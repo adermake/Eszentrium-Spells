@@ -16,7 +16,7 @@ public class main extends JavaPlugin {
 		this.getServer().getPluginManager().registerEvents(new EventCollector(), this);
 		Cooldowns.startCooldownHandler();
 		
-		//XXX->x
+		//XXX->x HAAALO
 		
  
 		
