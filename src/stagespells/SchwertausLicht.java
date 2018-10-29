@@ -28,8 +28,8 @@ public class SchwertausLicht extends Spell{
 		caster = c;
 		loc = l;
 		saveLoc = l;
-		casttime = randInt(12,34);
-		steprange = 500;
+		casttime = /*randInt(12,34);*/0;
+		steprange = 200;
 		speed = 8;
 		hitboxSize = 0.3;
 		castSpell(caster,"§eSchwerter aus Licht");

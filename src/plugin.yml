@@ -5,7 +5,7 @@ author: adermake
 api-version: 1.13
 
 commands:
-  subtitle:
-    description: Change the state of the title
-    usage: 
-    aliases: title
+  spell:
+    description: Make more SPELLS!!
+    usage: spell [name]
+    

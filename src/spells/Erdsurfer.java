@@ -20,7 +20,7 @@ public class Erdsurfer extends Spell {
 	public Erdsurfer() {
 		cooldown = 2;
 		name = "§cErdsurfer";
-		speed = 0;
+		speed = 1;
 		steprange = 0;
 		hitPlayer = false;
 		

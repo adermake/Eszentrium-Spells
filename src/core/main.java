@@ -15,7 +15,7 @@ public class main extends JavaPlugin {
 		
 		this.getServer().getPluginManager().registerEvents(new EventCollector(), this);
 		Cooldowns.startCooldownHandler();
-		
+		 this.getCommand("spell").setExecutor(new CommandReciver());
 		//XXX->x HAAALO
 		
  
