@@ -139,10 +139,16 @@ public class Flucht extends Spell{
 		new BukkitRunnable() {
 			public void run() {
 				
+				if (caster.isSneaking()) {
+					this.cancel();
+					dead = true;
+					le.remove();
+				}
 				if (le.isDead()) {
 					this.cancel();
 				}
-				doPull(le, p.getLocation(), 0.8D);
+				le.teleport(p);
+				//doPull(le, p.getLocation(), 0.8D);
 			}
 		}.runTaskTimer(main.plugin, 1, 1);
 	}

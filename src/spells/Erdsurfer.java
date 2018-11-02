@@ -47,6 +47,8 @@ public class Erdsurfer extends Spell {
 	@Override
 	public void move() {
 		t++;
+		caster.setAllowFlight(true);
+		caster.setFlying(true);
 		loc.add(randInt(-3, 3), 0, randInt(-3, 3));
 		playSound(Sound.BLOCK_WATER_AMBIENT, caster.getLocation(), 1, 1);
 		int ab = 0;
@@ -119,6 +121,7 @@ public class Erdsurfer extends Spell {
 				}
 
 				doPull(fb, caster.getLocation(), 1);
+				loc = caster.getLocation();
 				if (ti > 30) {
 					binder.remove();
 					fb.remove();

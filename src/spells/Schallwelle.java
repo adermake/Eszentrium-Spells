@@ -16,7 +16,7 @@ import net.minecraft.server.v1_13_R2.Items;
 public class Schallwelle extends Spell{
 	
 	public Schallwelle() {
-		cooldown = 2;
+		cooldown = 20*10;
 		name = "§eSchallwelle";
 		speed = 1;
 		steprange =30;
@@ -38,7 +38,7 @@ public class Schallwelle extends Spell{
 
 	@Override
 	public void move() {
-		
+		loc.add(loc.getDirection().multiply(0.5));
 		
 	}
 
@@ -46,20 +46,21 @@ public class Schallwelle extends Spell{
 	public void display() {
 		// TODO Auto-generated method stub
 		//ParUtils.createFlyingParticle(Particle.BUBBLE_POP, loc,0, 0, 0, 1, 2, loc.getDirection().multiply(-1));
-		
+		ParUtils.createParticle(Particle.EXPLOSION_LARGE, loc, 0, 0, 0, 1, 0);
 		
 	}
 
 	@Override
 	public void onPlayerHit(Player p) {
-		
-		
+		p.setVelocity(loc.getDirection().multiply(2));
+		damage(p, 1,caster);
 	}
 
 	@Override
 	public void onEntityHit(Entity ent) {
 		// TODO Auto-generated method stub
-		
+		damage(ent, 1,caster);
+		ent.setVelocity(loc.getDirection().multiply(2));
 	}
 
 	@Override
@@ -70,7 +71,7 @@ public class Schallwelle extends Spell{
 
 	@Override
 	public void onBlockHit(Block block) {
-		Bukkit.broadcastMessage("HitBLock");
+		
 		
 		//bounce();
 		
@@ -79,7 +80,8 @@ public class Schallwelle extends Spell{
 
 	@Override
 	public void onDeath() {
-		Bukkit.broadcastMessage("Ded");
+		
+		
 	}
 
 

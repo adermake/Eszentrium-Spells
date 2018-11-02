@@ -30,8 +30,8 @@ public class Explosion extends Spell{
 
 	@Override
 	public void launch() {
-		spawnShockWaffel(caster, 3,loc);
-		ParUtils.createParticle(Particle.EXPLOSION_LARGE, loc, 0, 0, 0, 1, 1);
+		spawnShockWaffel(caster, 3,loc.clone());
+		ParUtils.createParticle(Particle.EXPLOSION_HUGE, loc, 0, 0, 0, 1, 10);
 
 		caster.setVelocity(caster.getVelocity().setY(1.0D));
 		caster.playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
@@ -101,7 +101,7 @@ public class Explosion extends Spell{
 					double z = t * Math.sin(theta);
 					loc.add(x, y, z);
 					// ParticleEffect.FIREWORKS_SPARK.display(loc,0,0,0,0,1);
-					ParUtils.createParticle(Particle.SMOKE_LARGE, loc, 0, 0, 0, 1, 1);
+					ParUtils.createParticle(Particle.SMOKE_LARGE, loc, 0, 0, 0, 0, 0);
 				
 					loc.subtract(x, y, z);
 
@@ -112,7 +112,7 @@ public class Explosion extends Spell{
 					z = t * Math.sin(theta);
 					loc.add(x, y, z);
 					// ParticleEffect.WITCH_MAGIC.display(loc,0,0,0,0,1);
-					ParUtils.createParticle(Particle.CLOUD, loc, 0, 0, 0, 1, 1);
+					ParUtils.createParticle(Particle.CLOUD, loc, 0, 0, 0, 0, 0);
 					loc.subtract(x, y, z);
 				}
 				if (t > length) {

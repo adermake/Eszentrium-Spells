@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import core.Cooldowns;
 import core.ParUtils;
 import core.Spell;
 import core.main;
@@ -18,10 +19,10 @@ import core.main;
 public class Enterhaken extends Spell{
 
 	public Enterhaken() {
-		cooldown = 20*30;
-		name = "§eSchallwelle";
+		cooldown = 20*1;
+		name = "§eEnterhaken";
 		speed = 1;
-		steprange =30;
+		steprange = 100;
 		hitPlayer = false;
 	}	
 	@Override
@@ -36,27 +37,41 @@ public class Enterhaken extends Spell{
 		
 	}
 
+	Vector dir;
+	
 	@Override
 	public void launch() {
+		
 		// TODO Auto-generated method stub
+		loc = blockHo(caster);
+		
+		
+		
+		if (loc == null) {
+			Cooldowns.refundCurrentSpell(caster);
+			
+			dead = true;
+		}
+		
 		
 	}
 
-	int t = 0;
+	
 	@Override
 	public void move() {
-		t++;
-		Vector dir =loc.toVector().subtract(caster.getLocation().toVector()).normalize();
+		
+		dir = (loc.clone()).toVector().subtract(caster.getLocation().toVector()).normalize();
+		ParUtils.parLine(Particle.CRIT,caster.getLocation(), loc.clone(), 0, 0, 0, 0, 0, 3);
 		playSound(Sound.BLOCK_TRIPWIRE_ATTACH, caster.getLocation(), 1, 2);
 		caster.setVelocity(dir.clone().multiply(1.4));
-		loc = caster.getLocation();
 		
 		if (caster.isSneaking()) {
 			playSound(Sound.BLOCK_TRIPWIRE_CLICK_ON, caster.getLocation(), 1, 2);
 			caster.setVelocity(caster.getLocation().getDirection().multiply(2));
 			dead = true;
 		}
-		if (caster.getLocation().distance(loc)<2) {
+		if (((caster.getLocation()).distance(loc))<2) {
+			dead = true;
 			new BukkitRunnable() {
 				int t = 0;
 				public void run() {
@@ -77,9 +92,7 @@ public class Enterhaken extends Spell{
 			
 			
 		}
-		if (t>60) {
-			dead = true;
-		}
+		
 	}
 
 	@Override

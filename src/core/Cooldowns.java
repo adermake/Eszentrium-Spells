@@ -70,5 +70,10 @@ public class Cooldowns {
 	}
 	
 	
+	public static void refundCurrentSpell(Player p) {
+		ItemStack is = p.getInventory().getItemInMainHand();
+		is = NBTUtils.setNBT("Cooldown", "0", is);
+		p.getInventory().setItemInMainHand(is);
+	}
 	
 }

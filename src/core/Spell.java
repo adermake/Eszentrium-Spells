@@ -191,7 +191,12 @@ public abstract class Spell {
 	
 	
 	
-	
+	public void callCollision(double hitbox) {
+		
+		hitboxSize = hitbox;
+		collideWithPlayer();
+		collideWithEntity();
+	}
 	
 	
 	
@@ -395,9 +400,12 @@ public abstract class Spell {
 		return ent;
 	}
 	
-	public void damage(LivingEntity ent, double damage,Player damager) {
+	public void damage(Entity ent, double damage,Player damager) {
+		if (ent instanceof LivingEntity) {
+			((LivingEntity) ent).damage(damage);
+		}
 		
-		ent.damage(damage);
+		
 		
 	}
 	

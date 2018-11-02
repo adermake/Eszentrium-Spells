@@ -71,12 +71,16 @@ public class Feuerball extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
+		damage(p, 5, caster);
+		doKnockback(p,loc,2);
 		
 	}
 
 	@Override
 	public void onEntityHit(Entity ent) {
 		// TODO Auto-generated method stub
+		damage(ent, 5, caster);
+		doKnockback(ent,loc,2);
 		
 	}
 
@@ -84,36 +88,25 @@ public class Feuerball extends Spell {
 	public void onSpellHit(Spell spell) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 	@Override
 	public void onBlockHit(Block block) {
-		// TODO Auto-generated method stub
+		
+
 		
 	}
 
 	@Override
 	public void onDeath() {
+		for (int i = 0;i<15;i++) {
+			loc.getWorld().spawnFallingBlock(loc, Material.FIRE, (byte) 0).setVelocity(new Vector(randInt(-3,3),randInt(-3,3),randInt(-3,3)).normalize().multiply(1.5));
+		}
+		callCollision(4);
 		if (f != null)
 		f.remove();
-		for (int i = 0;i<15;i++) {
-			loc.getWorld().spawnFallingBlock(loc, Material.FIRE, (byte) 0).setVelocity(new Vector(randInt(-3,3),randInt(-3,3),randInt(-3,3)));
-		}
-		for (LivingEntity pl : f.getWorld().getLivingEntities()) {
-			if (!pl.getName().equals(f.getShooter())) {
-				
-			
-			if (pl.getLocation().distance(loc) < 4) {
-				
-				damage(pl, 5, caster);
-				doKnockback(pl,loc,2);
-				
 			}
-			
-			}
-			
-		}
-	}
 
 	
 	

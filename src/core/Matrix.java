@@ -33,6 +33,12 @@ public class Matrix {
 	}
 	
 	
+	public static Location alignLocRotation(Location l, Vector relative) {
+		relative = rotateMatrixVectorFunktion(relative, l);
+		return l.clone().add(relative);
+		
+	}
+	
 	
 	
 	
