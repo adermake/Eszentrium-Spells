@@ -18,9 +18,11 @@ public class CommandReciver implements CommandExecutor{
 		if (sender instanceof Player) {
             Player player = (Player) sender;
             if (cmd.getName().equals("spell")) {
-            ItemStack is = new ItemStack(Material.ENCHANTED_BOOK);
+            ItemStack is = new ItemStack(Material.BOOK);
             ItemMeta im = is.getItemMeta();
-            im.setDisplayName(args[0]);
+            String name = args[0];
+            name = name.replace("&", "§");
+            im.setDisplayName(name);
             is.setItemMeta(im);
             
             
