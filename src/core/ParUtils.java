@@ -1,13 +1,11 @@
 package core;
 
-import java.util.Random;
+import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.Particle.DustOptions;
-import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_13_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
@@ -17,12 +15,8 @@ import org.bukkit.util.Vector;
 
 import io.netty.util.internal.ThreadLocalRandom;
 import net.minecraft.server.v1_13_R2.Block;
-import net.minecraft.server.v1_13_R2.Blocks;
 import net.minecraft.server.v1_13_R2.EntityPlayer;
 import net.minecraft.server.v1_13_R2.Item;
-import net.minecraft.server.v1_13_R2.Items;
-import net.minecraft.server.v1_13_R2.PacketPlayOutWorldParticles;
-import net.minecraft.server.v1_13_R2.ParticleParam;
 import net.minecraft.server.v1_13_R2.ParticleParamBlock;
 import net.minecraft.server.v1_13_R2.ParticleParamItem;
 import net.minecraft.server.v1_13_R2.ParticleParamRedstone;
@@ -407,5 +401,40 @@ public class ParUtils {
 		Vector v = new Vector(dx,dy,dz);
 		return v;
 		
+	}
+	
+	
+	public static ArrayList<Location> preCalcCircle(Location l,double radius,Vector rotV,double offset) {
+		ArrayList<Location> locs = new ArrayList<Location>();
+		
+		
+		double r = radius;
+		Location loc = l.clone();
+		Location rot = l.clone().setDirection(rotV);
+
+		double ti = radius * 6;
+		ti = ti > 100 ? 100 : ti;
+
+		for (double t = 0; t <= ti;) {
+
+			t = t + Math.PI / randInt(4, 16);
+
+			double x = r * Math.cos(t);
+			double y = 1 + offset;
+			double z = r * Math.sin(t);
+			Location j = loc.clone();
+			Vector v = new Vector(x, y, z);
+			Matrix.rotateMatrixVectorFunktion(v, rot);
+
+			loc.add(v.getX(), v.getY(), v.getZ());
+
+			Vector ve = j.subtract(loc).toVector();
+			locs.add(loc.clone());
+			
+
+			loc.subtract(v.getX(), v.getY(), v.getZ());
+
+		}
+		return locs;
 	}
 }
