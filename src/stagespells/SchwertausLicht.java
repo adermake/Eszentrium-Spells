@@ -13,10 +13,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
-import core.Matrix;
-import core.ParUtils;
-import core.Spell;
-import core.main;
+import spellcore.Matrix;
+import spellcore.ParUtils;
+import spellcore.Spell;
+import spellcore.main;
 
 public class SchwertausLicht extends Spell{
 

@@ -1,4 +1,4 @@
-package core;
+package spellcore;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;

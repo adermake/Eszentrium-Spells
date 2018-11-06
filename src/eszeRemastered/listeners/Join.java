@@ -1,0 +1,43 @@
+package eszeRemastered.listeners;
+
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+
+import eszeRemastered.enums.Gamestate;
+import eszeRemastered.main.main;
+import eszeRemastered.players.PlayerAPI;
+import eszeRemastered.players.PlayerInfo;
+import eszeRemastered.utils.ItemStackUtils;
+
+public class Join implements Listener{
+	
+	@EventHandler
+	public void onJoin(PlayerJoinEvent e){
+		Player p = e.getPlayer();
+		p.setExp(0F);
+		p.setLevel(0);
+		p.setFoodLevel(20);
+		p.setHealth(20);
+		p.setMaxHealth(20);
+		p.setWalkSpeed(0.2F);
+		
+		p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
+		
+		if(Gamestate.getGameState() == Gamestate.LOBBY){
+			p.teleport((Location) main.plugin.getConfig().get("lobby.loc"));
+			e.setJoinMessage("§8> §3" + p.getName() + " §7ist beigetreten.");
+		}else if(Gamestate.getGameState() == Gamestate.INGAME){
+			e.setJoinMessage("");
+			if(PlayerAPI.getPlayerInfo(p) == null){
+				PlayerInfo pi = new PlayerInfo(p);
+				pi.isAlive = false;
+				pi.isInRound = false;
+			}
+		}
+	}
+
+}

@@ -10,9 +10,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import core.ParUtils;
-import core.Spell;
-import core.main;
+import spellcore.ParUtils;
+import spellcore.Spell;
+import spellcore.main;
 
 public class Aufwind extends Spell{
 

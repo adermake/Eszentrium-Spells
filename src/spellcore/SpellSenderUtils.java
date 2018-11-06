@@ -1,4 +1,4 @@
-package core;
+package spellcore;
 import java.lang.reflect.Field;
 
 import com.google.gson.JsonObject;

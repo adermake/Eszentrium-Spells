@@ -11,8 +11,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import core.ParUtils;
-import core.Spell;
+import spellcore.ParUtils;
+import spellcore.Spell;
 
 public class SwordExplosion extends Spell{
 	

@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 
-import core.Spell;
+import spellcore.Spell;
 
 public class Beben extends Spell{
 

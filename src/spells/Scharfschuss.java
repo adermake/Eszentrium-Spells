@@ -8,8 +8,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import core.ParUtils;
-import core.Spell;
+import spellcore.ParUtils;
+import spellcore.Spell;
 
 public class Scharfschuss extends Spell{
 	

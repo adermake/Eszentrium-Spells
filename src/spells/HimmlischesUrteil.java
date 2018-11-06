@@ -9,9 +9,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import core.Cooldowns;
-import core.ParUtils;
-import core.Spell;
+import spellcore.Cooldowns;
+import spellcore.ParUtils;
+import spellcore.Spell;
 
 public class HimmlischesUrteil extends Spell {
 

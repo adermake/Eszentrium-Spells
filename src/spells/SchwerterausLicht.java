@@ -16,10 +16,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
-import core.Matrix;
-import core.Spell;
-import core.main;
 import net.minecraft.server.v1_13_R2.World;
+import spellcore.Matrix;
+import spellcore.Spell;
+import spellcore.main;
 import stagespells.SchwertausLicht;
 
 public class SchwerterausLicht extends Spell{

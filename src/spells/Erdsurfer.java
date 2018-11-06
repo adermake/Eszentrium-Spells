@@ -13,8 +13,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import core.Spell;
-import core.main;
+import spellcore.Spell;
+import spellcore.main;
 
 public class Erdsurfer extends Spell {
 	public Erdsurfer() {

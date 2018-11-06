@@ -1,4 +1,4 @@
-package core;
+package spellcore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;

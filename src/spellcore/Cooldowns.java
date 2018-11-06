@@ -1,4 +1,4 @@
-package core;
+package spellcore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -74,6 +74,7 @@ public class Cooldowns {
 		ItemStack is = p.getInventory().getItemInMainHand();
 		is = NBTUtils.setNBT("Cooldown", "0", is);
 		p.getInventory().setItemInMainHand(is);
+		Bukkit.broadcastMessage("xx");
 	}
 	
 }

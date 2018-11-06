@@ -1,4 +1,4 @@
-package core;
+package spellcore;
 import org.bukkit.plugin.java.JavaPlugin;
 
 

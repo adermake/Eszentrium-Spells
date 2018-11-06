@@ -12,9 +12,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import core.ParUtils;
-import core.Spell;
-import core.main;
+import spellcore.ParUtils;
+import spellcore.Spell;
+import spellcore.main;
 
 public class Flucht extends Spell{
 

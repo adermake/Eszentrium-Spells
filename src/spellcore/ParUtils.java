@@ -1,4 +1,4 @@
-package core;
+package spellcore;
 
 import java.util.ArrayList;
 
