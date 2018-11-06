@@ -34,7 +34,7 @@ import net.minecraft.server.v1_13_R2.MinecraftServer;
 public class main extends JavaPlugin {
 	
 	public static main plugin;
-	public static String discord_TOKEN = "MzY0NDMzMzA2Nzk3OTk4MTAy.DTv0Wg.pS_sw8q8ctTy-jkUUB7a3R1t3AE";
+	public static String discord_TOKEN = "lolxd";
 	public static String mapname;
 	
 	@Override
