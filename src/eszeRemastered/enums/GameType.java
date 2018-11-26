@@ -33,7 +33,7 @@ public class GameType {
 	}
 	
 	public static enum TypeEnum {
-		SOLO;
+		SOLO,TTT,TEAMS;
 	}
 
 }

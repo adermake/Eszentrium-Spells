@@ -19,6 +19,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import eszeRemastered.enums.GameType;
@@ -198,6 +199,21 @@ public class cmd implements CommandExecutor, TabCompleter{
 				        p.sendMessage("§8| §7Der Name wurde in "+myStrings+" §7geändert!");
 					}
 			}
+				if (sender instanceof Player) {
+		            Player player = (Player) sender;
+		            if (cmd.getName().equals("spell")) {
+		            ItemStack is = new ItemStack(Material.BOOK);
+		            ItemMeta im = is.getItemMeta();
+		            String name = args[0];
+		            name = name.replace("&", "§");
+		            im.setDisplayName(name);
+		            is.setItemMeta(im);
+		            
+		            
+		            player.getInventory().addItem(is);
+		            return true;
+		            }
+		        }
 				
 				return false;
 		}

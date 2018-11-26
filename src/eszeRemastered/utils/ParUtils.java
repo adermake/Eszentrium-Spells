@@ -1,4 +1,4 @@
-package spellcore;
+package eszeRemastered.utils;
 
 import java.util.ArrayList;
 
@@ -23,6 +23,7 @@ import net.minecraft.server.v1_13_R2.ParticleParamRedstone;
 import net.minecraft.server.v1_13_R2.ParticleType;
 import net.minecraft.server.v1_13_R2.Particles;
 import net.minecraft.server.v1_13_R2.WorldServer;
+import spellcore.main;
 
 public class ParUtils {
 
@@ -89,6 +90,14 @@ public class ParUtils {
 		// offsetZ, double speed)
 	}
 
+	public static void createParticleSqareHorizontal(Particle par, Location loc,double size) {
+		
+		ParUtils.createParticle(par, loc.add(size,0,0), 0, 0, size-0.1, 5, 10);
+		ParUtils.createParticle(par, loc.add(-size,0,0), 0, 0, size-0.1, 5, 10);
+		ParUtils.createParticle(par, loc.add(0,0,size), size-0.1, 0, 0, 5, 10);
+		ParUtils.createParticle(par, loc.add(0,0,size), size-0.1, 0, 0, 5, 10);
+		
+	}
 	public static void createFlyingParticle(Particle par, Location loc, double spreadX, double spreadY, double spreadZ,
 			int count, double speed, Vector v) {
 

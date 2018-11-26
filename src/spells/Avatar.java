@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import spellcore.ParUtils;
+import eszeRemastered.utils.ParUtils;
 import spellcore.Spell;
 import spellcore.main;
 

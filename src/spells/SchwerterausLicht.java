@@ -16,8 +16,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
+import eszeRemastered.utils.Matrix;
 import net.minecraft.server.v1_13_R2.World;
-import spellcore.Matrix;
 import spellcore.Spell;
 import spellcore.main;
 import stagespells.SchwertausLicht;

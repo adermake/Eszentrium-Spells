@@ -1,4 +1,4 @@
-package spellcore;
+package eszeRemastered.utils;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;

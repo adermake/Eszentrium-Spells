@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import spellcore.ParUtils;
+import eszeRemastered.utils.ParUtils;
 import spellcore.Spell;
 import spellcore.main;
 

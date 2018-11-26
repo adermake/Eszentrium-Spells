@@ -1,4 +1,4 @@
-package spellcore;
+package eszeRemastered.utils;
 
 import org.bukkit.Location;
 import org.bukkit.util.Vector;

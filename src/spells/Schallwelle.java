@@ -8,9 +8,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import eszeRemastered.utils.ParUtils;
 import net.minecraft.server.v1_13_R2.Blocks;
 import net.minecraft.server.v1_13_R2.Items;
-import spellcore.ParUtils;
 import spellcore.Spell;
 
 public class Schallwelle extends Spell{

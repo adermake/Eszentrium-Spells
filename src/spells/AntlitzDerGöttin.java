@@ -6,7 +6,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import spellcore.ParUtils;
+import eszeRemastered.utils.ParUtils;
 import spellcore.Spell;
 
 public class AntlitzDerGöttin extends Spell{

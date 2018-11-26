@@ -30,6 +30,9 @@ import eszeRemastered.utils.ChatUtils;
 import eszeRemastered.utils.LibUtils;
 import eszeRemastered.voice.Discord;
 import net.minecraft.server.v1_13_R2.MinecraftServer;
+import spellcore.CommandReciver;
+import spellcore.Cooldowns;
+import spellcore.EventCollector;
 
 public class main extends JavaPlugin {
 	
@@ -40,12 +43,20 @@ public class main extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		
+		//R
 		
+		this.getServer().getPluginManager().registerEvents(new EventCollector(), this);
+		Cooldowns.startCooldownHandler();
+		
+		 
+		 //R
 		/*ParticleParam p = new ParticleParamItem((Particle<ParticleParamItem>) Particle.REGISTRY.get(new MinecraftKey("hugeexplosion")), null);
 		
 		PacketPlayOutWorldParticles w = new PacketPlayOutWorldParticles(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 		Particle.REGISTRY.get(new MinecraftKey("<particlename>"))*/
 		plugin = this;
+		
+		 this.getCommand("spell").setExecutor(new cmd());
 		this.getCommand("game").setExecutor(new cmd());
 		this.getCommand("maps").setExecutor(new cmd());
 		this.getCommand("setspawn").setExecutor(new cmd());

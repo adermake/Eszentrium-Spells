@@ -11,8 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import eszeRemastered.utils.ParUtils;
 import spellcore.Cooldowns;
-import spellcore.ParUtils;
 import spellcore.Spell;
 import spellcore.main;
 

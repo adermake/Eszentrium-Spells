@@ -1,4 +1,4 @@
-package spellcore;
+package eszeRemastered.utils;
 import java.lang.reflect.Field;
 
 import com.google.gson.JsonObject;

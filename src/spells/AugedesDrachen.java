@@ -12,10 +12,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import eszeRemastered.utils.Matrix;
+import eszeRemastered.utils.ParUtils;
 import net.minecraft.server.v1_13_R2.EntityEnderDragon;
 import net.minecraft.server.v1_13_R2.EntityLiving;
-import spellcore.Matrix;
-import spellcore.ParUtils;
 import spellcore.Spell;
 
 public class AugedesDrachen extends Spell{
