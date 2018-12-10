@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 import eszeRemastered.utils.Matrix;
 import eszeRemastered.utils.ParUtils;
 import spellcore.Spell;
-import spellcore.main;
+import eszeRemastered.main.main;
 
 public class Heilen extends Spell{
 	int s = 9;

@@ -1,6 +1,5 @@
 package spells;
 
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -14,9 +13,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import eszeRemastered.main.main;
 import eszeRemastered.utils.ParUtils;
 import spellcore.Spell;
-import spellcore.main;
 
 public class Avatar extends Spell{
 

@@ -25,7 +25,7 @@ public class TypeSOLO extends Type{
 	
 	@Override
 	public void death(PlayerDeathEvent event) {
-		Player p event.getEntity();
+		
 		
 		
 		

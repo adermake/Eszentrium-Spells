@@ -1,6 +1,9 @@
 package eszeRemastered.utils;
 
+import java.util.ArrayList;
+
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -9,33 +12,45 @@ public class ItemMenuIcon extends ItemStack{
 
 	private int gridX;
 	private int gridY;
-	private Inventory inventory;
+	private ItemMenu itemMenu;
 	
+	public static ArrayList<ItemMenuIcon> allIcons = new ArrayList<ItemMenuIcon>();  
 
 	
 	
 
 
-	public ItemMenuIcon(int gridX, int gridY, Material m, String iconname,Inventory i) {
+	public ItemMenuIcon(int gridX, int gridY, Material m, String iconname,ItemMenu i) {
 		
 		super(m);
-		inventory = i;
+		itemMenu = i;
 		ItemMeta im = this.getItemMeta();
 		im.setDisplayName(iconname);
 		this.setItemMeta(im);
-		
+		allIcons.add(this);
 		
 	}
 	
-	public void onClick() {
+	public static void ditributeClicks(String name,Inventory i,Player p) {
 		
-		
+		for (ItemMenuIcon icon : allIcons) {
+			if (icon.getItemMeta().getDisplayName().equals(icon.getItemMeta().getDisplayName()) && icon.getItemMenu().getInventory().equals(i)) {
+				icon.getItemMenu().clicked(icon,p);
+				
+			}
+		}
 		
 	}
+	
+	
 	
 	
 	public int getGridX() {
 		return gridX;
+	}
+	
+	public ItemMenu getItemMenu() {
+		return itemMenu;
 	}
 
 	public void setGridX(int gridX) {
@@ -50,9 +65,7 @@ public class ItemMenuIcon extends ItemStack{
 		this.gridY = gridY;
 	}
 
-	public Inventory getInventory() {
-		return inventory;
-	}
+
 
 	
 	

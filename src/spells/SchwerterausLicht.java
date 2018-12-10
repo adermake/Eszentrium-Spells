@@ -19,7 +19,7 @@ import org.bukkit.util.Vector;
 import eszeRemastered.utils.Matrix;
 import net.minecraft.server.v1_13_R2.World;
 import spellcore.Spell;
-import spellcore.main;
+import eszeRemastered.main.main;
 import stagespells.SchwertausLicht;
 
 public class SchwerterausLicht extends Spell{

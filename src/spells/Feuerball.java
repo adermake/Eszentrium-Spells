@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import spellcore.Spell;
-import spellcore.main;
+import eszeRemastered.main.main;
 
 public class Feuerball extends Spell {
 

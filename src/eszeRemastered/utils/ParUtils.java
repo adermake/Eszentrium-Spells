@@ -23,7 +23,6 @@ import net.minecraft.server.v1_13_R2.ParticleParamRedstone;
 import net.minecraft.server.v1_13_R2.ParticleType;
 import net.minecraft.server.v1_13_R2.Particles;
 import net.minecraft.server.v1_13_R2.WorldServer;
-import spellcore.main;
 
 public class ParUtils {
 
@@ -271,7 +270,7 @@ public class ParUtils {
 					this.cancel();
 				}
 			}
-		}.runTaskTimerAsynchronously(main.plugin, 1, 1);
+		}.runTaskTimerAsynchronously(eszeRemastered.main.main.plugin, 1, 1);
 	}
 
 	public static ParticleType translateParticle(Particle par) {

@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 
 import eszeRemastered.utils.ParUtils;
 import spellcore.Spell;
-import spellcore.main;
+import eszeRemastered.main.main;
 
 public class Chaoswelle extends Spell{
 	

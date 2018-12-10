@@ -14,8 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import eszeRemastered.utils.ParUtils;
 import spellcore.Spell;
-import spellcore.main;
-
+import eszeRemastered.main.main;
 public class Flucht extends Spell{
 
 	public Flucht() {

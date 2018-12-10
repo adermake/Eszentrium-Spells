@@ -2,10 +2,12 @@ package eszeRemastered.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 
-public class ItemMenu {
+public abstract class ItemMenu {
 
 	private Inventory inventory;
 	
@@ -21,7 +23,7 @@ public class ItemMenu {
 	
 	public void addClickableItem(int gridX, int gridY, Material m, String iconname) {
 		
-		ItemMenuIcon is = new ItemMenuIcon(gridX,gridY,m,iconname,inventory);
+		ItemMenuIcon is = new ItemMenuIcon(gridX,gridY,m,iconname,this);
 		
 		
 		
@@ -29,6 +31,24 @@ public class ItemMenu {
 	}
 	
 	
+	public void clicked(ItemMenuIcon icon,Player p) {
+		
+		
+		
+	}
+	
+	
+	public Inventory getInventory() {
+		return inventory;
+	}
+	
+	
+	
+	
+	public abstract void onWasClicked();
+		
+		
+		
 	
 	
 	

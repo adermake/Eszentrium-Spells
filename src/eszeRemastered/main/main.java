@@ -30,7 +30,6 @@ import eszeRemastered.utils.ChatUtils;
 import eszeRemastered.utils.LibUtils;
 import eszeRemastered.voice.Discord;
 import net.minecraft.server.v1_13_R2.MinecraftServer;
-import spellcore.CommandReciver;
 import spellcore.Cooldowns;
 import spellcore.EventCollector;
 

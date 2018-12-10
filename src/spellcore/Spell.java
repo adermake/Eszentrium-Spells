@@ -21,6 +21,7 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import eszeRemastered.main.main;
 import io.netty.util.internal.ThreadLocalRandom;
 
 public abstract class Spell {
