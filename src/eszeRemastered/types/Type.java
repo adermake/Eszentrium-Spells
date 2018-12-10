@@ -15,7 +15,6 @@ public class Type {
 	}
 	
 	public void death(PlayerDeathEvent event){
-		
 	}
 	
 	public void gameStart(){
