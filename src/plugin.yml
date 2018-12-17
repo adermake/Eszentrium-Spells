@@ -1,5 +1,5 @@
 name: Eszentrium
-main: eszeRemastered.main.main
+main: esze.main.main
 version: 1.0
 author: [Philipp0002, adermake, Astromake]
 api-version: 1.13
