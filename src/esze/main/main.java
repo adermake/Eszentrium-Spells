@@ -16,6 +16,7 @@ import esze.enums.GameType;
 import esze.enums.GameType.TypeEnum;
 import esze.listeners.Block;
 import esze.listeners.Damage;
+import esze.listeners.Death;
 import esze.listeners.DropPickup;
 import esze.listeners.FBoost;
 import esze.listeners.Hunger;
@@ -26,9 +27,9 @@ import esze.listeners.Move;
 import esze.listeners.Schwertwurf;
 import esze.listeners.Wheat;
 import esze.map.MapSelect;
+import esze.menu.Menu;
 import esze.utils.ChatUtils;
 import esze.utils.LibUtils;
-import esze.voice.Discord;
 import net.minecraft.server.v1_13_R2.MinecraftServer;
 import spells.spellcore.Cooldowns;
 import spells.spellcore.EventCollector;
@@ -70,6 +71,7 @@ public class main extends JavaPlugin {
 		
 		getServer().getPluginManager().registerEvents(new Join(), this);
 		getServer().getPluginManager().registerEvents(new Move(), this);
+		getServer().getPluginManager().registerEvents(new Death(), this);
 		getServer().getPluginManager().registerEvents(new Damage(), this);
 		getServer().getPluginManager().registerEvents(new Hunger(), this);
 		getServer().getPluginManager().registerEvents(new Interact(), this);
@@ -80,7 +82,7 @@ public class main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new DropPickup(), this);
 		getServer().getPluginManager().registerEvents(new JumpPad(), this);
 		getServer().getPluginManager().registerEvents(new MapSelect(), this);
-		
+		getServer().getPluginManager().registerEvents(new Menu(), this);
 		
 		SpellList.registerSpells();
 		if(getConfig().contains("settings.mode")){

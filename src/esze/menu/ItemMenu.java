@@ -24,7 +24,7 @@ public abstract class ItemMenu {
 	public void addClickableItem(int gridX, int gridY, Material m, String iconname) {
 		
 		ItemMenuIcon is = new ItemMenuIcon(gridX,gridY,m,iconname,this);
-		
+		inventory.setItem((gridY-1)*9+gridX-1, is);
 		
 		
 		

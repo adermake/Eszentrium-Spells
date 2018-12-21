@@ -45,6 +45,7 @@ public class SoloScoreboard {
 						
 						
 						ScoreboardUtil.rankedSidebarDisplay((Collection<Player>) Bukkit.getOnlinePlayers(), "Leben", lives);
+						
 					}
 				}
 			}

@@ -27,7 +27,7 @@ public class LobbyCountdownRunnable {
 				
 				
 				
-				if(timeLeft == 0){
+				if(timeLeft <= 0){
 					for(Player p : Bukkit.getOnlinePlayers()){
 						PlayerAPI.addPlayer(p);
 					}
@@ -37,6 +37,7 @@ public class LobbyCountdownRunnable {
 					GameType.getType().gameStart();
 					
 					timeLeft = timeDefault;
+					LobbyBackgroundRunnable.stop();
 					stop();
 				}
 				

@@ -1,5 +1,6 @@
 package esze.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,11 +15,12 @@ public class Damage implements Listener{
 	public void onDamage(EntityDamageEvent e){
 		if(e.getEntity() instanceof Player){
 			Player p = (Player) e.getEntity();
-			
+			Bukkit.broadcastMessage(""+p.getNoDamageTicks());
 			if(Gamestate.getGameState() == Gamestate.LOBBY){
+				Bukkit.broadcastMessage("RALF HAT RECHt");
 				e.setCancelled(true);
 			}else if(Gamestate.getGameState() == Gamestate.INGAME){
-				if(e.getCause() == DamageCause.FALL){
+				if(e.getCause().equals( DamageCause.FALL)){
 					e.setCancelled(true);
 				}
 			}

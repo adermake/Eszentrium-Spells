@@ -16,6 +16,7 @@ import spells.spellcore.Spell;
 public class Aufwind extends Spell{
 
 	public Aufwind() {
+		name = "§bAufwind";
 		cooldown = 20;
 	}
 	@Override

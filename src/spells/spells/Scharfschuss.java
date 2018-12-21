@@ -14,6 +14,7 @@ import spells.spellcore.Spell;
 public class Scharfschuss extends Spell{
 	
 	public Scharfschuss() {
+		name = "§aScharfschuss";
 		hitSpell = true;
 		steprange = 300;
 		speed = 100;

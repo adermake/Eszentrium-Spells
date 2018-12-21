@@ -13,6 +13,7 @@ public class AntlitzDerGöttin extends Spell{
 
 	
 	public AntlitzDerGöttin() {
+		name = "§3Antlitz der Göttin";
 		hitSpell = true;
 		hitPlayer = false;
 		hitBlock = false;

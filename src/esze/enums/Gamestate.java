@@ -11,7 +11,7 @@ public enum Gamestate {
 	}
 	
 	public static void setGameState(Gamestate state){
-		state = Gamestate.state;
+		Gamestate.state = state;
 	}
 
 }

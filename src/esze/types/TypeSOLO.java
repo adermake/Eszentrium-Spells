@@ -24,6 +24,8 @@ public class TypeSOLO extends Type{
 			if (p.getLocation().getY()<60) {
 				p.damage(p.getHealth());
 			}
+			
+			
 		}
 	}
 	
@@ -35,6 +37,8 @@ public class TypeSOLO extends Type{
 	@Override
 	public void gameStart() {
 		
+		SoloScoreboard scoreBoard = new SoloScoreboard();
+		scoreBoard.scoreboard();
 		for (Player p : players) {
 				p.teleport(nextLoc());
 				PlayerUtils.hidePlayer(p,100);
@@ -50,6 +54,7 @@ public class TypeSOLO extends Type{
 	@Override
 	public void death(PlayerDeathEvent event) {
 		Player p = event.getEntity();
+		Bukkit.broadcastMessage("DIE!!");
 		loseLife(p);
 		
 		

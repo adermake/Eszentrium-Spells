@@ -21,6 +21,7 @@ import spells.spellcore.Spell;
 public class AugedesDrachen extends Spell{
 
 	public AugedesDrachen() {
+		name = "§aAuge des Drachen";
 		hitBlock = false;
 		hitPlayer = false;
 		hitEntity = false;

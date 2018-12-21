@@ -30,7 +30,7 @@ public class ItemMenuIcon extends ItemStack {
 	public static void ditributeClicks(String name, Inventory i, Player p) {
 
 		for (ItemMenuIcon icon : allIcons) {
-			if (icon.getItemMeta().getDisplayName().equals(icon.getItemMeta().getDisplayName())
+			if (icon.getItemMeta().getDisplayName().equals(name)
 					&& icon.getItemMenu().getInventory().equals(i)) {
 				icon.getItemMenu().clicked(icon, p);
 
