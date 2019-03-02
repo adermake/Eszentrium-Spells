@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import esze.utils.MathUtils;
 import spells.spellcore.Spell;
 import spells.spells.Ansturm;
-import spells.spells.AntlitzDerGöttin;
+import spells.spells.AntlitzderGöttin;
 import spells.spells.Aufwind;
 import spells.spells.AugedesDrachen;
 import spells.spells.Schallwelle;
@@ -33,7 +33,7 @@ public class SpellList {
 	
 	public static void registerSpells() {
 		spells.add(new Ansturm());
-		spells.add(new AntlitzDerGöttin());
+		spells.add(new AntlitzderGöttin());
 		spells.add(new Aufwind());
 		spells.add(new AugedesDrachen());
 		spells.add(new Schallwelle());

@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_13_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
@@ -272,7 +273,44 @@ public class ParUtils {
 			}
 		}.runTaskTimerAsynchronously(esze.main.main.plugin, 1, 1);
 	}
-
+	/*
+	public static ArrayList<Location> grabBlocks(Location l,int count) {
+		ArrayList<Location> locList = new ArrayList<Location>();
+		ArrayList<Location> locSecList = new ArrayList<Location>();
+		for (BlockFace bf : BlockFace.values()) {
+			
+			if (MathUtils.randInt(1, 3) == 1) {
+				continue;
+			}
+			else {
+				Bukkit.broadcastMessage("L");
+			}
+			
+			if (count>1) {
+				locSecList = grabBlocks(l.getBlock().getRelative(bf).getLocation(),count-1);
+			}
+			else {
+				locSecList.add(l.getBlock().getRelative(bf).getLocation());
+			}
+				
+			
+			for (Location locSec : locSecList ) {
+				Bukkit.broadcastMessage(""+locSec);
+				locList.add(locSec);
+			}
+		}
+		return locList;
+	}
+	*/
+	public static ArrayList<Location> grabBlocks(Location l,int count,int radius) {
+		ArrayList<Location> locs = new ArrayList<Location>();
+		for (int i = count;i>0;i--) {
+			Location loc = l.clone();
+			loc.add(MathUtils.randInt(-radius,radius),0,MathUtils.randInt(-radius,radius));
+			locs.add(loc);
+		}
+		return locs;
+	}
 	public static ParticleType translateParticle(Particle par) {
 
 		
@@ -444,5 +482,24 @@ public class ParUtils {
 
 		}
 		return locs;
+	}
+	public static Location stepCalcCircle(Location l,double r,Vector rotV,double offset,double steps) {
+		double t =  (Math.PI / 22)* ((double)steps);
+		Location loc = l.clone();
+		Location rot = loc.clone().setDirection(rotV);
+		double x = r * Math.cos(t);
+		double y = 1 + offset;
+		double z = r * Math.sin(t);
+		Location j = loc.clone();
+		Vector v = new Vector(x, y, z);
+		Matrix.rotateMatrixVectorFunktion(v, rot);
+
+		loc.add(v.getX(), v.getY(), v.getZ());
+
+		
+		return loc;
+		
+
+		
 	}
 }

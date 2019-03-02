@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -18,14 +20,20 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Slime;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.enums.GameType;
 import esze.enums.Gamestate;
 import esze.enums.GameType.TypeEnum;
 import esze.map.MapMenu;
+import esze.map.JumpPad;
+import esze.map.JumpPad.JumpPadType;
+import esze.map.JumpPadHandler;
 import esze.utils.NBTUtils;
 import esze.voice.Discord;
 import net.minecraft.server.v1_13_R2.EntityPlayer;
@@ -36,7 +44,12 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 		final Player p = (Player) sender;			
 				
 				
-				if(cmd.getName().startsWith("game")) {
+				if(cmd.getName().equals("game")) {
+					Bukkit.broadcastMessage("L"+main.plugin.getConfig());
+					
+					Bukkit.broadcastMessage("-------");
+					Bukkit.broadcastMessage("K"+main.plugin.getConfig().getConfigurationSection("maps"));
+					 
 					if(p.isOp()){
 						if(args.length == 1){
 							if(args[0].equalsIgnoreCase("start")){
@@ -63,18 +76,33 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				
 				if(cmd.getName().startsWith("setjumppad")) {
 					if(p.isOp()){
-						if(args.length == 2){
+						if(args.length == 4){
 							try{
 								String name = args[0];
 								int i = Integer.parseInt(args[1]);
-								main.plugin.getConfig().set("jumpads."+name+"."+i, p.getLocation());
-								main.plugin.saveConfig();
+								double power = Double.parseDouble(args[3]);
+								if(args[2].equals("up")) {
+									JumpPad jp = new JumpPad(p.getLocation(),power,JumpPadType.UP);
+									Bukkit.broadcastMessage("S"+name+" "+i);
+									main.plugin.getConfig().set("jumppads."+name+"."+i, jp);
+									main.plugin.saveConfig();
+									
+									JumpPadHandler.jumpPads.add(jp);
+								
+								}
+								if(args[2].equals("dir")) {
+									JumpPad jp = new JumpPad(p.getLocation(),power,JumpPadType.DIRECTIONAL);
+									main.plugin.getConfig().set("jumppads."+name+"."+i, jp);
+									main.plugin.saveConfig();
+									JumpPadHandler.jumpPads.add(jp);
+								}
+								
 								p.sendMessage("§8| §7Das Jumppad §6"+i+" §7für Map §6"+name+" §7wurde gesetzt!");
 							}catch(Exception e){
-								p.sendMessage("§8| §cEin Fehler ist aufgetreten. Vielleicht ist deine Padnummer keine Zahl?");
+								p.sendMessage("§8| §cEin Fehler ist aufgetreten. Vielleicht ist deine Padnummer keine Zahl? " +e);
 							}
 						}else{
-							p.sendMessage("§8| §c/setjumppad <Map> <Spawnnummer>");
+							p.sendMessage("§8| §c/setjumppad <Map> <Spawnnummer> <Type> <Power>");
 						}
 					}
 		        }
@@ -150,6 +178,23 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 					}
 		        }
 				
+				if(cmd.getName().startsWith("removepads")) {
+					if(args.length == 1){
+						String map = args[0];
+						int padNumber = 0;
+						while (main.plugin.getConfig().contains("jumppads."+map+"."+padNumber)){
+							JumpPad jp = (JumpPad) main.plugin.getConfig().get("maps."+map+"."+padNumber);
+							padNumber++;
+							main.plugin.getConfig().set("jumppads."+map+"."+padNumber, null);
+						}
+						
+					
+					
+					}
+				else{
+					p.sendMessage("§8| §c/removepads <Map> ");
+				}
+				}
 				if(cmd.getName().startsWith("ping")) {
 					
 					if(args.length == 1){
@@ -167,7 +212,33 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 						p.sendMessage("§8| §cZu viele Parameter! /ping <Name>");
 					}
 				}
-								
+					
+				if(cmd.getName().startsWith("unload")) {
+					if(p.isOp()){
+						JumpPadHandler.jumpPads.clear();
+						p.sendMessage("§8| §ePriuuuusch");
+					}
+				}
+				if(cmd.getName().startsWith("showpads")) {
+					if(p.isOp()){
+						int number = 0;
+						while (main.plugin.getConfig().contains("jumppads."+args[0]+"."+number)) {
+							JumpPad jp = (JumpPad) main.plugin.getConfig().get("jumppads."+args[0]+"."+number);
+							Slime s = (Slime) p.getWorld().spawnEntity(jp.loc, EntityType.SLIME);
+							s.setSize(1);
+							s.setAI(false);
+							s.setGlowing(true);
+							
+							new BukkitRunnable() {
+								public void run() {
+									s.remove();
+								}
+							}.runTaskLater(main.plugin, 20*10);
+						}
+						
+						p.sendMessage("§8| §eAll is revealed");
+					}
+				}
 				if(cmd.getName().startsWith("setmode")) {
 					if(p.isOp()){
 						if(Gamestate.getGameState() == Gamestate.LOBBY){
@@ -188,6 +259,26 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 					}
 		        }
 				
+				if(cmd.getName().startsWith("gamemode") || cmd.getName().startsWith("gm")) {
+					if(p.isOp()){
+						if(args.length == 1){
+							String gamemode = args[0];
+							if (gamemode.equals("1")) {
+								p.setGameMode(GameMode.CREATIVE);
+							}
+							if (gamemode.equals("0")) {
+								p.setGameMode(GameMode.SURVIVAL);
+							}
+							if (gamemode.equals("2")) {
+								p.setGameMode(GameMode.ADVENTURE);
+							}
+							if (gamemode.equals("3")) {
+								p.setGameMode(GameMode.SPECTATOR);
+							}
+							
+						}
+					}
+		        }
 				if(cmd.getName().startsWith("removemap")) {
 					if(p.isOp()){
 						if(args.length == 1){
@@ -222,9 +313,16 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 		            ItemStack is = new ItemStack(Material.BOOK);
 		            ItemMeta im = is.getItemMeta();
 		            String name = args[0];
-		            name = name.replace("&", "§");
+		            for (String partName : args) {
+		            	if (partName == name)
+		            		continue;
+		            	name = name + " "+ partName;
+		            }
+		            //name = name.replace("&", "§");
+		            name = "§e"+name;
 		            im.setDisplayName(name);
 		            is.setItemMeta(im);
+		            
 		            is = NBTUtils.setNBT("Spell", "true", is);
 		            
 		            player.getInventory().addItem(is);

@@ -1,33 +1,45 @@
 package esze.map;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.main.main;
 import esze.utils.ParUtils;
 
-public class JumpPad {
+public class JumpPad implements ConfigurationSerializable{
 
-	double power = 1;
-	JumpPadType type = JumpPadType.UP;
+	public double power = 1;
+	public JumpPadType type = JumpPadType.UP;
+	public Location loc;
 	
 	
+	public JumpPad(Location loc,double power,JumpPadType type) {
+		
+		this.loc = loc;
+		this.power = power;
+		this.type = type;
+		
+	}
 	
 	
-	
-	
-	public void launch(Player p) {
+	public void launch(Entity p) {
 		
 		
-		if (type == JumpPadType.DIRECTIONAL) {
+		if (type == JumpPadType.DIRECTIONAL && p instanceof Player) {
 			new BukkitRunnable() {
 				int t = 0;
 				public void run() {
 					t++;
 					p.setVelocity(p.getVelocity().setY(0.5));
 					
-					if (p.isSneaking()) {
+					if (((Player)p).isSneaking()) {
 						p.setVelocity(p.getLocation().getDirection().multiply(power));
 						jumpAnimation(p);
 						this.cancel();
@@ -45,7 +57,7 @@ public class JumpPad {
 		
 		
 	}
-	public void jumpAnimation(Player p) {
+	public void jumpAnimation(Entity p) {
 		
 		if (type == JumpPadType.DIRECTIONAL) {
 			new BukkitRunnable() {
@@ -78,6 +90,28 @@ public class JumpPad {
 	public enum JumpPadType {		
 		UP,
 		DIRECTIONAL,	
+	}
+
+	@Override
+	public Map<String, Object> serialize() {
+		 Map<String, Object> map = new HashMap<String, Object>();
+	        map.put("loc", loc);
+	        if (type == JumpPadType.UP)
+	        map.put("type", "up");
+	        if (type == JumpPadType.DIRECTIONAL)
+		        map.put("type", "dir");
+	        map.put("power", power);
+	        return map;
 	};
+	
+	public JumpPad(Map<String, Object> map) {
+		loc = (Location) map.get("loc");
+		power = (Double) map.get("power");
+		if ((String) map.get("type") == "up")
+		type = JumpPadType.UP;
+		if ((String) map.get("type") == "dir")
+			type = JumpPadType.DIRECTIONAL;
+        
+    }
 	
 }

@@ -10,15 +10,15 @@ public class SoundUtils {
 	
 	
 	
-	public void playSound(Sound s,Location loc) {
+	public static void playSound(Sound s,Location loc) {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			p.playSound(loc, s, 1, 1);
 		}
 	}
 	
-	public void playSound(Sound s,Location loc,float pitch,float volume) {
+	public static void playSound(Sound s,Location loc,float pitch,float volume) {
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			p.playSound(loc, s, pitch, volume);
+			p.playSound(loc, s, volume, pitch);
 		}
 	}
 	

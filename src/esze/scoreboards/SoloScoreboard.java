@@ -12,15 +12,19 @@ import esze.types.TypeSOLO;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 
-public class SoloScoreboard {
+public class SoloScoreboard extends Scoreboard{
 	
-	public static void scoreboard(){
-		Bukkit.getScheduler().runTaskTimer(main.plugin, new Runnable() {
+	@Override
+	public void showScoreboard(){
+		
+		
+		new BukkitRunnable() {
 			
-			@Override
 			public void run() {
+				
 				if(GameType.getType().name.equals("SOLO")){
 					if(Gamestate.getGameState() == Gamestate.INGAME){
 						HashMap<String, Integer> lives = new HashMap<String, Integer>();
@@ -46,10 +50,22 @@ public class SoloScoreboard {
 						
 						ScoreboardUtil.rankedSidebarDisplay((Collection<Player>) Bukkit.getOnlinePlayers(), "Leben", lives);
 						
+						
+						if (hide) {
+							this.cancel();
+							hide = false;
+						}
 					}
 				}
+				
+				
 			}
-		}, 0, 20);
+		}.runTaskTimer(main.plugin, 0, 10);
+		
+				
+		
 	}
+	
+	
 	
 }

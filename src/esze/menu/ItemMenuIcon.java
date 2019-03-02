@@ -2,6 +2,7 @@ package esze.menu;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -28,7 +29,6 @@ public class ItemMenuIcon extends ItemStack {
 	}
 
 	public static void ditributeClicks(String name, Inventory i, Player p) {
-
 		for (ItemMenuIcon icon : allIcons) {
 			if (icon.getItemMeta().getDisplayName().equals(name)
 					&& icon.getItemMenu().getInventory().equals(i)) {

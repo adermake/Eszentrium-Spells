@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
@@ -35,6 +36,9 @@ public class EventCollector implements Listener {
 	public void onPressSpell(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
+			
+		
 		ItemStack is = p.getInventory().getItemInMainHand();
 		boolean refined = false;
 		if (is != null) {
@@ -110,6 +114,7 @@ public class EventCollector implements Listener {
 
 			}
 
+		}
 		}
 
 	}

@@ -23,7 +23,7 @@ public class Ansturm extends Spell{
 		cooldown = 40;
 		steprange = 60;
 		speed = 1;
-		
+		hitboxSize = 2;
 		
 	}
 	
@@ -52,7 +52,11 @@ public class Ansturm extends Spell{
 
 	@Override
 	public void move() {
-		loc.setDirection(loc.getDirection().add(new Vector(0,0.1,0)));
+		/*
+		if (!caster.isSneaking()) {
+			loc.setDirection(loc.getDirection().add(new Vector(0,0.1,0)));
+		}
+		*/
 		if (caster.isSneaking()) {
 			
 			for (BlockFace bf : BlockFace.values()) {

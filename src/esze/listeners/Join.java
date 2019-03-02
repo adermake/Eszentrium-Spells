@@ -12,6 +12,7 @@ import esze.main.main;
 import esze.players.PlayerAPI;
 import esze.players.PlayerInfo;
 import esze.utils.ItemStackUtils;
+import esze.utils.LobbyUtils;
 
 public class Join implements Listener{
 	
@@ -28,8 +29,11 @@ public class Join implements Listener{
 		p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
 		p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Test", null, true));
 		if(Gamestate.getGameState() == Gamestate.LOBBY){
-			p.teleport((Location) main.plugin.getConfig().get("lobby.loc"));
+			//p.teleport((Location) main.plugin.getConfig().get("lobby.loc"));
 			e.setJoinMessage("§8> §3" + p.getName() + " §7ist beigetreten.");
+			LobbyUtils.recall(p);
+			
+			
 		}else if(Gamestate.getGameState() == Gamestate.INGAME){
 			e.setJoinMessage("");
 			if(PlayerAPI.getPlayerInfo(p) == null){

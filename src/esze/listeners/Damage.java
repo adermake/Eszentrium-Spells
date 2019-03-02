@@ -15,9 +15,7 @@ public class Damage implements Listener{
 	public void onDamage(EntityDamageEvent e){
 		if(e.getEntity() instanceof Player){
 			Player p = (Player) e.getEntity();
-			Bukkit.broadcastMessage(""+p.getNoDamageTicks());
 			if(Gamestate.getGameState() == Gamestate.LOBBY){
-				Bukkit.broadcastMessage("RALF HAT RECHt");
 				e.setCancelled(true);
 			}else if(Gamestate.getGameState() == Gamestate.INGAME){
 				if(e.getCause().equals( DamageCause.FALL)){

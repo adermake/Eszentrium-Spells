@@ -38,3 +38,21 @@ commands:
   ping:
     description: Ping
     usage: 
+  gamemode:
+    description: Gamemode
+    usage: 
+  gm:
+    description: Gamemode
+    usage: 
+  setjumppad:
+    description: set a pad
+    usage: 
+  removepads:
+    description: Gamemode
+    usage: 
+  showpads:
+    description: shows pads
+    usage: /showpads map
+  unload:
+    description: unloads all pads
+    usage: 

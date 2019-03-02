@@ -59,7 +59,7 @@ public class Beben extends Spell{
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
-		
+		loc = caster.getLocation();
 	}
 
 	@Override

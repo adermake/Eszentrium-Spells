@@ -14,9 +14,16 @@ public class LobbyCountdownRunnable {
 	
 	private static int timeLeft = 15;
 	private static int runnableID;
-	
+	private static boolean running = false;
 	public static void start(){
+		if (running) {
+			
+			return;
+		}
+		running = true;
+		timeLeft = 15;
 		final int timeDefault = timeLeft;
+		
 		runnableID = Bukkit.getScheduler().scheduleSyncRepeatingTask(main.plugin, new Runnable() {
 			
 			@Override
@@ -50,7 +57,7 @@ public class LobbyCountdownRunnable {
 	public static void stop(){
 		Bukkit.getScheduler().cancelTask(runnableID);
 		
-		
+		running = false;
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			if (p.getGameMode() != GameMode.SPECTATOR) {
 				GameType.getType().players.add(p);

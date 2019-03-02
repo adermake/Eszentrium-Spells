@@ -2,6 +2,9 @@ package esze.main;
 
 import java.lang.reflect.Field;
 
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
+
 /*import net.minecraft.server.v1_13_R1.MinecraftKey;
 import net.minecraft.server.v1_13_R1.PacketPlayOutWorldParticles;
 import net.minecraft.server.v1_13_R1.Particle;
@@ -14,6 +17,7 @@ import com.google.gson.JsonObject;
 
 import esze.enums.GameType;
 import esze.enums.GameType.TypeEnum;
+import esze.enums.Gamestate;
 import esze.listeners.Block;
 import esze.listeners.Damage;
 import esze.listeners.Death;
@@ -22,10 +26,12 @@ import esze.listeners.FBoost;
 import esze.listeners.Hunger;
 import esze.listeners.Interact;
 import esze.listeners.Join;
-import esze.listeners.JumpPad;
+
 import esze.listeners.Move;
 import esze.listeners.Schwertwurf;
-import esze.listeners.Wheat;
+import esze.listeners.CancelClick;
+import esze.map.JumpPad;
+import esze.map.JumpPadHandler;
 import esze.map.MapSelect;
 import esze.menu.Menu;
 import esze.utils.ChatUtils;
@@ -48,16 +54,17 @@ public class main extends JavaPlugin {
 		
 		this.getServer().getPluginManager().registerEvents(new EventCollector(), this);
 		Cooldowns.startCooldownHandler();
-		
-		 
+		Bukkit.broadcastMessage("----X---");
+		ConfigurationSerialization.registerClass(JumpPad.class);
 		 //R
 		/*ParticleParam p = new ParticleParamItem((Particle<ParticleParamItem>) Particle.REGISTRY.get(new MinecraftKey("hugeexplosion")), null);
 		
 		PacketPlayOutWorldParticles w = new PacketPlayOutWorldParticles(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 		Particle.REGISTRY.get(new MinecraftKey("<particlename>"))*/
 		
-		
-		 this.getCommand("spell").setExecutor(new CommandReciever());
+		this.getCommand("showpads").setExecutor(new CommandReciever());
+		this.getCommand("unload").setExecutor(new CommandReciever());
+		this.getCommand("spell").setExecutor(new CommandReciever());
 		this.getCommand("game").setExecutor(new CommandReciever());
 		this.getCommand("maps").setExecutor(new CommandReciever());
 		this.getCommand("setspawn").setExecutor(new CommandReciever());
@@ -67,8 +74,11 @@ public class main extends JavaPlugin {
 		this.getCommand("ping").setExecutor(new CommandReciever());
 		this.getCommand("setmode").setExecutor(new CommandReciever());
 		this.getCommand("removemap").setExecutor(new CommandReciever());
+		this.getCommand("gamemode").setExecutor(new CommandReciever());
+		this.getCommand("gm").setExecutor(new CommandReciever());
 		this.getCommand("itemname").setExecutor(new CommandReciever());
-		
+		this.getCommand("setjumppad").setExecutor(new CommandReciever());
+		this.getCommand("removepads").setExecutor(new CommandReciever());
 		getServer().getPluginManager().registerEvents(new Join(), this);
 		getServer().getPluginManager().registerEvents(new Move(), this);
 		getServer().getPluginManager().registerEvents(new Death(), this);
@@ -77,13 +87,16 @@ public class main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Interact(), this);
 		getServer().getPluginManager().registerEvents(new Schwertwurf(), this);
 		getServer().getPluginManager().registerEvents(new FBoost(), this);
-		getServer().getPluginManager().registerEvents(new Wheat(), this);
+		getServer().getPluginManager().registerEvents(new CancelClick(), this);
 		getServer().getPluginManager().registerEvents(new Block(), this);
 		getServer().getPluginManager().registerEvents(new DropPickup(), this);
-		getServer().getPluginManager().registerEvents(new JumpPad(), this);
+		getServer().getPluginManager().registerEvents(new JumpPadHandler(), this);
 		getServer().getPluginManager().registerEvents(new MapSelect(), this);
 		getServer().getPluginManager().registerEvents(new Menu(), this);
 		
+		
+		JumpPadHandler.start();
+		Gamestate.setGameState(Gamestate.LOBBY);
 		SpellList.registerSpells();
 		if(getConfig().contains("settings.mode")){
 			GameType.setTypeByName(getConfig().getString("settings.mode"));

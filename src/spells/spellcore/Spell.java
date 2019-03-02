@@ -75,6 +75,7 @@ public abstract class Spell {
 	
 	
 	public void castSpell(Player p,String name) {
+		
 		this.name = name;
 		
 		createdSpell(p);
@@ -104,7 +105,7 @@ public abstract class Spell {
 				cast++;
 				cast();
 				if (cast>=casttime) {
-					loc = caster.getEyeLocation();
+					//loc = caster.getEyeLocation();
 					launch();
 					startSpellLoop();
 					this.cancel();
@@ -132,6 +133,7 @@ public abstract class Spell {
 					 display();
 					
 					if (dead == true) {
+						spell.remove(this);
 						this.cancel();
 					}
 				}

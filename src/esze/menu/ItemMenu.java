@@ -20,7 +20,12 @@ public abstract class ItemMenu {
 		
 	}
 	
-	
+	public ItemMenu(int size,String name) {
+		
+		inventory = Bukkit.createInventory(null, size*9,name);		
+		
+		
+	}
 	public void addClickableItem(int gridX, int gridY, Material m, String iconname) {
 		
 		ItemMenuIcon is = new ItemMenuIcon(gridX,gridY,m,iconname,this);
@@ -40,6 +45,7 @@ public abstract class ItemMenu {
 	
 	
 	public void open(Player p) {
+		Bukkit.broadcastMessage("TRIED TO OPEN"+inventory);
 		p.openInventory(inventory);
 	}
 	

@@ -14,8 +14,9 @@ import spells.spellcore.Spell;
 
 public class SoloSpellMenu extends ItemMenu{
 
+	boolean used = false;
 	public SoloSpellMenu() {
-		super(1);
+		super(1,"spellmenu");
 		ArrayList<Spell> spells = SpellList.getDiffrentRandom(4);
 		Bukkit.broadcastMessage(""+spells.size());
 		addClickableItem(2, 1, Material.ENCHANTED_BOOK, spells.get(0).getName());
@@ -26,7 +27,10 @@ public class SoloSpellMenu extends ItemMenu{
 
 	@Override
 	public void clicked(ItemMenuIcon icon, Player p) {
+		if (used)
+			return;
 		
+		used = true;
 		p.closeInventory();
 		ItemStack is = NBTUtils.setNBT("Spell", "true", icon);
 		p.getInventory().addItem(is);
