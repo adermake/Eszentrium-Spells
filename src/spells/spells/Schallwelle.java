@@ -1,16 +1,11 @@
 package spells.spells;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
-import net.minecraft.server.v1_13_R2.Blocks;
-import net.minecraft.server.v1_13_R2.Items;
 import spells.spellcore.Spell;
 
 public class Schallwelle extends Spell{
@@ -57,7 +52,7 @@ public class Schallwelle extends Spell{
 	}
 
 	@Override
-	public void onEntityHit(Entity ent) {
+	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		damage(ent, 1,caster);
 		ent.setVelocity(loc.getDirection().multiply(2));

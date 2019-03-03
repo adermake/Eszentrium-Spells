@@ -4,9 +4,9 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.IronGolem;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
@@ -112,7 +112,7 @@ public class Ansturm extends Spell{
 	}
 
 	@Override
-	public void onEntityHit(Entity ent) {
+	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		
 	}

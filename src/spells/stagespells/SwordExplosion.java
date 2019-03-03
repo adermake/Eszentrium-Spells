@@ -1,12 +1,9 @@
 package spells.stagespells;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -79,7 +76,7 @@ public class SwordExplosion extends Spell{
 	}
 
 	@Override
-	public void onEntityHit(Entity ent) {
+	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		doKnockback(ent, loc.add(loc.getDirection()), 1);
 		

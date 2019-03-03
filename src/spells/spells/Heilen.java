@@ -94,7 +94,7 @@ public class Heilen extends Spell{
 	}
 
 	@Override
-	public void onEntityHit(Entity ent) {
+	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		playSound(Sound.ENTITY_ENDERMITE_DEATH, loc, 2, 1);
 		heal((LivingEntity) ent, 1, caster);

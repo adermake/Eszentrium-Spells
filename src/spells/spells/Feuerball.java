@@ -77,7 +77,7 @@ public class Feuerball extends Spell {
 	}
 
 	@Override
-	public void onEntityHit(Entity ent) {
+	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		damage(ent, 5, caster);
 		doKnockback(ent,loc,2);

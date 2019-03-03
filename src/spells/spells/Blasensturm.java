@@ -1,15 +1,11 @@
 package spells.spells;
 
-import java.util.ArrayList;
-
 import org.bukkit.Color;
-import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
 import spells.spellcore.Spell;
@@ -84,7 +80,7 @@ public class Blasensturm extends Spell{
 	}
 
 	@Override
-	public void onEntityHit(Entity ent) {
+	public void onEntityHit(LivingEntity ent) {
 		ParUtils.createParticle(Particle.EXPLOSION_LARGE, loc, 0, 0, 0, 1, 2);
 		playSound(Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST,loc,0.5f,0.7f);
 		ent.setVelocity(loc.getDirection());

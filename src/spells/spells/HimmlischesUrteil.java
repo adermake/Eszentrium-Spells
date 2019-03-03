@@ -8,11 +8,12 @@ import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import esze.main.main;
 import esze.utils.ParUtils;
 import spells.spellcore.Cooldowns;
 import spells.spellcore.Spell;
@@ -24,6 +25,9 @@ public class HimmlischesUrteil extends Spell {
 		cooldown = 20*10;
 		casttime = 25;
 		steprange = 40;
+		hitboxSize = 3;
+		hitPlayer = true;
+		hitEntity = true;
 	}
 	
 	ArrayList<Location> circleDots = new ArrayList<Location>();
@@ -103,12 +107,21 @@ public class HimmlischesUrteil extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		if (step >= 10) {
+		if (step == 30) {
 			
 		
 		for (FallingBlock fb : fallingBlocks) {
-			//fb.setVelocity(new Vector(randDouble(-2, 2),randDouble(-2, 2),randDouble(-2, 2)));
-			
+			fb.setGravity(true);
+			doPull(fb,loc, 3);
+		}
+		for (Entity ent : hitEntitys) {
+			damage(ent, 3, caster);
+			ent.setGlowing(false);
+			doPull(ent,loc, 3);
+		}
+		if (step == 10) {
+			hitPlayer = false;
+			hitEntity = false;
 		}
 		}
 	}
@@ -124,13 +137,16 @@ public class HimmlischesUrteil extends Spell {
 
 	@Override
 	public void onPlayerHit(Player p) {
-		// TODO Auto-generated method stub
-		
+		damage(p, 5, caster);
+		p.setGlowing(true);
+		p.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION,40,5));
 	}
 
 	@Override
-	public void onEntityHit(Entity ent) {
-		// TODO Auto-generated method stub
+	public void onEntityHit(LivingEntity ent) {
+		damage(ent, 5, caster);
+		ent.setGlowing(true);
+		ent.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION,40,5));
 		
 	}
 

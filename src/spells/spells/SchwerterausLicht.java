@@ -5,20 +5,13 @@ import java.util.Collection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
-import esze.main.main;
 import esze.utils.Matrix;
-import net.minecraft.server.v1_13_R2.World;
 import spells.spellcore.Spell;
 import spells.stagespells.SchwertausLicht;
 
@@ -72,7 +65,7 @@ public class SchwerterausLicht extends Spell{
 	}
 
 	@Override
-	public void onEntityHit(Entity ent) {
+	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		
 	}

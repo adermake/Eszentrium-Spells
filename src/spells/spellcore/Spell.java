@@ -553,7 +553,7 @@ public abstract class Spell {
 	public abstract void move();
 	public abstract void display();
 	public abstract void onPlayerHit(Player p);
-	public abstract void onEntityHit(Entity ent);
+	public abstract void onEntityHit(LivingEntity ent);
 	public abstract void onSpellHit(Spell spell);
 	public abstract void onBlockHit(Block block);
 	public abstract void onDeath();

@@ -4,8 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
@@ -132,7 +132,7 @@ public class Beben extends Spell{
 	}
 
 	@Override
-	public void onEntityHit(Entity ent) {
+	public void onEntityHit(LivingEntity ent) {
 		doKnockback(ent, caster.getLocation(), 3+steprange/20);
 		ent.setVelocity(ent.getVelocity().setY(2.0D+steprange/30));
 		

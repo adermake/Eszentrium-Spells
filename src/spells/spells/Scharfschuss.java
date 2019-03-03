@@ -1,11 +1,10 @@
 package spells.spells;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import esze.utils.ParUtils;
@@ -82,7 +81,7 @@ public class Scharfschuss extends Spell{
 	}
 
 	@Override
-	public void onEntityHit(Entity ent) {
+	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		
 		damage(ent, 20,caster);
