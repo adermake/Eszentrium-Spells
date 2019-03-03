@@ -21,7 +21,7 @@ public class HimmlischesUrteil extends Spell {
 
 	public HimmlischesUrteil() {
 		String name = "HimmlischesUrteil";
-		cooldown = 20;
+		cooldown = 20*10;
 		casttime = 25;
 		steprange = 40;
 	}

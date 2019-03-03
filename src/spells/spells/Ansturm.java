@@ -20,7 +20,7 @@ public class Ansturm extends Spell{
 	public Ansturm() {
 		name = "§eAnsturm";
 		hitEntity = false;
-		cooldown = 40;
+		cooldown = 160;
 		steprange = 60;
 		speed = 1;
 		hitboxSize = 2;

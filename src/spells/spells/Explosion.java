@@ -15,7 +15,12 @@ import esze.utils.ParUtils;
 import spells.spellcore.Spell;
 
 public class Explosion extends Spell{
-
+	
+	public Explosion() {
+		name = "§eExplosion";
+		cooldown = 20*8;
+	}
+	
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub

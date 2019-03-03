@@ -18,7 +18,7 @@ import spells.spellcore.Spell;
 
 public class Erdsurfer extends Spell {
 	public Erdsurfer() {
-		cooldown = 2;
+		cooldown = 200;
 		name = "§cErdsurfer";
 		speed = 1;
 		steprange = 0;

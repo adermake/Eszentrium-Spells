@@ -21,7 +21,7 @@ public class Avatar extends Spell{
 
 	public Avatar() {
 		steprange = 350;
-		cooldown = 20;
+		cooldown = 220;
 		hitEntity = false;
 		hitPlayer = true;
 		hitboxSize = 5;

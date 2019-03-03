@@ -18,7 +18,7 @@ public class Feuerball extends Spell {
 	public Feuerball() {
 
 		steprange = 200;
-		cooldown = 2;
+		cooldown = 20*6;
 		name = "§eFeuerball";
 		speed = 1;
 		

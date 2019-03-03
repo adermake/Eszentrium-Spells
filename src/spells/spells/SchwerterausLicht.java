@@ -27,7 +27,7 @@ public class SchwerterausLicht extends Spell{
 	Location lolo;
 
 	public SchwerterausLicht() {
-		cooldown = 5;
+		cooldown = 20*5;
 		name = "SchwerterAusLicht";
 		
 		

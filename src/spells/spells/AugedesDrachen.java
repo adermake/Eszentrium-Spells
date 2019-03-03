@@ -27,7 +27,7 @@ public class AugedesDrachen extends Spell{
 		hitEntity = false;
 		hitSpell = true;
 		speed = 1;
-		cooldown = 100;
+		cooldown = 200;
 		steprange = 130;
 		hitboxSize = 1;
 		

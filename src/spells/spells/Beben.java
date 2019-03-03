@@ -17,7 +17,7 @@ public class Beben extends Spell{
 	public Beben() {
 		
 		steprange = 10;
-		cooldown = 20;
+		cooldown = 160;
 		hitEntity = true;
 		hitPlayer = true;
 		hitSpell = false;

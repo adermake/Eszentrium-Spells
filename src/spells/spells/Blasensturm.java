@@ -22,6 +22,7 @@ public class Blasensturm extends Spell{
 		speed =2;
 		casttime =  6;
 		hitboxSize = 1;
+		cooldown = 120;
 		
 		
 	}

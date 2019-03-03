@@ -22,7 +22,7 @@ public class AntlitzderGöttin extends Spell{
 		hitBlock = false;
 		hitEntity = false;
 		steprange = 60;
-		cooldown = 20;
+		cooldown = 200;
 		speed = 1;
 		hitboxSize = 4;
 	}

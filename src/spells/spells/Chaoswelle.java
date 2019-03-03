@@ -24,6 +24,7 @@ public class Chaoswelle extends Spell{
 		name = "§eChaoswelle";
 		casttime = 20;
 		speed = 1;
+		cooldown = 240;
 		
 	}
 	
