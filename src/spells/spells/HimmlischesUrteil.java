@@ -22,10 +22,10 @@ public class HimmlischesUrteil extends Spell {
 
 	public HimmlischesUrteil() {
 		String name = "HimmlischesUrteil";
-		cooldown = 20*10;
+		cooldown = 20*50;
 		casttime = 25;
 		steprange = 40;
-		hitboxSize = 3;
+		hitboxSize = 3.5;
 		hitPlayer = true;
 		hitEntity = true;
 	}
@@ -139,14 +139,14 @@ public class HimmlischesUrteil extends Spell {
 	public void onPlayerHit(Player p) {
 		damage(p, 5, caster);
 		p.setGlowing(true);
-		p.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION,40,5));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION,40,30));
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		damage(ent, 5, caster);
 		ent.setGlowing(true);
-		ent.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION,40,5));
+		ent.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION,40,30));
 		
 	}
 
