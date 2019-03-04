@@ -199,6 +199,8 @@ public class ParUtils {
 		Location rot = l.clone().setDirection(rotV);
 
 		double ti = radius * 6;
+		if (radius < 1)
+			ti = 6; 
 		ti = ti > 100 ? 100 : ti;
 
 		for (double t = 0; t <= ti;) {
@@ -232,6 +234,9 @@ public class ParUtils {
 		Location rot = l.clone().setDirection(rotV);
 
 		double ti = radius * 6;
+		if (radius < 1)
+			ti = 6; 
+		ti = ti > 100 ? 100 : ti;
 		ti = ti > 100 ? 100 : ti;
 
 		for (double t = 0; t <= ti;) {
