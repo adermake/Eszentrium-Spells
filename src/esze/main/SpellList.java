@@ -3,7 +3,6 @@ package esze.main;
 import java.util.ArrayList;
 
 import esze.utils.MathUtils;
-import net.minecraft.server.v1_13_R2.Explosion;
 import spells.spellcore.Spell;
 import spells.spells.Ansturm;
 import spells.spells.AntlitzderGöttin;
@@ -15,6 +14,7 @@ import spells.spells.Blasensturm;
 import spells.spells.Chaoswelle;
 import spells.spells.Enterhaken;
 import spells.spells.Erdsurfer;
+import spells.spells.Explosion;
 import spells.spells.Feuerball;
 import spells.spells.Flucht;
 import spells.spells.Heilen;
@@ -54,7 +54,7 @@ public class SpellList {
 		spells.add(new Beben());
 		spells.add(new Chaoswelle());
 		spells.add(new Enterhaken());
-		//spells.add(new Explosion());
+		spells.add(new Explosion());
 		spells.add(new Blasensturm());
 		spells.add(new Feuerball());
 		spells.add(new Flucht());
