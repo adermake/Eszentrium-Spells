@@ -230,6 +230,8 @@ public abstract class Spell {
 				if (multihit == false && hitEntitys.contains(ent)) {
 					continue;
 				}
+				if (noTargetEntitys.contains(ent))
+					continue;
 				if (ent.getEyeLocation().distance(loc)<0.6+hitboxSize ||ent.getLocation().distance(loc)<0.6+hitboxSize ) {
 					hitEntitys.add(ent);	
 					onEntityHit(ent);
