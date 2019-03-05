@@ -27,7 +27,6 @@ public class Menu implements Listener {
 	@EventHandler
 	public void inventoryCloseEvent(InventoryCloseEvent e) {
 		if (e.getInventory().getName().equals("spellmenu")) {
-			Bukkit.broadcastMessage("n"+e.getInventory().getItem(2));
 			ItemMenuIcon.ditributeClicks(e.getInventory().getItem(1).getItemMeta().getDisplayName(), e.getInventory(),(Player) e.getPlayer());
 			
 		}

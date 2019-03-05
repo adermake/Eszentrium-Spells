@@ -25,6 +25,7 @@ public class Blasensturm extends Spell{
 		casttime =  6;
 		hitboxSize = 1;
 		cooldown = 20*30;
+		hitSpell = true;
 		
 		
 	}
@@ -35,6 +36,7 @@ public class Blasensturm extends Spell{
 		rec = counter;
 		hitboxSize = 1;
 		
+		hitSpell = true;
 		
 	}
 	

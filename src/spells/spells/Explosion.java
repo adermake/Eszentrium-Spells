@@ -19,6 +19,7 @@ public class Explosion extends Spell{
 	public Explosion() {
 		name = "§eExplosion";
 		cooldown = 20*45;
+		hitSpell = true;
 	}
 	
 	@Override

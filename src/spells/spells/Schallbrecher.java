@@ -22,7 +22,7 @@ public class Schallbrecher extends Spell {
 		cooldown = 20*25;
 		hitEntity = true;
 		hitPlayer = true;
-		hitSpell = false;
+		hitSpell = true;
 		hitBlock = false;
 		hitboxSize = 1;
 		steprange = 15;

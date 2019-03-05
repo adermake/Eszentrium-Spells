@@ -22,6 +22,7 @@ public class Feuerball extends Spell {
 		name = "§eFeuerball";
 		speed = 1;
 		
+		hitSpell = true;
 		hitPlayer = true;
 		hitBlock = true;
 		

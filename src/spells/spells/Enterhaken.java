@@ -23,6 +23,7 @@ public class Enterhaken extends Spell{
 		speed = 1;
 		steprange = 100;
 		hitPlayer = false;
+		hitSpell = true;
 	}	
 	@Override
 	public void setUp() {

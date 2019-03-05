@@ -26,6 +26,7 @@ public class Heilen extends Spell{
 		
 		hitEntity = true;
 		hitPlayer = true;
+		hitSpell = true;
 		hitBlock = true;
 	}
 	public Heilen(int s) {
@@ -35,6 +36,7 @@ public class Heilen extends Spell{
 		name = "§eHeilen";
 		speed = 30;
 		
+		hitSpell = true;
 		hitEntity = true;
 		hitPlayer = true;
 		hitBlock = true;

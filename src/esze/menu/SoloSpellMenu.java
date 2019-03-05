@@ -18,7 +18,6 @@ public class SoloSpellMenu extends ItemMenu{
 	public SoloSpellMenu() {
 		super(1,"spellmenu");
 		ArrayList<Spell> spells = SpellList.getDiffrentRandom(4);
-		Bukkit.broadcastMessage(""+spells.size());
 		addClickableItem(2, 1, Material.ENCHANTED_BOOK, spells.get(0).getName());
 		addClickableItem(4, 1, Material.ENCHANTED_BOOK, spells.get(1).getName());
 		addClickableItem(6, 1, Material.ENCHANTED_BOOK, spells.get(2).getName());

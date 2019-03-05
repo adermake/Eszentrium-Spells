@@ -16,6 +16,7 @@ public class Schallwelle extends Spell{
 		speed = 1;
 		steprange =30;
 		hitPlayer = true;
+		hitSpell = true;
 		
 	}
 	

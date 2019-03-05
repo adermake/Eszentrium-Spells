@@ -152,10 +152,7 @@ public class MapSelect implements Listener{
 		}
 		
 		if(max.isEmpty()){
-			Bukkit.broadcastMessage(""+main.plugin.getConfig());
 			
-			Bukkit.broadcastMessage("-------");
-			Bukkit.broadcastMessage(""+main.plugin.getConfig().getConfigurationSection("maps"));
 			for(String arena: main.plugin.getConfig().getConfigurationSection("maps").getKeys(false)){
 				if(main.plugin.getConfig().get("maps."+arena)!=null){
 					max.add(arena);

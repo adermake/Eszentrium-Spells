@@ -1,6 +1,7 @@
 package spells.spellcore;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -36,6 +37,7 @@ public class Cooldowns {
 								ItemMeta im = i.getItemMeta();
 								im.setDisplayName(NBTUtils.getNBT("OriginalName", i));
 								i.setItemMeta(im);
+								i.setType(Material.ENCHANTED_BOOK);
 								i = NBTUtils.setNBT("Cooldown", "0", i);
 								p.getInventory().setItem(slot, i);
 							}
@@ -58,6 +60,7 @@ public class Cooldowns {
 								currentName = currentName + "§7]>";
 								im.setDisplayName(currentName);
 								i.setItemMeta(im);
+								i.setType(Material.BOOK);
 								i = NBTUtils.setNBT("Cooldown", ""+cooldown, i);
 								p.getInventory().setItem(slot, i);
 							}

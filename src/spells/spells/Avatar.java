@@ -27,6 +27,8 @@ public class Avatar extends Spell{
 		hitEntity = false;
 		hitPlayer = true;
 		hitboxSize = 5;
+		multihit = true;
+		hitSpell = true;
 		
 		
 		
@@ -120,7 +122,7 @@ public class Avatar extends Spell{
 
 	@Override
 	public void onPlayerHit(Player p) {
-		damage(p,20,caster);
+		damage(p,3,caster);
 		doKnockback(p,g.getLocation(),2);
 		
 	}

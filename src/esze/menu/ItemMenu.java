@@ -45,7 +45,6 @@ public abstract class ItemMenu {
 	
 	
 	public void open(Player p) {
-		Bukkit.broadcastMessage("TRIED TO OPEN"+inventory);
 		p.openInventory(inventory);
 	}
 	

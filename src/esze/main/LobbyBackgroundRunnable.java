@@ -18,7 +18,6 @@ public class LobbyBackgroundRunnable {
 	private static int runnableID;
 	
 	public static void start(){
-		Bukkit.broadcastMessage("XXX"+Bukkit.getScheduler().isCurrentlyRunning(runnableID));
 		runnableID = Bukkit.getScheduler().scheduleSyncRepeatingTask(main.plugin, new Runnable() {
 			
 			@Override
