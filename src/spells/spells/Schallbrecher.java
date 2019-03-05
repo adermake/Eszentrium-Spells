@@ -18,7 +18,8 @@ import spells.spellcore.Spell;
 public class Schallbrecher extends Spell {
 
 	public Schallbrecher() {
-		cooldown = 20*1;
+		name = "§eSchallbrecher";
+		cooldown = 20*8;
 		hitEntity = true;
 		hitPlayer = true;
 		hitSpell = false;
@@ -32,7 +33,7 @@ public class Schallbrecher extends Spell {
 	public void setUp() {
 		// TODO Auto-generated method stub
 		playSound(Sound.ENTITY_PHANTOM_FLAP, loc, 20, 0);
-		playSound(Sound.ENTITY_WITHER_SHOOT, loc, 1, 0.6);
+		playSound(Sound.ENTITY_WITHER_SHOOT, loc, 0.9, 0.6);
 		
 	}
 

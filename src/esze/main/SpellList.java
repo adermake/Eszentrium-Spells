@@ -18,8 +18,10 @@ import spells.spells.Erdsurfer;
 import spells.spells.Feuerball;
 import spells.spells.Flucht;
 import spells.spells.Heilen;
+import spells.spells.Schallbrecher;
 import spells.spells.Schallwelle;
 import spells.spells.Scharfschuss;
+import spells.spells.Spinnenkäfig;
 
 public class SpellList {
 
@@ -58,6 +60,8 @@ public class SpellList {
 		spells.add(new Flucht());
 		spells.add(new Heilen());
 		spells.add(new Erdsurfer());
+		spells.add(new Schallbrecher());
+		spells.add(new Spinnenkäfig());
 	}
 	
 }
