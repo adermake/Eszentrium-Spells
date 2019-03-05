@@ -1,11 +1,16 @@
 package spells.spells;
 
+import java.util.ArrayList;
+
 import org.bukkit.Color;
+import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
 import spells.spellcore.Spell;
@@ -14,11 +19,12 @@ public class Blasensturm extends Spell{
 
 	int rec = 65;
 	public Blasensturm() {
+		name = "§eBlasensturm";
 		steprange = 30;
 		speed =2;
 		casttime =  6;
 		hitboxSize = 1;
-		cooldown = 120;
+		cooldown = 20*30;
 		
 		
 	}

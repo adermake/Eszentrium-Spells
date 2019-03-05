@@ -2,11 +2,9 @@ package spells.spells;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -18,7 +16,7 @@ import spells.spellcore.Spell;
 
 public class Erdsurfer extends Spell {
 	public Erdsurfer() {
-		cooldown = 200;
+		cooldown = 20*60;
 		name = "§cErdsurfer";
 		speed = 1;
 		steprange = 0;

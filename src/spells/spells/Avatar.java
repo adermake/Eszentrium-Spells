@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.LivingEntity;
@@ -20,8 +21,9 @@ import spells.spellcore.Spell;
 public class Avatar extends Spell{
 
 	public Avatar() {
+		name = "§cAvatar";
 		steprange = 350;
-		cooldown = 220;
+		cooldown = 20*60;
 		hitEntity = false;
 		hitPlayer = true;
 		hitboxSize = 5;

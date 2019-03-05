@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -22,7 +23,7 @@ public class AntlitzderGöttin extends Spell{
 		hitBlock = false;
 		hitEntity = false;
 		steprange = 60;
-		cooldown = 200;
+		cooldown = 20*40;
 		speed = 1;
 		hitboxSize = 4;
 	}

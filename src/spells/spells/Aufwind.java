@@ -18,7 +18,7 @@ public class Aufwind extends Spell{
 
 	public Aufwind() {
 		name = "§bAufwind";
-		cooldown = 100;
+		cooldown = 20*18;
 	}
 	@Override
 	public void onDeath() {

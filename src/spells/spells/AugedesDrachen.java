@@ -4,7 +4,10 @@ import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_13_R2.entity.CraftEnderDragon;
 import org.bukkit.entity.EnderDragon;
+import org.bukkit.entity.EnderDragon.Phase;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -12,6 +15,8 @@ import org.bukkit.util.Vector;
 
 import esze.utils.Matrix;
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_13_R2.EntityEnderDragon;
+import net.minecraft.server.v1_13_R2.EntityLiving;
 import spells.spellcore.Spell;
 
 public class AugedesDrachen extends Spell{
@@ -23,7 +28,7 @@ public class AugedesDrachen extends Spell{
 		hitEntity = false;
 		hitSpell = true;
 		speed = 1;
-		cooldown = 200;
+		cooldown = 20*60;
 		steprange = 130;
 		hitboxSize = 1;
 		

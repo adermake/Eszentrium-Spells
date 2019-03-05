@@ -11,7 +11,7 @@ import spells.spellcore.Spell;
 public class Schallwelle extends Spell{
 	
 	public Schallwelle() {
-		cooldown = 20*9;
+		cooldown = 20*10;
 		name = "§eSchallwelle";
 		speed = 1;
 		steprange =30;

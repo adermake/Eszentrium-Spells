@@ -18,9 +18,9 @@ public class Spinnenkäfig extends Spell {
 	public Spinnenkäfig() {
 		
 		name = "§eSpinnenkäfig";
-		cooldown = 20*1;
+		cooldown = 20*25;
 		steprange = 80;
-		canHitSelf = true;
+		canHitSelf = false;
 		
 	}
 

@@ -21,8 +21,8 @@ import spells.spellcore.Spell;
 public class HimmlischesUrteil extends Spell {
 
 	public HimmlischesUrteil() {
-		String name = "HimmlischesUrteil";
-		cooldown = 20*50;
+		name = "§eHimmlisches Urteil";
+		cooldown = 20*40;
 		casttime = 25;
 		steprange = 40;
 		hitboxSize = 3.5;

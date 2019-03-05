@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.LivingEntity;
@@ -20,7 +21,7 @@ public class Ansturm extends Spell{
 	public Ansturm() {
 		name = "§eAnsturm";
 		hitEntity = false;
-		cooldown = 160;
+		cooldown = 20*10;
 		steprange = 60;
 		speed = 1;
 		hitboxSize = 2;

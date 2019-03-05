@@ -17,8 +17,8 @@ public class Scharfschuss extends Spell{
 		hitSpell = true;
 		steprange = 300;
 		speed = 100;
-		casttime = 20*12;
-		cooldown = 60;
+		casttime = 30;
+		cooldown = 20*60;
 	}
 
 	@Override
