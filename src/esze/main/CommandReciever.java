@@ -45,10 +45,7 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				
 				
 				if(cmd.getName().equals("game")) {
-					Bukkit.broadcastMessage("L"+main.plugin.getConfig());
-					
-					Bukkit.broadcastMessage("-------");
-					Bukkit.broadcastMessage("K"+main.plugin.getConfig().getConfigurationSection("maps"));
+				
 					 
 					if(p.isOp()){
 						if(args.length == 1){

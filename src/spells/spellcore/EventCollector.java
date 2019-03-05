@@ -121,7 +121,7 @@ public class EventCollector implements Listener {
 
 	@EventHandler
 	public void onTarget(EntityTargetEvent e) {
-		Bukkit.broadcastMessage("CANCEL");
+		
 		e.setCancelled(true);
 
 	}
