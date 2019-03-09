@@ -107,6 +107,7 @@ public class TypeSOLO extends Type{
 		
 		
 	}
+	boolean won = false;
 	public void checkWinner() {
 		if (players.size()<=1 && !gameOver) {
 			
@@ -120,12 +121,19 @@ public class TypeSOLO extends Type{
 			
 			for (Player winner : players) {
 				Title t = new Title("§a"+winner.getName()+" hat gewonnen!");
-				Gamestate.setGameState(Gamestate.LOBBY);
-				LobbyBackgroundRunnable.start();
-				LobbyUtils.recallAll();
+				won = true;
 				t.send(p);
+				
 			}
+			
 			}
+			
+		}
+		if (won) {
+			Gamestate.setGameState(Gamestate.LOBBY);
+			LobbyBackgroundRunnable.start();
+			LobbyUtils.recallAll();
+			Bukkit.broadcastMessage("END");
 		}
 			
 	}

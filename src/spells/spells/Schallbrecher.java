@@ -62,9 +62,9 @@ public class Schallbrecher extends Spell {
 		ParUtils.parKreisDot(Particle.CLOUD, locate, 0.5, 0.5, 0.2, direction.multiply(-1));
 		
 		ParUtils.createParticle(Particle.FLAME, midloc, 0.1, 0.1, 0.1, 5, 0);
-		
+		Vector dir = loc.getDirection();
 		loc = caster.getLocation();
-		
+		loc.setDirection(dir);
 		
 		
 		

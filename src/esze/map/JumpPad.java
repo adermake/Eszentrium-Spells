@@ -34,7 +34,7 @@ public class JumpPad implements ConfigurationSerializable{
 	
 	
 	public void launch(Entity p) {
-		
+		Bukkit.broadcastMessage(""+type);
 		
 		if (type == JumpPadType.DIRECTIONAL && p instanceof Player) {
 			new BukkitRunnable() {

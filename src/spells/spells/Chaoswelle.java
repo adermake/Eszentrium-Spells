@@ -19,7 +19,7 @@ public class Chaoswelle extends Spell{
 	
 	boolean inair = false;
 	public Chaoswelle() {
-		name = "§eChaoswelle";
+		name = "§cChaoswelle";
 		casttime = 20;
 		speed = 1;
 		cooldown = 20*60;
