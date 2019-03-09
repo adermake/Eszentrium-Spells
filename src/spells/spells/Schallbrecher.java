@@ -81,7 +81,7 @@ public class Schallbrecher extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		p.damage(1);
+		p.damage(4);
 		doKnockback(p, loc, 3);
 		playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, loc, 10, 0.7);
 		
@@ -92,7 +92,7 @@ public class Schallbrecher extends Spell {
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		
-		ent.damage(1);
+		ent.damage(4);
 		doKnockback(ent, loc, 3);
 		playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, loc, 10, 0.7);
 		
