@@ -66,6 +66,7 @@ public class TypeSOLO extends Type{
 				s.open(p);
 				lives.put(p, 4);
 			}
+		setupJumpPad(currentmap);
 		new SoloScoreboard();
 		
 	}

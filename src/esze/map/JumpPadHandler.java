@@ -44,7 +44,9 @@ public class JumpPadHandler implements Listener{
 	
 	
 	public static void checkJumpPads(Entity p) {
+		
 		for (JumpPad pad : jumpPads) {
+			
 			if (p.getLocation().distance(pad.loc)<1) {
 				pad.launch(p);
 			}
@@ -55,11 +57,12 @@ public class JumpPadHandler implements Listener{
 	
 	public static void loadJumpPads(String map) {
 		int padNumber = 1;
-		
 
 		while (main.plugin.getConfig().contains("jumppads."+map+"."+padNumber)){
-			JumpPad jp = (JumpPad) main.plugin.getConfig().get("maps."+map+"."+padNumber);
+			
+			JumpPad jp = (JumpPad) main.plugin.getConfig().get("jumppads."+map+"."+padNumber);
 			padNumber++;
+			
 			jumpPads.add(jp);
 		}
 			

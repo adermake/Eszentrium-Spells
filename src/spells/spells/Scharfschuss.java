@@ -103,7 +103,7 @@ public class Scharfschuss extends Spell{
 
 	@Override
 	public void launch() {
-		loc = caster.getLocation();
+		loc = caster.getEyeLocation();
 		playSound(Sound.ENTITY_ZOMBIE_INFECT,loc, 10, 1);
 		
 	}

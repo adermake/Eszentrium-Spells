@@ -59,7 +59,7 @@ public class Enterhaken extends Spell{
 	
 	@Override
 	public void move() {
-		
+		if (loc != null && caster != null)
 		dir = (loc.clone()).toVector().subtract(caster.getLocation().toVector()).normalize();
 		ParUtils.parLine(Particle.CRIT,caster.getLocation(), loc.clone(), 0, 0, 0, 0, 0, 3);
 		playSound(Sound.BLOCK_TRIPWIRE_ATTACH, caster.getLocation(), 1, 2);

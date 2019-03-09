@@ -1,6 +1,7 @@
 package spells.spells;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_13_R2.CraftWorld;
 import org.bukkit.entity.Chicken;
@@ -9,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import esze.utils.ParUtils;
 import net.minecraft.server.v1_13_R2.BlockPosition;
 import net.minecraft.server.v1_13_R2.EntityChicken;
 import spells.spellcore.Spell;
@@ -46,9 +48,10 @@ public class Hünchenluftschlag extends Spell{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		ParUtils.createParticleSqareHorizontal(Particle.FLAME, caster.getLocation(), step/10);
 		mcChicken.setHeadRotation(caster.getLocation().getYaw());
 		mcChicken.setPositionRotation(c.getLocation().getX(), c.getLocation().getY(), c.getLocation().getZ(), caster.getLocation().getYaw(), caster.getLocation().getPitch());
-		c.setVelocity(caster.getLocation().getDirection());
+		//c.setVelocity(caster.getLocation().getDirection());
 	
 		
 	}

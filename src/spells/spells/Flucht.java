@@ -20,8 +20,8 @@ public class Flucht extends Spell{
 	public Flucht() {
 		
 		
-		steprange = 20*35;
-		cooldown = 12;
+		steprange = 20*5;
+		cooldown = 20*35;
 		name = "§eFlucht";
 		speed = 1;
 		

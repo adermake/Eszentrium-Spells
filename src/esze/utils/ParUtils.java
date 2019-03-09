@@ -92,10 +92,10 @@ public class ParUtils {
 
 	public static void createParticleSqareHorizontal(Particle par, Location loc,double size) {
 		
-		ParUtils.createParticle(par, loc.add(size,0,0), 0, 0, size-0.1, 5, 10);
-		ParUtils.createParticle(par, loc.add(-size,0,0), 0, 0, size-0.1, 5, 10);
-		ParUtils.createParticle(par, loc.add(0,0,size), size-0.1, 0, 0, 5, 10);
-		ParUtils.createParticle(par, loc.add(0,0,size), size-0.1, 0, 0, 5, 10);
+		ParUtils.createParticle(par, loc.add(size,0,0), 0, 0, size-0.1, 5, 0);
+		ParUtils.createParticle(par, loc.add(0,0,0), 0, 0, size-0.1, 5, 0);
+		ParUtils.createParticle(par, loc.add(0,0,size), size-0.1, 0, 0, 5, 0);
+		ParUtils.createParticle(par, loc.add(0,0,0), size-0.1, 0, 0, 5, 0);
 		
 	}
 	public static void createFlyingParticle(Particle par, Location loc, double spreadX, double spreadY, double spreadZ,

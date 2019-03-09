@@ -216,6 +216,12 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 						p.sendMessage("§8| §ePriuuuusch");
 					}
 				}
+				if(cmd.getName().startsWith("loadpad")) {
+					if(p.isOp()){
+						JumpPadHandler.loadJumpPads(args[0]);
+						p.sendMessage("§8| §ePriuuuuschda");
+					}
+				}
 				if(cmd.getName().startsWith("showpads")) {
 					if(p.isOp()){
 						int number = 0;

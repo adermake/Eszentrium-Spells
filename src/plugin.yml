@@ -56,3 +56,6 @@ commands:
   unload:
     description: unloads all pads
     usage: 
+  loadpads:
+    description: load pads
+    usage: 

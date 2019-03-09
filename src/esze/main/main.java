@@ -54,7 +54,7 @@ public class main extends JavaPlugin {
 		
 		this.getServer().getPluginManager().registerEvents(new EventCollector(), this);
 		Cooldowns.startCooldownHandler();
-		Bukkit.broadcastMessage("----X---");
+		
 		ConfigurationSerialization.registerClass(JumpPad.class);
 		 //R
 		/*ParticleParam p = new ParticleParamItem((Particle<ParticleParamItem>) Particle.REGISTRY.get(new MinecraftKey("hugeexplosion")), null);
@@ -63,6 +63,7 @@ public class main extends JavaPlugin {
 		Particle.REGISTRY.get(new MinecraftKey("<particlename>"))*/
 		
 		this.getCommand("showpads").setExecutor(new CommandReciever());
+		this.getCommand("loadpads").setExecutor(new CommandReciever());
 		this.getCommand("unload").setExecutor(new CommandReciever());
 		this.getCommand("spell").setExecutor(new CommandReciever());
 		this.getCommand("game").setExecutor(new CommandReciever());

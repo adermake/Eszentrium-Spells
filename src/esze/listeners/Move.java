@@ -17,18 +17,20 @@ public class Move implements Listener{
 	@EventHandler
 	public void onVoid(PlayerMoveEvent e){
 		Player p = e.getPlayer();
-		if(p.getGameMode() == GameMode.SURVIVAL){
+		
 			if(Gamestate.getGameState() == Gamestate.INGAME){
 				if(e.getTo().getBlockY() <= 60){
+					
 					PlayerInfo pi = PlayerAPI.getPlayerInfo(p);
 					pi.damageVoid();
 				}
 			}else{
 				if(e.getTo().getBlockY() <= 60){
+					if (p.getGameMode() != GameMode.CREATIVE)
 					p.teleport((Location) main.plugin.getConfig().get("lobby.loc"));
 				}
 			}
-		}
+		
 	}
 
 }
