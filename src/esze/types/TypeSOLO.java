@@ -56,12 +56,8 @@ public class TypeSOLO extends Type{
 				p.teleport(nextLoc());
 				p.setGameMode(GameMode.SURVIVAL);
 				p.getInventory().clear();
-				if (p.getName().equals("kittyherz")) {
-					p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SHOVEL, 1, 0, "§eBalance", null, true));
-				}
-				else {
+			
 					p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true));
-				}
 				
 				PlayerUtils.hidePlayer(p,100);
 				p.setNoDamageTicks(100);
@@ -138,6 +134,7 @@ public class TypeSOLO extends Type{
 			Gamestate.setGameState(Gamestate.LOBBY);
 			LobbyBackgroundRunnable.start();
 			LobbyUtils.recallAll();
+			scoreboard.hide = true;
 			players.clear();
 			
 		}
