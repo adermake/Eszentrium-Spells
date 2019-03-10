@@ -34,7 +34,7 @@ public class JumpPad implements ConfigurationSerializable{
 	
 	
 	public void launch(Entity p) {
-		Bukkit.broadcastMessage(""+type);
+		
 		
 		if (type == JumpPadType.DIRECTIONAL && p instanceof Player) {
 			new BukkitRunnable() {
@@ -119,8 +119,8 @@ public class JumpPad implements ConfigurationSerializable{
 				Location dot = ParUtils.stepCalcCircle(loc, 1, new Vector(0,1,0), -0.3, step*3);
 				Location dot2 = ParUtils.stepCalcCircle(loc, 1, new Vector(0,1,0), -0.3, step*3+22);
 				
-				ParUtils.createParticle(Particle.TOTEM, dot, 0, 1, 0, 0, 14);
-				ParUtils.createParticle(Particle.TOTEM, dot2, 0, 1, 0, 0, 14);
+				ParUtils.createParticle(Particle.TOTEM, dot, 0, 1, 0, 0, 3*4.2);
+				ParUtils.createParticle(Particle.TOTEM, dot2, 0, 1, 0, 0, 3*4.2);
 				if (step > 15)
 					this.cancel();
 			}

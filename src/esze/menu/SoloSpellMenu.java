@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import esze.main.SpellList;
 import esze.utils.ItemStackUtils;
 import esze.utils.NBTUtils;
+import esze.utils.PlayerUtils;
 import spells.spellcore.Spell;
 
 public class SoloSpellMenu extends ItemMenu{
@@ -35,6 +36,7 @@ public class SoloSpellMenu extends ItemMenu{
 		p.getInventory().addItem(is);
 		p.setNoDamageTicks(10);
 		p.setVelocity(p.getVelocity().setY(1));
+		PlayerUtils.showPlayer(p);
 	}
 
 	

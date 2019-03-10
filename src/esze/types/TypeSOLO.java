@@ -47,6 +47,9 @@ public class TypeSOLO extends Type{
 	@Override
 	public void gameStart() {
 		
+		won = false;
+		gameOver = false;
+		
 		scoreboard = new SoloScoreboard();
 		scoreboard.showScoreboard();
 		for (Player p : players) {
@@ -54,7 +57,7 @@ public class TypeSOLO extends Type{
 				p.setGameMode(GameMode.SURVIVAL);
 				p.getInventory().clear();
 				if (p.getName().equals("kittyherz")) {
-					p.getInventory().addItem(ItemStackUtils.createItemStack(Material.DIAMOND_SWORD, 1, 0, "§eBelohnung", null, true));
+					p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SHOVEL, 1, 0, "§eBalance", null, true));
 				}
 				else {
 					p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true));
@@ -109,10 +112,12 @@ public class TypeSOLO extends Type{
 	}
 	boolean won = false;
 	public void checkWinner() {
+		if (!won) {
+			
+		
 		if (players.size()<=1 && !gameOver) {
 			
 			scoreboard.hideScoreboard();
-			LobbyBackgroundRunnable.start();
 			gameOver = true;
 			
 			
@@ -128,14 +133,17 @@ public class TypeSOLO extends Type{
 			
 			}
 			
-		}
 		if (won) {
+			Bukkit.broadcastMessage("END");
 			Gamestate.setGameState(Gamestate.LOBBY);
 			LobbyBackgroundRunnable.start();
 			LobbyUtils.recallAll();
-			Bukkit.broadcastMessage("END");
-		}
+			players.clear();
 			
+		}
+		
+		}
+	}
 	}
 	
 }

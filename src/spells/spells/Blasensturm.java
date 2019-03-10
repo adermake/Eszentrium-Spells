@@ -24,7 +24,7 @@ public class Blasensturm extends Spell{
 		speed =2;
 		casttime =  6;
 		hitboxSize = 1;
-		cooldown = 20*30;
+		cooldown = 20*25;
 		hitSpell = true;
 		
 		
@@ -62,6 +62,9 @@ public class Blasensturm extends Spell{
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
+		if (caster.isSneaking()) {
+			caster.setVelocity(caster.getLocation().getDirection().multiply(-0.5));
+		}
 		
 	}
 
