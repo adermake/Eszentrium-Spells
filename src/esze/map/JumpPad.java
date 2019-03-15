@@ -103,9 +103,9 @@ public class JumpPad implements ConfigurationSerializable{
 		loc = (Location) map.get("loc");
 		Bukkit.broadcastMessage("Unserialised "+map);
 		power = (Double) map.get("power");
-		if ((String) map.get("type") == "up")
+		if (((String) map.get("type")).equals("up"))
 		type = JumpPadType.UP;
-		if ((String) map.get("type") == "dir")
+		if (((String) map.get("type")).equals("dir"))
 			type = JumpPadType.DIRECTIONAL;
         
     }

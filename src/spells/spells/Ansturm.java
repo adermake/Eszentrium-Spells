@@ -103,12 +103,9 @@ public class Ansturm extends Spell{
 	public void onPlayerHit(Player p) {
 		
 		damage(p,5,caster);
-		if (caster.isSneaking()) {
-			doKnockback(p, caster.getLocation(), -3);
-		}
-		else {
-			doKnockback(p, caster.getLocation(), 3);
-		}
+		
+			p.setVelocity(loc.getDirection().multiply(-3));
+		
 		playSound(Sound.ENTITY_IRON_GOLEM_ATTACK, loc, 1, 1);
 		p.setVelocity(p.getVelocity().setY(2.0D));	
 	}

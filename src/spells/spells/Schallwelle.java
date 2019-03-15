@@ -48,15 +48,17 @@ public class Schallwelle extends Spell{
 
 	@Override
 	public void onPlayerHit(Player p) {
-		p.setVelocity(loc.getDirection().multiply(2));
+		p.setVelocity(loc.getDirection().multiply(5));
 		damage(p, 1,caster);
+		dead = true;
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		damage(ent, 1,caster);
-		ent.setVelocity(loc.getDirection().multiply(2));
+		ent.setVelocity(loc.getDirection().multiply(5));
+		dead = true;
 	}
 
 	@Override
