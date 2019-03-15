@@ -20,7 +20,7 @@ import esze.utils.SoundUtils;
 public class JumpPad implements ConfigurationSerializable{
 
 	public double power = 1;
-	public JumpPadType type = JumpPadType.UP;
+	public JumpPadType type = JumpPadType.DIRECTIONAL;
 	public Location loc;
 	
 	
@@ -91,10 +91,12 @@ public class JumpPad implements ConfigurationSerializable{
 	public Map<String, Object> serialize() {
 		 Map<String, Object> map = new HashMap<String, Object>();
 	        map.put("loc", loc);
-	        if (type == JumpPadType.UP)
-	        map.put("type", "up");
-	        if (type == JumpPadType.DIRECTIONAL)
+	        if (type == JumpPadType.UP) {
+	        	map.put("type", "up");
+	        }
+	        if (type == JumpPadType.DIRECTIONAL) {
 		        map.put("type", "dir");
+	        }
 	        map.put("power", power);
 	        return map;
 	};
@@ -103,10 +105,12 @@ public class JumpPad implements ConfigurationSerializable{
 		loc = (Location) map.get("loc");
 		Bukkit.broadcastMessage("Unserialised "+map);
 		power = (Double) map.get("power");
-		if (((String) map.get("type")).equals("up"))
-		type = JumpPadType.UP;
-		if (((String) map.get("type")).equals("dir"))
+		if (((String) map.get("type")).equals("up")) {
+			type = JumpPadType.UP;
+		}
+		if (((String) map.get("type")).equals("dir")) {
 			type = JumpPadType.DIRECTIONAL;
+		}
         
     }
 
