@@ -1,16 +1,15 @@
 package spells.spells;
 
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
 import esze.utils.SoundUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class AntlitzderGöttin extends Spell{
@@ -63,8 +62,8 @@ public class AntlitzderGöttin extends Spell{
 		Location dot = ParUtils.stepCalcCircle(loc, 3, new Vector(0,1,0), -0.3, step*3);
 		Location dot2 = ParUtils.stepCalcCircle(loc, 3, new Vector(0,1,0), -0.3, step*3+22);
 		loc = caster.getLocation();
-		ParUtils.createParticle(Particle.FLAME, dot, 0, 1, 0, 0, 14);
-		ParUtils.createParticle(Particle.FLAME, dot2, 0, 1, 0, 0, 14);
+		ParUtils.createParticle(Particles.FLAME, dot, 0, 1, 0, 0, 14);
+		ParUtils.createParticle(Particles.FLAME, dot2, 0, 1, 0, 0, 14);
 		//ParUtils.createParticle(Particle.VILLAGER_ANGRY, caster.getEyeLocation().add(0,-1.7,0), 0, 1, 0, 0, 1);
 	}
 

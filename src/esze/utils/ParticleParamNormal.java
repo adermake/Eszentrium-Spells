@@ -3,13 +3,13 @@ package esze.utils;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
-import net.minecraft.server.v1_13_R2.ArgumentBlock;
-import net.minecraft.server.v1_13_R2.Block;
-import net.minecraft.server.v1_13_R2.IBlockData;
-import net.minecraft.server.v1_13_R2.PacketDataSerializer;
-import net.minecraft.server.v1_13_R2.Particle;
-import net.minecraft.server.v1_13_R2.ParticleParam;
-import net.minecraft.server.v1_13_R2.ParticleParamBlock;
+import net.minecraft.server.v1_14_R1.ArgumentBlock;
+import net.minecraft.server.v1_14_R1.Block;
+import net.minecraft.server.v1_14_R1.IBlockData;
+import net.minecraft.server.v1_14_R1.PacketDataSerializer;
+import net.minecraft.server.v1_14_R1.Particle;
+import net.minecraft.server.v1_14_R1.ParticleParam;
+import net.minecraft.server.v1_14_R1.ParticleParamBlock;
 
 public class ParticleParamNormal implements ParticleParam {
 

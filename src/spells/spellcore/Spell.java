@@ -113,11 +113,39 @@ public abstract class Spell {
 			}
 		}.runTaskTimer(main.plugin, 1, 1);
 	}
+	// BOUND SPELLS
 	
+	boolean bound = false;
+	public boolean boundHitGround = false;
+	public boolean boundOnGround = false;
+	public Entity spellEnt;
 	
+	public void checkSpellEnt() {
+		if (spellEnt != null) {
+			
+		
+		if(!spellEnt.isValid() && bound) {
+			dead = true;
+			onDeath();
+			
+		}
+		}
+	}
 	
-	
-	
+	public void checkIfHitGround() {
+		
+		boundOnGround = spellEnt.isOnGround();
+		
+		if (boundOnGround && !boundHitGround) {
+			boundHitGround = true;
+			onBlockHit(spellEnt.getLocation().getBlock());
+		}
+		if (!boundOnGround) {
+			boundHitGround = false;
+		}
+			
+		
+	}
 	public void startSpellLoop() {
 		
 		
@@ -131,7 +159,12 @@ public abstract class Spell {
 				public void run() {
 					
 					 display();
+					 if (bound) {
+						 checkIfHitGround();
+						 checkSpellEnt();
+					 }
 					
+					 
 					if (dead == true) {
 						spell.remove(this);
 						this.cancel();
@@ -141,6 +174,7 @@ public abstract class Spell {
 			
 			
 			//MoveLoop
+			
 			
 			new BukkitRunnable() {
 				int ts = 0;
@@ -427,6 +461,11 @@ public abstract class Spell {
 		
 		
 	}
+	
+	public void bindEntity(Entity e) {
+		spellEnt = e;
+		bound = true;
+	}
 	public static void doKnockback(Entity e, Location fromLocation,double speed) {
 		// multiply default 0.25
 		
@@ -554,6 +593,7 @@ public abstract class Spell {
 	public abstract void cast();
 	public abstract void launch();
 	public abstract void move();
+	
 	public abstract void display();
 	public abstract void onPlayerHit(Player p);
 	public abstract void onEntityHit(LivingEntity ent);

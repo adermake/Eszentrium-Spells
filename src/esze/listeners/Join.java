@@ -41,6 +41,7 @@ public class Join implements Listener{
 				pi.isAlive = false;
 				pi.isInRound = false;
 			}
+			
 		}
 	}
 

@@ -94,8 +94,8 @@ public class MapSelect implements Listener{
 				e.setCancelled(true);
 			}
 		}
-		if(inv != null && inv.getName() != null){
-			if(inv.getName().equals("§aWähle eine Map:")){
+		if(inv != null && e.getView().getTitle() != null){
+			if(e.getView().getTitle().equals("§aWähle eine Map:")){
 				e.setCancelled(true);
 				if(item != null && item.getType() != Material.AIR){
 					if(votes.containsKey(p) && votes.get(p).equals(ChatColor.stripColor(item.getItemMeta().getDisplayName()))){

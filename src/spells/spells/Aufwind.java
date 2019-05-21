@@ -2,16 +2,15 @@ package spells.spells;
 
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.main.main;
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Aufwind extends Spell{
@@ -100,7 +99,7 @@ public class Aufwind extends Spell{
 				if (p.getGameMode() == GameMode.ADVENTURE) {
 					this.cancel();
 				}
-				ParUtils.createParticle(Particle.CLOUD, la, 0, 0, 0, 1, 0);
+				ParUtils.createParticle(Particles.CLOUD, la, 0, 0, 0, 1, 0);
 				
 				p.playSound(p.getLocation(), Sound.ITEM_ELYTRA_FLYING, (float) 0.1, (float) 0.1);
 				p.setVelocity(p.getVelocity().setY(0.5));

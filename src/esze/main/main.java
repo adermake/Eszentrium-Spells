@@ -2,7 +2,6 @@ package esze.main;
 
 import java.lang.reflect.Field;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 
 /*import net.minecraft.server.v1_13_R1.MinecraftKey;
@@ -19,6 +18,7 @@ import esze.enums.GameType;
 import esze.enums.GameType.TypeEnum;
 import esze.enums.Gamestate;
 import esze.listeners.Block;
+import esze.listeners.CancelClick;
 import esze.listeners.Damage;
 import esze.listeners.Death;
 import esze.listeners.DropPickup;
@@ -26,19 +26,19 @@ import esze.listeners.FBoost;
 import esze.listeners.Hunger;
 import esze.listeners.Interact;
 import esze.listeners.Join;
-
 import esze.listeners.Move;
 import esze.listeners.Schwertwurf;
-import esze.listeners.CancelClick;
+import esze.listeners.Spawn;
 import esze.map.JumpPad;
 import esze.map.JumpPadHandler;
 import esze.map.MapSelect;
 import esze.menu.Menu;
 import esze.utils.ChatUtils;
 import esze.utils.LibUtils;
-import net.minecraft.server.v1_13_R2.MinecraftServer;
+import net.minecraft.server.v1_14_R1.MinecraftServer;
 import spells.spellcore.Cooldowns;
 import spells.spellcore.EventCollector;
+import spells.spellcore.SpellList;
 
 public class main extends JavaPlugin {
 	
@@ -84,6 +84,7 @@ public class main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Move(), this);
 		getServer().getPluginManager().registerEvents(new Death(), this);
 		getServer().getPluginManager().registerEvents(new Damage(), this);
+		getServer().getPluginManager().registerEvents(new Spawn(), this);
 		getServer().getPluginManager().registerEvents(new Hunger(), this);
 		getServer().getPluginManager().registerEvents(new Interact(), this);
 		getServer().getPluginManager().registerEvents(new Schwertwurf(), this);

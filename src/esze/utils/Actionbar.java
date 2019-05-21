@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import net.minecraft.server.v1_13_R2.ChatMessageType;
+import net.minecraft.server.v1_14_R1.ChatMessageType;
 
 public class Actionbar {
 	

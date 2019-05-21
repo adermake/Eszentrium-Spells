@@ -5,8 +5,8 @@ import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_13_R2.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 
 import org.bukkit.event.EventHandler;
@@ -22,7 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
 import esze.utils.NBTUtils;
-import net.minecraft.server.v1_13_R2.PacketPlayOutSetCooldown;
+import net.minecraft.server.v1_14_R1.PacketPlayOutSetCooldown;
 
 public class EventCollector implements Listener {
 

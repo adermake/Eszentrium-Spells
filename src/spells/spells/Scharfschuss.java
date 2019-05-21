@@ -8,6 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Scharfschuss extends Spell{
@@ -41,9 +42,9 @@ public class Scharfschuss extends Spell{
 		t++;
 		stage++;
 		if (t<10) {
-			ParUtils.dashParticleTo(Particle.FLAME, caster, loc);
-			ParUtils.dashParticleTo(Particle.FLAME, caster, loc);
-			ParUtils.dashParticleTo(Particle.FLAME, caster, loc);
+			ParUtils.dashParticleTo(Particles.FLAME, caster, loc);
+			ParUtils.dashParticleTo(Particles.FLAME, caster, loc);
+			ParUtils.dashParticleTo(Particles.FLAME, caster, loc);
 		}
 		
 		if (t < 20) {
@@ -70,8 +71,8 @@ public class Scharfschuss extends Spell{
 		// TODO Auto-generated method stub
 		ParUtils.createRedstoneParticle(loc, 0, 0, 0, 1, Color.RED, 1);
 		ParUtils.createRedstoneParticle(loc, 0, 0, 0, 1, Color.FUCHSIA, 1);
-		ParUtils.createParticle(Particle.CRIT, loc, 0, 0,0, 1, 0);
-		ParUtils.createParticle(Particle.SMOKE_NORMAL, loc, 0, 0,0, 1, 0);
+		ParUtils.createParticle(Particles.CRIT, loc, 0, 0,0, 1, 0);
+		ParUtils.createParticle(Particles.SMOKE, loc, 0, 0,0, 1, 0);
 	}
 
 	@Override
@@ -97,7 +98,7 @@ public class Scharfschuss extends Spell{
 	public void onBlockHit(Block block) {
 		// TODO Auto-generated method stub
 		playSound(Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST,loc, 10, 1);
-		ParUtils.createParticle(Particle.EXPLOSION_LARGE, loc, 0, 0,0, 1, 0);
+		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0,0, 1, 0);
 		dead = true;
 	}
 

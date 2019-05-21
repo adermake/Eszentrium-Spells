@@ -1,10 +1,8 @@
 package spells.spells;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Bat;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -14,6 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.main.main;
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 public class Flucht extends Spell{
 
@@ -53,7 +52,7 @@ public class Flucht extends Spell{
 			pl.hidePlayer(main.plugin, caster);
 		}
 		
-		ParUtils.createParticle(Particle.SMOKE_LARGE, loc, 1, 1, 1, 100, 0);
+		ParUtils.createParticle(Particles.LARGE_SMOKE, loc, 1, 1, 1, 100, 0);
 		caster.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 100));
 		follow(bat(caster),caster);
 		bat(caster);

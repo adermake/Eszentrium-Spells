@@ -5,30 +5,34 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_13_R2.CraftWorld;
-import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_14_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import esze.main.main;
 import io.netty.util.internal.ThreadLocalRandom;
-import net.minecraft.server.v1_13_R2.Block;
-import net.minecraft.server.v1_13_R2.EntityPlayer;
-import net.minecraft.server.v1_13_R2.Item;
-import net.minecraft.server.v1_13_R2.ParticleParamBlock;
-import net.minecraft.server.v1_13_R2.ParticleParamItem;
-import net.minecraft.server.v1_13_R2.ParticleParamRedstone;
-import net.minecraft.server.v1_13_R2.ParticleType;
-import net.minecraft.server.v1_13_R2.Particles;
-import net.minecraft.server.v1_13_R2.WorldServer;
+import net.minecraft.server.v1_14_R1.Block;
+import net.minecraft.server.v1_14_R1.EntityPlayer;
+import net.minecraft.server.v1_14_R1.ParticleParamBlock;
+import net.minecraft.server.v1_14_R1.ParticleParamItem;
+import net.minecraft.server.v1_14_R1.ParticleParamRedstone;
+import net.minecraft.server.v1_14_R1.ParticleType;
+import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_14_R1.WorldServer;
 
 public class ParUtils {
 
 	public static void debug(Location loc) {
-		createParticle(Particle.BARRIER, loc, 0, 0, 0, 1, 0);
+		createParticle(Particles.BARRIER, loc, 0, 0, 0, 1, 0);
 	}
 
 	public static void createRedstoneParticle(Location loc, double spreadX, double spreadY, double spreadZ, int count,
@@ -49,7 +53,7 @@ public class ParUtils {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			EntityPlayer ep = ((CraftPlayer) p).getHandle();
 
-			nmsWorld.a(ep, new ParticleParamBlock(Particles.d, b.getBlockData()), true, loc.getX(), loc.getY(),
+			nmsWorld.a(ep, new ParticleParamBlock(Particles.BLOCK, b.getBlockData()), true, loc.getX(), loc.getY(),
 					loc.getZ(), count, spreadX, spreadY, spreadZ, 0);
 		}
 	}
@@ -60,29 +64,29 @@ public class ParUtils {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			EntityPlayer ep = ((CraftPlayer) p).getHandle();
 
-			nmsWorld.a(ep, new ParticleParamBlock(Particles.v, b.getBlockData()), true, loc.getX(), loc.getY(),
+			nmsWorld.a(ep, new ParticleParamBlock(Particles.FALLING_DUST, b.getBlockData()), true, loc.getX(), loc.getY(),
 					loc.getZ(), count, spreadX, spreadY, spreadZ, 0);
 		}
 	}
 
 	public static void createItemcrackParticle(Location loc, double spreadX, double spreadY, double spreadZ, int count,
-			Item i) {
+			net.minecraft.server.v1_14_R1.Item i) {
 		WorldServer nmsWorld = ((CraftWorld) loc.getWorld()).getHandle();
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			EntityPlayer ep = ((CraftPlayer) p).getHandle();
 
-			nmsWorld.a(ep, new ParticleParamItem(Particles.C, new net.minecraft.server.v1_13_R2.ItemStack(i)), true,
+			nmsWorld.a(ep, new ParticleParamItem(Particles.ITEM, new net.minecraft.server.v1_14_R1.ItemStack(i)), true,
 					loc.getX(), loc.getY(), loc.getZ(), count, spreadX, spreadY, spreadZ, 0);
 		}
 	}
 
-	public static void createParticle(Particle par, Location loc, double spreadX, double spreadY, double spreadZ,
+	public static void createParticle(ParticleType par, Location loc, double spreadX, double spreadY, double spreadZ,
 			int count, double speed) {
 
 		WorldServer nmsWorld = ((CraftWorld) loc.getWorld()).getHandle();
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			EntityPlayer ep = ((CraftPlayer) p).getHandle();
-			nmsWorld.a(ep, new ParticleParamNormal(translateParticle(par)), true, loc.getX(), loc.getY(), loc.getZ(),
+			nmsWorld.a(ep, new ParticleParamNormal(par), true, loc.getX(), loc.getY(), loc.getZ(),
 					count, spreadX, spreadY, spreadZ, speed);
 		}
 		// a(EntityPlayer target, ParticleParam particle, boolean longDistance, double
@@ -90,7 +94,7 @@ public class ParUtils {
 		// offsetZ, double speed)
 	}
 
-	public static void createParticleSqareHorizontal(Particle par, Location loc,double size) {
+	public static void createParticleSqareHorizontal(ParticleType par, Location loc,double size) {
 		
 		ParUtils.createParticle(par, loc.add(size,0,0), 0, 0, size-0.1, 5, 0);
 		ParUtils.createParticle(par, loc.add(0,0,0), 0, 0, size-0.1, 5, 0);
@@ -98,7 +102,7 @@ public class ParUtils {
 		ParUtils.createParticle(par, loc.add(0,0,0), size-0.1, 0, 0, 5, 0);
 		
 	}
-	public static void createFlyingParticle(Particle par, Location loc, double spreadX, double spreadY, double spreadZ,
+	public static void createFlyingParticle(ParticleType par, Location loc, double spreadX, double spreadY, double spreadZ,
 			int count, double speed, Vector v) {
 
 		for (int i = 0; i < count; i++) {
@@ -116,7 +120,7 @@ public class ParUtils {
 					randZ = ThreadLocalRandom.current().nextDouble(-spreadZ, spreadZ);
 				loctmp.add(randX, randY, randZ);
 				EntityPlayer ep = ((CraftPlayer) p).getHandle();
-				nmsWorld.a(ep, new ParticleParamNormal(translateParticle(par)), true, loctmp.getX(), loctmp.getY(),
+				nmsWorld.a(ep, new ParticleParamNormal(par), true, loctmp.getX(), loctmp.getY(),
 						loctmp.getZ(), 0, v.getX(), v.getY(), v.getZ(), speed);
 			}
 		}
@@ -144,7 +148,7 @@ public class ParUtils {
 
 	}
 
-	public static void parLine(Particle p, Location Cl1, Location Cl2, double spreadX, double spreadY, double spreadZ,int count, double speed, double thickness) {
+	public static void parLine(ParticleType p, Location Cl1, Location Cl2, double spreadX, double spreadY, double spreadZ,int count, double speed, double thickness) {
 		if (thickness == 0) {
 			Bukkit.shutdown();
 		}
@@ -166,7 +170,7 @@ public class ParUtils {
 
 	}
 
-	public static void parLineFly(Particle p, Location Cl1, Location Cl2, double speed, double thickness, Vector dir) {
+	public static void parLineFly(ParticleType p, Location Cl1, Location Cl2, double speed, double thickness, Vector dir) {
 		Location l1 = Cl1.clone();
 		Location l2 = Cl2.clone();
 		Vector v = l2.toVector().subtract(l1.toVector()).normalize();
@@ -186,13 +190,13 @@ public class ParUtils {
 	}
 
 	
-	public static void chargeDot(Location l,Particle pe,double speed,int spread) {
+	public static void chargeDot(Location l,ParticleType pe,double speed,int spread) {
 		Location loc = l.clone().add(randInt(-spread,spread),randInt(-spread,spread),randInt(-spread,spread));
 		
 		createParticle(pe, loc, l.getX()-loc.getX(), l.getY()-loc.getY(), l.getZ()-loc.getZ(), 0, speed);
 		
 	}
-	public static void parKreisDot(Particle pe, final Location l, double radius, double offset, double speed,Vector rotV) {
+	public static void parKreisDot(ParticleType pe, final Location l, double radius, double offset, double speed,Vector rotV) {
 
 		double r = radius;
 		Location loc = l.clone();
@@ -227,7 +231,7 @@ public class ParUtils {
 
 	}
 
-	public static void parKreisDir(Particle pe, final Location l, double radius, double offset, double speed,Vector rotV, Vector dir) {
+	public static void parKreisDir(ParticleType pe, final Location l, double radius, double offset, double speed,Vector rotV, Vector dir) {
 
 		double r = radius;
 		Location loc = l.clone();
@@ -263,7 +267,7 @@ public class ParUtils {
 
 	}
 	
-	public static void dashParticleTo(Particle par,Entity p,Location l) {
+	public static void dashParticleTo(ParticleType par,Entity p,Location l) {
 		Location loc = l.clone();
 		loc.add(randInt(-16,16),randInt(-16,16),randInt(-16,16));
 		
@@ -316,8 +320,10 @@ public class ParUtils {
 		}
 		return locs;
 	}
+	/*
 	public static ParticleType translateParticle(Particle par) {
-
+		Particle.valueOf(par.toString());
+		
 		
 
 		if (par == Particle.BARRIER)
@@ -428,8 +434,9 @@ public class ParUtils {
 			return Particles.s;
 
 		return null;
+		
 	}
-
+*/
 	public static int randInt(int min, int max) {
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 		return randomNum;
@@ -505,6 +512,30 @@ public class ParUtils {
 		return loc;
 		
 
+		
+	}
+
+	
+
+	// SPECIAL EFFECTS
+	
+	public static void dropItemEffectRandomVector(Location loc,Material m,int count,int delay,double power) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		for (int i = 0;i<count;i++) {
+			ItemStack im = new ItemStack(m);
+			Item it = loc.getWorld().dropItem(loc, im);
+			it.setVelocity(randVector().multiply(power));
+			it.setPickupDelay(1000);
+			items.add(it);
+		}
+		
+		new BukkitRunnable() {
+			public void run() {
+				for (Item i : items) {
+					i.remove();
+				}
+			}
+		}.runTaskLater(main.plugin, delay);
 		
 	}
 }

@@ -12,6 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import esze.main.main;
+import net.minecraft.server.v1_14_R1.Particles;
 
 public class LobbyUtils {
 
@@ -31,7 +32,7 @@ public class LobbyUtils {
 				ArrayList<Location> locs = ParUtils.preCalcCircle(l, 4, new Vector(0,0,-1), 0);
 				
 				for (Location loc : locs) {
-					ParUtils.createFlyingParticle(Particle.END_ROD, loc, 0, 0, 0, 1, 1, p.getLocation().toVector().subtract(loc.toVector()).multiply(0.1));
+					ParUtils.createFlyingParticle(Particles.END_ROD, loc, 0, 0, 0, 1, 1, p.getLocation().toVector().subtract(loc.toVector()).multiply(0.1));
 				}
 				
 				if (t>20) {
@@ -64,7 +65,7 @@ public class LobbyUtils {
 				ArrayList<Location> locs = ParUtils.preCalcCircle(l, 4, new Vector(0,0,-1), 0);
 				
 				for (Location loc : locs) {
-					ParUtils.createFlyingParticle(Particle.END_ROD, loc, 0, 0, 0, 1, 1,((Location) main.plugin.getConfig().get("lobby.loc")).toVector().subtract(loc.toVector()).multiply(0.1));
+					ParUtils.createFlyingParticle(Particles.END_ROD, loc, 0, 0, 0, 1, 1,((Location) main.plugin.getConfig().get("lobby.loc")).toVector().subtract(loc.toVector()).multiply(0.1));
 				}
 				
 				if (t>20) {

@@ -1,18 +1,15 @@
 package spells.spells;
 
-import java.util.Random;
-
-import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Schallbrecher extends Spell {
@@ -59,9 +56,9 @@ public class Schallbrecher extends Spell {
 		Vector direction = loc.getDirection();
 		direction.setY(0);
 		caster.setVelocity(direction);
-		ParUtils.parKreisDot(Particle.CLOUD, locate, 0.5, 0.5, 0.2, direction.multiply(-1));
+		ParUtils.parKreisDot(Particles.CLOUD, locate, 0.5, 0.5, 0.2, direction.multiply(-1));
 		
-		ParUtils.createParticle(Particle.FLAME, midloc, 0.1, 0.1, 0.1, 5, 0);
+		ParUtils.createParticle(Particles.FLAME, midloc, 0.1, 0.1, 0.1, 5, 0);
 		Vector dir = loc.getDirection();
 		loc = caster.getLocation();
 		loc.setDirection(dir);
@@ -81,7 +78,7 @@ public class Schallbrecher extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		p.damage(4);
+		p.damage(7);
 		doKnockback(p, loc, 3);
 		playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, loc, 10, 0.7);
 		
@@ -92,7 +89,7 @@ public class Schallbrecher extends Spell {
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		
-		ent.damage(4);
+		ent.damage(7);
 		doKnockback(ent, loc, 3);
 		playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, loc, 10, 0.7);
 		
@@ -121,7 +118,7 @@ public class Schallbrecher extends Spell {
 		locate.setY(locate.getY()-0.5);
 		
 		
-		ParUtils.parKreisDot(Particle.CLOUD, locate, 0.3, 0.0, 0.2, direction.multiply(-1));
+		ParUtils.parKreisDot(Particles.CLOUD, locate, 0.3, 0.0, 0.2, direction.multiply(-1));
 		
 		
 		

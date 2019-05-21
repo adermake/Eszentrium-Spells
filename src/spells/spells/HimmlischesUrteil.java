@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Cooldowns;
 import spells.spellcore.Spell;
 
@@ -53,9 +54,9 @@ public class HimmlischesUrteil extends Spell {
 	@Override
 	public void cast() {
 		// TODO Auto-generated method stub
-		ParUtils.parLineFly(Particle.CLOUD, loc, loc.clone().add(0,100,0), 1, 0.5, new Vector(0,1,0));
+		ParUtils.parLineFly(Particles.CLOUD, loc, loc.clone().add(0,100,0), 1, 0.5, new Vector(0,1,0));
 		for (Location l : circleDots) {
-			ParUtils.createParticle(Particle.END_ROD, l.clone(), 0, 1, 0, 0, 0.2F);
+			ParUtils.createParticle(Particles.END_ROD, l.clone(), 0, 1, 0, 0, 0.2F);
 			
 		}
 		
@@ -100,7 +101,7 @@ public class HimmlischesUrteil extends Spell {
 	
 		for (Location l : circleDots) {
 			
-			ParUtils.createFlyingParticle(Particle.CLOUD, l, 1, 1, 1, 111, 1,  loc.clone().add(0,2,0).toVector().subtract(l.toVector()).normalize());
+			ParUtils.createFlyingParticle(Particles.CLOUD, l, 1, 1, 1, 111, 1,  loc.clone().add(0,2,0).toVector().subtract(l.toVector()).normalize());
 		}
 	}
 

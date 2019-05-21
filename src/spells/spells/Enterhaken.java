@@ -2,7 +2,6 @@ package spells.spells;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
@@ -12,6 +11,7 @@ import org.bukkit.util.Vector;
 
 import esze.main.main;
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Cooldowns;
 import spells.spellcore.Spell;
 
@@ -61,7 +61,7 @@ public class Enterhaken extends Spell{
 	public void move() {
 		if (loc != null && caster != null)
 		dir = (loc.clone()).toVector().subtract(caster.getLocation().toVector()).normalize();
-		ParUtils.parLine(Particle.CRIT,caster.getLocation(), loc.clone(), 0, 0, 0, 0, 0, 3);
+		ParUtils.parLine(Particles.CRIT,caster.getLocation(), loc.clone(), 0, 0, 0, 0, 0, 3);
 		playSound(Sound.BLOCK_TRIPWIRE_ATTACH, caster.getLocation(), 1, 2);
 		caster.setVelocity(dir.clone().multiply(1.4));
 		
@@ -160,7 +160,7 @@ public class Enterhaken extends Spell{
 			double x = direction.getX() * t;
 			double y = direction.getY() * t + 1.5;
 			double z = direction.getZ() * t;
-			ParUtils.createParticle(Particle.CRIT, l, 0, 0, 0, 1, z);
+			ParUtils.createParticle(Particles.CRIT, l, 0, 0, 0, 1, z);
 			
 			Location lo = l.clone();
 

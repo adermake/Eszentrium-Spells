@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_13_R2.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -26,9 +26,9 @@ import com.google.common.collect.Multimap;
 
 import esze.main.main;
 import esze.players.PlayerAPI;
-import net.minecraft.server.v1_13_R2.AttributeModifier;
-import net.minecraft.server.v1_13_R2.EnumItemSlot;
-import net.minecraft.server.v1_13_R2.GenericAttributes;
+import net.minecraft.server.v1_14_R1.AttributeModifier;
+import net.minecraft.server.v1_14_R1.EnumItemSlot;
+import net.minecraft.server.v1_14_R1.GenericAttributes;
 
 public class Schwertwurf implements Listener {
 
@@ -154,9 +154,9 @@ public class Schwertwurf implements Listener {
 	public double getAttackDamage(ItemStack itemStack) {
         double attackDamage = 1.0;
         UUID uuid = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
-        net.minecraft.server.v1_13_R2.ItemStack craftItemStack = CraftItemStack.asNMSCopy(itemStack);
-        net.minecraft.server.v1_13_R2.Item item = craftItemStack.getItem();
-        if(item instanceof net.minecraft.server.v1_13_R2.ItemSword || item instanceof net.minecraft.server.v1_13_R2.ItemTool || item instanceof net.minecraft.server.v1_13_R2.ItemHoe) {
+        net.minecraft.server.v1_14_R1.ItemStack craftItemStack = CraftItemStack.asNMSCopy(itemStack);
+        net.minecraft.server.v1_14_R1.Item item = craftItemStack.getItem();
+        if(item instanceof net.minecraft.server.v1_14_R1.ItemSword || item instanceof net.minecraft.server.v1_14_R1.ItemTool || item instanceof net.minecraft.server.v1_14_R1.ItemHoe) {
             Multimap<String, AttributeModifier> map = item.a(EnumItemSlot.MAINHAND);
             Collection<AttributeModifier> attributes = map.get(GenericAttributes.ATTACK_DAMAGE.getName());
             if(!attributes.isEmpty()) {
@@ -165,15 +165,16 @@ public class Schwertwurf implements Listener {
                     Bukkit.getLogger().info(String.format("  (%s, %s, %f, %d)",am.a().toString(), am.b(), am.d(), am.c()));
                 }
                 for(AttributeModifier am: attributes) {
-                    if(am.a().toString().equalsIgnoreCase(uuid.toString()) && am.c() == 0) attackDamage += am.d();
+                    if(am.a().toString().equalsIgnoreCase(uuid.toString()) && am.d() == 0) attackDamage += am.d();
                 }
                 double y = 1;
+                // UPDTATE FAIL?
                 for(AttributeModifier am: attributes) {
-                    if(am.a().toString().equalsIgnoreCase(uuid.toString()) && am.c() == 1) y += am.d();
+                    if(am.a().toString().equalsIgnoreCase(uuid.toString()) && am.d() == 1) y += am.d();
                 }
                 attackDamage *= y;
                 for(AttributeModifier am: attributes) {
-                    if(am.a().toString().equalsIgnoreCase(uuid.toString()) && am.c() == 2) attackDamage *= (1 + am.d());
+                    if(am.a().toString().equalsIgnoreCase(uuid.toString()) && am.d() == 2) attackDamage *= (1 + am.d());
                 }
             }
         }

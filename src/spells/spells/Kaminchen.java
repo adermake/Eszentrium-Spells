@@ -3,27 +3,26 @@ package spells.spells;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
-import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
+import spells.stagespells.KaminchenEntity;
 
-public class Schallwelle extends Spell{
+public class Kaminchen extends Spell {
+
 	
-	public Schallwelle() {
-		cooldown = 20*10;
-		name = "§eSchallwelle";
-		speed = 1;
-		steprange =30;
-		hitPlayer = true;
-		hitSpell = true;
+	public Kaminchen() {
+		cooldown = 20 * 35;
+		name = "Kaminchen";
 		
 	}
 	
 	
 	@Override
 	public void setUp() {
-		// TODO Auto-generated method stub
+		
+		
+		
 	}
 
 	@Override
@@ -33,32 +32,34 @@ public class Schallwelle extends Spell{
 	}
 
 	@Override
+	public void launch() {
+		// TODO Auto-generated method stub
+		new KaminchenEntity(caster,caster.getLocation().getDirection());
+		dead = true;
+	}
+
+	@Override
 	public void move() {
-		loc.add(loc.getDirection().multiply(0.5));
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		//ParUtils.createFlyingParticle(Particle.BUBBLE_POP, loc,0, 0, 0, 1, 2, loc.getDirection().multiply(-1));
-		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 1, 0);
 		
 	}
 
 	@Override
 	public void onPlayerHit(Player p) {
-		p.setVelocity(loc.getDirection().multiply(5));
-		damage(p, 1,caster);
-		dead = true;
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
-		damage(ent, 1,caster);
-		ent.setVelocity(loc.getDirection().multiply(5));
-		dead = true;
+		
 	}
 
 	@Override
@@ -69,22 +70,12 @@ public class Schallwelle extends Spell{
 
 	@Override
 	public void onBlockHit(Block block) {
-		
-		
-		//bounce();
+		// TODO Auto-generated method stub
 		
 	}
-
 
 	@Override
 	public void onDeath() {
-		
-		
-	}
-
-
-	@Override
-	public void launch() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,17 +1,16 @@
 package spells.spells;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.main.main;
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Explosion extends Spell{
@@ -37,7 +36,7 @@ public class Explosion extends Spell{
 	@Override
 	public void launch() {
 		spawnShockWaffel(caster, 3,loc.clone());
-		ParUtils.createParticle(Particle.EXPLOSION_HUGE, loc, 0, 0, 0, 1, 10);
+		ParUtils.createParticle(Particles.EXPLOSION_EMITTER, loc, 0, 0, 0, 1, 10);
 
 		caster.setVelocity(caster.getVelocity().setY(1.0D));
 		caster.playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
@@ -107,7 +106,7 @@ public class Explosion extends Spell{
 					double z = t * Math.sin(theta);
 					loc.add(x, y, z);
 					// ParticleEffect.FIREWORKS_SPARK.display(loc,0,0,0,0,1);
-					ParUtils.createParticle(Particle.SMOKE_LARGE, loc, 0, 0, 0, 0, 0);
+					ParUtils.createParticle(Particles.LARGE_SMOKE, loc, 0, 0, 0, 0, 0);
 				
 					loc.subtract(x, y, z);
 
@@ -118,7 +117,7 @@ public class Explosion extends Spell{
 					z = t * Math.sin(theta);
 					loc.add(x, y, z);
 					// ParticleEffect.WITCH_MAGIC.display(loc,0,0,0,0,1);
-					ParUtils.createParticle(Particle.CLOUD, loc, 0, 0, 0, 0, 0);
+					ParUtils.createParticle(Particles.CLOUD, loc, 0, 0, 0, 0, 0);
 					loc.subtract(x, y, z);
 				}
 				if (t > length) {

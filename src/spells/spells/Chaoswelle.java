@@ -13,6 +13,7 @@ import org.bukkit.util.Vector;
 
 import esze.main.main;
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Chaoswelle extends Spell{
@@ -127,8 +128,8 @@ public class Chaoswelle extends Spell{
 					// ParticleEffect.FIREWORKS_SPARK.display(loc,0,0,0,0,1);
 
 					
-					ParUtils.createParticle(Particle.SMOKE_LARGE, loc.clone().add(0,1,0), 0, 0, 0, 1, 0);
-					ParUtils.createParticle(Particle.EXPLOSION_LARGE, loc.clone().add(0,1,0), 0, 0, 0, 1, 0);
+					ParUtils.createParticle(Particles.LARGE_SMOKE, loc.clone().add(0,1,0), 0, 0, 0, 1, 0);
+					ParUtils.createParticle(Particles.EXPLOSION, loc.clone().add(0,1,0), 0, 0, 0, 1, 0);
 					
 					for (LivingEntity le : p.getWorld().getLivingEntities()) {
 						if (checkHit(le,loc,p,2)) {

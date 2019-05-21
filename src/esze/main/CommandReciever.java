@@ -19,7 +19,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
@@ -36,7 +36,7 @@ import esze.map.JumpPad.JumpPadType;
 import esze.map.JumpPadHandler;
 import esze.utils.NBTUtils;
 import esze.voice.Discord;
-import net.minecraft.server.v1_13_R2.EntityPlayer;
+import net.minecraft.server.v1_14_R1.EntityPlayer;
 
 public class CommandReciever implements CommandExecutor, TabCompleter{
 	

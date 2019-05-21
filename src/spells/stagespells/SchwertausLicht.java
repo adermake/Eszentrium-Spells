@@ -2,7 +2,6 @@ package spells.stagespells;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -14,6 +13,7 @@ import org.bukkit.util.Vector;
 
 import esze.utils.Matrix;
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class SchwertausLicht extends Spell{
@@ -70,7 +70,7 @@ public class SchwertausLicht extends Spell{
 		Matrix.rotateMatrixVectorFunktion(rotMaLoc , loc.clone());
 		loc.add(rotMaLoc);
 		loc = loc.clone().add(0,1.5,0);
-		ParUtils.createParticle(Particle.END_ROD, loc.clone().add(0,1.5,0), 0,0,0, 5, 0);
+		ParUtils.createParticle(Particles.END_ROD, loc.clone().add(0,1.5,0), 0,0,0, 5, 0);
 		//ParUtils.parKreisDot(Particle.END_ROD, loc, 1, -1, 1, loc.getDirection());
 		
 	}
@@ -87,7 +87,7 @@ public class SchwertausLicht extends Spell{
 
 	@Override
 	public void display() {
-		ParUtils.createParticle(Particle.CRIT, loc, 0.01, 0.01, 0.01, 1, 0);
+		ParUtils.createParticle(Particles.CRIT, loc, 0.01, 0.01, 0.01, 1, 0);
 		
 	}
 

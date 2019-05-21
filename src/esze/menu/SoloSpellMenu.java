@@ -2,16 +2,14 @@ package esze.menu;
 
 import java.util.ArrayList;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import esze.main.SpellList;
-import esze.utils.ItemStackUtils;
 import esze.utils.NBTUtils;
 import esze.utils.PlayerUtils;
 import spells.spellcore.Spell;
+import spells.spellcore.SpellList;
 
 public class SoloSpellMenu extends ItemMenu{
 

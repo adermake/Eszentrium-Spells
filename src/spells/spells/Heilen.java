@@ -13,6 +13,7 @@ import org.bukkit.util.Vector;
 import esze.main.main;
 import esze.utils.Matrix;
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Heilen extends Spell{
@@ -76,7 +77,7 @@ public class Heilen extends Spell{
 
 	@Override
 	public void move() {
-		ParUtils.createParticle(Particle.VILLAGER_HAPPY, loc, 0, 0, 0, 1,0);
+		ParUtils.createParticle(Particles.HAPPY_VILLAGER, loc, 0, 0, 0, 1,0);
 		loc.add(loc.getDirection().multiply(0.4));
 		
 	}

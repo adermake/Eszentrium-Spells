@@ -26,7 +26,7 @@ public class Menu implements Listener {
 	
 	@EventHandler
 	public void inventoryCloseEvent(InventoryCloseEvent e) {
-		if (e.getInventory().getName().equals("spellmenu")) {
+		if (e.getView().getTitle().equals("spellmenu")) {
 			ItemMenuIcon.ditributeClicks(e.getInventory().getItem(1).getItemMeta().getDisplayName(), e.getInventory(),(Player) e.getPlayer());
 			
 		}

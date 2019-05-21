@@ -1,18 +1,13 @@
 package spells.spells;
 
-import java.util.ArrayList;
-
 import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Blasensturm extends Spell{
@@ -77,14 +72,14 @@ public class Blasensturm extends Spell{
 	@Override
 	public void display() {
 		
-		ParUtils.createParticle(Particle.WATER_BUBBLE, loc, 0, 0, 0, 5, 0);
+		ParUtils.createParticle(Particles.BUBBLE, loc, 0, 0, 0, 5, 0);
 		//ParUtils.createRedstoneParticle(loc, 0, 0, 0, 2, Color.AQUA, 2);
 		
 	}
 
 	@Override
 	public void onPlayerHit(Player p) {
-		ParUtils.createParticle(Particle.EXPLOSION_LARGE, loc, 0, 0, 0, 1, 2);
+		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 1, 2);
 		playSound(Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST,loc,0.5f,0.7f);
 		p.setVelocity(loc.getDirection());
 		damage(p,2,caster);
@@ -92,7 +87,7 @@ public class Blasensturm extends Spell{
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
-		ParUtils.createParticle(Particle.EXPLOSION_LARGE, loc, 0, 0, 0, 1, 2);
+		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 1, 2);
 		playSound(Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST,loc,0.5f,0.7f);
 		ent.setVelocity(loc.getDirection());
 		
