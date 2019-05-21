@@ -1,36 +1,34 @@
-package spells.stagespells;
+package spells.spells;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import spells.spellcore.Spell;
+import spells.stagespells.SchockLaser;
 
-public class Eggsplosive extends Spell {
+public class Schock extends Spell {
 
-	Location overrideLoc;
-	public Eggsplosive(Player p,Location loca) {
+	
+	public Schock() {
+		cooldown = 20 * 35;
+		name = "Schock";
+		casttime =  3;
 		
-		overrideLoc = loca;
-		castSpell(p,"Eggsplosive");
-		steprange = 200;
+		
 	}
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		loc = overrideLoc;
-		bindEntity(caster.getWorld().spawnEntity(loc, EntityType.EGG));
 		
 	}
 
 	@Override
 	public void cast() {
 		// TODO Auto-generated method stub
-		
+		new SchockLaser(caster);
+		playSound(Sound.ENTITY_LIGHTNING_BOLT_IMPACT, loc, 4, 0.3F);
 	}
 
 	@Override
@@ -42,7 +40,7 @@ public class Eggsplosive extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		loc = spellEnt.getLocation();
+		dead = true;
 	}
 
 	@Override
@@ -77,8 +75,9 @@ public class Eggsplosive extends Spell {
 
 	@Override
 	public void onDeath() {
-		new Explosion(2,9,1,2,caster,loc);
+		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

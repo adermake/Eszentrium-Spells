@@ -2,6 +2,7 @@ package spells.stagespells;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -26,7 +27,7 @@ public class SchwertausLicht extends Spell{
 		caster = c;
 		loc = l;
 		saveLoc = l;
-		casttime = /*randInt(12,34);*/0;
+		casttime = randInt(12,34);
 		steprange = 200;
 		speed = 8;
 		hitboxSize = 0.3;
@@ -50,7 +51,7 @@ public class SchwertausLicht extends Spell{
 		EulerAngle ea = new EulerAngle((caster.getLocation().getPitch()/180)*Math.PI, 0, 0);
 		
 		a.setRightArmPose(ea);
-		
+		playSound(Sound.BLOCK_ENCHANTMENT_TABLE_USE,loc,10,2);
 				
 		
 		
@@ -64,6 +65,7 @@ public class SchwertausLicht extends Spell{
 
 	@Override
 	public void launch() {
+		playSound(Sound.ENTITY_FIREWORK_ROCKET_LAUNCH,loc,4,0.5F);
 		// TODO Auto-generated method stub
 		loc = saveLoc.clone();
 		Vector rotMaLoc = new Vector(-0.4,0,0);

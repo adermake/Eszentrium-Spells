@@ -28,7 +28,7 @@ public class SwordExplosion extends Spell{
 	@Override
 	public void setUp() {
 		loc = svloc;
-		playSound(Sound.ENTITY_GENERIC_EXPLODE, loc, 1, 1.5F);
+		playSound(Sound.ENTITY_GENERIC_EXPLODE, loc, 10, 1.5F);
 	}
 
 	@Override

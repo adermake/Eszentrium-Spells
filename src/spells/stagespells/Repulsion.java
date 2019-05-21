@@ -2,29 +2,36 @@ package spells.stagespells;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.ParticleType;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
-public class Eggsplosive extends Spell {
+public class Repulsion extends Spell {
 
+	double damage = 0;
+	double knockback = 0;
+	float pitch = 1;
 	Location overrideLoc;
-	public Eggsplosive(Player p,Location loca) {
-		
+	public Repulsion(double size,double knockback,Player caster,Location loca) {
+		hitboxSize = size;
+		steprange = 1;
+		this.pitch = pitch;
+		this.knockback = knockback;
 		overrideLoc = loca;
-		castSpell(p,"Eggsplosive");
-		steprange = 200;
+		
+		castSpell(caster, "Repulsion");
 	}
+	
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
 		loc = overrideLoc;
-		bindEntity(caster.getWorld().spawnEntity(loc, EntityType.EGG));
-		
 	}
 
 	@Override
@@ -42,12 +49,12 @@ public class Eggsplosive extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		loc = spellEnt.getLocation();
+		
+		
 	}
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -55,12 +62,14 @@ public class Eggsplosive extends Spell {
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		
+		doKnockback(p, loc, knockback);
+		
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
-		// TODO Auto-generated method stub
 		
+		doKnockback(ent, loc, knockback);
 	}
 
 	@Override
@@ -77,7 +86,7 @@ public class Eggsplosive extends Spell {
 
 	@Override
 	public void onDeath() {
-		new Explosion(2,9,1,2,caster,loc);
+		// TODO Auto-generated method stub
 		
 	}
 

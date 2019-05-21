@@ -15,14 +15,17 @@ import spells.spellcore.Spell;
 public class Explosion extends Spell {
 
 	double damage = 0;
+	double knockback = 0;
 	float pitch = 1;
 	Location overrideLoc;
-	public Explosion(double size,double damage,float pitch,Player caster,Location loca) {
+	public Explosion(double size,double damage,double knockback,float pitch,Player caster,Location loca) {
 		hitboxSize = size;
-		steprange = 2;
+		steprange = 1;
 		this.damage = damage;
 		this.pitch = pitch;
+		this.knockback = knockback;
 		overrideLoc = loca;
+		
 		castSpell(caster, "Explosion");
 	}
 	
@@ -53,6 +56,9 @@ public class Explosion extends Spell {
 
 	@Override
 	public void display() {
+		if (hitboxSize>2) {
+			ParUtils.createParticle(Particles.EXPLOSION_EMITTER, loc, hitboxSize/2, hitboxSize/2, hitboxSize/2, (int)hitboxSize/2, 0);
+		}
 		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 3, 0);
 		playSound(Sound.ENTITY_GENERIC_EXPLODE, loc,5, pitch);
 	}
@@ -61,13 +67,14 @@ public class Explosion extends Spell {
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		damage(p,damage,caster);
+		doKnockback(p, loc, knockback);
 		
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		damage(ent,damage,caster);
-		
+		doKnockback(ent, loc, knockback);
 	}
 
 	@Override
