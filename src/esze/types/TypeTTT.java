@@ -23,6 +23,7 @@ import esze.utils.LobbyUtils;
 import esze.utils.MathUtils;
 import esze.utils.PlayerUtils;
 import esze.utils.Title;
+import spells.spellcore.Spelldrop;
 
 public class TypeTTT extends Type{
 	boolean gameOver = false;
@@ -34,6 +35,7 @@ public class TypeTTT extends Type{
 		name = "TTT";
 	}
 	
+	int sec = 0;
 	@Override
 	public void runEverySecond() {
 		for (Player p : players) {
@@ -42,6 +44,11 @@ public class TypeTTT extends Type{
 			}
 			
 			
+		}
+		sec++;
+		if (sec>10) {
+			spawnNewSpell();
+			sec = 0;
 		}
 	}
 	
@@ -118,6 +125,29 @@ public class TypeTTT extends Type{
 		
 	}
 	
+	public void spawnNewSpell() {
+		Location loc = nextLoc();
+		loc.add(MathUtils.randInt(-30, 30),MathUtils.randInt(-10, 30),MathUtils.randInt(-30, 30));
+		
+		while (!loc.getBlock().getType().isSolid())  {
+			loc.add(0,-1,0);
+			if (loc.getY()< 60 ) {
+				spawnNewSpell();
+				return;
+				
+			}
+		}
+		while (loc.clone().add(0,1,0).getBlock().getType().isSolid())  {
+			loc.add(0,1,0);
+			if (loc.getY()> 200 ) {
+				spawnNewSpell();
+				return;
+				
+			}
+		}
+		new Spelldrop(loc);
+	
+	}
 	
 	public void setTraitor(Player p) {
 		

@@ -1,9 +1,8 @@
-package esze.main;
+package spells.spellcore;
 
 import java.util.ArrayList;
 
 import esze.utils.MathUtils;
-import spells.spellcore.Spell;
 import spells.spells.Ansturm;
 import spells.spells.AntlitzderGöttin;
 import spells.spells.Aufwind;
@@ -26,7 +25,7 @@ import spells.spells.Spinnenkäfig;
 public class SpellList {
 
 	public static ArrayList<Spell> spells = new ArrayList<Spell>();
-	
+	public static ArrayList<Spell> traitorSpells = new ArrayList<Spell>();
 	
 	
 	
@@ -42,6 +41,9 @@ public class SpellList {
 		
 	}
 	
+	public static Spell getRandomSpell() {
+		return spells.get(MathUtils.randInt(0, spells.size()-1));
+	}
 	
 	public static void registerSpells() {
 		spells.add(new Ansturm());
@@ -62,6 +64,9 @@ public class SpellList {
 		spells.add(new Erdsurfer());
 		spells.add(new Schallbrecher());
 		spells.add(new Spinnenkäfig());
+	}
+	public static void registerTraitorSpells() {
+		
 	}
 	
 }
