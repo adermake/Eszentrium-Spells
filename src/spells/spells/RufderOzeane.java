@@ -1,34 +1,36 @@
 package spells.spells;
 
-import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import spells.spellcore.Spell;
-import spells.stagespells.SchockLaser;
+import spells.stagespells.RufDerOzeaneFish;
 
-public class Schock extends Spell {
-
+public class RufderOzeane extends Spell{
 	
-	public Schock() {
-		cooldown = 20 * 35;
-		name = "Schock";
-		casttime =  3;
-		
+	public RufderOzeane() {
+		name = "§eRuf der Oceane";
+		cooldown = 20 * 5;
+		steprange = 30;
+		speed = 0.5;
 		
 	}
 	@Override
 	public void setUp() {
-		// TODO Auto-generated method stub
+		
+		
+		
+		
 		
 	}
 
 	@Override
 	public void cast() {
-		// TODO Auto-generated method stub
-		new SchockLaser(caster);
-		playSound(Sound.ENTITY_LIGHTNING_BOLT_THUNDER,caster.getLocation(),8F,2f);
+		
+		
+		
+		
 		
 	}
 
@@ -41,7 +43,7 @@ public class Schock extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		dead = true;
+		new RufDerOzeaneFish(caster);
 	}
 
 	@Override
@@ -79,6 +81,5 @@ public class Schock extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
-	
 
 }

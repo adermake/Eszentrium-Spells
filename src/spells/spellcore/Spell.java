@@ -59,7 +59,7 @@ public abstract class Spell {
 	protected boolean multihit = false;
 	protected boolean dieOnLowPower = true;
 	protected boolean powerBattle = false;
-	
+	protected boolean traitorSpell = false;
 	protected boolean dead = false;
 	
 	//VARS
@@ -67,6 +67,7 @@ public abstract class Spell {
 	protected boolean spellLoopStarted = false;
 	protected ArrayList<Entity> noTargetEntitys = new ArrayList<Entity>();
 	protected ArrayList<Entity> hitEntitys = new ArrayList<Entity>();
+	public static ArrayList<Entity> pressingF = new ArrayList<Entity>();
 	protected static ArrayList<Spell> spell = new ArrayList<Spell>();
 	protected static ArrayList<Player> gliding = new ArrayList<Player>();
 	protected Location startPos;
@@ -158,6 +159,7 @@ public abstract class Spell {
 			new BukkitRunnable() {
 				public void run() {
 					
+					
 					 display();
 					 if (bound) {
 						 checkIfHitGround();
@@ -191,10 +193,13 @@ public abstract class Spell {
 								display();
 							}
 							
-							collideWithPlayer();
-							collideWithEntity();
-							collideWithSpell();
-							collideWithBlock();
+							if (!dead) {
+								collideWithPlayer();
+								collideWithEntity();
+								collideWithSpell();
+								collideWithBlock();
+							}
+							
 							if (dead) {
 								
 								this.cancel();
@@ -216,6 +221,7 @@ public abstract class Spell {
 						onDeath();
 						this.cancel();
 					}
+					pressingF.clear();
 					
 				}
 			}.runTaskTimer(main.plugin, 1, 1);
@@ -261,6 +267,7 @@ public abstract class Spell {
 				if (ent instanceof Player) {
 					continue;
 				}
+				
 				if (multihit == false && hitEntitys.contains(ent)) {
 					continue;
 				}
@@ -463,6 +470,7 @@ public abstract class Spell {
 	}
 	
 	public void bindEntity(Entity e) {
+		noTargetEntitys.add(e);
 		spellEnt = e;
 		bound = true;
 	}
@@ -543,6 +551,35 @@ public abstract class Spell {
 		return null;
 
 	}
+	public Location block(Player p,int range) {
+		Location loc = p.getLocation();
+		for (int t = 1; t <= range; t++) {
+
+			Vector direction = loc.getDirection().normalize().multiply(0.5);
+			double x = direction.getX() * t;
+			double y = direction.getY() * t + 1.5;
+			double z = direction.getZ() * t;
+			loc.add(x, y, z);
+			Location lo = loc.clone();
+
+			if (loc.getBlock().getType() != Material.AIR) {
+				return loc;
+
+			}
+
+			loc.subtract(x, y, z);
+		}
+		return null;
+
+	}
+	public Location getTop(Location loca) {
+		
+		while (loca.getBlock().getType().isSolid()) {
+			loca.add(0,1,0);
+		}
+		return loca.getBlock().getLocation().add(0.5,0.5,0.5);
+		
+	}
 	public String getName() {
 		return name;
 	}
@@ -582,6 +619,17 @@ public abstract class Spell {
 		
 		
 		return false;
+	}
+	
+	public ArmorStand createArmorStand(Location loca) {
+		ArmorStand a = (ArmorStand) loca.getWorld().spawnEntity(loca, EntityType.ARMOR_STAND);
+		
+		a.setInvulnerable(true);
+		a.setVisible(false);
+		a.setGravity(false);
+		
+		
+		return a;
 	}
 	
 	

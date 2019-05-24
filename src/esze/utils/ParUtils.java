@@ -130,8 +130,12 @@ public class ParUtils {
 		// offsetZ, double speed)
 	}
 
-	public static void parLineRedstone(Location l1, Location l2, Color color, float size, double thickness) {
-
+	public static void parLineRedstone(Location l1C, Location l2C, Color color, float size, double thickness) {
+		if (thickness == 0) {
+			Bukkit.shutdown();
+		}
+		Location l1 = l1C.clone();
+		Location l2 = l2C.clone();
 		Vector v = l2.toVector().subtract(l1.toVector()).normalize();
 		v.multiply(thickness);
 		double counter = l1.distance(l2) / thickness;
@@ -194,6 +198,14 @@ public class ParUtils {
 		Location loc = l.clone().add(randInt(-spread,spread),randInt(-spread,spread),randInt(-spread,spread));
 		
 		createParticle(pe, loc, l.getX()-loc.getX(), l.getY()-loc.getY(), l.getZ()-loc.getZ(), 0, speed);
+		
+	}
+	
+	public static void chargeDot(Location l,ParticleType pe,double speed,int spread,int count) {
+		
+		for (int i = 0;i<count;i++) {
+			ParUtils.chargeDot(l.clone(), pe, speed, count);
+		}
 		
 	}
 	public static void parKreisDot(ParticleType pe, final Location l, double radius, double offset, double speed,Vector rotV) {
@@ -267,6 +279,77 @@ public class ParUtils {
 
 	}
 	
+	public static void parKreisDirSolid(ParticleType pe, final Location l, double radius, double offset, double speed,Vector rotV, Vector dir) {
+
+		double r = radius;
+		Location loc = l.clone();
+		Location rot = l.clone().setDirection(rotV);
+
+		double ti = 100;
+		if (radius < 1)
+			ti = 6; 
+		ti = ti > 100 ? 100 : ti;
+		ti = ti > 100 ? 100 : ti;
+
+		for (double t = 0; t <= ti;) {
+
+			t = t + Math.PI / randInt(4, 16);
+
+			double x = r * Math.cos(t);
+			double y = 1 + offset;
+			double z = r * Math.sin(t);
+			Location j = loc.clone();
+			Vector v = new Vector(x, y, z);
+			Matrix.rotateMatrixVectorFunktion(v, rot);
+
+			loc.add(v.getX(), v.getY(), v.getZ());
+
+			Vector ve = j.subtract(loc).toVector();
+			
+			
+			createParticle(pe, loc, (float)dir.getX(),(float) dir.getY(),(float)dir.getZ(), 0, (float)speed);
+
+			loc.subtract(v.getX(), v.getY(), v.getZ());
+
+		}
+
+	}
+	
+	public static void parKreisSolidRedstone(Color color, float size,final Location l, double radius, double offset, double speed,Vector rotV) {
+
+		double r = radius;
+		Location loc = l.clone();
+		Location rot = l.clone().setDirection(rotV);
+
+		double ti = 100;
+		if (radius < 1)
+			ti = 6; 
+		ti = ti > 100 ? 100 : ti;
+		ti = ti > 100 ? 100 : ti;
+
+		for (double t = 0; t <= ti;) {
+
+			t = t + Math.PI / randInt(4, 16);
+
+			double x = r * Math.cos(t);
+			double y = 1 + offset;
+			double z = r * Math.sin(t);
+			Location j = loc.clone();
+			Vector v = new Vector(x, y, z);
+			Matrix.rotateMatrixVectorFunktion(v, rot);
+
+			loc.add(v.getX(), v.getY(), v.getZ());
+
+			Vector ve = j.subtract(loc).toVector();
+			
+			
+			//createParticle(pe, loc, (float)dir.getX(),(float) dir.getY(),(float)dir.getZ(), 0, (float)speed);
+			createRedstoneParticle(loc, 0, 0, 0, 0, color, size);
+			loc.subtract(v.getX(), v.getY(), v.getZ());
+
+		}
+
+	}
 	public static void dashParticleTo(ParticleType par,Entity p,Location l) {
 		Location loc = l.clone();
 		loc.add(randInt(-16,16),randInt(-16,16),randInt(-16,16));
@@ -514,6 +597,26 @@ public class ParUtils {
 
 		
 	}
+	public static Location stepCalcSpiral(Location l,double r,Vector rotV,double offset,double steps) {
+		double t =  (Math.PI / 22)* ((double)steps);
+		Location loc = l.clone();
+		Location rot = loc.clone().setDirection(rotV);
+		r = r - steps/44;
+		double x = r * Math.cos(t);
+		double y = 1 + offset;
+		double z = r * Math.sin(t);
+		Location j = loc.clone();
+		Vector v = new Vector(x, y, z);
+		Matrix.rotateMatrixVectorFunktion(v, rot);
+
+		loc.add(v.getX(), v.getY(), v.getZ());
+
+		
+		return loc;
+		
+
+		
+	}
 
 	
 
@@ -525,6 +628,25 @@ public class ParUtils {
 			ItemStack im = new ItemStack(m);
 			Item it = loc.getWorld().dropItem(loc, im);
 			it.setVelocity(randVector().multiply(power));
+			it.setPickupDelay(1000);
+			items.add(it);
+		}
+		
+		new BukkitRunnable() {
+			public void run() {
+				for (Item i : items) {
+					i.remove();
+				}
+			}
+		}.runTaskLater(main.plugin, delay);
+		
+	}
+	public static void dropItemEffectVector(Location loc,Material m,int count,int delay,double power,Vector dir) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		for (int i = 0;i<count;i++) {
+			ItemStack im = new ItemStack(m);
+			Item it = loc.getWorld().dropItem(loc, im);
+			it.setVelocity(dir.multiply(power));
 			it.setPickupDelay(1000);
 			items.add(it);
 		}

@@ -3,6 +3,7 @@ package spells.stagespells;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -121,6 +122,7 @@ public class SchockLaser extends Spell {
 		new Explosion(2, 5+((caster.getLocation().getY()-loc.getY())/20), 1, 2, caster, loc);
 		ParUtils.parKreisDot(Particles.CLOUD, loc, 5, 0, 0.05, loc.getDirection().multiply(-1));
 		dead = true;
+		playSound(Sound.ENTITY_LIGHTNING_BOLT_IMPACT, loc, 4, 0.3F);
 	}
 	@Override
 	public void onDeath() {

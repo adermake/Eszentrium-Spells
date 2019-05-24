@@ -1,45 +1,35 @@
-package spells.stagespells;
+package spells.spells;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import org.bukkit.Color;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.ParticleType;
-import net.minecraft.server.v1_14_R1.Particles;
+import spells.spellcore.Cooldowns;
 import spells.spellcore.Spell;
 
-public class Repulsion extends Spell {
-
-	double damage = 0;
-	double knockback = 0;
-	float pitch = 1;
-	Location overrideLoc;
-	public Repulsion(double size,double knockback,Player caster,Location loca) {
-		hitboxSize = size;
-		steprange = 1;
-		this.pitch = pitch;
-		this.knockback = knockback;
-		overrideLoc = loca;
-		
-		castSpell(caster, "Repulsion");
+public class Raumwechsel extends Spell{
+	
+	public Raumwechsel() {
+		name = "Raumwechsel";
+		cooldown = 20 * 42;
 	}
-	public Repulsion(double size,double knockback,Player caster,Location loca,boolean b) {
-		hitboxSize = size;
-		steprange = 1;
-		this.pitch = pitch;
-		this.knockback = knockback;
-		overrideLoc = loca;
-		canHitSelf =b;
-		castSpell(caster, "Repulsion");
-	}
+	
+	Player target;
+	
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		loc = overrideLoc;
+		target = pointEntity(caster);
+		
+		if (target == null) {
+			Cooldowns.refundCurrentSpell(caster);
+			dead = true;
+			
+		}
+		
 	}
 
 	@Override
@@ -51,6 +41,15 @@ public class Repulsion extends Spell {
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
+		if (target != null) {
+			playSound(Sound.ENTITY_EVOKER_PREPARE_WOLOLO, target.getLocation(), 1, 2);
+			playSound(Sound.ENTITY_EVOKER_PREPARE_WOLOLO, target.getLocation(), 1, 2);
+			doPull(caster, target.getLocation(), 4);
+			doPull(target,caster.getLocation(),4);
+			ParUtils.parLineRedstone(target.getLocation(),caster.getLocation(), Color.AQUA, 0.5F, 0.5);
+		}
+		
+		dead = true;
 		
 	}
 
@@ -58,11 +57,11 @@ public class Repulsion extends Spell {
 	public void move() {
 		// TODO Auto-generated method stub
 		
-		
 	}
 
 	@Override
 	public void display() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -70,14 +69,12 @@ public class Repulsion extends Spell {
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		
-		doKnockback(p, loc, knockback);
-		
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
+		// TODO Auto-generated method stub
 		
-		doKnockback(ent, loc, knockback);
 	}
 
 	@Override

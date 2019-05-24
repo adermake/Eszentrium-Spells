@@ -1,45 +1,29 @@
-package spells.stagespells;
+package spells.spells;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import java.util.ArrayList;
+
 import org.bukkit.block.Block;
+import org.bukkit.block.data.Orientable;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.ParticleType;
-import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
+import spells.stagespells.OrbitarOrb;
 
-public class Repulsion extends Spell {
+public class Orbitar extends Spell {
 
-	double damage = 0;
-	double knockback = 0;
-	float pitch = 1;
-	Location overrideLoc;
-	public Repulsion(double size,double knockback,Player caster,Location loca) {
-		hitboxSize = size;
-		steprange = 1;
-		this.pitch = pitch;
-		this.knockback = knockback;
-		overrideLoc = loca;
+	public ArrayList<OrbitarOrb> orb = new ArrayList<OrbitarOrb>();
+	public Orbitar() {
+		name = "§6Orbitar";
+		cooldown = 20 * 60;
+		steprange = 20 * 15;
 		
-		castSpell(caster, "Repulsion");
 	}
-	public Repulsion(double size,double knockback,Player caster,Location loca,boolean b) {
-		hitboxSize = size;
-		steprange = 1;
-		this.pitch = pitch;
-		this.knockback = knockback;
-		overrideLoc = loca;
-		canHitSelf =b;
-		castSpell(caster, "Repulsion");
-	}
+	
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		loc = overrideLoc;
+		
 	}
 
 	@Override
@@ -51,18 +35,32 @@ public class Repulsion extends Spell {
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
-		
+		orb.add(new OrbitarOrb(caster,0,steprange));
+		orb.add(new OrbitarOrb(caster,14,steprange));
+		orb.add(new OrbitarOrb(caster,28,steprange));
 	}
 
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
 		
+		if (caster.isSneaking()) {
+			for (OrbitarOrb o : orb) {
+				o.setSpeed(4);
+				
+			}
+		}
+		else {
+			for (OrbitarOrb o : orb) {
+				o.setSpeed(2);
+			}
+		}
 		
 	}
 
 	@Override
 	public void display() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -70,14 +68,12 @@ public class Repulsion extends Spell {
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		
-		doKnockback(p, loc, knockback);
-		
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
+		// TODO Auto-generated method stub
 		
-		doKnockback(ent, loc, knockback);
 	}
 
 	@Override

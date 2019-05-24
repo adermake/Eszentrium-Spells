@@ -1,45 +1,29 @@
-package spells.stagespells;
+package spells.spells;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.ParticleType;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
-public class Repulsion extends Spell {
+public class Luftsprung extends Spell {
 
-	double damage = 0;
-	double knockback = 0;
-	float pitch = 1;
-	Location overrideLoc;
-	public Repulsion(double size,double knockback,Player caster,Location loca) {
-		hitboxSize = size;
-		steprange = 1;
-		this.pitch = pitch;
-		this.knockback = knockback;
-		overrideLoc = loca;
-		
-		castSpell(caster, "Repulsion");
-	}
-	public Repulsion(double size,double knockback,Player caster,Location loca,boolean b) {
-		hitboxSize = size;
-		steprange = 1;
-		this.pitch = pitch;
-		this.knockback = knockback;
-		overrideLoc = loca;
-		canHitSelf =b;
-		castSpell(caster, "Repulsion");
+	
+	public Luftsprung() {
+		steprange = 10;
+		name = "Luftpsrung";
+		hitPlayer = false;
+		hitEntity = false;
+		hitSpell = false;
+		cooldown = 20 * 22;
 	}
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		loc = overrideLoc;
+		
 	}
 
 	@Override
@@ -57,12 +41,17 @@ public class Repulsion extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		
-		
+		if (step%3 == 0) {
+			
+			playSound( Sound.ENTITY_WITHER_SHOOT,caster.getLocation(), 1, 2);
+			ParUtils.parKreisDot(Particles.CLOUD, caster.getLocation(), 1,0, 0.1, caster.getLocation().getDirection());
+			caster.setVelocity(caster.getLocation().getDirection().multiply(2));
+		}
 	}
 
 	@Override
 	public void display() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -70,14 +59,12 @@ public class Repulsion extends Spell {
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		
-		doKnockback(p, loc, knockback);
-		
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
+		// TODO Auto-generated method stub
 		
-		doKnockback(ent, loc, knockback);
 	}
 
 	@Override

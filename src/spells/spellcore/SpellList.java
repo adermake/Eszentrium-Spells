@@ -17,10 +17,20 @@ import spells.spells.Explosion;
 import spells.spells.Feuerball;
 import spells.spells.Flucht;
 import spells.spells.Heilen;
+import spells.spells.HimmlischesUrteil;
+import spells.spells.Lamaturm;
+import spells.spells.Lichtstrudel;
+import spells.spells.Luftsprung;
+import spells.spells.Magmafalle;
+import spells.spells.Magnetball;
+import spells.spells.Meteoritenhagel;
+import spells.spells.Notenzauber;
+import spells.spells.Opfersuche;
+import spells.spells.Orbitar;
+import spells.spells.Raumwechsel;
 import spells.spells.Schallbrecher;
 import spells.spells.Schallwelle;
 import spells.spells.Scharfschuss;
-import spells.spells.Spinnenkäfig;
 
 public class SpellList {
 
@@ -61,9 +71,19 @@ public class SpellList {
 		spells.add(new Feuerball());
 		spells.add(new Flucht());
 		spells.add(new Heilen());
+		spells.add(new HimmlischesUrteil());
+		spells.add(new Lamaturm());
+		spells.add(new Lichtstrudel());
+		spells.add(new Luftsprung());
+		spells.add(new Magmafalle());
+		spells.add(new Magnetball());
+		spells.add(new Meteoritenhagel());
+		spells.add(new Notenzauber());
+		spells.add(new Opfersuche());
+		spells.add(new Orbitar());
+		spells.add(new Raumwechsel());
 		spells.add(new Erdsurfer());
 		spells.add(new Schallbrecher());
-		spells.add(new Spinnenkäfig());
 	}
 	public static void registerTraitorSpells() {
 		

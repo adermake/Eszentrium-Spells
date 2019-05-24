@@ -1,5 +1,6 @@
 package spells.spells;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -48,9 +49,11 @@ public class Enterhaken extends Spell{
 		
 		
 		if (loc == null) {
+			dead = true;
+			Bukkit.broadcastMessage("RE");
 			Cooldowns.refundCurrentSpell(caster);
 			
-			dead = true;
+			Bukkit.broadcastMessage("FUND");
 		}
 		
 		
@@ -59,6 +62,9 @@ public class Enterhaken extends Spell{
 	
 	@Override
 	public void move() {
+		if (dead)
+			return;
+		
 		if (loc != null && caster != null)
 		dir = (loc.clone()).toVector().subtract(caster.getLocation().toVector()).normalize();
 		ParUtils.parLine(Particles.CRIT,caster.getLocation(), loc.clone(), 0, 0, 0, 0, 0, 3);

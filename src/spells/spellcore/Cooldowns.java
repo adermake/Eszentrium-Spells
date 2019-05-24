@@ -1,5 +1,7 @@
 package spells.spellcore;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -8,23 +10,28 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.main.main;
+import esze.utils.Actionbar;
 import esze.utils.NBTUtils;
 
 public class Cooldowns {
 
-	
+	public static ArrayList<ItemStack> removeLater = new ArrayList<ItemStack>();
 	
 	public static void startCooldownHandler() {
 		int barcount = 10;
 		int downticker = 1;
+		
 		new BukkitRunnable() {
 			public void run() {
 				
-				
+				for (ItemStack is : removeLater) {
+					is.setType(Material.AIR);
+				}
 				for (Player p : Bukkit.getOnlinePlayers()) {
 					
 					for (int slot = 0;slot<p.getInventory().getSize();slot++) {
 						ItemStack i = p.getInventory().getItem(slot);
+						
 						if (i ==  null ) {
 							continue;
 						}
@@ -77,10 +84,17 @@ public class Cooldowns {
 	
 	
 	public static void refundCurrentSpell(Player p) {
-		ItemStack is = p.getInventory().getItemInMainHand();
-		is = NBTUtils.setNBT("Cooldown", "0", is);
-		p.getInventory().setItemInMainHand(is);
-		Bukkit.broadcastMessage("xx");
+		Actionbar a = new Actionbar("§c Zauber unterbrochen!");
+		a.send(p);
+		new BukkitRunnable() {
+			public void run() {
+				
+				ItemStack is = p.getInventory().getItemInMainHand();
+				is = NBTUtils.setNBT("Cooldown", "0", is);
+				p.getInventory().setItemInMainHand(is);
+			}
+		}.runTaskLater(main.plugin, 1);
+		
 	}
 	
 }

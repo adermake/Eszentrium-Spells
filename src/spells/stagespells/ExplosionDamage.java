@@ -12,30 +12,19 @@ import net.minecraft.server.v1_14_R1.ParticleType;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
-public class Repulsion extends Spell {
+public class ExplosionDamage extends Spell {
 
 	double damage = 0;
-	double knockback = 0;
-	float pitch = 1;
 	Location overrideLoc;
-	public Repulsion(double size,double knockback,Player caster,Location loca) {
+	public ExplosionDamage(double size,double damage,Player caster,Location loca) {
 		hitboxSize = size;
 		steprange = 1;
-		this.pitch = pitch;
-		this.knockback = knockback;
+		this.damage = damage;
 		overrideLoc = loca;
 		
-		castSpell(caster, "Repulsion");
+		castSpell(caster, "Explosion");
 	}
-	public Repulsion(double size,double knockback,Player caster,Location loca,boolean b) {
-		hitboxSize = size;
-		steprange = 1;
-		this.pitch = pitch;
-		this.knockback = knockback;
-		overrideLoc = loca;
-		canHitSelf =b;
-		castSpell(caster, "Repulsion");
-	}
+	
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
@@ -64,20 +53,19 @@ public class Repulsion extends Spell {
 	@Override
 	public void display() {
 		
+		
 	}
 
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		
-		doKnockback(p, loc, knockback);
+		damage(p,damage,caster);
 		
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
-		
-		doKnockback(ent, loc, knockback);
+		damage(ent,damage,caster);
 	}
 
 	@Override

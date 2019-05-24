@@ -1,45 +1,38 @@
 package spells.stagespells;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.ParticleType;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
-public class Repulsion extends Spell {
+public class LamaturmProjectile extends Spell {
 
-	double damage = 0;
-	double knockback = 0;
-	float pitch = 1;
-	Location overrideLoc;
-	public Repulsion(double size,double knockback,Player caster,Location loca) {
-		hitboxSize = size;
-		steprange = 1;
-		this.pitch = pitch;
-		this.knockback = knockback;
-		overrideLoc = loca;
-		
-		castSpell(caster, "Repulsion");
+	Location origin;
+	Location realLoc;
+	public LamaturmProjectile(Player p,Location origin,Entity nohit) {
+		name = "Lamaturm";
+		hitEntity = true;
+		hitPlayer = true;
+		hitSpell = true;
+		steprange = 20;
+		speed = 2;
+		realLoc = origin;
+		this.origin = origin;
+		noTargetEntitys.add(nohit);
+		castSpell(p, name);
 	}
-	public Repulsion(double size,double knockback,Player caster,Location loca,boolean b) {
-		hitboxSize = size;
-		steprange = 1;
-		this.pitch = pitch;
-		this.knockback = knockback;
-		overrideLoc = loca;
-		canHitSelf =b;
-		castSpell(caster, "Repulsion");
-	}
+	
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		loc = overrideLoc;
+		loc = realLoc;
+		playSound(Sound.ENTITY_LLAMA_SPIT,loc,4,1);
 	}
 
 	@Override
@@ -57,27 +50,34 @@ public class Repulsion extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		loc.add(loc.getDirection().multiply(0.5));
+		loc.add(0,-0.1,0);
 		
 		
 	}
 
 	@Override
 	public void display() {
-		
+		// TODO Auto-generated method stub
+		ParUtils.createParticle(Particles.SPIT, loc, 0, 0, 0, 1, 0);
 	}
 
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		
-		doKnockback(p, loc, knockback);
-		
+		doKnockback(p, origin, 2);
+		p.damage(3);
+		playSound(Sound.ENTITY_GUARDIAN_FLOP, loc, 3, 1);
+		dead = true;
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
-		
-		doKnockback(ent, loc, knockback);
+		// TODO Auto-generated method stub
+		doKnockback(ent, origin, 2);
+		ent.damage(3);
+		playSound(Sound.ENTITY_GUARDIAN_FLOP, loc, 3, 1);
+		dead = true;
 	}
 
 	@Override
@@ -89,7 +89,8 @@ public class Repulsion extends Spell {
 	@Override
 	public void onBlockHit(Block block) {
 		// TODO Auto-generated method stub
-		
+		playSound(Sound.ENTITY_GUARDIAN_FLOP, loc, 3, 1);
+		dead = true;
 	}
 
 	@Override
