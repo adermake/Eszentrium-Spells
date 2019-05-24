@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import esze.analytics.solo.SaveUtils;
 import esze.enums.Gamestate;
 import esze.main.LobbyBackgroundRunnable;
 import esze.main.main;
@@ -53,6 +53,7 @@ public class TypeSOLO extends Type{
 		scoreboard = new SoloScoreboard();
 		scoreboard.showScoreboard();
 		for (Player p : players) {
+				SaveUtils.addPlayer(p.getName()); //Analytics
 				p.teleport(nextLoc());
 				p.setGameMode(GameMode.SURVIVAL);
 				p.getInventory().clear();
@@ -73,6 +74,7 @@ public class TypeSOLO extends Type{
 	@Override
 	public void death(PlayerDeathEvent event) {
 		Player p = event.getEntity();
+		SaveUtils.addPlayerDeath(p.getName(), ""); //Analytics TODO: Add cause of death
 		p.setHealth(p.getMaxHealth());
 		loseLife(p);
 		checkWinner();

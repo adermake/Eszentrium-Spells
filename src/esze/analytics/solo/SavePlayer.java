@@ -1,5 +1,7 @@
 package esze.analytics.solo;
 
+import java.util.ArrayList;
+
 public class SavePlayer {
 	
 	private String name;
@@ -128,21 +130,40 @@ public class SavePlayer {
 	}
 
 	public boolean addDeath(String sele) {
-		if (d1 != null) {d1 = sele;return false;}
-		if (d2 != null) {d2 = sele;return false;}
-		if (d3 != null) {d3 = sele;return false;}
-		if (d4 != null) {d4 = sele;return true;}
+		if (d1 == null) {d1 = sele;return false;}
+		if (d2 == null) {d2 = sele;return false;}
+		if (d3 == null) {d3 = sele;return false;}
+		if (d4 == null) {d4 = sele;return true;}
 		return true;
 	}
 
 	public void addSelect(SaveSelection sele) {
-		if (s1 != null) {s1 = sele;return;}
-		if (s2 != null) {s2 = sele;return;}
-		if (s3 != null) {s3 = sele;return;}
-		if (s4 != null) {s4 = sele;return;}
+		if (s1 == null) {s1 = sele;return;}
+		if (s2 == null) {s2 = sele;return;}
+		if (s3 == null) {s3 = sele;return;}
+		if (s4 == null) {s4 = sele;return;}
 	}
 	
+	public ArrayList<SaveSelection> getSelections() {
+		ArrayList<SaveSelection> selections = new ArrayList<>();
+		if (s1 != null) {selections.add(s1);}
+		if (s2 != null) {selections.add(s2);}
+		if (s3 != null) {selections.add(s3);}
+		if (s4 != null) {selections.add(s4);}
+		return selections;
+	}
 	
+	public ArrayList<String> getDeaths() {
+		ArrayList<String> deaths = new ArrayList<>();
+		if (d1 !=null) {deaths.add(d1);}
+		if (d2 !=null) {deaths.add(d2);}
+		if (d3 !=null) {deaths.add(d3);}
+		if (d4 !=null) {deaths.add(d4);}
+		return deaths;
+	}
 	
+	public int getDeathCount() {
+		return getDeaths().size();
+	}
 
 }

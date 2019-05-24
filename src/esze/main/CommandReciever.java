@@ -27,6 +27,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import esze.analytics.solo.SaveUtils;
 import esze.enums.GameType;
 import esze.enums.Gamestate;
 import esze.enums.GameType.TypeEnum;
@@ -309,7 +310,28 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				        p.getInventory().getItemInMainHand().setItemMeta(m);
 				        p.sendMessage("§8| §7Der Name wurde in "+myStrings+" §7geändert!");
 					}
-			}
+			}	
+				if (cmd.getName().equalsIgnoreCase("analytics")) {
+					switch (args[0]) {
+					case "wins":
+						p.sendMessage("§7You have" + SaveUtils.getSaveEsze().getVictories(p.getName()) + "§7 Victories!");
+						break;
+					case "losses":
+						p.sendMessage("§7You have" + SaveUtils.getSaveEsze().getLosses(p.getName()) + "§7 Losses!");
+						break;
+					case "worth":
+						String assembly = "";
+						for (int i = 1; i < args.length; i++) {
+							assembly += args[i] + " ";
+						}
+						assembly = assembly.substring(0,assembly.length()-1);
+						p.sendMessage("§7The Spell " + assembly + "§7 has a worth of " + SaveUtils.getSaveEsze().getWorth(assembly) + "§7%!");
+						break;
+					default:
+						p.sendMessage("ERROR");
+						break;
+					}
+				}
 				if (sender instanceof Player) {
 		            Player player = (Player) sender;
 		            if (cmd.getName().equals("spell")) {

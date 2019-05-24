@@ -30,7 +30,6 @@ public class Move implements Listener{
 					p.teleport((Location) main.plugin.getConfig().get("lobby.loc"));
 				}
 			}
-		
 	}
 
 }

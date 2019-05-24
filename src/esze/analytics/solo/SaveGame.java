@@ -12,8 +12,8 @@ public class SaveGame {
 	
 	public SaveGame(String s) {
 		String[] args = SaveUtils.readString(s);
-		for (int i = 0; i < args.length; i+=2) {
-			map.put(new SavePlayer(args[i]), Integer.parseInt(args[i]));
+		for (int i = 0; (i+2) < args.length; i+=2) {
+			map.put(new SavePlayer(args[i]), Integer.parseInt(args[i+1]));
 		}
 	}
 	
@@ -75,7 +75,6 @@ public class SaveGame {
 			}
 		}
 	}
-	
 	
 
 }

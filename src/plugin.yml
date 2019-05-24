@@ -59,3 +59,6 @@ commands:
   loadpads:
     description: load pads
     usage: 
+  analytics:
+    description: Shows Stats
+    usage: /analytics [wins/losses/worth] spell

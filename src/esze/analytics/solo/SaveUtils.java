@@ -1,12 +1,23 @@
 package esze.analytics.solo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+
+import com.google.common.io.Files;
 
 public class SaveUtils {
 	
 	private static SaveGame gme =null;
 	private static SaveEsze svgms = null;
-	private static final String FILE = "analytics_solo.sav";
+	private static final String FOLDER = "analytics/";
+	private static final String EXTENTION = ".sav"; 
+	private static final String FILE = FOLDER + "analytics_solo" + EXTENTION;
 	
 	public static String[] readString(String s) {
 		ArrayList<String> list = new ArrayList<String>();
@@ -71,11 +82,59 @@ public class SaveUtils {
 		gme.addSelect(name,sele);
 	}
 	
+	public static SaveEsze getSaveEsze() {
+		return svgms;
+	}
+	
 	public static void load() {
-		String s = FILE;
+		File in = new File(FILE);
+		if (!in.exists()) {
+			svgms = new SaveEsze();
+		} else {
+			try {
+				Scanner inScan = new Scanner(in);
+				String input = "";
+				while (inScan.hasNext()) {
+					input += inScan.next();
+					
+				}
+				inScan.close();
+				svgms = new SaveEsze(input);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 	public static void save() {
-		String s = FILE;
+		if (svgms == null) {
+			load();
+		}
+		File out = new File(FILE);
+		if (out.exists()) {
+			out.delete();
+		}
+		try {
+			FileWriter outWriter = new FileWriter(out);
+			outWriter.write(svgms.toString());
+			outWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void backup() {
+		save();
+		try {
+			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd-mm-ss");
+			Date d = new Date();
+			File out = new File(FOLDER + "backup-" + f.format(d) + EXTENTION);
+			File in = new File(FILE);
+			Files.copy(in, out);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

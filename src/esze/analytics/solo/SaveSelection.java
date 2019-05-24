@@ -1,5 +1,7 @@
 package esze.analytics.solo;
 
+import java.util.ArrayList;
+
 public class SaveSelection {
 	
 	private String sp1;
@@ -75,5 +77,13 @@ public class SaveSelection {
 		this.chsp = chsp;
 	}
 	
+	public ArrayList<String> getChoices() {
+		ArrayList<String> choices = new ArrayList<>();
+		choices.add(sp1);
+		choices.add(sp2);
+		choices.add(sp3);
+		choices.add(sp4);
+		return choices;
+	}
 
 }

@@ -80,6 +80,7 @@ public class main extends JavaPlugin {
 		this.getCommand("itemname").setExecutor(new CommandReciever());
 		this.getCommand("setjumppad").setExecutor(new CommandReciever());
 		this.getCommand("removepads").setExecutor(new CommandReciever());
+		this.getCommand("analytics").setExecutor(new CommandReciever());
 		getServer().getPluginManager().registerEvents(new Join(), this);
 		getServer().getPluginManager().registerEvents(new Move(), this);
 		getServer().getPluginManager().registerEvents(new Death(), this);

@@ -1,6 +1,5 @@
 package esze.listeners;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import esze.enums.Gamestate;
-import esze.main.main;
 import esze.players.PlayerAPI;
 import esze.players.PlayerInfo;
 import esze.utils.ItemStackUtils;

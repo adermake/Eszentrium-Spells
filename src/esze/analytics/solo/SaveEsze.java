@@ -33,6 +33,52 @@ public class SaveEsze {
 		return s + "]";
 	}
 	
-	//Anaysis
+	
+	public double getWorth(String s) {
+		int choice = 0;
+		int chosen = 0;
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				for (SaveSelection sele : p.getSelections()) {
+					if (sele.getChsp().equals(s)) {
+						chosen++;
+					}
+					if (sele.getChoices().contains(s)) {
+						choice++;
+					}
+				}
+			}
+		}
+		
+		return (100 * ((double) chosen / (double) choice));
+	}
+	
+	public int getVictories(String s) {
+		int victories = 0;
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				if (p.getName().equals(s)) {
+					if (g.getMap().get(p) == 1) {
+						victories++;
+					}
+				}
+			}
+		}
+		return victories;
+	}
+	
+	public int getLosses(String s) {
+		int losses = 0;
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				if (p.getName().equals(s)) {
+					if (g.getMap().get(p) != 1) {
+						losses++;
+					}
+				}
+			}
+		}
+		return losses;
+	}
 
 }
