@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -107,20 +108,16 @@ public class Schwertwurf implements Listener {
 							}
 						}
 
-						for (LivingEntity pl : as.getWorld().getLivingEntities()) {
-							if (!pl.getUniqueId().equals(p.getUniqueId()) && pl.getType() != EntityType.ARMOR_STAND) {
-								if(pl instanceof Player){
-									if(!PlayerAPI.getPlayerInfo((Player)pl).isAlive){
-										continue;
-									}
-								}
+						for (Player pl : Bukkit.getOnlinePlayers()) {
+								if (pl instanceof Player && ((Player) pl).getGameMode() == GameMode.SURVIVAL) {
+									
 								Location ploc1 = pl.getLocation();
 								Location ploc2 = pl.getLocation();
 								ploc2.add(0, 1, 0);
 								if (ploc1.distance(loc) <= 1 || ploc2.distance(loc) <= 1) {
 									main.damageCause.remove((Player)pl);
 									main.damageCause.put((Player)pl, "Schwertwurf-" + p.getName()); //Damage Cause
-									PlayerAPI.getPlayerInfo((Player)pl).damage(p, (int)getAttackDamage(as.getEquipment().getItemInMainHand()), "§3Schwertwurf");
+									//PlayerAPI.getPlayerInfo((Player)pl).damage(p, (int)getAttackDamage(as.getEquipment().getItemInMainHand()), "§3Schwertwurf");
 									p.getInventory().addItem(new ItemStack(as.getEquipment().getItemInMainHand()));
 									for (Player pl2 : Bukkit.getOnlinePlayers()) {
 										pl2.playSound(as.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 2, 2);
@@ -130,7 +127,8 @@ public class Schwertwurf implements Listener {
 									this.cancel();
 									return;
 								}
-							}
+								}
+							
 						}
 
 						loc.subtract(x, y, z);

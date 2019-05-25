@@ -11,6 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import esze.main.main;
 import esze.map.JumpPadHandler;
 import esze.scoreboards.Scoreboard;
+import esze.utils.PlayerUtils;
 
 public class Type {
 	
@@ -60,7 +61,9 @@ public class Type {
 	
 	public void out(Player p) {
 		p.getInventory().clear();
-		p.setGameMode(GameMode.SPECTATOR);
+		p.setGameMode(GameMode.ADVENTURE);
+		p.setFlying(true);
+		PlayerUtils.hidePlayer(p);
 		if (p.getLocation().getY()<60) {
 			p.teleport(nextLoc());
 		}

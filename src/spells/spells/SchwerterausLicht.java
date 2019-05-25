@@ -20,18 +20,18 @@ public class SchwerterausLicht extends Spell{
 	Location lolo;
 
 	public SchwerterausLicht() {
-		cooldown = 20*5;
-		name = "§cSchwerter aus Licht";
 		
+		name = "§cSchwerter aus Licht";
+		cooldown = 20*60;
 		
 		
 	}
 	@Override
 	public void setUp() {
-		Bukkit.broadcastMessage("xxxxxxxxxxxxxx");
 		// TODO Auto-generated method stub
 		lolo = raycast(caster.getEyeLocation());
 		summonSwords();
+		dead = true;
 	}
 
 	@Override

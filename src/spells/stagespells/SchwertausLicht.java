@@ -31,6 +31,7 @@ public class SchwertausLicht extends Spell{
 		steprange = 200;
 		speed = 8;
 		hitboxSize = 0.3;
+		
 		castSpell(caster,"§eSchwerter aus Licht");
 	}
 	ArmorStand a;

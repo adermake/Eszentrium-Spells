@@ -102,8 +102,14 @@ public class Lamaturm extends Spell {
 			loc.setPitch(loc.getPitch()+8);
 		}
 		
-		if (turret.getVelocity().length()<0.1)
-		turret.teleport(loc);
+		if (turret.getVelocity().length()<0.1) {
+			turret.teleport(loc);
+		}
+		else {
+			loc =turret.getLocation();
+		}
+		
+		
 		// TODO Auto-generated method stub
 		
 		

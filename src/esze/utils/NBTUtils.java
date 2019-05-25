@@ -20,6 +20,13 @@ public class NBTUtils {
 		is = CraftItemStack.asBukkitCopy(nms);
 		return is;
 	}
+	public static org.bukkit.inventory.ItemStack setNBT(NBTTagCompound n,org.bukkit.inventory.ItemStack is) {
+		ItemStack nms = CraftItemStack.asNMSCopy(is);
+		
+		nms.setTag(n);
+		is = CraftItemStack.asBukkitCopy(nms);
+		return is;
+	}
 	public static String getNBT(String key,org.bukkit.inventory.ItemStack is) {
 		ItemStack nms = CraftItemStack.asNMSCopy(is);
 		NBTTagCompound n = (nms.hasTag()) ? nms.getTag() : new NBTTagCompound();

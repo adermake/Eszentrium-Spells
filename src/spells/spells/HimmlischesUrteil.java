@@ -88,7 +88,7 @@ public class HimmlischesUrteil extends Spell {
 				FallingBlock fb = caster.getWorld().spawnFallingBlock(blockClone, block.getBlock().getType(), block.getBlock().getData());
 				fallingBlocks.add(fb);
 				fb.setGravity(false);
-				fb.setGlowing(true);
+				
 				fb.setHurtEntities(false);
 				fb.setDropItem(false);
 				

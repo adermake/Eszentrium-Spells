@@ -6,11 +6,14 @@ import javax.annotation.Nonnull;
 
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.inventory.meta.SkullMeta;
+
+import net.minecraft.server.v1_14_R1.NBTTagCompound;
+import net.minecraft.server.v1_14_R1.NBTTagDouble;
+import net.minecraft.server.v1_14_R1.NBTTagInt;
+import net.minecraft.server.v1_14_R1.NBTTagString;
 
 public class ItemStackUtils {
 	
@@ -44,6 +47,20 @@ public class ItemStackUtils {
 		meta.setUnbreakable(unbreakable);
 		i.setItemMeta(meta);
 		return i;
+	}
+	
+	public static ItemStack attackSpeedify(ItemStack is) {
+		NBTTagCompound speed = new NBTTagCompound();
+		speed.set("AttributeName", new NBTTagString("generic.attackSpeed"));
+		speed.set("Name", new NBTTagString("generic.attackSpeed"));
+		speed.set("Amount", new NBTTagDouble(0));
+		speed.set("Operation", new NBTTagInt(0));
+		speed.set("UUIDLeast", new NBTTagInt(894654));
+		speed.set("UUIDMost", new NBTTagInt(2872));
+		speed.set("Slot", new NBTTagString("mainhand"));
+		
+		
+		return NBTUtils.setNBT(speed, is);
 	}
 
 }

@@ -64,7 +64,7 @@ public class TypeSOLO extends Type {
 				p.setGameMode(GameMode.SURVIVAL);
 				p.getInventory().clear();
 			
-					p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true));
+					p.getInventory().addItem(ItemStackUtils.attackSpeedify(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true)));
 				
 				PlayerUtils.hidePlayer(p,100);
 				p.setNoDamageTicks(100);
@@ -89,7 +89,7 @@ public class TypeSOLO extends Type {
 			rec.sendMessage(out);
 		}
 		SaveUtils.addPlayerDeath(p.getName(), main.damageCause.get(p)); //Analytics 
-		
+		p.setVelocity(p.getVelocity().multiply(0));
 		p.setHealth(p.getMaxHealth());
 		loseLife(p);
 		checkWinner();	
@@ -150,8 +150,11 @@ public class TypeSOLO extends Type {
 			
 			Bukkit.broadcastMessage("END");
 			Gamestate.setGameState(Gamestate.LOBBY);
+			Bukkit.broadcastMessage("gamestate set");
 			LobbyBackgroundRunnable.start();
+			Bukkit.broadcastMessage("lobbyrunnabel set");
 			LobbyUtils.recallAll();
+			Bukkit.broadcastMessage("recalled");
 			scoreboard.hide = true;
 			players.clear();
 			
