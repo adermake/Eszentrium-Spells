@@ -327,6 +327,9 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 						assembly = assembly.substring(0,assembly.length()-1);
 						p.sendMessage("§7The Spell " + assembly + "§7 has a worth of " + SaveUtils.getSaveEsze().getWorth(assembly) + "§7%!");
 						break;
+					case "backup":
+						SaveUtils.backup();
+						break;
 					default:
 						p.sendMessage("ERROR");
 						break;

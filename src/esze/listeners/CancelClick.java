@@ -16,10 +16,13 @@ public class CancelClick implements Listener{
             event.setCancelled(true);
         
         if (event.getPlayer().getGameMode() == GameMode.SURVIVAL) {
-        	 if(event.getClickedBlock().getType() == Material.LEGACY_FLOWER_POT)
-                 event.setCancelled(true);
+        	
+        	if (event.getClickedBlock() != null) {
+        		
+        	
              if(event.getClickedBlock().getType() == Material.FLOWER_POT)
                  event.setCancelled(true);
+        	}
         }
        
         

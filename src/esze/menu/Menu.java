@@ -12,6 +12,8 @@ public class Menu implements Listener {
 	
 	@EventHandler
 	public void omMenu(InventoryClickEvent e) {
+		if(e == null)
+			return;
 		
 		Player p = (Player) e.getWhoClicked();
 		if (e.getCurrentItem().hasItemMeta()) {

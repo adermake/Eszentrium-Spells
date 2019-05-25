@@ -148,7 +148,7 @@ public class main extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		SaveUtils.backup();
+		//SaveUtils.backup();
 	}
 	
 	
