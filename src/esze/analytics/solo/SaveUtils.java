@@ -17,7 +17,8 @@ public class SaveUtils {
 	private static SaveEsze svgms = null;
 	private static final String FOLDER = "analytics/";
 	private static final String EXTENTION = ".sav"; 
-	private static final String FILE = FOLDER + "analytics_solo" + EXTENTION;
+	private static final String NAME = "analytics_solo";
+	private static final String FILE = FOLDER + NAME + EXTENTION;
 	
 	public static String[] readString(String s) {
 		ArrayList<String> list = new ArrayList<String>();
@@ -130,7 +131,7 @@ public class SaveUtils {
 		try {
 			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd-mm-ss");
 			Date d = new Date();
-			File out = new File(FOLDER + "backup-" + f.format(d) + EXTENTION);
+			File out = new File(FOLDER + NAME + "-backup-" + f.format(d) + EXTENTION);
 			File in = new File(FILE);
 			Files.copy(in, out);
 		} catch (IOException e) {

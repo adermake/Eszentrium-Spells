@@ -70,7 +70,6 @@ public class ItemMenuIcon extends ItemStack {
 	}
 	
 	public boolean compareName(String toCompare) {
-
 		if (this.hasItemMeta() && this.getItemMeta().hasDisplayName()) {
 
 			return toCompare.equals(this.getName());

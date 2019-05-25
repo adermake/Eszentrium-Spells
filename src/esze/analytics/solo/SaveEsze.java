@@ -33,6 +33,7 @@ public class SaveEsze {
 		return s + "]";
 	}
 	
+	//Analytics ----------------------------------------------------------------------------------------------
 	
 	public double getWorth(String s) {
 		int choice = 0;
@@ -105,4 +106,86 @@ public class SaveEsze {
 		}
 	}
 
+	public int getKills(String name) {
+		int kills = 0; 
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				for (String s : p.getDeaths()) {
+					String[] edit = s.split("-");
+					if (edit.length >= 2) {
+						if (edit[1].equals(name)) {
+							kills++;
+						}
+					}
+				}
+			}
+		}
+		return kills;
+	}
+	
+	public int getSpellKills(String name, String spell) {
+		int kills = 0; 
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				for (String s : p.getDeaths()) {
+					String[] edit = s.split("-");
+					if (edit.length >= 2) {
+						if (edit[1].equals(name) && edit[0].equals(spell)) {
+							kills++;
+						}
+					}
+				}
+			}
+		}
+		return kills;
+	}
+	
+	public int getDeaths(String name) {
+		int deaths = 0;
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				deaths += p.getDeathCount();
+			}
+		}
+		return deaths;
+	}
+	
+	public int getSpellDeaths(String name, String spell) {
+		int deaths = 0; 
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				if (p.getName().equals(name)) {
+					for (String s : p.getDeaths()) {
+						String[] edit = s.split("-");
+						if (edit.length >= 1) {
+							if (edit[0].equals(spell)) {
+								deaths++;
+							}
+						}
+					}
+				}
+			}
+		}
+		return deaths;
+	}
+
+	public double getSpellWorth(String name, String s) {
+		int choice = 0;
+		int chosen = 0;
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				if (p.getName().equals(name)) {
+					for (SaveSelection sele : p.getSelections()) {
+						if (sele.getChsp().equals(s)) {
+							chosen++;
+						}
+						if (sele.getChoices().contains(s)) {
+							choice++;
+						}
+					}
+				}
+			}
+		}
+		return (100 * ((double) chosen / (double) choice));
+	}
 }

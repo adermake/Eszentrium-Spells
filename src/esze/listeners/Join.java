@@ -1,5 +1,6 @@
 package esze.listeners;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,7 +19,7 @@ public class Join implements Listener{
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e){
 		Player p = e.getPlayer();
-		main.damageCause.put(p, ""); //Analytics
+		main.damageCause.put(p, ""); //Damage Cause
 		p.setExp(0F);
 		p.setLevel(0);
 		p.setFoodLevel(20);
@@ -26,6 +27,10 @@ public class Join implements Listener{
 		p.setMaxHealth(20);
 		p.setWalkSpeed(0.2F);
 		
+		//Clears Inventory of Players
+		if (p.getGameMode().equals(GameMode.SURVIVAL)) {
+			p.getInventory().clear();
+		}
 		p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
 		p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Test", null, true));
 		if(Gamestate.getGameState() == Gamestate.LOBBY){

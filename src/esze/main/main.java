@@ -3,6 +3,10 @@ package esze.main;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 
@@ -35,8 +39,10 @@ import esze.listeners.Spawn;
 import esze.map.JumpPad;
 import esze.map.JumpPadHandler;
 import esze.map.MapSelect;
+import esze.map.MapUtils;
 import esze.menu.Menu;
 import esze.utils.ChatUtils;
+import esze.utils.ItemStackUtils;
 import esze.utils.LibUtils;
 import net.minecraft.server.v1_14_R1.MinecraftServer;
 import spells.spellcore.Cooldowns;
@@ -117,6 +123,24 @@ public class main extends JavaPlugin {
 		MinecraftServer.getServer().setMotd(ChatUtils.centerMotD("§cEsze§3Remastered").substring(2)+"\n§8"+ChatUtils.centerMotD("Der Klassiker neu aufgelegt!").substring(3));
 		
 		LibUtils.initlibs();
+		
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			main.damageCause.put(p, ""); //Damage Cause
+			p.setExp(0F);
+			p.setLevel(0);
+			p.setFoodLevel(20);
+			p.setHealth(20);
+			p.setMaxHealth(20);
+			p.setWalkSpeed(0.2F);
+			
+			//Clears Inventory of Players
+			if (p.getGameMode().equals(GameMode.SURVIVAL)) {
+				p.getInventory().clear();
+				p.teleport(new Location(Bukkit.getWorld("world"), 0, 105, 0));// teleport into Lobby
+			}
+			p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
+			p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Test", null, true));
+		}
 		//Discord.run(); DISCORD STUFF
 	}
 	
