@@ -118,6 +118,8 @@ public class Schwertwurf implements Listener {
 								Location ploc2 = pl.getLocation();
 								ploc2.add(0, 1, 0);
 								if (ploc1.distance(loc) <= 1 || ploc2.distance(loc) <= 1) {
+									main.damageCause.remove((Player)pl);
+									main.damageCause.put((Player)pl, "Schwertwurf-" + p.getName()); //Damage Cause
 									PlayerAPI.getPlayerInfo((Player)pl).damage(p, (int)getAttackDamage(as.getEquipment().getItemInMainHand()), "§3Schwertwurf");
 									p.getInventory().addItem(new ItemStack(as.getEquipment().getItemInMainHand()));
 									for (Player pl2 : Bukkit.getOnlinePlayers()) {
