@@ -41,7 +41,9 @@ public class LobbyCountdownRunnable {
 					Gamestate.setGameState(Gamestate.INGAME);
 					new Actionbar("").sendAll();
 					
-					GameType.getType().gameStart();
+					
+					
+					
 					
 					timeLeft = timeDefault;
 					LobbyBackgroundRunnable.stop();

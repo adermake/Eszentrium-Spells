@@ -52,6 +52,11 @@ public class TypeSOLO extends Type {
 		SaveUtils.startGame(); //Analytics
 		scoreboard = new SoloScoreboard();
 		scoreboard.showScoreboard();
+		for (int i = 0;i<16;i++) {
+			Bukkit.getWorld("world").loadChunk(Bukkit.getWorld("world").getChunkAt(nextLoc()));
+		}
+		
+		
 		for (Player p : players) {
 				main.damageCause.put(p, ""); //Reset damage Cause
 				SaveUtils.addPlayer(p.getName()); //Analytics

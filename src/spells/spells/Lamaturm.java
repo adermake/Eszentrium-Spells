@@ -20,6 +20,7 @@ public class Lamaturm extends Spell {
 	Player target;
 	Llama turret;
 	public Lamaturm() {
+		name = "§7Lamaturm";
 		cooldown = 20 * 55;
 		steprange = 300;
 		hitboxSize = 10;

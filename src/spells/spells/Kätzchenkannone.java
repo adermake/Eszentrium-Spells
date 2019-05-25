@@ -23,7 +23,7 @@ public class Kätzchenkannone extends Spell {
 
 	public Kätzchenkannone() {
 
-		name = "Kätzchenkannone";
+		name = "§7Kätzchenkannone";
 		cooldown = 20 * 20;
 		steprange = 70;
 

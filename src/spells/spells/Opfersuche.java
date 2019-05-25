@@ -21,7 +21,7 @@ import spells.spellcore.Spell;
 public class Opfersuche extends Spell {
 
 	public Opfersuche() {
-		name = "Opfersuche";
+		name = "§7Opfersuche";
 		cooldown = 20 * 44;
 		steprange = 200;
 		hitboxSize= 4;
