@@ -2,6 +2,7 @@ package esze.types;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -37,6 +38,7 @@ public class Type {
 	
 	public Location nextLoc(){
 		Location loc = null;
+		
 		
 		
 		if(main.plugin.getConfig().contains("maps."+currentmap+"."+spawnloc)){

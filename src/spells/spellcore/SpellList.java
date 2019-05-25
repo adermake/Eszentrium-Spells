@@ -31,6 +31,8 @@ import spells.spells.Raumwechsel;
 import spells.spells.Schallbrecher;
 import spells.spells.Schallwelle;
 import spells.spells.Scharfschuss;
+import spells.spells.Schock;
+import spells.spells.SchwerterausLicht;
 
 public class SpellList {
 
@@ -74,6 +76,7 @@ public class SpellList {
 		spells.add(new HimmlischesUrteil());
 		spells.add(new Lamaturm());
 		spells.add(new Lichtstrudel());
+		spells.add(new Lichtstrudel());
 		spells.add(new Luftsprung());
 		spells.add(new Magmafalle());
 		spells.add(new Magnetball());
@@ -84,6 +87,8 @@ public class SpellList {
 		spells.add(new Raumwechsel());
 		spells.add(new Erdsurfer());
 		spells.add(new Schallbrecher());
+		spells.add(new SchwerterausLicht());
+		spells.add(new Schock());
 	}
 	public static void registerTraitorSpells() {
 		

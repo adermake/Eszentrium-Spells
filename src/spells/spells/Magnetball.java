@@ -14,7 +14,7 @@ import spells.spellcore.Spell;
 public class Magnetball extends Spell{
 
 	public Magnetball() {
-		name = "Magnetball";
+		name = "§eMagnetball";
 		cooldown = 20 * 34;
 		hitEntity = true;
 		hitSpell = true;

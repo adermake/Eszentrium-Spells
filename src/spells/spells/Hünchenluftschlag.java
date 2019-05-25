@@ -26,7 +26,7 @@ import spells.stagespells.Eggsplosive;
 public class Hünchenluftschlag extends Spell{
 
 	public Hünchenluftschlag() {
-		
+		name = "§7Hünchenluftschlag";
 		cooldown = 20 * 42;
 		steprange = 66;
 	}

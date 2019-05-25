@@ -21,6 +21,7 @@ public class Notenzauber extends Spell {
 
 	
 	public Notenzauber() {
+		name = "§eNotenzauber";
 		cooldown = 20 * 19;
 		casttime = 64;
 		hitEntity = false;

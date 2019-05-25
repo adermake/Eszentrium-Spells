@@ -123,7 +123,7 @@ public class Schwertwurf implements Listener {
 									for (Player pl2 : Bukkit.getOnlinePlayers()) {
 										pl2.playSound(as.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 2, 2);
 									}
-
+									pl.damage(4);
 									as.remove();
 									this.cancel();
 									return;

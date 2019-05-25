@@ -17,7 +17,7 @@ public class Lichtstrudel extends Spell {
 
 	public Lichtstrudel() {
 		cooldown = 20 * 3;
-		name = "§cLichtstudel";
+		name = "§cLichtstrudel";
 		steprange = 100;
 		
 	}

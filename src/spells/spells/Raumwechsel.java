@@ -13,7 +13,7 @@ import spells.spellcore.Spell;
 public class Raumwechsel extends Spell{
 	
 	public Raumwechsel() {
-		name = "Raumwechsel";
+		name = "§bRaumwechsel";
 		cooldown = 20 * 42;
 	}
 	

@@ -14,7 +14,7 @@ public class Luftsprung extends Spell {
 	
 	public Luftsprung() {
 		steprange = 10;
-		name = "Luftpsrung";
+		name = "§bLuftsprung";
 		hitPlayer = false;
 		hitEntity = false;
 		hitSpell = false;
