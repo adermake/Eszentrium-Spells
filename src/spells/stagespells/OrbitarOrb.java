@@ -19,8 +19,8 @@ public class OrbitarOrb extends Spell {
 	
 	ArmorStand a;
 	int offset;
-	public OrbitarOrb(Player p,int offset,int steps) {
-		name = "§6Orbitar";
+	public OrbitarOrb(Player p,int offset,int steps,String namae) {
+		name = namae;
 		steprange = steps;
 		castSpell(p,name);
 		speed = 2;

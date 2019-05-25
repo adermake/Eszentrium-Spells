@@ -117,8 +117,8 @@ public class Miiilone extends Spell {
 		loc = i.getLocation();
 		ParUtils.dropItemEffectRandomVector(loc, Material.MELON_SLICE, 22, 50, 1);
 		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 5, 1);
-		new ExplosionDamage(5, 11, caster, loc);
-		new Repulsion(5, 3, caster, loc);
+		new ExplosionDamage(5, 11, caster, loc,name);
+		new Repulsion(5, 3, caster, loc,name);
 		i.remove();
 		ar.remove();
 	}

@@ -452,13 +452,13 @@ public abstract class Spell {
 	}
 	
 	public void damage(Entity ent, double damage,Player damager) {
+		if (ent instanceof Player) {
+			tagPlayer((Player) ent);
+		}
 		if (ent instanceof LivingEntity) {
 			((LivingEntity) ent).damage(damage);
 		}
 		//Damage will be an Damage cause even when tagPlayers has been disabled
-		if (ent instanceof Player) {
-			tagPlayer((Player) ent);
-		}
 	}
 	
 	/**

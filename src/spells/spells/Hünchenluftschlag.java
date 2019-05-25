@@ -84,7 +84,7 @@ public class Hünchenluftschlag extends Spell{
 				Location sLoc = c.getLocation();
 				@Override
 				public void run() {
-					new Eggsplosive(caster,sLoc.add(0,-1,0));
+					new Eggsplosive(caster,sLoc.add(0,-1,0), name);
 					playSound(Sound.ENTITY_CHICKEN_EGG,loc,4,1);
 				}
 			}.runTaskLater(main.plugin,3);

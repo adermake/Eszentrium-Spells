@@ -92,7 +92,7 @@ public class Lamaturm extends Spell {
 			if (realDelay == 0 && shots>0) {
 				shots--;
 				
-				new LamaturmProjectile(caster,turret.getEyeLocation(),turret);
+				new LamaturmProjectile(caster,turret.getEyeLocation(),turret,name);
 			}
 			
 			

@@ -15,8 +15,8 @@ public class LamaturmProjectile extends Spell {
 
 	Location origin;
 	Location realLoc;
-	public LamaturmProjectile(Player p,Location origin,Entity nohit) {
-		name = "Lamaturm";
+	public LamaturmProjectile(Player p,Location origin,Entity nohit, String namae) {
+		name = namae;
 		hitEntity = true;
 		hitPlayer = true;
 		hitSpell = true;

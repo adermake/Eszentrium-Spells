@@ -18,23 +18,24 @@ public class Repulsion extends Spell {
 	double knockback = 0;
 	float pitch = 1;
 	Location overrideLoc;
-	public Repulsion(double size,double knockback,Player caster,Location loca) {
+	public Repulsion(double size,double knockback,Player caster,Location loca, String namae) {
 		hitboxSize = size;
 		steprange = 1;
 		this.pitch = pitch;
 		this.knockback = knockback;
 		overrideLoc = loca;
-		
-		castSpell(caster, "Repulsion");
+		name = namae;
+		castSpell(caster, name);
 	}
-	public Repulsion(double size,double knockback,Player caster,Location loca,boolean b) {
+	public Repulsion(double size,double knockback,Player caster,Location loca,boolean b, String namae) {
 		hitboxSize = size;
 		steprange = 1;
 		this.pitch = pitch;
 		this.knockback = knockback;
 		overrideLoc = loca;
 		canHitSelf =b;
-		castSpell(caster, "Repulsion");
+		name = namae;
+		castSpell(caster, name);
 	}
 	@Override
 	public void setUp() {

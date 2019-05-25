@@ -15,8 +15,8 @@ import spells.spellcore.Spell;
 
 public class SchockLaser extends Spell {
 
-	public SchockLaser(Player p) {
-		name = "Schock";
+	public SchockLaser(Player p, String namae) {
+		name = namae;
 		steprange =  500;
 		speed = 250;
 		castSpell(p, name);
@@ -119,7 +119,7 @@ public class SchockLaser extends Spell {
 
 	
 	public void onHit() {
-		new Explosion(2, 5+((caster.getLocation().getY()-loc.getY())/20), 1, 2, caster, loc);
+		new Explosion(2, 5+((caster.getLocation().getY()-loc.getY())/20), 1, 2, caster, loc, name);
 		ParUtils.parKreisDot(Particles.CLOUD, loc, 5, 0, 0.05, loc.getDirection().multiply(-1));
 		dead = true;
 		playSound(Sound.ENTITY_LIGHTNING_BOLT_IMPACT, loc, 4, 0.3F);

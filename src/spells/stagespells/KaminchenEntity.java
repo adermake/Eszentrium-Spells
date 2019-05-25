@@ -20,7 +20,7 @@ import spells.spellcore.Spell;
 public class KaminchenEntity extends Spell {
 	
 	Rabbit ent;
-	public KaminchenEntity(Player caster,Vector dir) {
+	public KaminchenEntity(Player caster,Vector dir, String namae) {
 		steprange = 600;
 		hitboxSize = 1.6;
 		hitPlayer = true;
@@ -32,9 +32,9 @@ public class KaminchenEntity extends Spell {
 		ent.setVelocity(dir);
 		ent.setTarget(ent);
 		ent.setInvulnerable(true);
+		name = namae;
 		
-		
-		castSpell(caster,"Kaminchen");
+		castSpell(caster, name);
 	}
 
 	@Override

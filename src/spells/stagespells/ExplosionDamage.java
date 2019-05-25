@@ -16,13 +16,14 @@ public class ExplosionDamage extends Spell {
 
 	double damage = 0;
 	Location overrideLoc;
-	public ExplosionDamage(double size,double damage,Player caster,Location loca) {
+	public ExplosionDamage(double size,double damage,Player caster,Location loca, String namae) {
+		name = namae;
 		hitboxSize = size;
 		steprange = 1;
 		this.damage = damage;
 		overrideLoc = loca;
 		
-		castSpell(caster, "Explosion");
+		castSpell(caster, name);
 	}
 	
 	@Override

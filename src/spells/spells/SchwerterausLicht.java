@@ -106,7 +106,7 @@ public class SchwerterausLicht extends Spell{
 
 			l.add(v.getX(), v.getY(), v.getZ());
 			l.add(l.getDirection().multiply(-3));
-			new SchwertausLicht(l.clone(),caster);
+			new SchwertausLicht(l.clone(),caster,name);
 			Vector ve = j.subtract(l).toVector();
 			Location lala = l.clone();
 			l.setDirection(lolo.toVector().subtract(lala.toVector()));

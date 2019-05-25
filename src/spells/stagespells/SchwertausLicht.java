@@ -23,7 +23,7 @@ public class SchwertausLicht extends Spell{
 	boolean hp = false;
 	boolean hb = false;
 	
-	public SchwertausLicht(Location l,Player c) {
+	public SchwertausLicht(Location l,Player c, String namae) {
 		caster = c;
 		loc = l;
 		saveLoc = l;
@@ -31,8 +31,8 @@ public class SchwertausLicht extends Spell{
 		steprange = 200;
 		speed = 8;
 		hitboxSize = 0.3;
-		
-		castSpell(caster,"§eSchwerter aus Licht");
+		name = namae;
+		castSpell(caster,namae);
 	}
 	ArmorStand a;
 	@Override
@@ -124,7 +124,7 @@ public class SchwertausLicht extends Spell{
 		
 		
 		a.remove();
-		new SwordExplosion(loc,caster);
+		new SwordExplosion(loc,caster, name);
 		
 	}
 

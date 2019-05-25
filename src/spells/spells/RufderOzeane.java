@@ -43,7 +43,7 @@ public class RufderOzeane extends Spell{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		new RufDerOzeaneFish(caster);
+		new RufDerOzeaneFish(caster,name);
 	}
 
 	@Override

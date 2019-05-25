@@ -34,7 +34,7 @@ public class Kaminchen extends Spell {
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
-		new KaminchenEntity(caster,caster.getLocation().getDirection());
+		new KaminchenEntity(caster,caster.getLocation().getDirection(), name);
 		dead = true;
 	}
 

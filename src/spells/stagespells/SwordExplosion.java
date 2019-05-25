@@ -15,14 +15,15 @@ public class SwordExplosion extends Spell{
 	
 	Location svloc;
 	
-	public SwordExplosion(Location loca,Player castguy) {
+	public SwordExplosion(Location loca,Player castguy, String namae) {
 		loc = loca;
 		svloc = loca;
 		steprange = 3;
 		caster = castguy;
 		hitboxSize = 5;
 		speed = 3;
-		castSpell(caster,"§eSchwerter aus Licht");
+		name = namae;
+		castSpell(caster,name);
 	}
 
 	@Override

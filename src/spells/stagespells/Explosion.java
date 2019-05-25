@@ -18,15 +18,15 @@ public class Explosion extends Spell {
 	double knockback = 0;
 	float pitch = 1;
 	Location overrideLoc;
-	public Explosion(double size,double damage,double knockback,float pitch,Player caster,Location loca) {
+	public Explosion(double size,double damage,double knockback,float pitch,Player caster,Location loca, String namae) {
 		hitboxSize = size;
 		steprange = 1;
 		this.damage = damage;
 		this.pitch = pitch;
 		this.knockback = knockback;
 		overrideLoc = loca;
-		
-		castSpell(caster, "Explosion");
+		name = namae;
+		castSpell(caster, name);
 	}
 	
 	@Override

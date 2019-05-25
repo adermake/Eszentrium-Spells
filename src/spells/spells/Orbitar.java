@@ -35,9 +35,9 @@ public class Orbitar extends Spell {
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
-		orb.add(new OrbitarOrb(caster,0,steprange));
-		orb.add(new OrbitarOrb(caster,14,steprange));
-		orb.add(new OrbitarOrb(caster,28,steprange));
+		orb.add(new OrbitarOrb(caster,0,steprange,name));
+		orb.add(new OrbitarOrb(caster,14,steprange,name));
+		orb.add(new OrbitarOrb(caster,28,steprange,name));
 	}
 
 	@Override

@@ -15,11 +15,11 @@ import spells.spellcore.Spell;
 public class Meteor extends Spell {
 
 	Location overrideLoc;
-	public Meteor(Location loca,Player caster) {
+	public Meteor(Location loca,Player caster, String namae) {
 		overrideLoc = loca;
 		hitboxSize = 2;
-		
-		castSpell(caster,"Meteoritenhagel");
+		name = namae;
+		castSpell(caster, name);
 		
 	}
 	
@@ -93,7 +93,7 @@ public class Meteor extends Spell {
 		// TODO Auto-generated method stub
 		//new ExplosionDamage(4, 8, caster, loc);
 		
-		new Explosion(4, 8, 0.1, 0.5F, caster, loc);
+		new Explosion(4, 8, 0.1, 0.5F, caster, loc, name);
 		dead = true;
 	}
 

@@ -19,8 +19,8 @@ public class RufDerOzeaneFish extends Spell{
 
 	
 	LivingEntity ent;
-	public RufDerOzeaneFish(Player p) {
-		name = "§eRuf der Ozeane";
+	public RufDerOzeaneFish(Player p, String namae) {
+		name = namae;
 		steprange = 30;
 		castSpell(p,name);
 		

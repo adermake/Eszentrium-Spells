@@ -13,10 +13,10 @@ import spells.spellcore.Spell;
 public class Eggsplosive extends Spell {
 
 	Location overrideLoc;
-	public Eggsplosive(Player p,Location loca) {
-		
+	public Eggsplosive(Player p,Location loca,String namae) {
+		name = namae;
 		overrideLoc = loca;
-		castSpell(p,"Eggsplosive");
+		castSpell(p,name);
 		steprange = 200;
 	}
 	@Override
@@ -77,7 +77,7 @@ public class Eggsplosive extends Spell {
 
 	@Override
 	public void onDeath() {
-		new Explosion(2,9,1,2,caster,loc);
+		new Explosion(2,9,1,2,caster,loc, name);
 		
 	}
 

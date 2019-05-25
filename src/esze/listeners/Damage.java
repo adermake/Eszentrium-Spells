@@ -3,6 +3,7 @@ package esze.listeners;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
@@ -18,14 +19,18 @@ public class Damage implements Listener{
 			if(Gamestate.getGameState() == Gamestate.LOBBY){
 				e.setCancelled(true);
 			}else if(Gamestate.getGameState() == Gamestate.INGAME){
-				// Analytics
-				if (e.getCause().equals( DamageCause.ENTITY_ATTACK) || e.getCause().equals( DamageCause.ENTITY_SWEEP_ATTACK)) {
-					main.damageCause.remove(p);
-					main.damageCause.put(p, "Schwert-"); //TODO: add the person who punched  
-				}
 				if(e.getCause().equals( DamageCause.FALL)){
 					e.setCancelled(true);
 				}
+			}
+		}
+	}
+	
+	public void onEntityDamage(EntityDamageByEntityEvent e) {
+		if(e.getDamager() instanceof Player) {
+			if (e.getEntity() instanceof Player) {
+				main.damageCause.remove((Player) e.getDamager());
+				main.damageCause.put((Player) e.getEntity(), "Schwert-" + ((Player) e.getDamager()).getName());
 			}
 		}
 	}
