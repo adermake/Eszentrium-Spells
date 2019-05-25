@@ -57,6 +57,8 @@ public class main extends JavaPlugin {
 	public static final String voiddamage = "void";
 	public static HashMap<Player, String> damageCause = new HashMap<Player, String>();
 	
+	
+	
 	@Override
 	public void onEnable() {
 		
