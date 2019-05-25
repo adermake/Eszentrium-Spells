@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import esze.enums.Gamestate;
+import esze.main.main;
 import esze.players.PlayerAPI;
 import esze.players.PlayerInfo;
 import esze.utils.ItemStackUtils;
@@ -17,6 +18,7 @@ public class Join implements Listener{
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e){
 		Player p = e.getPlayer();
+		main.damageCause.put(p, ""); //Analytics
 		p.setExp(0F);
 		p.setLevel(0);
 		p.setFoodLevel(20);

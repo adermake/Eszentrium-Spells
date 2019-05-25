@@ -21,7 +21,7 @@ import esze.utils.LobbyUtils;
 import esze.utils.PlayerUtils;
 import esze.utils.Title;
 
-public class TypeSOLO extends Type{
+public class TypeSOLO extends Type {
 	boolean gameOver = false;
 	public HashMap<Player, Integer> lives = new HashMap<Player,Integer>();
 	public TypeSOLO() {
@@ -49,10 +49,11 @@ public class TypeSOLO extends Type{
 		
 		won = false;
 		gameOver = false;
-		
+		SaveUtils.startGame(); //Analytics
 		scoreboard = new SoloScoreboard();
 		scoreboard.showScoreboard();
 		for (Player p : players) {
+				main.damageCause.put(p, ""); //Reset damage Cause
 				SaveUtils.addPlayer(p.getName()); //Analytics
 				p.teleport(nextLoc());
 				p.setGameMode(GameMode.SURVIVAL);
@@ -74,12 +75,19 @@ public class TypeSOLO extends Type{
 	@Override
 	public void death(PlayerDeathEvent event) {
 		Player p = event.getEntity();
-		SaveUtils.addPlayerDeath(p.getName(), ""); //Analytics TODO: Add cause of death
+		if (main.damageCause.get(p) == null) {
+			main.damageCause.put(p, "");
+		}
+		//Output death message
+		String out = main.toStringCause(p);
+		for (Player rec : Bukkit.getOnlinePlayers()) {
+			rec.sendMessage(out);
+		}
+		SaveUtils.addPlayerDeath(p.getName(), main.damageCause.get(p)); //Analytics 
+		
 		p.setHealth(p.getMaxHealth());
 		loseLife(p);
-		checkWinner();
-		
-		
+		checkWinner();	
 	}
 
 	
@@ -132,6 +140,9 @@ public class TypeSOLO extends Type{
 			}
 			
 		if (won) {
+			
+			SaveUtils.endGame(); //Analytics
+			
 			Bukkit.broadcastMessage("END");
 			Gamestate.setGameState(Gamestate.LOBBY);
 			LobbyBackgroundRunnable.start();
@@ -144,5 +155,6 @@ public class TypeSOLO extends Type{
 		}
 	}
 	}
+	
 	
 }

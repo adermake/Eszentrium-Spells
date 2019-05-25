@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class SaveEsze {
 	
-	private ArrayList<SaveGame> sv = new ArrayList<>();
+	private ArrayList<SaveGame> sv;
 	
 	public SaveEsze() {
-		
+		sv = new ArrayList<>();
 	}
 	
 	public SaveEsze(String s) {
+		sv = new ArrayList<>();
 		String[] args = SaveUtils.readString(s);
-		
 		for (int i = 0; i < args.length; i++) {
 			sv.add(new SaveGame(args[i]));
 		}
@@ -79,6 +79,30 @@ public class SaveEsze {
 			}
 		}
 		return losses;
+	}
+	
+	public void changeSpellName(String old_s, String new_s) {
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				for (SaveSelection sele : p.getSelections()) {
+					if (sele.getChsp().equals(old_s)) {
+						sele.setChsp(new_s);
+					}
+					if (sele.getSp1().equals(old_s)) {
+						sele.setSp1(new_s);
+					}
+					if (sele.getSp2().equals(old_s)) {
+						sele.setSp2(new_s);
+					}
+					if (sele.getSp3().equals(old_s)) {
+						sele.setSp3(new_s);
+					}
+					if (sele.getSp4().equals(old_s)) {
+						sele.setSp4(new_s);
+					}
+				}
+			}
+		}
 	}
 
 }

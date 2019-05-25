@@ -20,6 +20,15 @@ public class Move implements Listener{
 		
 			if(Gamestate.getGameState() == Gamestate.INGAME){
 				if(e.getTo().getBlockY() <= 60){
+					//Register void as damageCause
+					if (main.damageCause.get(p) == null) {
+						main.damageCause.put(p, "");
+					}
+					if (main.damageCause.get(p).equals("")) {
+						main.damageCause.put(p, main.voiddamage);
+					} else if (!main.damageCause.get(p).endsWith(main.voiddamage)){
+						main.damageCause.put(p, main.damageCause.get(p) + "-" + main.voiddamage);
+					}
 					
 					PlayerInfo pi = PlayerAPI.getPlayerInfo(p);
 					pi.damageVoid();

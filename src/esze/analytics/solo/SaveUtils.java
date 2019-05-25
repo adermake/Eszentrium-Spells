@@ -13,7 +13,7 @@ import com.google.common.io.Files;
 
 public class SaveUtils {
 	
-	private static SaveGame gme =null;
+	private static SaveGame gme = null;
 	private static SaveEsze svgms = null;
 	private static final String FOLDER = "analytics/";
 	private static final String EXTENTION = ".sav"; 
@@ -65,6 +65,7 @@ public class SaveUtils {
 		}
 		svgms.add(gme);
 		gme = null;
+		save();
 	}
 	
 	public static void addPlayer(String s) {

@@ -123,7 +123,6 @@ public class Avatar extends Spell{
 	public void onPlayerHit(Player p) {
 		damage(p,3,caster);
 		doKnockback(p,g.getLocation(),2);
-		
 	}
 
 	@Override

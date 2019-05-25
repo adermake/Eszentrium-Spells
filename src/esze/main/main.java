@@ -1,8 +1,10 @@
 package esze.main;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.entity.Player;
 
 /*import net.minecraft.server.v1_13_R1.MinecraftKey;
 import net.minecraft.server.v1_13_R1.PacketPlayOutWorldParticles;
@@ -14,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.google.gson.JsonObject;
 
+import esze.analytics.solo.SaveUtils;
 import esze.enums.GameType;
 import esze.enums.GameType.TypeEnum;
 import esze.enums.Gamestate;
@@ -45,6 +48,8 @@ public class main extends JavaPlugin {
 	public static main plugin;
 	public static String discord_TOKEN = "lolxd";
 	public static String mapname;
+	public static final String voiddamage = "void";
+	public static HashMap<Player, String> damageCause = new HashMap<Player, String>();
 	
 	@Override
 	public void onEnable() {
@@ -115,6 +120,11 @@ public class main extends JavaPlugin {
 		//Discord.run(); DISCORD STUFF
 	}
 	
+	@Override
+	public void onDisable() {
+		SaveUtils.backup();
+	}
+	
 	
 	public String objToJson(Object obj){
 		Class<?> objClass = obj.getClass();
@@ -134,5 +144,25 @@ public class main extends JavaPlugin {
 	    }
 	    return Jobj.toString();
 	}
-
+	
+	public static String toStringCause(Player p) {
+		String[] in = main.damageCause.get(p).split("-");
+		String color = "§7";
+		//Analysis 
+		if (in.length == 1) {
+			if (in[0].equals("")) {
+				color += p.getName() + " starb!"; //no Cause
+			}
+			if (in[0].equals(voiddamage)) {
+				color += p.getName() + " fiel ins Void!"; //Void
+			}
+		}
+		if (in.length == 2) {
+			color += p.getName() + " wurde durch " + in[1] + " mit " + in[0] + " getötet!"; //Cause+Player
+		}
+		if (in.length == 3) {
+			color += p.getName() + " wurde durch " + in[1] + " mit " + in[0] + " ins Void geworfen!"; //Cause+Player+void
+		}
+		return color;
+	}
 }

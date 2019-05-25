@@ -62,6 +62,8 @@ public abstract class Spell {
 	protected boolean traitorSpell = false;
 	protected boolean dead = false;
 	
+	protected boolean tagPlayer = true; //hit Players will get a damage Cause
+	
 	//VARS
 	
 	protected boolean spellLoopStarted = false;
@@ -256,6 +258,10 @@ public abstract class Spell {
 				if (p.getEyeLocation().distance(loc)<0.6+hitboxSize ||p.getLocation().distance(loc)<0.6+hitboxSize ) {
 					hitEntitys.add(p);	
 					onPlayerHit(p);
+					//tags Players
+					if (tagPlayer) {
+						tagPlayer(p);
+					}
 				}			
 			}
 		}		
@@ -280,8 +286,6 @@ public abstract class Spell {
 				}			
 			}
 		}
-		
-		
 	}
 	
 	public void collideWithSpell() {
@@ -451,9 +455,19 @@ public abstract class Spell {
 		if (ent instanceof LivingEntity) {
 			((LivingEntity) ent).damage(damage);
 		}
-		
-		
-		
+		//Damage will be an Damage cause even when tagPlayers has been disabled
+		if (ent instanceof Player) {
+			tagPlayer((Player) ent);
+		}
+	}
+	
+	/**
+	 * Shows caster and Spell as DamageCause
+	 * @param ent
+	 */
+	public void tagPlayer(Player ent) {
+		main.damageCause.remove(ent);
+		main.damageCause.put(ent, name + "-" + caster.getName());
 	}
 	
 	public void heal(LivingEntity ent, double damage,Player healer) {
