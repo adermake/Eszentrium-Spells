@@ -34,6 +34,7 @@ import esze.enums.GameType.TypeEnum;
 import esze.map.MapMenu;
 import esze.map.JumpPad;
 import esze.map.JumpPad.JumpPadType;
+import esze.menu.SoloAnalyticsMenu;
 import esze.map.JumpPadHandler;
 import esze.utils.NBTUtils;
 import esze.voice.Discord;
@@ -314,11 +315,11 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				if (cmd.getName().equalsIgnoreCase("analytics")) {
 					switch (args[0]) {
 					case "wins":
-						p.sendMessage("§7You have" + SaveUtils.getSaveEsze().getVictories(p.getName()) + "§7 Victories!");
-						break;
+						p.sendMessage("§7Du hast " + SaveUtils.getSaveEsze().getVictories(p.getName()) + "§7 Runden gewonnen!");
+						return true;
 					case "losses":
-						p.sendMessage("§7You have" + SaveUtils.getSaveEsze().getLosses(p.getName()) + "§7 Losses!");
-						break;
+						p.sendMessage("§7Du hast " + SaveUtils.getSaveEsze().getLosses(p.getName()) + "§7 Runden verloren!");
+						return true;
 					case "worth":
 						String assembly = "";
 						for (int i = 1; i < args.length; i++) {
@@ -326,13 +327,16 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 						}
 						assembly = assembly.substring(0,assembly.length()-1);
 						p.sendMessage("§7The Spell " + assembly + "§7 has a worth of " + SaveUtils.getSaveEsze().getWorth(assembly) + "§7%!");
-						break;
+						return true;
+					case "stats":
+						new SoloAnalyticsMenu(p).open(p);
+						return true;
 					case "backup":
 						SaveUtils.backup();
-						break;
+						return true;
 					default:
 						p.sendMessage("ERROR");
-						break;
+						return false;
 					}
 				}
 				if (sender instanceof Player) {

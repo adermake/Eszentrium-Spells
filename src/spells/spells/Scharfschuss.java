@@ -77,15 +77,12 @@ public class Scharfschuss extends Spell{
 
 	@Override
 	public void onPlayerHit(Player p) {
-		// TODO Auto-generated method stub
-		damage(p, 20,caster);
+		damage(p, 20, caster);
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
-		// TODO Auto-generated method stub
-		
-		damage(ent, 20,caster);
+		damage(ent, 20, caster);
 	}
 
 	@Override

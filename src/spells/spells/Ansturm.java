@@ -78,8 +78,7 @@ public class Ansturm extends Spell{
 				if (bf == BlockFace.DOWN)
 					continue;
 				if (golem.getLocation().getBlock().getRelative(bf).getType() != Material.AIR) {
-					
-						golem.setVelocity(moveDir.clone().multiply(1).setY(0.5D));
+					golem.setVelocity(moveDir.clone().multiply(1).setY(0.5D));
 					
 					break;
 				}
@@ -103,19 +102,18 @@ public class Ansturm extends Spell{
 
 	@Override
 	public void onPlayerHit(Player p) {
-		
 		damage(p,5,caster);
-		
-			p.setVelocity(loc.getDirection().multiply(-3));
-		
+		p.setVelocity(loc.getDirection().multiply(-3));
 		playSound(Sound.ENTITY_IRON_GOLEM_ATTACK, loc, 1, 1);
 		p.setVelocity(p.getVelocity().setY(2.0D));	
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
-		// TODO Auto-generated method stub
-		
+		damage(ent,5,caster);
+		ent.setVelocity(loc.getDirection().multiply(-3));
+		playSound(Sound.ENTITY_IRON_GOLEM_ATTACK, loc, 1, 1);
+		ent.setVelocity(ent.getVelocity().setY(2.0D));
 	}
 
 	@Override

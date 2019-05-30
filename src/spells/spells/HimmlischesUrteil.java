@@ -65,7 +65,6 @@ public class HimmlischesUrteil extends Spell {
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
-		Bukkit.broadcastMessage("XXX");
 		for (Location block : ParUtils.grabBlocks(loc, 34,5)) {
 			
 			int t = 0;

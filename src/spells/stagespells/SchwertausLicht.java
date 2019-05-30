@@ -121,8 +121,6 @@ public class SchwertausLicht extends Spell{
 
 	@Override
 	public void onDeath() {
-		
-		
 		a.remove();
 		new SwordExplosion(loc,caster, name);
 		

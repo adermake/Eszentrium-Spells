@@ -263,6 +263,9 @@ public abstract class Spell {
 				if (multihit == false && hitEntitys.contains(p)) {
 					continue;
 				}
+				if (p.getGameMode().equals(GameMode.ADVENTURE)) {
+					continue;
+				}
 				if (p.getEyeLocation().distance(loc)<0.6+hitboxSize ||p.getLocation().distance(loc)<0.6+hitboxSize ) {
 					hitEntitys.add(p);	
 					onPlayerHit(p);

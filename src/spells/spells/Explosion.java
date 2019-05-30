@@ -42,8 +42,8 @@ public class Explosion extends Spell{
 		caster.playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
 		for (LivingEntity le : caster.getWorld().getLivingEntities()) {
 			if (checkHit(le,caster.getLocation(),caster,5)) {
-				
-				le.damage(9);
+				damage(le, 9, caster);
+				//le.damage(9);
 				doKnockback(le, caster.getLocation(), 1);
 			}
 		}

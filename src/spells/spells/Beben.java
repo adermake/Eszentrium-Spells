@@ -78,6 +78,14 @@ public class Beben extends Spell{
 				break;
 			}
 		}
+		int plus = 0;
+		while (loc.getBlock().getRelative(BlockFace.UP).getType() != Material.AIR) {
+			loc.add(0, 1, 0);
+			plus++;
+			if (plus >= 4) {
+				break;
+			}
+		}
 		playSound(Sound.ENTITY_GENERIC_EXPLODE,loc, 1, (float) 0.1);
 		@SuppressWarnings("deprecation")
 		MaterialData md = new MaterialData(loc.getBlock().getRelative(BlockFace.DOWN).getType(), loc.getBlock().getRelative(BlockFace.DOWN).getData());

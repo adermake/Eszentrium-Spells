@@ -64,7 +64,7 @@ public class Type {
 		p.setGameMode(GameMode.ADVENTURE);
 		p.setAllowFlight(true);
 		p.setFlying(true);
-		if (p.getLocation().getY()<80) {
+		if (p.getLocation().getY()<60) {
 			p.teleport(nextLoc());
 		}
 		PlayerUtils.hidePlayer(p);

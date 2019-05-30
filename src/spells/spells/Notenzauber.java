@@ -119,8 +119,6 @@ public class Notenzauber extends Spell {
 				
 					if (p.getGameMode() == GameMode.ADVENTURE) {
 						this.cancel();
-						
-
 					}
 					Location locP = p.getLocation();
 					locP.setDirection(loca.toVector().subtract(locP.toVector()));
