@@ -1,5 +1,6 @@
 package spells.spells;
 
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -11,7 +12,7 @@ public class RufderOzeane extends Spell{
 	
 	public RufderOzeane() {
 		name = "§eRuf der Oceane";
-		cooldown = 20 * 5;
+		cooldown = 20 * 50;
 		steprange = 30;
 		speed = 0.5;
 		
@@ -43,6 +44,7 @@ public class RufderOzeane extends Spell{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		playSound(Sound.AMBIENT_UNDERWATER_LOOP_ADDITIONS,loc,1,1);
 		new RufDerOzeaneFish(caster,name);
 	}
 

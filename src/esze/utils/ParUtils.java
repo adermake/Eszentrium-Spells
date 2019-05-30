@@ -8,8 +8,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.craftbukkit.v1_14_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_14_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -22,6 +24,7 @@ import esze.main.main;
 import io.netty.util.internal.ThreadLocalRandom;
 import net.minecraft.server.v1_14_R1.Block;
 import net.minecraft.server.v1_14_R1.EntityPlayer;
+import net.minecraft.server.v1_14_R1.IBlockData;
 import net.minecraft.server.v1_14_R1.ParticleParamBlock;
 import net.minecraft.server.v1_14_R1.ParticleParamItem;
 import net.minecraft.server.v1_14_R1.ParticleParamRedstone;
@@ -48,12 +51,13 @@ public class ParUtils {
 	}
 
 	public static void createBlockcrackParticle(Location loc, double spreadX, double spreadY, double spreadZ, int count,
-			Block b) {
+			Material m) {
+		Block c = CraftMagicNumbers.getBlock(m);
 		WorldServer nmsWorld = ((CraftWorld) loc.getWorld()).getHandle();
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			EntityPlayer ep = ((CraftPlayer) p).getHandle();
 
-			nmsWorld.a(ep, new ParticleParamBlock(Particles.BLOCK, b.getBlockData()), true, loc.getX(), loc.getY(),
+			nmsWorld.a(ep, new ParticleParamBlock(Particles.BLOCK, c.getBlockData()), true, loc.getX(), loc.getY(),
 					loc.getZ(), count, spreadX, spreadY, spreadZ, 0);
 		}
 	}

@@ -22,6 +22,7 @@ public class RufDerOzeaneFish extends Spell{
 	public RufDerOzeaneFish(Player p, String namae) {
 		name = namae;
 		steprange = 30;
+		hitboxSize = 2;
 		castSpell(p,name);
 		
 	}
@@ -84,20 +85,28 @@ public class RufDerOzeaneFish extends Spell{
 	public void display() {
 		// TODO Auto-generated method stub
 		
-		ParUtils.createParticle(Particles.FALLING_WATER, loc, 0.1, 0.1, 0.1, 10, 1);
-	
+		if (step>2) {
+			ParUtils.createBlockcrackParticle(loc, 0.1,0.1,0.1, 2, Material.LIGHT_BLUE_STAINED_GLASS);
+			ParUtils.createBlockcrackParticle(loc, 0.1,0.1,0.1, 2, Material.LIGHT_BLUE_CONCRETE_POWDER);
+			ParUtils.createParticle(Particles.BUBBLE_COLUMN_UP, loc, 0.4, 0.4, 0.4, 3, 1);
+		}
+		
+		
+		
 	}
 
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		
+		damage(p,1,caster);
+		doKnockback(p, caster.getLocation(), 1.5);
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
-		
+		damage(ent,1,caster);
+		doKnockback(ent, caster.getLocation(), 1.5);
 	}
 
 	@Override
