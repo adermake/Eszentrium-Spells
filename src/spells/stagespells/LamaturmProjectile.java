@@ -65,7 +65,7 @@ public class LamaturmProjectile extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		doKnockback(p, origin, 2);
+		doKnockback(p, origin, 4);
 		p.damage(3);
 		playSound(Sound.ENTITY_GUARDIAN_FLOP, loc, 3, 1);
 		dead = true;
@@ -74,7 +74,7 @@ public class LamaturmProjectile extends Spell {
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
-		doKnockback(ent, origin, 2);
+		doKnockback(ent, origin, 4);
 		ent.damage(3);
 		playSound(Sound.ENTITY_GUARDIAN_FLOP, loc, 3, 1);
 		dead = true;

@@ -16,7 +16,7 @@ public class Orbitar extends Spell {
 	public Orbitar() {
 		name = "§6Orbitar";
 		cooldown = 20 * 60;
-		steprange = 20 * 15;
+		steprange = 20 * 10;
 		
 	}
 	

@@ -11,7 +11,7 @@ import spells.stagespells.RufDerOzeaneFish;
 public class RufderOzeane extends Spell{
 	
 	public RufderOzeane() {
-		name = "§eRuf der Oceane";
+		name = "§eRuf der Ozeane";
 		cooldown = 20 * 50;
 		steprange = 30;
 		speed = 0.5;

@@ -37,6 +37,7 @@ public class Ansturm extends Spell{
 	@Override
 	public void setUp() {
 		golem = (IronGolem) spawnEntity(EntityType.IRON_GOLEM);
+		moveDir = loc.getDirection();
 	}
 
 	@Override
@@ -51,6 +52,7 @@ public class Ansturm extends Spell{
 		
 	}
 
+	Vector moveDir;
 	@Override
 	public void move() {
 		/*
@@ -64,11 +66,11 @@ public class Ansturm extends Spell{
 				if (bf == BlockFace.DOWN)
 					continue;
 				if (golem.getLocation().getBlock().getRelative(bf).getType() != Material.AIR) {
-					golem.setVelocity(loc.getDirection().multiply(-1).setY(0.5D));
+					golem.setVelocity(moveDir.clone().multiply(-1).setY(0.5D));
 					break;
 				}
 				else {
-					golem.setVelocity(loc.getDirection().multiply(-1).setY(-1D));
+					golem.setVelocity(moveDir.clone().multiply(-1).setY(-1D));
 				}
 			}
 		} else {
@@ -77,12 +79,12 @@ public class Ansturm extends Spell{
 					continue;
 				if (golem.getLocation().getBlock().getRelative(bf).getType() != Material.AIR) {
 					
-						golem.setVelocity(loc.getDirection().multiply(1).setY(0.5D));
+						golem.setVelocity(moveDir.clone().multiply(1).setY(0.5D));
 					
 					break;
 				}
 				else {
-					golem.setVelocity(loc.getDirection().multiply(1).setY(-1D));
+					golem.setVelocity(moveDir.clone().multiply(1).setY(-1D));
 				}
 				
 			}

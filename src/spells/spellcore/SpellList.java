@@ -28,6 +28,7 @@ import spells.spells.Notenzauber;
 import spells.spells.Opfersuche;
 import spells.spells.Orbitar;
 import spells.spells.Raumwechsel;
+import spells.spells.RufderOzeane;
 import spells.spells.Schallbrecher;
 import spells.spells.Schallwelle;
 import spells.spells.Scharfschuss;
@@ -85,6 +86,7 @@ public class SpellList {
 		spells.add(new Opfersuche());
 		spells.add(new Orbitar());
 		spells.add(new Raumwechsel());
+		spells.add(new RufderOzeane());
 		spells.add(new Erdsurfer());
 		spells.add(new Schallbrecher());
 		spells.add(new SchwerterausLicht());

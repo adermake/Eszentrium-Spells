@@ -22,7 +22,7 @@ public class Lamaturm extends Spell {
 	public Lamaturm() {
 		name = "§7Lamaturm";
 		cooldown = 20 * 55;
-		steprange = 300;
+		steprange = 20 * 50;
 		hitboxSize = 10;
 		 
 		
@@ -45,7 +45,8 @@ public class Lamaturm extends Spell {
 			turret = (Llama) caster.getWorld().spawnEntity(loc, EntityType.LLAMA);
 			bindEntity(turret);
 			turret.setJumpStrength(0);
-			turret.setTamed(true);
+			turret.setTamed(false);
+			
 			turret.setAdult();
 			turret.setCollidable(false);
 			turret.setCarryingChest(true);

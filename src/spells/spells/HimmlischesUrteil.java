@@ -36,7 +36,6 @@ public class HimmlischesUrteil extends Spell {
 	
 	@Override
 	public void setUp() {
-		Bukkit.broadcastMessage("XXXY");
 		// TODO Auto-generated method stub
 		loc = null;
 		loc = block(caster);
@@ -101,7 +100,7 @@ public class HimmlischesUrteil extends Spell {
 	
 		for (Location l : circleDots) {
 			
-			ParUtils.createFlyingParticle(Particles.CLOUD, l, 1, 1, 1, 111, 1,  loc.clone().add(0,2,0).toVector().subtract(l.toVector()).normalize());
+			ParUtils.createFlyingParticle(Particles.CLOUD, l, 1, 1, 1, 5, 1,  loc.clone().add(0,2,0).toVector().subtract(l.toVector()).normalize());
 		}
 	}
 

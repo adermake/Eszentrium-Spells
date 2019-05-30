@@ -72,6 +72,8 @@ public abstract class Spell {
 	public static ArrayList<Entity> pressingF = new ArrayList<Entity>();
 	protected static ArrayList<Spell> spell = new ArrayList<Spell>();
 	protected static ArrayList<Player> gliding = new ArrayList<Player>();
+	protected static ArrayList<Player> hasDied = new ArrayList<Player>();
+	protected static ArrayList<Player> hasDiedEntry = new ArrayList<Player>();
 	protected Location startPos;
 	//CALLED
 	
@@ -196,12 +198,18 @@ public abstract class Spell {
 							}
 							
 							if (!dead) {
+								hasDied = new ArrayList<Player>(hasDiedEntry);
 								collideWithPlayer();
 								collideWithEntity();
 								collideWithSpell();
 								collideWithBlock();
+								
+								
 							}
 							
+							if (hasDied.contains(caster)) {
+								dead = true; //EXPERIMENTAL
+							}
 							if (dead) {
 								
 								this.cancel();
@@ -266,6 +274,7 @@ public abstract class Spell {
 			}
 		}		
 	}
+	
 	
 	public void collideWithEntity() {
 		if (hitEntity) {

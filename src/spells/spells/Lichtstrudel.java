@@ -117,7 +117,6 @@ public void dot(Location la,Location to,Player p,int time ) {
 				ParUtils.createParticle(Particles.END_ROD, l, 0, 0,0,0, 0);
 				for (LivingEntity le : p.getWorld().getLivingEntities()) {
 					if (checkHit(le,l,p,2)) {
-						Bukkit.broadcastMessage("pulling");
 						doPull(le, too,1);
 					}
 				}

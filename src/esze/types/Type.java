@@ -62,12 +62,17 @@ public class Type {
 	public void out(Player p) {
 		p.getInventory().clear();
 		p.setGameMode(GameMode.ADVENTURE);
+		p.setAllowFlight(true);
 		p.setFlying(true);
-		PlayerUtils.hidePlayer(p);
-		if (p.getLocation().getY()<60) {
+		if (p.getLocation().getY()<80) {
 			p.teleport(nextLoc());
 		}
+		PlayerUtils.hidePlayer(p);
+		p.setVelocity(p.getVelocity().multiply(0));
+		p.setHealth(p.getMaxHealth());
 		players.remove(p);
 		spectator.add(p);
+		
+		Bukkit.broadcastMessage(p.getName() + "ist raus");
 	}
 }

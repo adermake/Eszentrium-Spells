@@ -54,6 +54,9 @@ public class Interact implements Listener{
 		PlayerInteractEvent IE = new PlayerInteractEvent(p, Action.RIGHT_CLICK_AIR, p.getInventory().getItemInMainHand(), null, null);
 		Bukkit.getPluginManager().callEvent(IE);
 		
+		if(e.getRightClicked().getType() == EntityType.LLAMA) {
+			e.setCancelled(true);
+		}
 		if(e.getRightClicked().getType() == EntityType.SHEEP) {
 			p.addPassenger(e.getRightClicked());
 			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*14, 1));

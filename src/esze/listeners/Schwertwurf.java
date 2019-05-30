@@ -111,6 +111,9 @@ public class Schwertwurf implements Listener {
 						for (Player pl : Bukkit.getOnlinePlayers()) {
 								if (pl instanceof Player && ((Player) pl).getGameMode() == GameMode.SURVIVAL) {
 									
+									if (p == pl) {
+										continue;
+									}
 								Location ploc1 = pl.getLocation();
 								Location ploc2 = pl.getLocation();
 								ploc2.add(0, 1, 0);
