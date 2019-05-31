@@ -31,7 +31,7 @@ public class Meteor extends Spell {
 		FallingBlock fb2 = caster.getWorld().spawnFallingBlock(loc.clone().add(0,1,0), Material.FIRE,(byte)0);
 		fb.addPassenger(fb2);
 		fb.setVelocity(fb.getVelocity().setY(-4));
-		loc.setDirection(new Vector(0, -4, 0));
+		loc.setDirection(new Vector(0, -1, 0));
 		fb.setFireTicks(100);
 		bindEntity(fb);
 	}
@@ -51,14 +51,16 @@ public class Meteor extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		Vector dir = loc.getDirection();
 		loc = fb.getLocation();
+		loc = loc.setDirection(dir);
 		if (caster.isSneaking()) {
 			Vector v = fb.getVelocity();
 			v.setX(caster.getLocation().getDirection().getX());
 			v.setZ(caster.getLocation().getDirection().getZ());
 			fb.setVelocity(v);
 		}
-		fb.setVelocity(loc.getDirection());
+		fb.setVelocity(loc.getDirection().normalize().multiply(4));
 	}
 
 	@Override
