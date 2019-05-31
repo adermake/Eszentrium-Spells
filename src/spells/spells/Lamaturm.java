@@ -46,7 +46,6 @@ public class Lamaturm extends Spell {
 			bindEntity(turret);
 			turret.setJumpStrength(0);
 			turret.setTamed(false);
-			
 			turret.setAdult();
 			turret.setCollidable(false);
 			turret.setCarryingChest(true);
@@ -75,24 +74,24 @@ public class Lamaturm extends Spell {
 	public void move() {
 		if (turret == null)
 			return;
-		realDelay++;
+		realDelay = (realDelay == -1) ? -1 : realDelay++;
 		shootDelay++;
-		if (shootDelay>40 && shots < 3) {
+		if (shootDelay > 40 && shots < 3) {
 			shots++;
 			playSound(Sound.ENTITY_LLAMA_ANGRY,loc,4,1);
 			
 			shootDelay = 0;
 		}
 		if (realDelay>5) {
-			realDelay = 0;
+			realDelay = -1;
 		}
 		
 		if (target != null && target.getLocation().distance(loc)<10) {
 			
 			loc.setDirection(target.getLocation().toVector().subtract(loc.toVector()));
-			if (realDelay == 0 && shots>0) {
+			if (realDelay == -1 && shots>0) {
 				shots--;
-				
+				realDelay++;
 				new LamaturmProjectile(caster,turret.getEyeLocation(),turret,name);
 			}
 			

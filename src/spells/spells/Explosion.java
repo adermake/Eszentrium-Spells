@@ -43,7 +43,6 @@ public class Explosion extends Spell{
 		for (LivingEntity le : caster.getWorld().getLivingEntities()) {
 			if (checkHit(le,caster.getLocation(),caster,5)) {
 				damage(le, 9, caster);
-				//le.damage(9);
 				doKnockback(le, caster.getLocation(), 1);
 			}
 		}

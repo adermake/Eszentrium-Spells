@@ -38,7 +38,6 @@ public class Scharfschuss extends Spell{
 	int stage = 0;
 	@Override
 	public void cast() {
-		// TODO Auto-generated method stub
 		t++;
 		stage++;
 		if (t<10) {
@@ -49,7 +48,6 @@ public class Scharfschuss extends Spell{
 		
 		if (t < 20) {
 			if (stage > 2) {
-				
 				playGlobalSound(Sound.ENTITY_ELDER_GUARDIAN_DEATH_LAND, 1, 1);
 				stage = 0;
 			}

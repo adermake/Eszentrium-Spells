@@ -28,6 +28,7 @@ public class SchwertausLicht extends Spell{
 		loc = l;
 		saveLoc = l;
 		casttime = randInt(12,34);
+		hitSpell = true;
 		steprange = 200;
 		speed = 8;
 		hitboxSize = 0.3;

@@ -21,6 +21,7 @@ public class RufDerOzeaneFish extends Spell{
 	LivingEntity ent;
 	public RufDerOzeaneFish(Player p, String namae) {
 		name = namae;
+		hitSpell = true;
 		steprange = 30;
 		hitboxSize = 2;
 		castSpell(p,name);

@@ -15,12 +15,12 @@ import spells.spellcore.Spell;
 public class Meteor extends Spell {
 
 	Location overrideLoc;
+	Vector direction;
 	public Meteor(Location loca,Player caster, String namae) {
 		overrideLoc = loca;
 		hitboxSize = 2;
 		name = namae;
 		castSpell(caster, name);
-		
 	}
 	
 	FallingBlock fb;
@@ -31,6 +31,7 @@ public class Meteor extends Spell {
 		FallingBlock fb2 = caster.getWorld().spawnFallingBlock(loc.clone().add(0,1,0), Material.FIRE,(byte)0);
 		fb.addPassenger(fb2);
 		fb.setVelocity(fb.getVelocity().setY(-4));
+		loc.setDirection(new Vector(0, -4, 0));
 		fb.setFireTicks(100);
 		bindEntity(fb);
 	}
@@ -57,6 +58,7 @@ public class Meteor extends Spell {
 			v.setZ(caster.getLocation().getDirection().getZ());
 			fb.setVelocity(v);
 		}
+		fb.setVelocity(loc.getDirection());
 	}
 
 	@Override
@@ -70,7 +72,7 @@ public class Meteor extends Spell {
 		// TODO Auto-generated method stub
 		if (!boundOnGround) {
 			p.setVelocity(p.getVelocity().setY(-3));
-			damage(p,5,caster);
+			damage(p,7,caster);
 		}
 	}
 
@@ -79,7 +81,7 @@ public class Meteor extends Spell {
 		// TODO Auto-generated method stub
 		if (!boundOnGround) {
 			ent.setVelocity(ent.getVelocity().setY(-3));
-			damage(ent,5,caster);
+			damage(ent,7,caster);
 		}
 	}
 
@@ -93,7 +95,7 @@ public class Meteor extends Spell {
 		// TODO Auto-generated method stub
 		//new ExplosionDamage(4, 8, caster, loc);
 		
-		new Explosion(4, 8, 0.1, 0.5F, caster, loc, name);
+		new Explosion(4, 9, 0.1, 0.5F, caster, loc, name);
 		dead = true;
 	}
 

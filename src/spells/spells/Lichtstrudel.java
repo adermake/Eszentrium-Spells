@@ -49,7 +49,7 @@ public class Lichtstrudel extends Spell {
 		
 		//playSound(Sound.UI_TOAST_CHALLENGE_COMPLETE,caster.getLocation(),0.1F,2f);
 		// TODO Auto-generated method stub
-		if (delay > 2) {
+		if (delay > 4) {
 			
 			delay = 0;
 		}
