@@ -20,21 +20,33 @@ public class Death implements Listener {
 	
 	@EventHandler
 	public void onDeath(EntityDamageEvent e){
-		
+		Bukkit.broadcastMessage("a");
 			// TEST
 		if (e.getEntity() instanceof Player) {
+			Bukkit.broadcastMessage("b");
 			Player p = (Player) e.getEntity();
-			if (p.getHealth()<=0) {
+			Bukkit.broadcastMessage("p.getHealth() = "+p.getHealth());
+			Bukkit.broadcastMessage("e.getFinalDamage() = "+e.getFinalDamage());
+			Bukkit.broadcastMessage("^DIFFERENCE^ = "+(p.getHealth() - e.getFinalDamage()));
+			
+			if (p.getHealth() - e.getFinalDamage() < 1 ) {
+				Bukkit.broadcastMessage("c");
 				
 			
 			PlayerDeathEvent event = new PlayerDeathEvent(p, null, 0, "he dead");
+			Bukkit.broadcastMessage("d");
 			
-			((LivingEntity) e.getEntity()).setHealth(20);
+
+			e.setCancelled(true);
+			p.setHealth(20);
+			Bukkit.broadcastMessage("e");
 			
 			
 			
 			ParUtils.createRedstoneParticle(e.getEntity().getLocation(), 0.3, 0.5, 0.3, 10, Color.RED, 3);
+			Bukkit.broadcastMessage("f");
 			GameType.getType().death(event);
+			Bukkit.broadcastMessage("g");
 			}
 		}
 		
