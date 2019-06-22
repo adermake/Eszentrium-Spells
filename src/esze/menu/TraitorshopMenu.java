@@ -12,12 +12,12 @@ import spells.spellcore.SpellList;
 public class TraitorshopMenu extends ItemMenu {
 
 	public TraitorshopMenu() {
-		super(9,"§cSchwarzmarkt");
+		super(1, "§cSchwarzmarkt");
 		
-		addClickableItem(0, 0, Material.SPECTRAL_ARROW, "§4Magmanadel");
-		addClickableItem(1, 0, Material.SHEEP_SPAWN_EGG, "§4Verzaubern");
-		addClickableItem(2, 0, Material.STRING, "§4Griff der sieben Winde");
-		addClickableItem(3, 0, Material.MELON_SLICE, "§4Miiilone");
+		addClickableItem(1, 1, Material.SPECTRAL_ARROW, "§4Magmanadel");
+		addClickableItem(2, 1, Material.SHEEP_SPAWN_EGG, "§4Verzaubern");
+		addClickableItem(3, 1, Material.STRING, "§4Griff der sieben Winde");
+		addClickableItem(4, 1, Material.MELON_SLICE, "§4Miiilone");
 		
 	}
 

@@ -20,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import esze.main.main;
+import esze.menu.TraitorshopMenu;
 import esze.utils.ItemStackUtils;
 
 
@@ -122,6 +123,12 @@ public class MapSelect implements Listener{
 			if(i.hasItemMeta() && i.getItemMeta().hasDisplayName() && i.getItemMeta().getDisplayName().equals("§3Map wählen")){
 				e.setCancelled(true);
 				openSelection(p);
+			}
+		}
+		if(i != null && i.getType() == Material.EMERALD){
+			if(i.hasItemMeta() && i.getItemMeta().hasDisplayName() && i.getItemMeta().getDisplayName().equals("§cSchwarzmarkt")){
+				e.setCancelled(true);
+				new TraitorshopMenu().open(p);
 			}
 		}
 	}

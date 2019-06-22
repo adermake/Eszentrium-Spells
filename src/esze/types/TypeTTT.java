@@ -105,6 +105,7 @@ public class TypeTTT extends Type{
 			p.setGameMode(GameMode.SURVIVAL);
 			p.getInventory().clear();
 			p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true));
+			
 		}
 		
 		
@@ -132,6 +133,7 @@ public class TypeTTT extends Type{
 		for(Player p : innocent){
 			p.sendMessage("§8| §7Du bist §6unschuldig!");
 			new Title("§a§lUNSCHULDIGER", "ist deine Rolle").send(p);
+			p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.EMERALD, 1, 0, "§eWeltenkatalysator", null, true));
 		}
 		for(Player p : traitor){
 			if(traitor.size() > 1){
@@ -147,6 +149,7 @@ public class TypeTTT extends Type{
 				p.sendMessage("§8| §7Du bist §6alleine §7Verräter!");
 			}
 			new Title("§c§lVERRÄTER", "ist deine Rolle").send(p);
+			p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.EMERALD, 1, 0, "§cSchwarzmarkt", null, true));
 		}
 		
 		/*

@@ -51,6 +51,7 @@ import esze.map.JumpPad.JumpPadType;
 import esze.map.JumpPadHandler;
 import esze.map.MapMenu;
 import esze.menu.SoloAnalyticsMenu;
+import esze.menu.TraitorshopMenu;
 import esze.utils.NBTUtils;
 import esze.voice.Discord;
 
@@ -68,6 +69,7 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 							if(args[0].equalsIgnoreCase("start")){
 								LobbyCountdownRunnable.start();
 							}else if(args[0].equalsIgnoreCase("stop")){
+
 								LobbyCountdownRunnable.stop();
 							}else if(args[0].equalsIgnoreCase("info")){
 								p.sendMessage("§8| §3Discord4J §7- "+Discord.getVersion() + " - " + (Discord.isLoggedIn() ? "§aCONNECTED" : "§cDISCONNECTED"));
