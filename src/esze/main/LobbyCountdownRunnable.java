@@ -66,6 +66,7 @@ public class LobbyCountdownRunnable {
 			}
 		}
 		GameType.getType().currentmap = MapSelect.maxVotes();
+		Gamestate.setGameState(Gamestate.INGAME);
 		GameType.getType().gameStart();
 		
 		

@@ -36,4 +36,12 @@ public class PlayerUtils {
 			pl.showPlayer(main.plugin, p);
 		}
 	}
+	public static void showAllPlayers() {
+		for (Player pl : Bukkit.getOnlinePlayers()) {
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				pl.showPlayer(main.plugin, p);
+			}
+			
+		}
+	}
 }

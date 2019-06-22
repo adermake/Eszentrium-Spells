@@ -18,6 +18,7 @@ import esze.main.LobbyBackgroundRunnable;
 import esze.main.main;
 import esze.menu.SoloSpellMenu;
 import esze.scoreboards.SoloScoreboard;
+import esze.scoreboards.TTTScoreboard;
 import esze.utils.ItemStackUtils;
 import esze.utils.LobbyUtils;
 import esze.utils.MathUtils;
@@ -60,12 +61,20 @@ public class TypeTTT extends Type{
 	@Override
 	public void gameStart() {
 		
+		innocent.clear();
+		traitor.clear();
+		
 		won = false;
 		gameOver = false;
 		
 		int playerCount = players.size();
 		int traitorCount = 1;
 		
+		
+		scoreboard = new TTTScoreboard();
+		scoreboard.showScoreboard();
+		
+		PlayerUtils.showAllPlayers();
 		
 		for (Player p : players) {
 			p.teleport(nextLoc());
@@ -79,11 +88,12 @@ public class TypeTTT extends Type{
 			
 		}
 		
+		if ( ((int)playerCount/3)-1 > 0)
 		traitorCount += ((int)playerCount/3)-1;
 		
 		
 		for (int i = 0;i<traitorCount;i++) {
-			int index = MathUtils.randInt(0, players.size());
+			int index = MathUtils.randInt(0, players.size()-1);
 			setTraitor(players.get(index));
 		}
 		
@@ -117,9 +127,21 @@ public class TypeTTT extends Type{
 	@Override
 	public void death(PlayerDeathEvent event) {
 		Player p = event.getEntity();
-		p.setHealth(p.getMaxHealth());
+		Bukkit.broadcastMessage("1");
+		p.setHealth(20);
 		players.remove(p);
 		p.setGameMode(GameMode.ADVENTURE);
+		Bukkit.broadcastMessage("2");
+		PlayerUtils.hidePlayer(p);
+		
+		if (innocent.contains(p))
+			innocent.remove(p);
+		if (traitor.contains(p))
+			traitor.remove(p);
+		Bukkit.broadcastMessage("3");
+		p.setHealth(p.getMaxHealth());
+		p.setNoDamageTicks(100);
+		p.teleport(p.getLocation());
 		checkWinner();
 		
 		
@@ -163,17 +185,18 @@ public class TypeTTT extends Type{
 	public void checkWinner() {
 		if (!won) {
 			
-		
+			Bukkit.broadcastMessage("4");
 		if (innocent.isEmpty() && !gameOver) {
 			
 			scoreboard.hideScoreboard();
 			
-			
+			Bukkit.broadcastMessage("5");
 			
 			for (Player p : Bukkit.getOnlinePlayers()) {
 			
 			
-				Title t = new Title("§7Die §4Verräter §7haben gewonnen!");
+				Title t = new Title("§4Verräter");
+				t.setSubtitle("§7haben gewonnen!");
 				won = true;
 				t.send(p);
 				
@@ -183,7 +206,7 @@ public class TypeTTT extends Type{
 			
 			
 		}
-		
+		Bukkit.broadcastMessage("5");
 		if (traitor.isEmpty() && !gameOver) {
 			
 			scoreboard.hideScoreboard();
@@ -193,7 +216,9 @@ public class TypeTTT extends Type{
 			for (Player p : Bukkit.getOnlinePlayers()) {
 			
 			
-				Title t = new Title("§7Die §aUnschuldigen §7haben gewonnen!");
+
+				Title t = new Title("§aUnschuldigen");
+				t.setSubtitle("§7haben gewonnen!");
 				won = true;
 				t.send(p);
 				
