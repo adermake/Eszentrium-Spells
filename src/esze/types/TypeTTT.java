@@ -139,7 +139,7 @@ public class TypeTTT extends Type{
 		if (traitor.contains(p))
 			traitor.remove(p);
 		Bukkit.broadcastMessage("3");
-		p.setHealth(p.getMaxHealth());
+		
 		p.setNoDamageTicks(100);
 		p.teleport(p.getLocation());
 		checkWinner();

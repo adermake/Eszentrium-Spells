@@ -91,7 +91,7 @@ public class TypeSOLO extends Type {
 		SaveUtils.addPlayerDeath(p.getName(), main.damageCause.get(p)); //Analytics 
 		main.damageCause.put(p, "");
 		p.setVelocity(new Vector(0, 0, 0));
-		p.setHealth(p.getMaxHealth());
+		
 		loseLife(p);
 		checkWinner();	
 	}
