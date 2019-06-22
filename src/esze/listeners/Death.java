@@ -24,6 +24,9 @@ public class Death implements Listener {
 			// TEST
 		if (e.getEntity() instanceof Player) {
 			Player p = (Player) e.getEntity();
+			if (p.getHealth()<=0) {
+				
+			
 			PlayerDeathEvent event = new PlayerDeathEvent(p, null, 0, "he dead");
 			
 			((LivingEntity) e.getEntity()).setHealth(20);
@@ -32,6 +35,7 @@ public class Death implements Listener {
 			
 			ParUtils.createRedstoneParticle(e.getEntity().getLocation(), 0.3, 0.5, 0.3, 10, Color.RED, 3);
 			GameType.getType().death(event);
+			}
 		}
 		
 	}
