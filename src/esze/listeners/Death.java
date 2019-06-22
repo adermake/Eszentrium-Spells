@@ -1,5 +1,6 @@
 package esze.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.event.EventHandler;
@@ -14,11 +15,12 @@ public class Death implements Listener {
 	
 	@EventHandler
 	public void onDeath(PlayerDeathEvent e){
-		if(Gamestate.getGameState() == Gamestate.INGAME){
+		
+			e.getEntity().setHealth(20);
+			Bukkit.broadcastMessage("Hea"+e.getEntity().getHealth());
 			e.setDeathMessage("");
 			ParUtils.createRedstoneParticle(e.getEntity().getLocation(), 0.3, 0.5, 0.3, 10, Color.RED, 3);
 			GameType.getType().death(e);
-		}
 	}
 
 }
