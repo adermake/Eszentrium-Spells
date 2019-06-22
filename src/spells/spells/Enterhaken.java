@@ -98,6 +98,7 @@ public class Enterhaken extends Spell{
 
 	@Override
 	public void display() {
+		if (loc != null && caster != null)
 		ParUtils.parLine(Particles.CRIT,caster.getLocation(), loc.clone(), 0, 0, 0, 0, 0, 3);
 		
 	}
