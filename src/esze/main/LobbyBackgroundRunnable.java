@@ -51,7 +51,6 @@ public class LobbyBackgroundRunnable {
 	}
 	
 	public static void stop(){
-		Bukkit.broadcastMessage("YSTOPPP"+Bukkit.getScheduler().isCurrentlyRunning(runnableID));
 		Bukkit.getScheduler().cancelTask(runnableID);
 	}
 	

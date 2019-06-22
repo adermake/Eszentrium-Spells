@@ -1,5 +1,6 @@
 package spells.spells;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -74,7 +75,8 @@ public class Lamaturm extends Spell {
 	public void move() {
 		if (turret == null)
 			return;
-		realDelay = (realDelay == -1) ? -1 : realDelay++;
+		realDelay++;
+		//realDelay = /*(realDelay == -1) ? -1 : */realDelay++;
 		shootDelay++;
 		if (shootDelay > 40 && shots < 3) {
 			shots++;
@@ -83,13 +85,15 @@ public class Lamaturm extends Spell {
 			shootDelay = 0;
 		}
 		if (realDelay>5) {
-			realDelay = -1;
+			realDelay = 0;
 		}
 		
 		if (target != null && target.getLocation().distance(loc)<10) {
 			
 			loc.setDirection(target.getLocation().toVector().subtract(loc.toVector()));
-			if (realDelay == -1 && shots>0) {
+			Bukkit.broadcastMessage("realDelay = "+realDelay);
+			Bukkit.broadcastMessage("shots = "+shots);
+			if (realDelay == 0 && shots>0) {
 				shots--;
 				realDelay++;
 				new LamaturmProjectile(caster,turret.getEyeLocation(),turret,name);

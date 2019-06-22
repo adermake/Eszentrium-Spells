@@ -18,6 +18,8 @@ public class LobbyCountdownRunnable {
 	public static void start(){
 		if (running) {
 			
+			timeLeft = 1;
+			
 			return;
 		}
 		running = true;
@@ -46,6 +48,7 @@ public class LobbyCountdownRunnable {
 					
 					
 					timeLeft = timeDefault;
+					GameRunnable.start();
 					LobbyBackgroundRunnable.stop();
 					stop();
 				}

@@ -8,6 +8,8 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 /*import net.minecraft.server.v1_13_R1.MinecraftKey;
@@ -48,6 +50,7 @@ import net.minecraft.server.v1_14_R1.MinecraftServer;
 import spells.spellcore.Cooldowns;
 import spells.spellcore.EventCollector;
 import spells.spellcore.SpellList;
+import spells.spellcore.Spelldrop;
 
 public class main extends JavaPlugin {
 	
@@ -109,6 +112,7 @@ public class main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new JumpPadHandler(), this);
 		getServer().getPluginManager().registerEvents(new MapSelect(), this);
 		getServer().getPluginManager().registerEvents(new Menu(), this);
+		getServer().getPluginManager().registerEvents(new Spelldrop(), this);
 		
 		
 		JumpPadHandler.start();
@@ -149,7 +153,13 @@ public class main extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		//SaveUtils.backup();
+		for(Entity e : Bukkit.getWorld("world").getEntities()){
+			if(e.getType() != EntityType.PLAYER){
+				e.remove();
+			}
+		}
 	}
+	
 	
 	
 	public String objToJson(Object obj){

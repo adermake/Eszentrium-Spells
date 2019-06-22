@@ -2,18 +2,27 @@ package esze.types;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
+
+import net.minecraft.server.v1_14_R1.Particles;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.jflac.io.RandomFileInputStream;
 
+import com.google.common.base.Preconditions;
+
 import esze.enums.Gamestate;
+import esze.main.GameRunnable;
 import esze.main.LobbyBackgroundRunnable;
 import esze.main.main;
 import esze.menu.SoloSpellMenu;
@@ -22,6 +31,7 @@ import esze.scoreboards.TTTScoreboard;
 import esze.utils.ItemStackUtils;
 import esze.utils.LobbyUtils;
 import esze.utils.MathUtils;
+import esze.utils.ParUtils;
 import esze.utils.PlayerUtils;
 import esze.utils.Title;
 import spells.spellcore.Spelldrop;
@@ -30,6 +40,8 @@ public class TypeTTT extends Type{
 	boolean gameOver = false;
 	public ArrayList<Player> innocent = new ArrayList<Player>();
 	public ArrayList<Player> traitor = new ArrayList<Player>();
+	public ArrayList<Player> startInnocent = new ArrayList<Player>();
+	public ArrayList<Player> startTraitor = new ArrayList<Player>();
 	public HashMap<Player,Player> foundBody = new HashMap<Player,Player>();
 	
 	public TypeTTT() {
@@ -55,7 +67,10 @@ public class TypeTTT extends Type{
 	
 	@Override
 	public void runEveryTick() {
-		
+		for(org.bukkit.entity.ArmorStand as : Spelldrop.items.keySet()){
+			as.setRightArmPose(as.getRightArmPose().add(0, 0.1, 0));
+			ParUtils.createParticle(Particles.CLOUD, as.getLocation().clone().add(0, 0.5, 0), 0, 0, 0, 1, 0);
+		}		
 	}
 	
 	@Override
@@ -63,6 +78,13 @@ public class TypeTTT extends Type{
 		
 		innocent.clear();
 		traitor.clear();
+		
+		startInnocent.clear();
+		startTraitor.clear();
+		
+
+		scoreboard = new TTTScoreboard();
+		scoreboard.showScoreboard();
 		
 		won = false;
 		gameOver = false;
@@ -75,17 +97,20 @@ public class TypeTTT extends Type{
 		scoreboard.showScoreboard();
 		
 		PlayerUtils.showAllPlayers();
+
+		setupJumpPad(currentmap);
 		
 		for (Player p : players) {
 			p.teleport(nextLoc());
 			p.setGameMode(GameMode.SURVIVAL);
 			p.getInventory().clear();
 			p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true));
-			
-			
-			
-			
-			
+		}
+		
+		
+		
+		for(int i = 0; i<10; i++){
+			spawnNewSpell();
 		}
 		
 		if ( ((int)playerCount/3)-1 > 0)
@@ -95,11 +120,33 @@ public class TypeTTT extends Type{
 		for (int i = 0;i<traitorCount;i++) {
 			int index = MathUtils.randInt(0, players.size()-1);
 			setTraitor(players.get(index));
+			
 		}
 		
 		for (Player p : players) {
-			if (!traitor.contains(p))
+			if (!traitor.contains(p)){
 				setInnocent(p);
+			}
+		}
+		
+		for(Player p : innocent){
+			p.sendMessage("§8| §7Du bist §6unschuldig!");
+			new Title("§a§lUNSCHULDIGER", "ist deine Rolle").send(p);
+		}
+		for(Player p : traitor){
+			if(traitor.size() > 1){
+				String build = "§8| §7Du bist ein Traitor mit §6";
+				for(Player p2 : traitor){
+					if(!p2.equals(p)){
+						build += p2.getName()+", ";
+					}
+				}
+				build = build.substring(0, build.length()-2) + ".";
+				p.sendMessage(build);
+			}else{
+				p.sendMessage("§8| §7Du bist §6alleine §7Verräter!");
+			}
+			new Title("§c§lVERRÄTER", "ist deine Rolle").send(p);
 		}
 		
 		/*
@@ -148,13 +195,74 @@ public class TypeTTT extends Type{
 	}
 	
 	public void spawnNewSpell() {
+		
+		Location nLoc = nextLoc();
+			
+		Location a = getRandomLocation(nLoc.clone().add(30,5,30), nLoc.clone().add(-30,-40,-30));
+		//int b =  Bukkit.getWorld("world").getHighestBlockYAt(a);
+		//a.setY(b);
+		
+		int tries = 0;
+		Location next = a.clone();
+		while(true){
+			if(next.getBlock().getType() == Material.AIR 
+			&& next.getBlock().getRelative(BlockFace.DOWN).getType().isSolid()
+			&& next.getBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
+				break;
+			}
+			
+			if(tries >= 80){
+				break;
+			}else{
+				tries++;
+				next.add(0,1,0);
+			}
+		}
+		
+		a = next.clone();
+		a.setX(a.getBlockX());
+		a.setZ(a.getBlockZ());
+		a.setY(a.getBlockY());
+		
+		if(next.getBlock().getType() == Material.AIR 
+				&& next.getBlock().getRelative(BlockFace.DOWN).getType().isSolid()
+				&& next.getBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
+			new Spelldrop(a);
+		}else {
+			spawnNewSpell();
+		}
+			
+			
+			
+		
+		}
+	
+	public static Location getRandomLocation(Location loc1, Location loc2) {
+        Preconditions.checkArgument(loc1.getWorld() == loc2.getWorld());
+        double minX = Math.min(loc1.getX(), loc2.getX());
+        double minY = Math.min(loc1.getY(), loc2.getY());
+        double minZ = Math.min(loc1.getZ(), loc2.getZ());
+
+        double maxX = Math.max(loc1.getX(), loc2.getX());
+        double maxY = Math.max(loc1.getY(), loc2.getY());
+        double maxZ = Math.max(loc1.getZ(), loc2.getZ());
+
+        return new Location(loc1.getWorld(), randomDouble(minX, maxX), randomDouble(minY, maxY), randomDouble(minZ, maxZ));
+    }
+	
+	 public static double randomDouble(double min, double max) {
+        return min + ThreadLocalRandom.current().nextDouble(Math.abs(max - min + 1));
+	 }
+	
+	public void spawnNewSpellOLD() {
+		
 		Location loc = nextLoc();
 		loc.add(MathUtils.randInt(-30, 30),MathUtils.randInt(-10, 30),MathUtils.randInt(-30, 30));
 		
 		while (!loc.getBlock().getType().isSolid())  {
 			loc.add(0,-1,0);
 			if (loc.getY()< 60 ) {
-				spawnNewSpell();
+				spawnNewSpellOLD();
 				return;
 				
 			}
@@ -162,23 +270,27 @@ public class TypeTTT extends Type{
 		while (loc.clone().add(0,1,0).getBlock().getType().isSolid())  {
 			loc.add(0,1,0);
 			if (loc.getY()> 200 ) {
-				spawnNewSpell();
+				spawnNewSpellOLD();
 				return;
 				
 			}
 		}
 		new Spelldrop(loc);
+		
+		
 	
 	}
 	
 	public void setTraitor(Player p) {
 		
-		p.sendMessage("§7Du bist der §4Verräter");
+		//p.sendMessage("§7Du bist der §4Verräter");
 		traitor.add(p);
+		startTraitor.add(p);
 	}
 	public void setInnocent(Player p) {
-		p.sendMessage("§7Du bist §aunschuldig");
+		//p.sendMessage("§7Du bist §aunschuldig");
 		innocent.add(p);
+		startInnocent.add(p);
 	}
 	
 	boolean won = false;
@@ -231,6 +343,12 @@ public class TypeTTT extends Type{
 			
 		if (won && !gameOver) {
 			Bukkit.broadcastMessage("END");
+			for(Entity e : Bukkit.getWorld("world").getEntities()){
+				if(e.getType() != EntityType.PLAYER){
+					e.remove();
+				}
+			}
+			GameRunnable.stop();
 			Gamestate.setGameState(Gamestate.LOBBY);
 			LobbyBackgroundRunnable.start();
 			LobbyUtils.recallAll();

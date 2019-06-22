@@ -12,6 +12,7 @@ import esze.types.TypeSOLO;
 import esze.types.TypeTTT;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -28,21 +29,49 @@ public class TTTScoreboard extends Scoreboard{
 				
 				if(GameType.getType().name.equals("TTT")){
 					if(Gamestate.getGameState() == Gamestate.INGAME){
-						HashMap<String, Integer> players = new HashMap<String, Integer>();
-						
 						TypeTTT game = ((TypeTTT)GameType.getType());
-						for (Player p : game.players) {
-							
-							for (Player other : game.players) {
-								
-								
+						
+						// TRAITOR BOARD CREATION
+						ArrayList<String> traitorBoard = new ArrayList<String>();
+						traitorBoard.add("§2Spielstand");
+						traitorBoard.add("§c§lVerräter");
+						for(Player p : game.startTraitor){
+							if(p.getGameMode() == GameMode.ADVENTURE){
+								traitorBoard.add("§m"+p.getName());
+							}else{
+								traitorBoard.add(p.getName());
 							}
-							
+						}
+						traitorBoard.add(" ");
+						traitorBoard.add("§a§lUnschuldig");
+						for(Player p : game.startInnocent){
+							if(p.getGameMode() == GameMode.ADVENTURE){
+								traitorBoard.add("§m"+p.getName());
+							}else{
+								traitorBoard.add(p.getName());
+							}
 						}
 						
 						
-						ScoreboardUtil.rankedSidebarDisplay(game.innocent, "§aUnschuldig", players);
-						ScoreboardUtil.rankedSidebarDisplay(game.traitor, "§cVerräter", players);
+						// INNOCENT BOARD CREATION
+						ArrayList<String> innoBoard = new ArrayList<String>();
+						innoBoard.add("§2Spielstand");
+						innoBoard.add("§3§lSpieler");
+						for(Player p : game.players){
+							innoBoard.add(p.getName());
+						}
+						
+						
+						for (Player p : Bukkit.getOnlinePlayers()) {
+							if(!game.innocent.contains(p) && !game.traitor.contains(p)){
+								ScoreboardUtil.unrankedSidebarDisplay(p, innoBoard.toArray(new String[innoBoard.size()]));
+							}
+						}
+						
+						
+						ScoreboardUtil.unrankedSidebarDisplay(game.innocent, innoBoard.toArray(new String[innoBoard.size()]));
+						
+						ScoreboardUtil.unrankedSidebarDisplay(game.traitor, traitorBoard.toArray(new String[traitorBoard.size()]));
 						
 						if (hide) {
 							this.cancel();

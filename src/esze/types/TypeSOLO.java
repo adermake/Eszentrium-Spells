@@ -12,6 +12,7 @@ import org.bukkit.util.Vector;
 
 import esze.analytics.solo.SaveUtils;
 import esze.enums.Gamestate;
+import esze.main.GameRunnable;
 import esze.main.LobbyBackgroundRunnable;
 import esze.main.main;
 import esze.menu.SoloSpellMenu;
@@ -147,9 +148,10 @@ public class TypeSOLO extends Type {
 			
 		if (won) {
 			
-			SaveUtils.endGame(); //Analytics
+			//SaveUtils.endGame(); //Analytics //TODO Macht ERROR
 			
 			Bukkit.broadcastMessage("END");
+			GameRunnable.stop();
 			Gamestate.setGameState(Gamestate.LOBBY);
 			Bukkit.broadcastMessage("gamestate set");
 			LobbyBackgroundRunnable.start();

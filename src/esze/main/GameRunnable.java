@@ -18,7 +18,7 @@ public class GameRunnable {
 				GameType.getType().runEveryTick();
 				
 			}
-		}, 0, 20);
+		}, 0, 1);
 		
 		runnableSecID = Bukkit.getScheduler().scheduleSyncRepeatingTask(main.plugin, new Runnable() {
 			
@@ -28,7 +28,7 @@ public class GameRunnable {
 				GameType.getType().runEverySecond();
 				
 			}
-		}, 0, 1);
+		}, 0, 20);
 	}
 	
 	public static void stop(){

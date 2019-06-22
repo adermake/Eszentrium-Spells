@@ -27,11 +27,14 @@ public class Spelldrop implements Listener {
 	
 	public static HashMap<ArmorStand,ArmorStand> items = new HashMap<ArmorStand,ArmorStand>();
 	
+	public Spelldrop(){}
 	
-	public Spelldrop(Location loc) {
+	public Spelldrop(Location loc2) {
 		
-		Bukkit.broadcastMessage("dont forget to implement Listenr of Spelldrop");
-		ArmorStand a = (ArmorStand) Bukkit.getWorld("world").spawnEntity(loc, EntityType.ARMOR_STAND);
+		Location loc = loc2.clone();
+		//loc.add(0, 1, 0);
+		
+		/*ArmorStand a = (ArmorStand) Bukkit.getWorld("world").spawnEntity(loc, EntityType.ARMOR_STAND);
 		a.setGravity(false);
 		a.setVisible(false);
 		a.setInvulnerable(true);
@@ -46,7 +49,28 @@ public class Spelldrop implements Listener {
 		name.setVisible(false);
 		name.setInvulnerable(true);
 		name.setCustomName(a.getItemInHand().getItemMeta().getDisplayName());
-		items.put(a, name);
+		name.setCustomNameVisible(true);*/
+		
+		
+		ArmorStand as = loc.getWorld().spawn(loc.clone().add(0.30, -0.5, 0), ArmorStand.class);
+		as.setGravity(false);
+		as.setItemInHand(getRandomSpell());
+		as.setBasePlate(false);
+		as.setVisible(false);
+		as.setMarker(false);
+		as.getRightArmPose();
+		as.setRightArmPose(EulerAngle.ZERO);
+        as.setRightArmPose(as.getRightArmPose().add(0, 0.1, 0));
+		
+		ArmorStand holo = loc.getWorld().spawn(loc.clone().add(0.30, -1.5, 0), ArmorStand.class);
+		holo.setCustomName(as.getItemInHand().getItemMeta().getDisplayName());
+		holo.setCustomNameVisible(true);
+		holo.setGravity(false);
+		holo.setMarker(false);
+		holo.setBasePlate(false);
+		holo.setVisible(false);
+		
+		items.put(as, holo);
 	}
 	
 	
@@ -73,6 +97,7 @@ public class Spelldrop implements Listener {
 			if (a.getLocation().distance(p.getLocation())<1.5) {
 				p.getInventory().addItem(a.getItemInHand());
 				items.get(a).remove();
+				items.remove(a);
 				SoundUtils.playSound( Sound.ENTITY_ITEM_PICKUP, a.getLocation());
 				a.remove();
 				
