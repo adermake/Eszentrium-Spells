@@ -16,11 +16,14 @@ public class Death implements Listener {
 	@EventHandler
 	public void onDeath(PlayerDeathEvent e){
 		
+			// TEST
+		GameType.getType().death(e);
 			e.getEntity().setHealth(20);
-			Bukkit.broadcastMessage("Hea"+e.getEntity().getHealth());
-			e.setDeathMessage("");
+			Bukkit.broadcastMessage("Hesda"+e.getEntity().getHealth());
+			e.setDeathMessage("s");
+			
+			
 			ParUtils.createRedstoneParticle(e.getEntity().getLocation(), 0.3, 0.5, 0.3, 10, Color.RED, 3);
-			GameType.getType().death(e);
 	}
 
 }
