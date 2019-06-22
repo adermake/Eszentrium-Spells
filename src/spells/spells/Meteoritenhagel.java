@@ -64,7 +64,6 @@ public class Meteoritenhagel extends Spell {
 	public void move() {
 		delay++;
 		if (delay > 3) {
-			// TODO Auto-generated method stub
 			Location calc = loc.clone().add(0,100,0);
 			calc.add(randInt(-6,6),0,randInt(-6,6));
 			new Meteor(calc,caster,name);

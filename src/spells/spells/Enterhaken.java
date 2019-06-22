@@ -24,7 +24,6 @@ public class Enterhaken extends Spell{
 		speed = 1;
 		steprange = 100;
 		hitPlayer = false;
-		hitSpell = true;
 	}	
 	@Override
 	public void setUp() {
@@ -50,10 +49,7 @@ public class Enterhaken extends Spell{
 		
 		if (loc == null) {
 			dead = true;
-			Bukkit.broadcastMessage("RE");
 			Cooldowns.refundCurrentSpell(caster);
-			
-			Bukkit.broadcastMessage("FUND");
 		}
 		
 		
@@ -67,7 +63,6 @@ public class Enterhaken extends Spell{
 		
 		if (loc != null && caster != null)
 		dir = (loc.clone()).toVector().subtract(caster.getLocation().toVector()).normalize();
-		ParUtils.parLine(Particles.CRIT,caster.getLocation(), loc.clone(), 0, 0, 0, 0, 0, 3);
 		playSound(Sound.BLOCK_TRIPWIRE_ATTACH, caster.getLocation(), 1, 2);
 		caster.setVelocity(dir.clone().multiply(1.4));
 		
@@ -103,7 +98,7 @@ public class Enterhaken extends Spell{
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
+		ParUtils.parLine(Particles.CRIT,caster.getLocation(), loc.clone(), 0, 0, 0, 0, 0, 3);
 		
 	}
 

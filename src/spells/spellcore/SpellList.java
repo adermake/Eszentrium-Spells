@@ -45,11 +45,8 @@ public class SpellList {
 	public static ArrayList<Spell> getDiffrentRandom(int count) {
 		ArrayList<Spell> randomList = (ArrayList<Spell>) spells.clone();
 		while (randomList.size()>count) {
-			
 			randomList.remove(MathUtils.randInt(0, randomList.size()-1));
 		}
-		
-		
 		return randomList;
 		
 	}
@@ -73,8 +70,8 @@ public class SpellList {
 		spells.add(new Blasensturm());
 		spells.add(new Feuerball());
 		spells.add(new Flucht());
-		spells.add(new Heilen());
-		spells.add(new HimmlischesUrteil());
+		//spells.add(new Heilen());
+		//spells.add(new HimmlischesUrteil());
 		spells.add(new Lamaturm());
 		spells.add(new Lichtstrudel());
 		spells.add(new Lichtstrudel());

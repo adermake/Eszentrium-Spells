@@ -1,5 +1,6 @@
 package esze.listeners;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,6 +30,9 @@ public class Damage implements Listener{
 	public void onEntityDamage(EntityDamageByEntityEvent e) {
 		if(e.getDamager() instanceof Player) {
 			if (e.getEntity() instanceof Player) {
+				if (((Player) e.getDamager()).getGameMode().equals(GameMode.ADVENTURE)) {
+					e.setCancelled(true);
+				}
 				main.damageCause.remove((Player) e.getDamager());
 				main.damageCause.put((Player) e.getEntity(), "Schwert-" + ((Player) e.getDamager()).getName());
 			}

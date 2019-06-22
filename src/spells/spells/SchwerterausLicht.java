@@ -22,7 +22,7 @@ public class SchwerterausLicht extends Spell{
 	public SchwerterausLicht() {
 		
 		name = "§cSchwerter aus Licht";
-		cooldown = 20*60;
+		cooldown = 20*50;
 		
 		
 	}

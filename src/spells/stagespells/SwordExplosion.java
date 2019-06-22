@@ -72,14 +72,14 @@ public class SwordExplosion extends Spell{
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		doKnockback(p, loc.add(loc.getDirection()), 1);
+		doKnockback(p, loc.add(loc.getDirection()), 1.5);
 		p.damage(5);
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
-		doKnockback(ent, loc.add(loc.getDirection()), 1);
+		doKnockback(ent, loc.add(loc.getDirection()), 1.5);
 		
 	}
 

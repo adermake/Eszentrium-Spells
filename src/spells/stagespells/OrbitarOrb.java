@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Giant;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,6 +23,7 @@ public class OrbitarOrb extends Spell {
 	public OrbitarOrb(Player p,int offset,int steps,String namae) {
 		name = namae;
 		steprange = steps;
+		hitSpell = true;
 		castSpell(p,name);
 		speed = 2;
 		a = createArmorStand(p.getLocation());

@@ -1,5 +1,6 @@
 package spells.spells;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -73,7 +74,7 @@ public class Avatar extends Spell{
 	public void move() {
 		loc = g.getLocation();
 		i--;
-		if (caster.isSneaking()) {
+		if (caster.isSneaking() || caster.getGameMode().equals(GameMode.ADVENTURE)) {
 			dead = true;
 		}
 		
