@@ -33,6 +33,7 @@ import esze.utils.LobbyUtils;
 import esze.utils.MathUtils;
 import esze.utils.ParUtils;
 import esze.utils.PlayerUtils;
+import esze.utils.TTTCorpse;
 import esze.utils.Title;
 import spells.spellcore.Spelldrop;
 
@@ -177,6 +178,9 @@ public class TypeTTT extends Type{
 	@Override
 	public void death(PlayerDeathEvent event) {
 		Player p = event.getEntity();
+		TTTCorpse corpse = new TTTCorpse(p, true);
+		corpse.spawn();
+		
 		Bukkit.broadcastMessage("1");
 		p.setHealth(20);
 		players.remove(p);

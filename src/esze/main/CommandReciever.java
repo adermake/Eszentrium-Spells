@@ -53,6 +53,7 @@ import esze.map.MapMenu;
 import esze.menu.SoloAnalyticsMenu;
 import esze.menu.TraitorshopMenu;
 import esze.utils.NBTUtils;
+import esze.utils.TTTCorpse;
 import esze.voice.Discord;
 
 public class CommandReciever implements CommandExecutor, TabCompleter{
@@ -70,7 +71,10 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 								LobbyCountdownRunnable.start();
 							}else if(args[0].equalsIgnoreCase("stop")){
 
-								LobbyCountdownRunnable.stop();
+								//LobbyCountdownRunnable.stop();
+								
+								TTTCorpse corpse = new TTTCorpse(p, true);
+								corpse.spawn();
 							}else if(args[0].equalsIgnoreCase("info")){
 								p.sendMessage("§8| §3Discord4J §7- "+Discord.getVersion() + " - " + (Discord.isLoggedIn() ? "§aCONNECTED" : "§cDISCONNECTED"));
 							}else{
@@ -372,7 +376,7 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 		            is.setItemMeta(im);
 		            
 		            is = NBTUtils.setNBT("Spell", "true", is);
-		            
+		            is = NBTUtils.setNBT("OriginalName", is.getItemMeta().getDisplayName(), is);
 		            player.getInventory().addItem(is);
 		            return true;
 		            }
@@ -386,15 +390,32 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 	@Override
 	public List<String> onTabComplete(CommandSender player, Command cmd, String cmdname, String[] args) {
 		if(args.length == 1){
-			if(cmdname.contains("esze")){
+			if(cmdname.contains("game")){
 				List<String> to = new ArrayList<String>();
 				List<String> from = new ArrayList<String>();
 				from.add("start");
 				from.add("stop");
-				from.add("speedup");
 				from.add("info");
-				from.add("debug");
-				from.add("reload");
+				try{
+					for(String s : from){
+						String eing = args[0];
+						String a = s;
+						String eing2 = a.substring(0, eing.length());
+						
+						if(eing.equalsIgnoreCase(eing2)){
+							to.add(a);
+						}
+					}
+				}catch(Exception e){}
+				return to;
+			}else if(cmdname.contains("setjumppad")){ 
+				List<String> to = new ArrayList<String>();
+				List<String> from = new ArrayList<String>();
+				for(String arena: main.plugin.getConfig().getConfigurationSection("maps").getKeys(false)){
+					if(main.plugin.getConfig().get("maps."+arena)!=null){
+						from.add(arena);
+					}
+				}
 				try{
 					for(String s : from){
 						String eing = args[0];
@@ -474,6 +495,25 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				try{
 					for(String s : from){
 						String eing = args[1];
+						String a = s;
+						String eing2 = a.substring(0, eing.length());
+						
+						if(eing.equalsIgnoreCase(eing2)){
+							to.add(a);
+						}
+					}
+				}catch(Exception e){}
+				return to;
+			}
+		}else if(args.length == 3){
+			if(cmdname.contains("setjumppad")){ 
+				List<String> to = new ArrayList<String>();
+				List<String> from = new ArrayList<String>();
+				from.add("dir");
+				from.add("up");
+				try{
+					for(String s : from){
+						String eing = args[2];
 						String a = s;
 						String eing2 = a.substring(0, eing.length());
 						

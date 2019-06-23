@@ -1,12 +1,14 @@
 package esze.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.server.v1_14_R1.BlockPosition;
 import net.minecraft.server.v1_14_R1.DataWatcher;
 import net.minecraft.server.v1_14_R1.DataWatcherRegistry;
 import net.minecraft.server.v1_14_R1.EntityPlayer;
+import net.minecraft.server.v1_14_R1.PacketPlayOutEntity.PacketPlayOutEntityLook;
 import net.minecraft.server.v1_14_R1.PacketPlayOutEntityDestroy;
 import net.minecraft.server.v1_14_R1.PacketPlayOutEntityMetadata;
 import net.minecraft.server.v1_14_R1.PacketPlayOutEntityTeleport;
@@ -24,16 +26,17 @@ import org.bukkit.entity.Player;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 
+
 public class CorpseUtils {
 	
-	private static ArrayList<Integer> allCorpses = new ArrayList<Integer>();
+	private static HashMap<Integer, EntityPlayer> allCorpses = new HashMap<Integer, EntityPlayer>();
 	
 	public static ArrayList<Integer> getAllCorpseIDs(){
-		return (ArrayList<Integer>)allCorpses.clone();
+		return (ArrayList<Integer>)allCorpses.keySet();
 	}
 	
 	public static String getCorpseName(int cID){
-		return ((CraftWorld)Bukkit.getWorld("world")).getHandle().getEntity(cID).getName();
+		return allCorpses.get(cID).getName();
 	}
 	
 	public static int spawnCorpseForAll(Player player, Location loc){
@@ -58,9 +61,11 @@ public class CorpseUtils {
 		((CraftWorld) player.getWorld()).getHandle(), gameProfile, new PlayerInteractManager(((CraftWorld) player.getWorld()).getHandle()));
 		entityPlayer.setPosition(loc.getX(), loc.getY(), loc.getZ());
 
-		((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedEntitySpawn(entityPlayer));
-		((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, entityPlayer));
-
+		for(Player all : showTo){
+			((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedEntitySpawn(entityPlayer));
+			((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, entityPlayer));
+		}
+		
 		Location bed = loc.clone().add(1, 0, 0);
 		entityPlayer.e(new BlockPosition(bed.getX(), bed.getY(), bed.getZ()));
 
@@ -68,19 +73,33 @@ public class CorpseUtils {
 		Byte b = 0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x40; // each of the overlays (cape, jacket, sleeves, pants, hat)
 		watcher.set(DataWatcherRegistry.a.a(15), (byte) b); // 15 is the value for Spigot 1.14 apparently (even though on wiki.vg it says it's 13, but it isn't)
 
+		PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(cID = entityPlayer.getId(), watcher, false);
+		
 		for(Player all : showTo){
-			((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityMetadata(cID = entityPlayer.getId(), watcher, false));
+			Bukkit.broadcastMessage("Paket an "+all.getName()+" geschickt!");
+			((CraftPlayer) all).getHandle().playerConnection.sendPacket(packet);
 		}
-		allCorpses.add(cID);
+		allCorpses.put(cID, entityPlayer);
 		return cID;
 	}
 	
 	public static void teleportCorpse(int cID, Location loc){
-		((CraftWorld)loc.getWorld()).getHandle().getEntity(cID).locX = loc.getX();
-		((CraftWorld)loc.getWorld()).getHandle().getEntity(cID).locY = loc.getY();
-		((CraftWorld)loc.getWorld()).getHandle().getEntity(cID).locZ = loc.getZ();
+		//Bukkit.broadcastMessage("loc: "+loc);
+		//Bukkit.broadcastMessage("ent: "+allCorpses.get(cID));
+		allCorpses.get(cID).locX = loc.getX();
+		allCorpses.get(cID).locY = loc.getY();
+		allCorpses.get(cID).locZ = loc.getZ();
+		allCorpses.get(cID).pitch = loc.getPitch();
+		allCorpses.get(cID).yaw = loc.getYaw();
+		
+		Bukkit.broadcastMessage("p: "+allCorpses.get(cID).pitch);
+		Bukkit.broadcastMessage("y: "+allCorpses.get(cID).yaw);
+		
+		PacketPlayOutEntityLook packet = new PacketPlayOutEntityLook(cID, getFixRotation(loc.getYaw()),getFixRotation(loc.getPitch()), true);
+		
 		for(Player all : Bukkit.getOnlinePlayers()){
-			((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityTeleport(((CraftWorld)loc.getWorld()).getHandle().getEntity(cID)));
+			((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityTeleport(allCorpses.get(cID)));
+			((CraftPlayer) all).getHandle().playerConnection.sendPacket(packet);
 		}
 	}
 	
@@ -96,6 +115,10 @@ public class CorpseUtils {
 		for(Player all : Bukkit.getOnlinePlayers()){
 			((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityDestroy(cID));
 		}
+	}
+	
+	private static byte getFixRotation(float yawpitch){
+        return (byte) ((int) (yawpitch * 256.0F / 360.0F));
 	}
 	
 	
