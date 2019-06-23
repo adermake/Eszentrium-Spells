@@ -1,12 +1,13 @@
 package spells.spells;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -25,13 +26,14 @@ public class Enterhaken extends Spell{
 		steprange = 100;
 		hitPlayer = false;
 	}	
+	
+	Trident hook;
 	@Override
 	public void setUp() {
-		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
+		// TODO Auto-generated method stub
+		
 	public void cast() {
 		// TODO Auto-generated method stub
 		
@@ -50,6 +52,12 @@ public class Enterhaken extends Spell{
 		if (loc == null) {
 			dead = true;
 			Cooldowns.refundCurrentSpell(caster);
+		}
+		else {
+			hook = (Trident) caster.getWorld().spawnEntity(caster.getEyeLocation(), EntityType.TRIDENT);
+			hook.setGravity(false);
+			hook.setVelocity(caster.getLocation().getDirection().multiply(6));
+			hook.setDamage(0);
 		}
 		
 		
@@ -130,7 +138,8 @@ public class Enterhaken extends Spell{
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
-		
+		if (hook != null)
+			hook.remove();
 	}
 	public Location blockHo(Player p) {
 		Location loc = p.getLocation();

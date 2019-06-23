@@ -84,7 +84,7 @@ public class Cooldowns {
 	
 	
 	public static void refundCurrentSpell(Player p) {
-		Actionbar a = new Actionbar("§c Zauber unterbrochen!");
+		Actionbar a = new Actionbar("§c Kein Ziel gefunden!");
 		a.send(p);
 		new BukkitRunnable() {
 			public void run() {

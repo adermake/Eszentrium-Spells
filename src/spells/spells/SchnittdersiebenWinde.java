@@ -62,6 +62,8 @@ public class SchnittdersiebenWinde extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		if (dead)
+			return;
 		
 		if (caster.getGameMode() == GameMode.ADVENTURE) {
 			dead = true;

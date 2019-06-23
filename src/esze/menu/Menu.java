@@ -15,8 +15,12 @@ public class Menu implements Listener {
 		if(e == null)
 			return;
 		
+		if (e.getClickedInventory() == e.getWhoClicked().getInventory()) {
+			return;
+		}
 		Player p = (Player) e.getWhoClicked();
 		if (e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta()) {
+			
 			ItemMenuIcon.ditributeClicks(e.getCurrentItem().getItemMeta().getDisplayName(), e.getInventory(),p);
 			e.setCancelled(true);
 		}
