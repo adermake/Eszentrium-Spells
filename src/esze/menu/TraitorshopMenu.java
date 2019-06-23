@@ -1,10 +1,13 @@
 package esze.menu;
 
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import esze.main.main;
 import esze.utils.NBTUtils;
 import spells.spellcore.Spell;
 import spells.spellcore.SpellList;
@@ -14,10 +17,10 @@ public class TraitorshopMenu extends ItemMenu {
 	public TraitorshopMenu() {
 		super(1, "§cSchwarzmarkt");
 		
-		addClickableItem(1, 1, Material.SPECTRAL_ARROW, "§4Magmanadel");
-		addClickableItem(2, 1, Material.SHEEP_SPAWN_EGG, "§4Verzaubern");
-		addClickableItem(3, 1, Material.STRING, "§4Griff der sieben Winde");
-		addClickableItem(4, 1, Material.MELON_SLICE, "§4Miiilone");
+		addClickableItem(1, 1, Material.SPECTRAL_ARROW, "§4Magmanadel","§a8 Punkte");
+		addClickableItem(2, 1, Material.SHEEP_SPAWN_EGG, "§4Verzaubern","§a6 Punkte");
+		addClickableItem(3, 1, Material.STRING, "§4Griff der sieben Winde","§a6 Punkte");
+		addClickableItem(4, 1, Material.MELON_SLICE, "§4Miiilone","§a4 Punkte");
 		
 	}
 
@@ -63,6 +66,18 @@ public class TraitorshopMenu extends ItemMenu {
 			is = NBTUtils.setNBT("Spell", "true", is);
 			p.getInventory().addItem(is);
 			p.setLevel(p.getLevel()-price);
+		}
+		else {
+			p.playSound(p.getLocation(),Sound.BLOCK_CHEST_LOCKED, 1, 0.8F);
+			Material type = icon.getType();
+			icon.setType(Material.BARRIER);
+			
+			new BukkitRunnable() {
+				public void run() {
+					icon.setType(type);
+				}
+			}.runTaskLater(main.plugin,5);
+			
 		}
 	}
 		

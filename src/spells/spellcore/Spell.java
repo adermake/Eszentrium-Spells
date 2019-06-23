@@ -78,6 +78,9 @@ public abstract class Spell {
 	//CALLED
 	
 	
+	//CC 
+		protected static ArrayList<Player> silenced = new ArrayList<Player>();
+	//
 	
 	public void castSpell(Player p,String name) {
 		
@@ -555,7 +558,49 @@ public abstract class Spell {
 		return null;
 
 	}
-	
+	public Player pointEntity(Player p,int range) {
+		
+		int toleranz = 1;
+		Location loc = p.getLocation();
+		for (double t = 1; t <= range; t=t+0.5) {
+
+			Vector direction = loc.getDirection().normalize();
+			double x = direction.getX() * t;
+			double y = direction.getY() * t + 1.5;
+			double z = direction.getZ() * t;
+			loc.add(x, y, z);
+			Location lo = loc.clone();
+
+			// Particel
+
+
+			if (loc.getBlock().getType().isSolid()) {
+
+				break;
+			}
+
+			for (Player pl : Bukkit.getOnlinePlayers()) {
+				if (!(pl.getName().equalsIgnoreCase(p.getName())) && pl.getGameMode() != GameMode.ADVENTURE) {
+					
+					Location ploc1 = pl.getLocation();
+					Location ploc2 = pl.getLocation();
+					ploc2.add(0, 1, 0);
+					if (ploc1.distance(loc) <= toleranz || ploc2.distance(loc) <= toleranz) {
+						
+
+						return pl;
+					}
+				}
+			}
+			
+			// SUBTRACTING LOCATION UM den prozess
+			// von vorne zu
+			// starten
+			loc.subtract(x, y, z);
+		}
+		return null;
+
+	}
 	public Location block(Player p) {
 		Location loc = p.getLocation();
 		for (int t = 1; t <= 300; t++) {

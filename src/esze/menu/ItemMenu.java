@@ -1,10 +1,14 @@
 package esze.menu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.meta.ItemMeta;
 
 
 public abstract class ItemMenu {
@@ -34,7 +38,19 @@ public abstract class ItemMenu {
 		
 		
 	}
-	
+	public void addClickableItem(int gridX, int gridY, Material m, String iconname,String l) {
+		
+		ItemMenuIcon is = new ItemMenuIcon(gridX,gridY,m,iconname,this);
+		ItemMeta im = is.getItemMeta();
+		List<String> lore = im.getLore();
+		lore.add(l);
+		im.setLore(lore);
+		is.setItemMeta(im);
+		inventory.setItem((gridY-1)*9+gridX-1, is);
+		
+		
+		
+	}
 	
 	public abstract void clicked(ItemMenuIcon icon,Player p);
 	
