@@ -92,7 +92,7 @@ public class SiegelderFurcht extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		if (step>2) {
+		if (step>4) {
 			hitPlayer = false;
 			hitEntity = false;
 			hitSpell = false;

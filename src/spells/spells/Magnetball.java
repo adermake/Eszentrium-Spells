@@ -47,8 +47,11 @@ public class Magnetball extends Spell{
 		// TODO Auto-generated method stub
 		loc.add(loc.getDirection().multiply(0.5));
 		playSound(Sound.BLOCK_CONDUIT_ATTACK_TARGET,loc,1f,2f);
-		if (caster.isSneaking())
+		if (caster.isSneaking()) {
 			dead = true;
+			
+		}
+			
 	}
 
 	@Override
