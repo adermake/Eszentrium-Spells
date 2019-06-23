@@ -25,6 +25,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 
+import esze.utils.Actionbar;
 import esze.utils.NBTUtils;
 import esze.utils.SoundUtils;
 import net.minecraft.server.v1_14_R1.PacketPlayOutSetCooldown;
@@ -39,6 +40,10 @@ public class EventCollector implements Listener {
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
 			
 		
+			if (Spell.silenced.contains(p)) {
+				Actionbar bar = new Actionbar("§cDu bist verstummt!");
+				return;
+			}
 		ItemStack is = p.getInventory().getItemInMainHand();
 		boolean refined = false;
 		boolean traitor = false;
