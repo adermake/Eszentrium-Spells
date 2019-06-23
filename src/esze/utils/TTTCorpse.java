@@ -1,6 +1,7 @@
 package esze.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -102,31 +103,25 @@ public class TTTCorpse implements Listener{
 				
 				if(carrier != null){
 					Location loc = carrier.getLocation().clone().add(0, 2, 0);
-					//loc.setPitch(0);
-					//loc.setYaw(0);
 					
 					
 					loc.setYaw(carrier.getLocation().getYaw()*-1);
 					Location turn = loc.clone();
 					
-					/*turn.setPitch(0);
-					
-					float yaw = turn.getYaw();
-					yaw = yaw*-1 -90;
-					if (yaw<-360)
-						yaw = (yaw+360)*-1;
-
-					Bukkit.broadcastMessage("Pre"+turn.getYaw());
-					turn.setYaw(yaw);
-					Bukkit.broadcastMessage("Post"+turn.getYaw());
-					*/
 					turn.setPitch(0);
 					turn.setYaw(turn.getYaw()*-1-90);
 					
 					Vector dir = turn.getDirection();
 					
+					ArrayList<Player> players = new ArrayList<Player>();
+					for(Player p : Bukkit.getOnlinePlayers()){
+						if(p != carrier){
+							players.add(p);
+						}
+					}
+					CorpseUtils.teleportCorpseForPlayers(corpseID, loc.add(dir), players);
 					
-					CorpseUtils.teleportCorpse(corpseID, loc.add(dir));Bukkit.broadcastMessage(""+loc.getDirection());
+					CorpseUtils.teleportCorpseForPlayers(corpseID, loc.add(0,1,0), Arrays.asList(carrier));
 					
 					cows.get(0).teleport(loc.clone().add(1, 0, 0));
 					cows.get(0).teleport(loc.clone().add(0, 0, 0));
@@ -150,6 +145,8 @@ public class TTTCorpse implements Listener{
 		if(this.carrier == null){
 			this.carrier = carrier;
 			carryRunner();
+		}else{
+			
 		}
 	}
 	
@@ -161,7 +158,7 @@ public class TTTCorpse implements Listener{
 		((CraftCow)e).setAI(false);
 		((CraftCow)e).setSilent(true);
 		((CraftCow)e).setGravity(false);
-		//((CraftCow)e).getHandle().collides = false;
+		((CraftCow)e).setCollidable(false);
 		((CraftCow)e).addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1000*1000*1000, 100), false);
 		((CraftCow)e).setInvulnerable(true);
 		
@@ -169,7 +166,7 @@ public class TTTCorpse implements Listener{
 		((CraftCow)e2).setAI(false);
 		((CraftCow)e2).setSilent(true);
 		((CraftCow)e2).setGravity(false);
-		//((CraftCow)e).getHandle().collides = false;
+		((CraftCow)e2).setCollidable(false);
 		((CraftCow)e2).addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1000*1000*1000, 100), false);
 		((CraftCow)e2).setInvulnerable(true);
 		

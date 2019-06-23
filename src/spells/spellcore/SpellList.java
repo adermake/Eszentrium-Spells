@@ -32,8 +32,12 @@ import spells.spells.RufderOzeane;
 import spells.spells.Schallbrecher;
 import spells.spells.Schallwelle;
 import spells.spells.Scharfschuss;
+import spells.spells.Schicksalschnitt;
+import spells.spells.SchnittdersiebenWinde;
 import spells.spells.Schock;
+import spells.spells.Schwerkraftsmanipulation;
 import spells.spells.SchwerterausLicht;
+import spells.spells.SiegelderFurcht;
 
 public class SpellList {
 
@@ -88,6 +92,10 @@ public class SpellList {
 		spells.add(new Schallbrecher());
 		spells.add(new SchwerterausLicht());
 		spells.add(new Schock());
+		spells.add(new Schwerkraftsmanipulation());
+		spells.add(new Schicksalschnitt());
+		spells.add(new SchnittdersiebenWinde());
+		spells.add(new SiegelderFurcht());
 	}
 	public static void registerTraitorSpells() {
 		

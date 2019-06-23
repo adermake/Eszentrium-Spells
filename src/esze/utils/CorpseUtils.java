@@ -83,7 +83,7 @@ public class CorpseUtils {
 		return cID;
 	}
 	
-	public static void teleportCorpse(int cID, Location loc){
+	public static void teleportCorpseForPlayers(int cID, Location loc, List<Player> teleportFor){
 		//Bukkit.broadcastMessage("loc: "+loc);
 		//Bukkit.broadcastMessage("ent: "+allCorpses.get(cID));
 		allCorpses.get(cID).locX = loc.getX();
@@ -97,10 +97,18 @@ public class CorpseUtils {
 		
 		PacketPlayOutEntityLook packet = new PacketPlayOutEntityLook(cID, getFixRotation(loc.getYaw()),getFixRotation(loc.getPitch()), true);
 		
-		for(Player all : Bukkit.getOnlinePlayers()){
+		for(Player all : teleportFor){
 			((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityTeleport(allCorpses.get(cID)));
 			((CraftPlayer) all).getHandle().playerConnection.sendPacket(packet);
 		}
+	}
+	
+	public static void teleportCorpseForAll(int cID, Location loc){
+		ArrayList<Player> players = new ArrayList<Player>();
+		for(Player p : Bukkit.getOnlinePlayers()){
+			players.add(p);
+		}
+		teleportCorpseForPlayers(cID, loc, players);
 	}
 	
 	

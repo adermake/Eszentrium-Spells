@@ -25,9 +25,6 @@ public class Death implements Listener {
 		if (e.getEntity() instanceof Player) {
 			if(e.getCause() != DamageCause.FALL){
 				Player p = (Player) e.getEntity();
-				Bukkit.broadcastMessage("p.getHealth() = "+p.getHealth());
-				Bukkit.broadcastMessage("e.getFinalDamage() = "+e.getFinalDamage());
-				Bukkit.broadcastMessage("^DIFFERENCE^ = "+(p.getHealth() - e.getFinalDamage()));
 				
 				if (p.getHealth() - e.getFinalDamage() <= 0 ) {
 				
@@ -37,9 +34,7 @@ public class Death implements Listener {
 				p.setHealth(20);
 				
 				ParUtils.createRedstoneParticle(e.getEntity().getLocation(), 0.3, 0.5, 0.3, 10, Color.RED, 3);
-				Bukkit.broadcastMessage("f");
 				GameType.getType().death(event);
-				Bukkit.broadcastMessage("g");
 				}
 			}else{
 				e.setCancelled(true);
