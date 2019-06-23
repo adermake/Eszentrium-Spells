@@ -42,7 +42,7 @@ public abstract class ItemMenu {
 		
 		ItemMenuIcon is = new ItemMenuIcon(gridX,gridY,m,iconname,this);
 		ItemMeta im = is.getItemMeta();
-		List<String> lore = im.getLore();
+		List<String> lore = new ArrayList<String>();
 		lore.add(l);
 		im.setLore(lore);
 		is.setItemMeta(im);
