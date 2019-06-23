@@ -92,8 +92,8 @@ public class CorpseUtils {
 		allCorpses.get(cID).pitch = loc.getPitch();
 		allCorpses.get(cID).yaw = loc.getYaw();
 		
-		Bukkit.broadcastMessage("p: "+allCorpses.get(cID).pitch);
-		Bukkit.broadcastMessage("y: "+allCorpses.get(cID).yaw);
+		//Bukkit.broadcastMessage("p: "+allCorpses.get(cID).pitch);
+		//Bukkit.broadcastMessage("y: "+allCorpses.get(cID).yaw);
 		
 		PacketPlayOutEntityLook packet = new PacketPlayOutEntityLook(cID, getFixRotation(loc.getYaw()),getFixRotation(loc.getPitch()), true);
 		

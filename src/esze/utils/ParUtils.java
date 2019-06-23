@@ -687,4 +687,21 @@ public class ParUtils {
 		}.runTaskLater(main.plugin, delay);
 		
 	}
+	
+	public static void debugRay(Location locC) {
+		Location loc = locC.clone();
+		for (double t = 1; t <= 10; t=t+0.5) {
+			
+			Vector direction = loc.getDirection().normalize();
+			double x = direction.getX() * t;
+			double y = direction.getY() * t + 1.5;
+			double z = direction.getZ() * t;
+			loc.add(x, y, z);
+			
+			ParUtils.createParticle(Particles.FLAME, loc, 0, 0, 0, 1, 0);
+			
+			loc.subtract(x, y, z);
+		}
+	
+	}
 }

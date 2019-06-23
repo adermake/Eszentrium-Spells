@@ -13,12 +13,12 @@ import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Cooldowns;
 import spells.spellcore.Spell;
 
-public class SchnittDerSiebenWinde extends Spell {
+public class SchnittdersiebenWinde extends Spell {
 
 	
 	
 	
-	public SchnittDerSiebenWinde() {
+	public SchnittdersiebenWinde() {
 		name = "§bSchnitt der sieben Winde";
 		cooldown = 20 * 30;
 		steprange = 32;

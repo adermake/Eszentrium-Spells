@@ -66,9 +66,10 @@ public class TraitorshopMenu extends ItemMenu {
 			is = NBTUtils.setNBT("Spell", "true", is);
 			p.getInventory().addItem(is);
 			p.setLevel(p.getLevel()-price);
+			p.playSound(p.getLocation(),Sound.BLOCK_BELL_USE, 1, 1.5F);
 		}
 		else {
-			p.playSound(p.getLocation(),Sound.BLOCK_CHEST_LOCKED, 1, 0.8F);
+			p.playSound(p.getLocation(),Sound.BLOCK_CHEST_LOCKED, 1, 0.1F);
 			Material type = icon.getType();
 			icon.setType(Material.BARRIER);
 			

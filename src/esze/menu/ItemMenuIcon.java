@@ -15,6 +15,7 @@ public class ItemMenuIcon extends ItemStack {
 	private int gridY;
 	private ItemMenu itemMenu;
 
+	
 	public static ArrayList<ItemMenuIcon> allIcons = new ArrayList<ItemMenuIcon>();
 
 	public ItemMenuIcon(int gridX, int gridY, Material m, String iconname, ItemMenu i) {

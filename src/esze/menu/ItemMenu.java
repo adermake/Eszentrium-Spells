@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public abstract class ItemMenu {
 
-	private Inventory inventory;
+	public Inventory inventory;
 	
 	
 	

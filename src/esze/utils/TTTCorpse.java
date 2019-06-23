@@ -20,6 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.Vector;
 
 import esze.main.main;
 
@@ -100,13 +101,32 @@ public class TTTCorpse implements Listener{
 			public void run() {
 				
 				if(carrier != null){
-					Location loc = carrier.getLocation().clone().add(1, 2, -0.3);
+					Location loc = carrier.getLocation().clone().add(0, 2, 0);
 					//loc.setPitch(0);
 					//loc.setYaw(0);
 					
 					
+					loc.setYaw(carrier.getLocation().getYaw()*-1);
+					Location turn = loc.clone();
 					
-					CorpseUtils.teleportCorpse(corpseID, loc);
+					/*turn.setPitch(0);
+					
+					float yaw = turn.getYaw();
+					yaw = yaw*-1 -90;
+					if (yaw<-360)
+						yaw = (yaw+360)*-1;
+
+					Bukkit.broadcastMessage("Pre"+turn.getYaw());
+					turn.setYaw(yaw);
+					Bukkit.broadcastMessage("Post"+turn.getYaw());
+					*/
+					turn.setPitch(0);
+					turn.setYaw(turn.getYaw()*-1-90);
+					
+					Vector dir = turn.getDirection();
+					
+					
+					CorpseUtils.teleportCorpse(corpseID, loc.add(dir));Bukkit.broadcastMessage(""+loc.getDirection());
 					
 					cows.get(0).teleport(loc.clone().add(1, 0, 0));
 					cows.get(0).teleport(loc.clone().add(0, 0, 0));
@@ -157,5 +177,7 @@ public class TTTCorpse implements Listener{
 		cows.add(e2);
 		
 	}
+	
+
 
 }
