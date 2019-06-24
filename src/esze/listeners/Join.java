@@ -2,10 +2,12 @@ package esze.listeners;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import esze.enums.Gamestate;
 import esze.main.main;
@@ -20,6 +22,8 @@ public class Join implements Listener{
 	public void onJoin(PlayerJoinEvent e){
 		Player p = e.getPlayer();
 		main.damageCause.put(p, ""); //Damage Cause
+		p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(20D);
+	    p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(0.5D);
 		p.setExp(0F);
 		p.setLevel(0);
 		p.setFoodLevel(20);
@@ -48,6 +52,12 @@ public class Join implements Listener{
 			}
 			
 		}
+	}
+	
+	@EventHandler
+	public void onLeave(PlayerQuitEvent e){
+		Player p = e.getPlayer();
+		e.setQuitMessage("§8< §6"+p.getName()+" §7hat das Spiel verlassen");
 	}
 
 }
