@@ -23,8 +23,11 @@ public class Blasensturm extends Spell{
 		hitSpell = true;
 		
 		
+		
+		
 	}
-	public Blasensturm(int counter) {
+	public Blasensturm(int counter,boolean ref) {
+		refined = ref;
 		steprange = 30;
 		speed =2;
 		casttime = 2;
@@ -40,14 +43,18 @@ public class Blasensturm extends Spell{
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		
+		if (refined) {
+			speed = 6;
+			steprange = 90;
+		}
+			
 	}
 
 	@Override
 	public void cast() {
 		if (cast == 1) {
 			if (rec>0) {
-				Blasensturm bs = new Blasensturm(rec-1);
+				Blasensturm bs = new Blasensturm(rec-1,refined);
 				bs.castSpell(caster, name);
 			}
 		}

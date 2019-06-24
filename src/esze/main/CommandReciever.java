@@ -319,17 +319,10 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				
 				if(cmd.getName().equalsIgnoreCase("itemname")) {
 					if(p.isOp()){
-						String myString = "";
-				        for(int i = 0; i < args.length; i++){
-				            String arg = args[i] + " ";
-				            myString = myString + arg;
-				        }
-				        String myStrings = myString.substring(0, myString.length() -1);
-				        String s = ChatColor.translateAlternateColorCodes('&', myStrings);
-				        ItemMeta m = p.getInventory().getItemInMainHand().getItemMeta();
-				        m.setDisplayName(s);
-				        p.getInventory().getItemInMainHand().setItemMeta(m);
-				        p.sendMessage("§8| §7Der Name wurde in "+myStrings+" §7geändert!");
+						ItemMeta im = p.getInventory().getItemInMainHand().getItemMeta();
+						im.setDisplayName("§2"+im.getDisplayName().substring(2, im.getDisplayName().length()));
+						p.getInventory().getItemInMainHand().setItemMeta(im);
+				        p.sendMessage("§8| §7Der Name wurde geändert!");
 					}
 			}	
 				if (cmd.getName().equalsIgnoreCase("analytics")) {
@@ -371,7 +364,10 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 		            	name = name + " "+ partName;
 		            }
 		            //name = name.replace("&", "§");
-		            name = "§e"+name;
+		          
+		            	 name = "§e"+name;
+		           
+		           
 		            im.setDisplayName(name);
 		            is.setItemMeta(im);
 		            

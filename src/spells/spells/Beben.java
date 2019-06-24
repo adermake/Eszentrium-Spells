@@ -47,6 +47,8 @@ public class Beben extends Spell{
 	public void cast() {
 		if (caster.isOnGround() == true) {
 			cast = casttime;
+			if (refined)
+			steprange= steprange*2;
 		}
 		else {
 			cast = 0;

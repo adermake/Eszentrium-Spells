@@ -643,6 +643,24 @@ public abstract class Spell {
 		return null;
 
 	}
+	public Location loc(Player p,int range) {
+		Location loc = p.getLocation();
+		Location ret = p.getLocation();
+		for (int t = 1; t <= range; t++) {
+
+			Vector direction = loc.getDirection().normalize().multiply(0.5);
+			double x = direction.getX() * t;
+			double y = direction.getY() * t + 1.5;
+			double z = direction.getZ() * t;
+			loc.add(x, y, z);
+			
+
+			ret = loc.clone();
+			loc.subtract(x, y, z);
+		}
+		return ret;
+
+	}
 	public Location getTop(Location loca) {
 		
 		while (loca.getBlock().getType().isSolid()) {

@@ -72,11 +72,21 @@ public class Enterhaken extends Spell{
 		if (loc != null && caster != null)
 		dir = (loc.clone()).toVector().subtract(caster.getLocation().toVector()).normalize();
 		playSound(Sound.BLOCK_TRIPWIRE_ATTACH, caster.getLocation(), 1, 2);
-		caster.setVelocity(dir.clone().multiply(1.4));
+		if (refined) {
+			caster.setVelocity(dir.clone().multiply(2.4));
+		}else {
+			caster.setVelocity(dir.clone().multiply(1.4));
+		}
+		
 		
 		if (caster.isSneaking()) {
 			playSound(Sound.BLOCK_TRIPWIRE_CLICK_ON, caster.getLocation(), 1, 2);
-			caster.setVelocity(caster.getLocation().getDirection().multiply(2));
+			if (refined) {
+				caster.setVelocity(caster.getLocation().getDirection().multiply(6));
+			}else {
+				caster.setVelocity(caster.getLocation().getDirection().multiply(2));
+			}
+			
 			dead = true;
 		}
 		if (((caster.getLocation()).distance(loc))<2) {
@@ -114,6 +124,7 @@ public class Enterhaken extends Spell{
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 

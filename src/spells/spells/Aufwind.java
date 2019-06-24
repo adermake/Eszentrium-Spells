@@ -4,6 +4,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -18,20 +19,39 @@ public class Aufwind extends Spell{
 	public Aufwind() {
 		name = "§bAufwind";
 		cooldown = 20*18;
+		hitPlayer = false;
+		hitEntity = false;
+		hitboxSize = 5;
+		steprange = 130;
 	}
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	
+	
 	@Override
 	public void setUp() {
-		spawnSpirale(caster,caster, 2, 2.5, 0);
-		spawnSpirale(caster,caster, 2, 2.5, 1);
-		spawnSpirale(caster,caster, -2, 2.5, 1);
-		spawnSpirale(caster,caster, -2, 2.5, 0);
-		dead = true;
+		playSound( Sound.ITEM_ELYTRA_FLYING,caster.getLocation(), 1, 1);
+		if (refined) {
+			hitPlayer = true;
+			hitEntity = true;
+			spawnSpirale(caster,caster, 5,  2.5, 0);
+			spawnSpirale(caster,caster, 5,  2.5, 1);
+			spawnSpirale(caster,caster, -5,  2.5, 1);
+			spawnSpirale(caster,caster, -5,  2.5, 0);
+		}
+		else {
+			spawnSpirale(caster,caster, 2, 2.5, 0);
+			spawnSpirale(caster,caster, 2, 2.5, 1);
+			spawnSpirale(caster,caster, -2, 2.5, 1);
+			spawnSpirale(caster,caster, -2, 2.5, 0);
+			dead = true;
+		}
+		
+	
 		
 	}
 
@@ -50,6 +70,23 @@ public class Aufwind extends Spell{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		if (refined) {
+			for (Entity ent : hitEntitys) {
+				doPull(ent,caster.getLocation().add(0,5,0),1.5);
+				
+				if (caster.isSneaking()) {
+					ent.setVelocity(caster.getLocation().getDirection().multiply(4));
+					dead = true;
+				}
+			}
+			if (caster.isSneaking()) {
+				ParUtils.parKreisDir(Particles.CLOUD, caster.getLocation(), 3, 0, 1, caster.getLocation().getDirection(),caster.getLocation().getDirection());
+				dead = true;
+			}
+			
+		}
+		
+		
 		
 	}
 
@@ -101,7 +138,7 @@ public class Aufwind extends Spell{
 				}
 				ParUtils.createParticle(Particles.CLOUD, la, 0, 0, 0, 1, 0);
 				
-				p.playSound(p.getLocation(), Sound.ITEM_ELYTRA_FLYING, (float) 0.1, (float) 0.1);
+				
 				p.setVelocity(p.getVelocity().setY(0.5));
 
 				la.subtract(x, y, z);

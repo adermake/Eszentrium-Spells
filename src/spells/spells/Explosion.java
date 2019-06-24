@@ -35,10 +35,19 @@ public class Explosion extends Spell{
 
 	@Override
 	public void launch() {
+		if (refined) {
+			Location block = block(caster);
+			if (block != null) {
+				loc = block;
+			}
+		}
+		
 		spawnShockWaffel(caster, 3,loc.clone());
 		ParUtils.createParticle(Particles.EXPLOSION_EMITTER, loc, 0, 0, 0, 1, 10);
-
+		
+		if (!refined)
 		caster.setVelocity(caster.getVelocity().setY(1.0D));
+		
 		caster.playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
 		for (LivingEntity le : caster.getWorld().getLivingEntities()) {
 			if (checkHit(le,caster.getLocation(),caster,5)) {

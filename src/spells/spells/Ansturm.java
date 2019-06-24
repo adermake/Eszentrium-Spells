@@ -1,5 +1,6 @@
 package spells.spells;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -20,8 +21,8 @@ public class Ansturm extends Spell{
 	
 	public Ansturm() {
 		name = "§eAnsturm";
-		hitEntity = false;
-		cooldown = 20*10;
+		hitEntity = true;
+		cooldown = 20*24;
 		steprange = 60;
 		speed = 1;
 		hitboxSize = 2;
@@ -37,6 +38,7 @@ public class Ansturm extends Spell{
 	@Override
 	public void setUp() {
 		golem = (IronGolem) spawnEntity(EntityType.IRON_GOLEM);
+		noTargetEntitys.add(golem);
 		moveDir = loc.getDirection();
 	}
 
@@ -61,7 +63,13 @@ public class Ansturm extends Spell{
 		}
 		*/
 		if (caster.isSneaking()) {
+			// REFINED
+			if (refined) {
+				canHitSelf = true;
+				
+			}
 			
+			// REFINED
 			for (BlockFace bf : BlockFace.values()) {
 				if (bf == BlockFace.DOWN)
 					continue;
@@ -74,6 +82,7 @@ public class Ansturm extends Spell{
 				}
 			}
 		} else {
+			canHitSelf = false;
 			for (BlockFace bf : BlockFace.values()) {
 				if (bf == BlockFace.DOWN)
 					continue;
@@ -102,16 +111,35 @@ public class Ansturm extends Spell{
 
 	@Override
 	public void onPlayerHit(Player p) {
+		double velAdder = 0;
+		if (refined)
+			velAdder = 3;
+		if (caster != p)
 		damage(p,5,caster);
-		p.setVelocity(loc.getDirection().multiply(-3));
+		if (caster.isSneaking()) {
+			
+			p.setVelocity(loc.getDirection().multiply(3+velAdder));
+		}
+		else {
+			p.setVelocity(loc.getDirection().multiply(-3-velAdder));
+		}
+		
 		playSound(Sound.ENTITY_IRON_GOLEM_ATTACK, loc, 1, 1);
 		p.setVelocity(p.getVelocity().setY(2.0D));	
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
+		double velAdder = 0;
+		if (refined)
+			velAdder = 3;
 		damage(ent,5,caster);
-		ent.setVelocity(loc.getDirection().multiply(-3));
+		if (caster.isSneaking()) {
+			ent.setVelocity(loc.getDirection().multiply(3+velAdder));
+		}
+		else {
+			ent.setVelocity(loc.getDirection().multiply(-3-velAdder));
+		}
 		playSound(Sound.ENTITY_IRON_GOLEM_ATTACK, loc, 1, 1);
 		ent.setVelocity(ent.getVelocity().setY(2.0D));
 	}

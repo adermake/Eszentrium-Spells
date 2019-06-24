@@ -83,7 +83,6 @@ public class SpellList {
 		spells.add(new Heilen());
 		spells.add(new Erdsurfer());
 		spells.add(new Schallbrecher());
-		spells.add(new Spinnenkäfig());
 		spells.add(new Hünchenluftschlag());
 		spells.add(new Kaminchen());
 		spells.add(new Kätzchenkannone());

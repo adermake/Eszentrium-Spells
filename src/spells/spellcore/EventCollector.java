@@ -68,6 +68,7 @@ public class EventCollector implements Listener {
 						
 						String name = is.getItemMeta().getDisplayName();
 						if (name.contains("§2")) {
+							
 							refined = true;
 						}
 						
@@ -78,7 +79,8 @@ public class EventCollector implements Listener {
 							// Bukkit.broadcastMessage("F" + s);
 							Class clazz = Class.forName(name);
 							Spell sp = (Spell) clazz.newInstance();
-							sp.refined = true;
+							
+							sp.refined = refined;
 							if (!sp.traitorSpell) {
 								
 							
@@ -119,7 +121,7 @@ public class EventCollector implements Listener {
 							// Bukkit.broadcastMessage("F" + s);
 							Class clazz = Class.forName(name);
 							Spell sp = (Spell) clazz.newInstance();
-							sp.refined = true;
+							sp.refined = refined;
 							is = NBTUtils.setNBT("Cooldown", "" + sp.cooldown + "", is);
 							is = NBTUtils.setNBT("MaxCooldown", "" + sp.cooldown, is);
 							is = NBTUtils.setNBT("OriginalName", is.getItemMeta().getDisplayName(), is);

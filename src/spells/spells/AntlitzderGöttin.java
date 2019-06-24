@@ -1,6 +1,7 @@
 package spells.spells;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
@@ -36,6 +37,7 @@ public class AntlitzderGöttin extends Spell{
 	public void setUp() {
 		// TODO Auto-generated method stub
 		SoundUtils.playSound(Sound.ENTITY_WITCH_AMBIENT, loc, 3, 0.3F);
+		
 	}
 
 	@Override
@@ -53,17 +55,29 @@ public class AntlitzderGöttin extends Spell{
 	@Override
 	public void move() {
 		loc = caster.getLocation();
-		
+		if (refined)
+			caster.setNoDamageTicks(5);
 	}
 
 	@Override
 	public void display() {
+		//playSound(Sound.BLOCK_NOTE_BLOCK_COW_BELL, loc, 10F, 0.1F);
 		SoundUtils.playSound(Sound.ENTITY_BLAZE_BURN, loc, 3, 0.4F);
-		Location dot = ParUtils.stepCalcCircle(loc, 3, new Vector(0,1,0), -0.3, step*3);
-		Location dot2 = ParUtils.stepCalcCircle(loc, 3, new Vector(0,1,0), -0.3, step*3+22);
+		Location dot = ParUtils.stepCalcCircle(loc, 1.3, new Vector(0,1,0), -0.3, step*3);
+		Location dot2 = ParUtils.stepCalcCircle(loc, 1.3, new Vector(0,1,0), -0.3, step*3+22);
 		loc = caster.getLocation();
-		ParUtils.createParticle(Particles.FLAME, dot, 0, 1, 0, 0, 14);
-		ParUtils.createParticle(Particles.FLAME, dot2, 0, 1, 0, 0, 14);
+		
+		//ParUtils.createParticle(Particles.FLAME, dot, 0, 1, 0, 0, 14);
+		//ParUtils.createParticle(Particles.FLAME, dot2, 0, 1, 0, 0, 14);
+		if (refined) {
+			ParUtils.dropItemEffectVector(dot, Material.MAP, 1, 6, 5,new Vector(0,1,0));
+			ParUtils.dropItemEffectVector(dot2, Material.MAP, 1, 6, 5,new Vector(0,1,0));
+		}
+		else {
+			ParUtils.dropItemEffectVector(dot, Material.MAP, 1, 1, 1,new Vector(0,1,0));
+			ParUtils.dropItemEffectVector(dot2, Material.MAP, 1, 1, 1,new Vector(0,1,0));
+		}
+		
 		//ParUtils.createParticle(Particle.VILLAGER_ANGRY, caster.getEyeLocation().add(0,-1.7,0), 0, 1, 0, 0, 1);
 	}
 
