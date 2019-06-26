@@ -13,6 +13,7 @@ import esze.main.main;
 import esze.utils.ParUtils;
 import esze.utils.Title;
 import net.minecraft.server.v1_14_R1.Particles;
+import spells.spellcore.Cooldowns;
 import spells.spellcore.Spell;
 
 public class Verstummen extends Spell {
@@ -24,11 +25,12 @@ public class Verstummen extends Spell {
 		name = "§eVerstummen";
 		cooldown = 20 * 38;
 		speed = 4;
-		steprange = 60;
+		steprange = 30;
 	}
 	
 	@Override
 	public void setUp() {
+		
 		// TODO Auto-generated method stub
 		effect = createArmorStand(caster.getLocation());
 		effect.setHelmet(new ItemStack(Material.BARRIER));
@@ -87,9 +89,13 @@ public class Verstummen extends Spell {
 					
 					silenced.remove(p);
 					this.cancel();
+					
 				}
 			}
 		}.runTaskTimer(main.plugin, 1, 1);
+		if (refined) {
+			Cooldowns.refundCurrentRandomSpell(caster);
+		}
 	}
 
 	@Override

@@ -27,7 +27,11 @@ public class Schock extends Spell {
 	@Override
 	public void cast() {
 		// TODO Auto-generated method stub
-		new SchockLaser(caster,name);
+		if (refined) {
+			new SchockLaser(caster,name,refined);
+			refined = false;
+		}
+		new SchockLaser(caster,name,refined);
 		playSound(Sound.ENTITY_LIGHTNING_BOLT_THUNDER,caster.getLocation(),8F,2f);
 		
 	}

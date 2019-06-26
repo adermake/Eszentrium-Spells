@@ -9,28 +9,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.server.v1_14_R1.BlockPosition;
-import net.minecraft.server.v1_14_R1.DataWatcher;
-import net.minecraft.server.v1_14_R1.DataWatcherRegistry;
-import net.minecraft.server.v1_14_R1.EntityPlayer;
-import net.minecraft.server.v1_14_R1.PacketPlayOutEntityDestroy;
-import net.minecraft.server.v1_14_R1.PacketPlayOutEntityMetadata;
-import net.minecraft.server.v1_14_R1.PacketPlayOutNamedEntitySpawn;
-import net.minecraft.server.v1_14_R1.PacketPlayOutPlayerInfo;
-import net.minecraft.server.v1_14_R1.PlayerInteractManager;
-
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.craftbukkit.v1_14_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_14_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -38,9 +25,6 @@ import org.bukkit.entity.Slime;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 
 import esze.analytics.solo.SaveUtils;
 import esze.enums.GameType;
@@ -51,10 +35,12 @@ import esze.map.JumpPad.JumpPadType;
 import esze.map.JumpPadHandler;
 import esze.map.MapMenu;
 import esze.menu.SoloAnalyticsMenu;
-import esze.menu.TraitorshopMenu;
+import esze.utils.MathUtils;
 import esze.utils.NBTUtils;
+import esze.utils.SoundUtils;
 import esze.utils.TTTCorpse;
 import esze.voice.Discord;
+import net.minecraft.server.v1_14_R1.EntityPlayer;
 
 public class CommandReciever implements CommandExecutor, TabCompleter{
 	
@@ -325,6 +311,16 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				        p.sendMessage("§8| §7Der Name wurde geändert!");
 					}
 			}	
+				
+				if(cmd.getName().startsWith("playrandomsound")) {
+					ArrayList<Sound> sound = new ArrayList<Sound>();
+					for (Sound s : Sound.values()) {
+						sound.add(s);
+					}
+					Sound s = sound.get(MathUtils.randInt(0, sound.size()-1));
+					SoundUtils.playSound(s, p.getLocation(), 1, 1);
+					p.sendMessage(""+s.name());
+				}
 				if (cmd.getName().equalsIgnoreCase("analytics")) {
 					switch (args[0]) {
 					case "wins":

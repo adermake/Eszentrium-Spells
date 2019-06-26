@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_14_R1.CraftWorld;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.EntityType;
@@ -13,6 +14,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import esze.main.main;
 import esze.utils.ParUtils;
@@ -22,11 +24,13 @@ import net.minecraft.server.v1_14_R1.EntityTypes;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 import spells.stagespells.Eggsplosive;
+import spells.stagespells.ExplosionDamage;
+import spells.stagespells.Repulsion;
 
 public class Hünchenluftschlag extends Spell{
 
 	public Hünchenluftschlag() {
-		name = "§7Hünchenluftschlag";
+		name = "§6Hünchenluftschlag";
 		cooldown = 20 * 42;
 		steprange = 66;
 	}
@@ -59,6 +63,8 @@ public class Hünchenluftschlag extends Spell{
 		c = (Chicken) caster.getWorld().spawnEntity(loc, EntityType.CHICKEN);
 		c.addPassenger(caster);
 	}
+	boolean dropped = false;
+	Vector dir;
 	int i = 0;
 	@Override
 	public void move() {
@@ -68,12 +74,43 @@ public class Hünchenluftschlag extends Spell{
 		//mcChicken.setPositionRotation(c.getLocation().getX(), c.getLocation().getY(), c.getLocation().getZ(), caster.getLocation().getYaw(), caster.getLocation().getPitch());
 		//c.setVelocity(caster.getLocation().getDirection());
 		c.setRotation(caster.getLocation().getYaw(), caster.getLocation().getPitch());
+		
+		if (!dropped)
 		c.setVelocity(caster.getLocation().getDirection().multiply(1).setY(0.5D));
 		
 		if (c.getPassengers().isEmpty()) {
-			c.remove();
-			caster.setVelocity(caster.getVelocity().setY(2));
-			dead = true;
+			if (refined) {
+				if (!dropped) {
+					playSound(Sound.ENTITY_CHICKEN_DEATH,caster.getLocation(),7,1);
+				
+				dir = caster.getLocation().getDirection();
+				dropped = true;
+				step = 0;
+				}
+			}
+			else {
+				c.remove();
+				caster.setVelocity(caster.getVelocity().setY(2));
+				dead = true;
+			}
+			
+		}
+		
+		if (dropped) {
+			c.setVelocity(dir.normalize().multiply(3));
+			
+			for (BlockFace bf : BlockFace.values()) {
+				if (c.getLocation().getBlock().getRelative(bf).getType() != Material.AIR) {
+
+					
+					ParUtils.createParticle(Particles.EXPLOSION_EMITTER, loc, 0, 0, 0, 3, 1);
+					new ExplosionDamage(4, 8, caster, c.getLocation(), name);
+					new Repulsion(4, 1, caster, c.getLocation(), name);
+					c.remove();
+					
+					dead = true;
+				}
+			}
 		}
 		
 		i++;
@@ -90,6 +127,8 @@ public class Hünchenluftschlag extends Spell{
 			}.runTaskLater(main.plugin,3);
 			
 		}
+		
+		
 		
 		loc = c.getLocation();
 	}

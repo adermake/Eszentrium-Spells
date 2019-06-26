@@ -14,7 +14,7 @@ public class Orbitar extends Spell {
 
 	public ArrayList<OrbitarOrb> orb = new ArrayList<OrbitarOrb>();
 	public Orbitar() {
-		name = "§6Orbitar";
+		name = "§3Orbitar";
 		cooldown = 20 * 60;
 		steprange = 20 * 10;
 		
@@ -35,16 +35,16 @@ public class Orbitar extends Spell {
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
-		orb.add(new OrbitarOrb(caster,0,steprange,name));
-		orb.add(new OrbitarOrb(caster,14,steprange,name));
-		orb.add(new OrbitarOrb(caster,28,steprange,name));
+		orb.add(new OrbitarOrb(caster,0,steprange,name,refined));
+		orb.add(new OrbitarOrb(caster,14,steprange,name,refined));
+		orb.add(new OrbitarOrb(caster,28,steprange,name,refined));
 	}
 
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
 		
-		if (caster.isSneaking()) {
+		if (caster.isSneaking() && refined) {
 			for (OrbitarOrb o : orb) {
 				o.setSpeed(4);
 				

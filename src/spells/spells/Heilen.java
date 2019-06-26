@@ -30,7 +30,8 @@ public class Heilen extends Spell{
 		hitSpell = true;
 		hitBlock = true;
 	}
-	public Heilen(int s) {
+	public Heilen(int s,boolean ref) {
+		refined = ref;
 		this.s = s;
 		steprange = 40;
 		cooldown = 2;
@@ -65,7 +66,7 @@ public class Heilen extends Spell{
 		new BukkitRunnable() {
 			public void run() {
 				if (s>0) {
-					Spell h = (Spell) new Heilen(s-1);
+					Spell h = (Spell) new Heilen(s-1,refined);
 					h.castSpell(caster,name);
 				}
 				
@@ -118,7 +119,10 @@ public class Heilen extends Spell{
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
-		
+		if (refined) {
+			heal(caster,1,caster);
+			ParUtils.parKreisDirSolid(Particles.TOTEM_OF_UNDYING, loc, 1, 0, 3, loc.getDirection(), loc.getDirection().multiply(-2));
+		}
 	}
 
 }

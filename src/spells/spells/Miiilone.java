@@ -19,6 +19,7 @@ public class Miiilone extends Spell {
 	public Miiilone() {
 		cooldown = 5;
 		steprange = 60;
+		name = "§4Miiilone";
 		
 	}
 	boolean holding = true;

@@ -16,7 +16,8 @@ import spells.spellcore.Spell;
 public class ThermolanzeLaser extends Spell{
 
 	
-	public ThermolanzeLaser(Player c) {
+	public ThermolanzeLaser(Player c,boolean refined) {
+		this.refined = refined;
 		caster = c;
 		name ="§eThermolanze";
 		speed = 60;
@@ -87,9 +88,15 @@ public class ThermolanzeLaser extends Spell{
 		dir.setPitch(dir.getPitch()-90);
 		ParUtils.createFlyingParticle(Particles.CAMPFIRE_COSY_SMOKE, loc.clone().add(loc.getDirection().multiply(-1)), 0, 0, 0, 1, 1, dir.getDirection());
 		
-		FallingBlock fb = loc.clone().add(loc.getDirection().multiply(-1)).getWorld().spawnFallingBlock(loc.clone().add(loc.getDirection().multiply(-1)), Material.FIRE, (byte)0);
-		fb.setVelocity(dir.getDirection().multiply(0.7));
-		dead = true;
+		if (refined) {
+			bounce();
+		}
+		else {
+			FallingBlock fb = loc.clone().add(loc.getDirection().multiply(-1)).getWorld().spawnFallingBlock(loc.clone().add(loc.getDirection().multiply(-1)), Material.FIRE, (byte)0);
+			fb.setVelocity(dir.getDirection().multiply(0.7));
+			dead = true;
+		}
+		
 		
 	}
 

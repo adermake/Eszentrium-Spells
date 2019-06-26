@@ -37,7 +37,9 @@ public class Notenzauber extends Spell {
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		
+		if (refined) {
+			casttime = 5;
+		}
 	}
 
 	@Override

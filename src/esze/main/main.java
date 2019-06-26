@@ -35,6 +35,7 @@ import esze.listeners.FBoost;
 import esze.listeners.Hunger;
 import esze.listeners.Interact;
 import esze.listeners.Join;
+import esze.listeners.LeaveVehicle;
 import esze.listeners.Move;
 import esze.listeners.Schwertwurf;
 import esze.listeners.Spawn;
@@ -78,6 +79,7 @@ public class main extends JavaPlugin {
 		PacketPlayOutWorldParticles w = new PacketPlayOutWorldParticles(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 		Particle.REGISTRY.get(new MinecraftKey("<particlename>"))*/
 		
+		this.getCommand("playrandomsound").setExecutor(new CommandReciever());
 		this.getCommand("showpads").setExecutor(new CommandReciever());
 		this.getCommand("loadpads").setExecutor(new CommandReciever());
 		this.getCommand("unload").setExecutor(new CommandReciever());
@@ -113,7 +115,7 @@ public class main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new MapSelect(), this);
 		getServer().getPluginManager().registerEvents(new Menu(), this);
 		getServer().getPluginManager().registerEvents(new Spelldrop(), this);
-		
+		getServer().getPluginManager().registerEvents(new LeaveVehicle(), this);
 		
 		JumpPadHandler.start();
 		Gamestate.setGameState(Gamestate.LOBBY);

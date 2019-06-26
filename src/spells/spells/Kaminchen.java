@@ -1,9 +1,9 @@
 package spells.spells;
 
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 import spells.spellcore.Spell;
 import spells.stagespells.KaminchenEntity;
@@ -13,7 +13,7 @@ public class Kaminchen extends Spell {
 	
 	public Kaminchen() {
 		cooldown = 20 * 35;
-		name = "§7Kaminchen";
+		name = "§6Kaminchen";
 		
 	}
 	
@@ -35,6 +35,14 @@ public class Kaminchen extends Spell {
 	public void launch() {
 		// TODO Auto-generated method stub
 		new KaminchenEntity(caster,caster.getLocation().getDirection(), name);
+		if (refined) {
+			Location dirLoc = caster.getLocation();
+			dirLoc.setYaw(dirLoc.getYaw()+45);
+			new KaminchenEntity(caster,dirLoc.getDirection(), name);
+			dirLoc.setYaw(dirLoc.getYaw()-90);
+			new KaminchenEntity(caster,dirLoc.getDirection(), name);
+		}
+		
 		dead = true;
 	}
 

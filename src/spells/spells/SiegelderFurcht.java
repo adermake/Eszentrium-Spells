@@ -115,7 +115,12 @@ public class SiegelderFurcht extends Spell {
 			double z = Bz - Az;
 			
 			Vector v = new Vector(x, y, z).normalize().multiply(0.5);
-			ent.setVelocity(ent.getVelocity().add(v).normalize().multiply(0.3).setY(ent.getVelocity().getY()));
+			if (refined && caster.isSneaking()) {
+				ent.setVelocity(ent.getVelocity().add(v).normalize().multiply(-0.3).setY(ent.getVelocity().getY()));
+			}else {
+				ent.setVelocity(ent.getVelocity().add(v).normalize().multiply(0.3).setY(ent.getVelocity().getY()));
+			}
+			
 		}
 	}
 

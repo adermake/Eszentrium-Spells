@@ -10,6 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import esze.enums.Gamestate;
 import esze.main.main;
+import spells.spells.Schwerkraftsmanipulation;
 
 public class Damage implements Listener{
 	
@@ -20,7 +21,7 @@ public class Damage implements Listener{
 			if(Gamestate.getGameState() == Gamestate.LOBBY){
 				e.setCancelled(true);
 			}else if(Gamestate.getGameState() == Gamestate.INGAME){
-				if(e.getCause().equals( DamageCause.FALL)){
+				if(e.getCause().equals( DamageCause.FALL) && !Schwerkraftsmanipulation.gravityMani.contains(p)){
 					e.setCancelled(true);
 				}
 			}

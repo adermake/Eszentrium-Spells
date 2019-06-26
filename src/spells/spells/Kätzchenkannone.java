@@ -23,7 +23,7 @@ public class Kätzchenkannone extends Spell {
 
 	public Kätzchenkannone() {
 
-		name = "§7Kätzchenkannone";
+		name = "§6Kätzchenkannone";
 		cooldown = 20 * 20;
 		steprange = 70;
 
@@ -104,8 +104,16 @@ public class Kätzchenkannone extends Spell {
 				doKnockback(caster, loc, 4);
 			}
 			playSound(Sound.ENTITY_CAT_DEATH, caster.getLocation(), 3.0F, 1F);
-			new Explosion(1, 10, 0, 1, caster, loc,name);
-			new Repulsion(3, 4, caster, loc,name);
+			if (refined) {
+				new Explosion(1, 15, 0, 1, caster, loc,name);
+				new Repulsion(3, 6, caster, loc,name);
+			}
+			else {
+				new Explosion(1, 10, 0, 1, caster, loc,name);
+				new Repulsion(3, 4, caster, loc,name);
+			}
+			
+			
 			ParUtils.dropItemEffectRandomVector(loc, Material.TROPICAL_FISH, 1,40, 0.3);
 			ParUtils.dropItemEffectRandomVector(loc, Material.RABBIT_HIDE, 1,40, 0.3);
 		}

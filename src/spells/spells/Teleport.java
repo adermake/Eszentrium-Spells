@@ -31,6 +31,8 @@ public class Teleport extends Spell {
 	public void setUp() {
 		// TODO Auto-generated method stub
 		
+		if (refined)
+			speed = 40;
 		
 	}
 

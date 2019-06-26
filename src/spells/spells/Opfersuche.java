@@ -21,8 +21,8 @@ import spells.spellcore.Spell;
 public class Opfersuche extends Spell {
 
 	public Opfersuche() {
-		name = "§7Opfersuche";
-		cooldown = 20 * 44;
+		name = "§6Opfersuche";
+		cooldown = 20 * 34;
 		steprange = 200;
 		hitboxSize= 4;
 		hitSpell = true;
@@ -93,7 +93,7 @@ public class Opfersuche extends Spell {
 			dead = true;
 		}
 		
-		if (caster.isSneaking()) {
+		if (caster.isSneaking() && refined) {
 			Location save = ent.getLocation();
 			boolean hadPassanger = false;
 			for (Entity e : ent.getPassengers()) {

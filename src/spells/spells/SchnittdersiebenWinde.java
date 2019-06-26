@@ -6,6 +6,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import esze.utils.Actionbar;
 import esze.utils.ParUtils;
@@ -29,13 +30,21 @@ public class SchnittdersiebenWinde extends Spell {
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		target = pointEntity(caster);
+		target = pointEntity(caster,300);
 		if (target == null) {
 			Cooldowns.refundCurrentSpell(caster);
 			dead = true;
 		}
 		
-		else if (target.isOnGround()) {
+		else if (target.isOnGround() || refined) {
+			
+			if (refined) {
+				target.setVelocity(target.getVelocity().setY(8));
+				ParUtils.parKreisDirSolid(Particles.CLOUD, target.getLocation(), 3, 0, 3, new Vector(0,1,0), new Vector(0,1,0));
+			
+			}
+				
+			playSound(Sound.ENTITY_RAVAGER_ATTACK,target.getLocation(),6,0.3F);
 			Cooldowns.refundCurrentSpell(caster);
 			dead = true;
 			Actionbar bar = new Actionbar("§c Spieler muss sich in der Luft befinden!");
@@ -70,8 +79,15 @@ public class SchnittdersiebenWinde extends Spell {
 		}
 		
 		if (step >30) {
-			target.setVelocity(caster.getLocation().getDirection().multiply(3));
-			caster.setVelocity(caster.getVelocity().setY(3.0D));
+			if (refined) {
+				target.setVelocity(caster.getLocation().getDirection().multiply(5));
+				caster.setVelocity(caster.getVelocity().setY(3.0D));
+			}
+			else {
+				target.setVelocity(caster.getLocation().getDirection().multiply(3));
+				caster.setVelocity(caster.getVelocity().setY(3.0D));
+			}
+			playSound(Sound.ENTITY_WITHER_SHOOT,target.getLocation(),1,2);
 			
 			dead = true;
 		}else {

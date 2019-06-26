@@ -62,3 +62,6 @@ commands:
   analytics:
     description: Shows Stats
     usage: /analytics [wins/losses/worth] spell
+  playrandomsound:
+    description: plays random sound
+    usage: /playrandomsound

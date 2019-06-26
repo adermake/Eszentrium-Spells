@@ -11,6 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.main.main;
 import esze.utils.Actionbar;
+import esze.utils.MathUtils;
 import esze.utils.NBTUtils;
 
 public class Cooldowns {
@@ -90,6 +91,20 @@ public class Cooldowns {
 			public void run() {
 				
 				ItemStack is = p.getInventory().getItemInMainHand();
+				is = NBTUtils.setNBT("Cooldown", "0", is);
+				p.getInventory().setItemInMainHand(is);
+			}
+		}.runTaskLater(main.plugin, 1);
+		
+	}
+	public static void refundCurrentRandomSpell(Player p) {
+		
+		Actionbar a = new Actionbar("§a Cooldown für einen Spell zurückgestezt!");
+		a.send(p);
+		new BukkitRunnable() {
+			public void run() {
+				
+				ItemStack is = p.getInventory().getItem(MathUtils.randInt(0,10));
 				is = NBTUtils.setNBT("Cooldown", "0", is);
 				p.getInventory().setItemInMainHand(is);
 			}

@@ -7,11 +7,12 @@ import org.bukkit.entity.Player;
 
 import spells.spellcore.Spell;
 import spells.stagespells.RufDerOzeaneFish;
+import spells.stagespells.RufDerOzeaneRefined;
 
 public class RufderOzeane extends Spell{
 	
 	public RufderOzeane() {
-		name = "§eRuf der Ozeane";
+		name = "§6Ruf der Ozeane";
 		cooldown = 20 * 50;
 		steprange = 30;
 		speed = 0.5;
@@ -20,7 +21,10 @@ public class RufderOzeane extends Spell{
 	@Override
 	public void setUp() {
 		
-		
+		if (refined) {
+			new RufDerOzeaneRefined(caster,name);
+			playSound(Sound.AMBIENT_UNDERWATER_LOOP_ADDITIONS,loc,1,1);
+		}
 		
 		
 		
@@ -44,8 +48,11 @@ public class RufderOzeane extends Spell{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		playSound(Sound.AMBIENT_UNDERWATER_LOOP_ADDITIONS,loc,1,1);
-		new RufDerOzeaneFish(caster,name);
+		if (!refined) {
+			playSound(Sound.AMBIENT_UNDERWATER_LOOP_ADDITIONS,loc,1,1);
+			new RufDerOzeaneFish(caster,name);
+		}
+		
 	}
 
 	@Override

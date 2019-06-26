@@ -24,6 +24,10 @@ public class Schallwelle extends Spell{
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
+		if (refined) {
+			steprange *=2;
+			speed = 4;
+		}
 	}
 
 	@Override
@@ -48,7 +52,13 @@ public class Schallwelle extends Spell{
 
 	@Override
 	public void onPlayerHit(Player p) {
-		p.setVelocity(loc.getDirection().multiply(5));
+		if (refined) {
+			p.setVelocity(loc.getDirection().multiply(7));
+		}
+		else {
+			p.setVelocity(loc.getDirection().multiply(5));
+		}
+		
 		damage(p, 1,caster);
 		dead = true;
 	}
@@ -57,7 +67,13 @@ public class Schallwelle extends Spell{
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		damage(ent, 1,caster);
-		ent.setVelocity(loc.getDirection().multiply(5));
+		if (refined) {
+			ent.setVelocity(loc.getDirection().multiply(7));
+		}
+		else {
+			ent.setVelocity(loc.getDirection().multiply(5));
+		}
+		
 		dead = true;
 	}
 

@@ -740,6 +740,28 @@ public abstract class Spell {
 		return loc;
 	}
 	
+	public static Player getNearestPlayer(Player c) {
+		double distance = 10000;
+		Player nearest = c;
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			if (nearest == c) {
+				nearest = p;
+				distance = c.getLocation().distance(p.getLocation());
+			}
+			if (p != c && p.getGameMode() == GameMode.ADVENTURE) {
+				double dis = c.getLocation().distance(p.getLocation());
+				if (dis<distance) {
+					nearest = p;
+					distance = dis;
+				}
+			}
+		}
+		
+
+		return nearest;
+		
+	}
+	
 	public ArmorStand createArmorStand(Location loca) {
 		ArmorStand a = (ArmorStand) loca.getWorld().spawnEntity(loca, EntityType.ARMOR_STAND);
 		

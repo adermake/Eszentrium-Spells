@@ -15,8 +15,9 @@ import spells.spellcore.Spell;
 
 public class SchockLaser extends Spell {
 
-	public SchockLaser(Player p, String namae) {
+	public SchockLaser(Player p, String namae,boolean refined) {
 		name = namae;
+		this.refined = refined;
 		hitBlock = true;
 		steprange =  500;
 		speed = 250;
@@ -126,6 +127,13 @@ public class SchockLaser extends Spell {
 		ParUtils.parKreisDot(Particles.CLOUD, loc, 5, 0, 0.05, loc.getDirection().multiply(-1));
 		dead = true;
 		playSound(Sound.ENTITY_LIGHTNING_BOLT_IMPACT, loc, 4, 0.3F);
+		if (refined) {
+			Player nearest = getNearestPlayer(caster);
+			caster.teleport(lookAt(getTop(loc), nearest.getLocation()));
+			
+			
+		}
+			
 	}
 	@Override
 	public void onDeath() {

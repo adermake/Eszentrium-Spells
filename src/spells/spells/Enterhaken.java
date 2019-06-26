@@ -21,7 +21,7 @@ public class Enterhaken extends Spell{
 
 	public Enterhaken() {
 		cooldown = 20*30;
-		name = "§eEnterhaken";
+		name = "§bEnterhaken";
 		speed = 1;
 		steprange = 100;
 		hitPlayer = false;

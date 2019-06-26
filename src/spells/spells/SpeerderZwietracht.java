@@ -98,7 +98,12 @@ public class SpeerderZwietracht  extends Spell{
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		doKnockback(p,caster.getLocation(),1);
-		damage(p, 3, caster);
+		if (refined) {
+			damage(p, 6, caster);
+		}
+		else {
+			damage(p, 3, caster);
+		}
 		playSound(Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, p.getLocation(), 3, 2F);
 	}
 
@@ -106,7 +111,14 @@ public class SpeerderZwietracht  extends Spell{
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		doKnockback(ent,caster.getLocation(),1);
-		damage(ent, 3, caster);
+		if (refined) {
+			damage(ent, 6, caster);
+		}
+		else {
+			damage(ent, 3, caster);
+		}
+		
+		
 		playSound(Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, ent.getLocation(), 3, 2F);
 	}
 
@@ -127,7 +139,12 @@ public class SpeerderZwietracht  extends Spell{
 		hitSpell = false;
 		step = 0;
 		speed = 1;
-		steprange = 140;
+		if (refined) {
+			steprange = 240;
+		}else {
+			steprange = 140;
+		}
+		
 		hasHitBlock = true;
 		hitBlock = false;
 		

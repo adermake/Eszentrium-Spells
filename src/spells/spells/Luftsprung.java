@@ -13,7 +13,7 @@ public class Luftsprung extends Spell {
 
 	
 	public Luftsprung() {
-		steprange = 10;
+		steprange = 40;
 		name = "§bLuftsprung";
 		hitPlayer = false;
 		hitEntity = false;
@@ -38,14 +38,33 @@ public class Luftsprung extends Spell {
 		
 	}
 
+	boolean reversed = false;
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		if (step%3 == 0) {
+		if (step<10) {
 			
-			playSound( Sound.ENTITY_WITHER_SHOOT,caster.getLocation(), 1, 2);
+		
+		if (step%3 == 0) {
 			ParUtils.parKreisDot(Particles.CLOUD, caster.getLocation(), 1,0, 0.1, caster.getLocation().getDirection());
-			caster.setVelocity(caster.getLocation().getDirection().multiply(2));
+			
+			if (reversed) {
+				caster.setVelocity(caster.getLocation().getDirection().multiply(-2));
+			}
+			else {
+				caster.setVelocity(caster.getLocation().getDirection().multiply(2));
+			}
+			playSound( Sound.ENTITY_WITHER_SHOOT,caster.getLocation(), 1, 2);
+			
+		}
+		}else {
+			if (refined && !reversed) {
+				if (caster.isSneaking()) {
+					reversed = true;
+					step = 0;
+					steprange = 10;
+				}
+			}
 		}
 	}
 

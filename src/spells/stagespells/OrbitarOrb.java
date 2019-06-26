@@ -20,7 +20,8 @@ public class OrbitarOrb extends Spell {
 	
 	ArmorStand a;
 	int offset;
-	public OrbitarOrb(Player p,int offset,int steps,String namae) {
+	public OrbitarOrb(Player p,int offset,int steps,String namae,boolean ref) {
+		refined = ref;
 		name = namae;
 		steprange = steps;
 		hitSpell = true;

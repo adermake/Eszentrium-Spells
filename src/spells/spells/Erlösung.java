@@ -19,7 +19,7 @@ public class Erlösung extends Spell {
 
 	
 	public Erlösung() {
-		name = "§cSphärederKonzentration";
+		name = "§8Erlösung";
 		steprange = 20 * 22;
 		speed = 1;
 		cooldown = 20 * 60;

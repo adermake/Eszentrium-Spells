@@ -13,7 +13,7 @@ public class Thermolanze extends Spell {
 	
 	public Thermolanze() {
 		cooldown = 20 * 5;
-		name = "§cThermolanze";
+		name = "§eThermolanze";
 		steprange = 60;
 	}
 	
@@ -39,7 +39,7 @@ public class Thermolanze extends Spell {
 	public void move() {
 		// TODO Auto-generated method stub
 		playSound(Sound.ENTITY_HUSK_DEATH,loc,10F,1F);
-		new ThermolanzeLaser(caster);
+		new ThermolanzeLaser(caster,refined);
 	}
 
 	@Override

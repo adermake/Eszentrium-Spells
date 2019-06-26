@@ -1,6 +1,7 @@
 package spells.spells;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
@@ -21,7 +22,7 @@ public class Flucht extends Spell{
 		
 		steprange = 20*5;
 		cooldown = 20*35;
-		name = "§eFlucht";
+		name = "§bFlucht";
 		speed = 1;
 		
 		hitPlayer = false;
@@ -54,23 +55,10 @@ public class Flucht extends Spell{
 		
 		ParUtils.createParticle(Particles.LARGE_SMOKE, loc, 1, 1, 1, 100, 0);
 		caster.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 100));
-		follow(bat(caster),caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
-		bat(caster);
+		follow(bat(caster,refined),caster);
+		for (int i = 0;i<35;i++) {
+			bat(caster,refined);
+		}
 	}
 
 	@Override
@@ -117,20 +105,38 @@ public class Flucht extends Spell{
 		}
 	}
 	
-	public LivingEntity bat(final Player p) {
+	public LivingEntity bat(final Player p,boolean refined) {
 		
 		final Bat bat = (Bat) p.getWorld().spawnEntity(p.getLocation(), EntityType.BAT);
 		
 		
 		
-		main.plugin.getServer().getScheduler().scheduleSyncDelayedTask(main.plugin, new Runnable() {
+	
+		new BukkitRunnable() {
+			int t = 0;
 			public void run() {
-				bat.remove();
+				t++;
+				if (t>100) {
+					this.cancel();
+					bat.remove();
+				}
 				
-				
-
+				if (refined) {
+					bat.setVelocity(bat.getLocation().getDirection());
+					for (Player p : Bukkit.getOnlinePlayers()) {
+						if (caster == p)
+							continue;
+						
+						if (p.getGameMode() == GameMode.SURVIVAL) {
+							if (bat.getLocation().distance(p.getLocation())<2) {
+								p.setVelocity(bat.getVelocity());
+							}
+						}
+					}
+					
+				}
 			}
-		}, 20 * 5L);
+		}.runTaskTimer(main.plugin, 1,1);
 		return bat;
 	}
 	public void follow (LivingEntity le,LivingEntity p) {

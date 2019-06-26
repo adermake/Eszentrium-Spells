@@ -21,7 +21,7 @@ public class Lamaturm extends Spell {
 	Player target;
 	Llama turret;
 	public Lamaturm() {
-		name = "§7Lamaturm";
+		name = "§6Lamaturm";
 		cooldown = 20 * 55;
 		steprange = 20 * 50;
 		hitboxSize = 10;
@@ -54,6 +54,10 @@ public class Lamaturm extends Spell {
 			playSound(Sound.ENTITY_LLAMA_HURT,loc,4,1);
 		}
 		
+		if (refined) {
+			maxShots = 16;
+		}
+		
 	}
 
 	@Override
@@ -71,6 +75,7 @@ public class Lamaturm extends Spell {
 	int shootDelay = 0;
 	int shots = 1;
 	int realDelay = 0;
+	int maxShots = 3;
 	@Override
 	public void move() {
 		if (turret == null)
@@ -78,7 +83,10 @@ public class Lamaturm extends Spell {
 		realDelay++;
 		//realDelay = /*(realDelay == -1) ? -1 : */realDelay++;
 		shootDelay++;
-		if (shootDelay > 40 && shots < 3) {
+		if (refined) {
+			shootDelay+=10;
+		}
+		if (shootDelay > 40 && shots < maxShots) {
 			shots++;
 			playSound(Sound.ENTITY_LLAMA_ANGRY,loc,4,1);
 			
@@ -91,8 +99,6 @@ public class Lamaturm extends Spell {
 		if (target != null && target.getLocation().distance(loc)<10) {
 			
 			loc.setDirection(target.getLocation().toVector().subtract(loc.toVector()));
-			Bukkit.broadcastMessage("realDelay = "+realDelay);
-			Bukkit.broadcastMessage("shots = "+shots);
 			if (realDelay == 0 && shots>0) {
 				shots--;
 				realDelay++;
@@ -126,7 +132,7 @@ public class Lamaturm extends Spell {
 		// TODO Auto-generated method stub
 		for (double i = 0;i<shots;i++) {
 			
-			Location l = ParUtils.stepCalcCircle(turret.getEyeLocation().clone(), 2, new Vector(0,1,0), -1, step+(i*14));
+			Location l = ParUtils.stepCalcCircle(turret.getEyeLocation().clone(), 2, new Vector(0,1,0), -1, step+(i*44/maxShots));
 			ParUtils.createParticle(Particles.BUBBLE, l.clone().add(0,-1,0), 0, 0, 0, 5, 0);
 		}
 		

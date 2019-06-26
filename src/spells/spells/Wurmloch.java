@@ -17,7 +17,7 @@ import spells.spellcore.Spell;
 public class Wurmloch extends Spell {
 
 	public Wurmloch() {
-		name = "§bWurmloch";
+		name = "§cWurmloch";
 		cooldown = 20 * 42;
 		canHitSelf = true;
 		hitboxSize = 6;

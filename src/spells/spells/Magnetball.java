@@ -27,7 +27,9 @@ public class Magnetball extends Spell{
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		
+		if (refined) {
+			hitboxSize = 14;
+		}
 	}
 
 	@Override
@@ -93,7 +95,7 @@ public class Magnetball extends Spell{
 		ParUtils.chargeDot(loc, Particles.END_ROD, 0.2, 4,60);
 		playSound(Sound.ENTITY_WITHER_SPAWN,loc,4f,2f);
 		for (Entity e : hitEntitys) {
-			if (e.getLocation().distance(loc)<=8) {
+			if (e.getLocation().distance(loc)<=hitboxSize) {
 				e.setVelocity(loc.toVector().subtract(e.getLocation().toVector()));
 			}
 		}

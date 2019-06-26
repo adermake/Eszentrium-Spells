@@ -11,12 +11,13 @@ import org.bukkit.util.Vector;
 import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
+import spells.stagespells.RepulsionDirectional;
 
 public class Schallbrecher extends Spell {
 
 	public Schallbrecher() {
-		name = "§eSchallbrecher";
-		cooldown = 20*25;
+		name = "§bSchallbrecher";
+		cooldown = 20*18;
 		hitEntity = true;
 		hitPlayer = true;
 		hitSpell = true;
@@ -121,6 +122,16 @@ public class Schallbrecher extends Spell {
 		ParUtils.parKreisDot(Particles.CLOUD, locate, 0.3, 0.0, 0.2, direction.multiply(-1));
 		
 		
+		
+		if (refined) {
+			
+			new RepulsionDirectional(5, 7, caster, caster.getLocation(), caster.getVelocity(), name);
+			ParUtils.parKreisDirSolid(Particles.CLOUD, caster.getLocation(), 3, 0, 1, caster.getVelocity(), caster.getVelocity());
+			ParUtils.parKreisDot(Particles.CLOUD, caster.getLocation(), 3, 0, 3, caster.getVelocity());
+			ParUtils.parKreisDot(Particles.CLOUD, caster.getLocation(), 3, 0, 2, caster.getVelocity());
+			ParUtils.parKreisDot(Particles.CLOUD, caster.getLocation(), 3, 0, 1, caster.getVelocity());
+			playSound(Sound.ENTITY_WITCH_DEATH,caster.getLocation(),5,0.5F);
+		}
 		
 		
 		

@@ -1,5 +1,7 @@
 package spells.spells;
 
+import java.util.ArrayList;
+
 import org.bukkit.Color;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -15,8 +17,9 @@ import spells.spellcore.Spell;
 public class Schwerkraftsmanipulation extends Spell {
 
 	
+	public static ArrayList<Player> gravityMani = new ArrayList<Player>();
 	public Schwerkraftsmanipulation() {
-		name = "§9Schwerkraftsmanipulation";
+		name = "§eSchwerkraftsmanipulation";
 		cooldown = 20 * 30;
 		steprange = 60;
 	}
@@ -34,6 +37,9 @@ public class Schwerkraftsmanipulation extends Spell {
 			ParUtils.parKreisSolidRedstone(Color.GRAY, 2, target.getLocation(), 4, 0, 1, new Vector(0,1,0));
 			playSound(Sound.BLOCK_BELL_USE,target.getLocation(),16,2F);
 			playSound(Sound.BLOCK_BELL_RESONATE,target.getLocation(),6,1.6F);
+			if (refined) {
+				gravityMani.add(target);
+			}
 		}
 		
 	}
@@ -97,7 +103,9 @@ public class Schwerkraftsmanipulation extends Spell {
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
-		
+		if (refined) {
+			gravityMani.remove(target);
+		}
 	}
 
 }

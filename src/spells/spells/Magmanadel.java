@@ -17,7 +17,7 @@ import spells.spellcore.Spell;
 public class Magmanadel extends Spell{
 	
 	public Magmanadel() {
-		name = "§aMagmanadel";
+		name = "§4Magmanadel";
 		hitSpell = true;
 		steprange = 300;
 		speed = 100;

@@ -16,7 +16,7 @@ import spells.spellcore.Spell;
 public class Explosion extends Spell{
 	
 	public Explosion() {
-		name = "§eExplosion";
+		name = "§3Explosion";
 		cooldown = 20*45;
 		hitSpell = true;
 	}
