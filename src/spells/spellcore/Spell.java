@@ -2,6 +2,7 @@ package spells.spellcore;
 
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -74,12 +75,14 @@ public abstract class Spell {
 	protected static ArrayList<Player> gliding = new ArrayList<Player>();
 	protected static ArrayList<Player> hasDied = new ArrayList<Player>();
 	protected static ArrayList<Player> hasDiedEntry = new ArrayList<Player>();
+	
 	protected Location startPos;
 	//CALLED
 	
 	
 	//CC 
 		protected static ArrayList<Player> silenced = new ArrayList<Player>();
+		public static HashMap<Player,DamageCauseContainer> damageCause = new HashMap<Player,DamageCauseContainer>();
 	//
 	
 	public void castSpell(Player p,String name) {
@@ -481,8 +484,16 @@ public abstract class Spell {
 	 * @param ent
 	 */
 	public void tagPlayer(Player ent) {
+		
+		// FABIANS DAMAGE CAUSE
 		main.damageCause.remove(ent);
 		main.damageCause.put(ent, name + "-" + caster.getName());
+		
+		
+		//RALFS RICHTIGER DAMAGE CAUSE
+		damageCause.remove(ent);
+		damageCause.put(ent,new DamageCauseContainer(caster,name));
+		
 	}
 	
 	public void heal(LivingEntity ent, double damage,Player healer) {

@@ -34,7 +34,10 @@ import esze.utils.MathUtils;
 import esze.utils.ParUtils;
 import esze.utils.PlayerUtils;
 import esze.utils.TTTCorpse;
+import esze.utils.TabList;
 import esze.utils.Title;
+import spells.spellcore.DamageCauseContainer;
+import spells.spellcore.Spell;
 import spells.spellcore.Spelldrop;
 
 public class TypeTTT extends Type{
@@ -45,6 +48,8 @@ public class TypeTTT extends Type{
 	public ArrayList<Player> startTraitor = new ArrayList<Player>();
 	public HashMap<Player,Player> foundBody = new HashMap<Player,Player>();
 	
+	int gameLengthSeconds = 60 * 10; 
+	int secondsLeft = 0;
 	public TypeTTT() {
 		name = "TTT";
 	}
@@ -52,7 +57,19 @@ public class TypeTTT extends Type{
 	int sec = 0;
 	@Override
 	public void runEverySecond() {
+		secondsLeft--;
+		if (secondsLeft <= 0) {
+			//
+			traitor.clear();
+			checkWinner();
+			//
+		}
+		
+		TabList tlist = new TabList("§cTTT","§e"+secToMin(secondsLeft));
+		
 		for (Player p : players) {
+			
+			tlist.send(p);
 			if (p.getLocation().getY()<60) {
 				p.damage(p.getHealth());
 			}
@@ -66,6 +83,17 @@ public class TypeTTT extends Type{
 		}
 	}
 	
+	
+	public String secToMin(int sec ) {
+		int min = sec / 60;
+		sec = sec - min * 60;
+		
+		String ret = min+":"+"sec";
+		if (sec < 10) {
+			ret = min+":0"+"sec";
+		}
+		return ret;
+	}
 	@Override
 	public void runEveryTick() {
 		for(org.bukkit.entity.ArmorStand as : Spelldrop.items.keySet()){
@@ -74,9 +102,11 @@ public class TypeTTT extends Type{
 		}		
 	}
 	
+	
+	
 	@Override
 	public void gameStart() {
-		
+		secondsLeft = gameLengthSeconds;
 		innocent.clear();
 		traitor.clear();
 		
@@ -105,8 +135,11 @@ public class TypeTTT extends Type{
 			p.teleport(nextLoc());
 			p.setGameMode(GameMode.SURVIVAL);
 			p.getInventory().clear();
+			p.setLevel(0);
 			p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true));
-			
+			if (traitor.contains(p)) {
+				p.setLevel(10);
+			}
 		}
 		
 		
@@ -181,18 +214,27 @@ public class TypeTTT extends Type{
 		TTTCorpse corpse = new TTTCorpse(p, true);
 		corpse.spawn();
 		
-		Bukkit.broadcastMessage("1");
+		p.getInventory().clear();
+		players.remove(p);
+		p.setGameMode(GameMode.ADVENTURE);
+		if (Spell.damageCause.containsKey(p)) {
+			DamageCauseContainer dcc = Spell.damageCause.get(p);
+			dcc.killer.setLevel(dcc.killer.getLevel()+5);
+			
+			
+		}
+	
+		
+		
 		p.setHealth(20);
 		players.remove(p);
 		p.setGameMode(GameMode.ADVENTURE);
-		Bukkit.broadcastMessage("2");
 		PlayerUtils.hidePlayer(p);
 		
 		if (innocent.contains(p))
 			innocent.remove(p);
 		if (traitor.contains(p))
 			traitor.remove(p);
-		Bukkit.broadcastMessage("3");
 		
 		p.setNoDamageTicks(100);
 		p.teleport(p.getLocation());
