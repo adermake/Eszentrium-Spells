@@ -322,21 +322,36 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 					p.sendMessage(""+s.name());
 				}
 				if (cmd.getName().equalsIgnoreCase("analytics")) {
+					if (args.length < 1) {
+						p.sendMessage("ERROR");
+						return false;
+					}
 					switch (args[0]) {
 					case "wins":
-						p.sendMessage("§7Du hast " + SaveUtils.getSaveEsze().getVictories(p.getName()) + "§7 Runden gewonnen!");
+						if (args.length < 2) {
+							p.sendMessage("§7Du hast " + SaveUtils.getSaveEsze().getVictories(p.getName()) + "§7 Runden gewonnen!");
+						} else {
+							p.sendMessage("§7" + args[1] + " hat " + SaveUtils.getSaveEsze().getVictories(args[1]) + "§7 Runden gewonnen!");
+						}
+						
 						return true;
 					case "losses":
-						p.sendMessage("§7Du hast " + SaveUtils.getSaveEsze().getLosses(p.getName()) + "§7 Runden verloren!");
+						if (args.length < 2) {
+							p.sendMessage("§7Du hast " + SaveUtils.getSaveEsze().getVictories(p.getName()) + "§7 Runden verloren!");
+						} else {
+							p.sendMessage("§7" + args[1] + " hat " + SaveUtils.getSaveEsze().getVictories(args[1]) + "§7 Runden verloren!");
+						}
 						return true;
 					case "worth":
-						String assembly = "";
-						for (int i = 1; i < args.length; i++) {
-							assembly += args[i] + " ";
+						if (args.length > 2) {
+							String assembly = "";
+							for (int i = 1; i < args.length; i++) {
+								assembly += args[i] + " ";
+							}
+							assembly = assembly.substring(0,assembly.length()-1);
+							p.sendMessage("§7The Spell " + assembly + "§7 has a worth of " + SaveUtils.getSaveEsze().getWorth(assembly) + "§7%!");
+							return true;
 						}
-						assembly = assembly.substring(0,assembly.length()-1);
-						p.sendMessage("§7The Spell " + assembly + "§7 has a worth of " + SaveUtils.getSaveEsze().getWorth(assembly) + "§7%!");
-						return true;
 					case "stats":
 						new SoloAnalyticsMenu(p).open(p);
 						return true;
