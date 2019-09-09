@@ -13,7 +13,11 @@ public class SaveGame {
 	public SaveGame(String s) {
 		String[] args = SaveUtils.readString(s);
 		for (int i = 0; (i+2) < args.length; i+=2) {
-			map.put(new SavePlayer(args[i]), Integer.parseInt(args[i+1]));
+			if (args[i+1].equals("")) {
+				map.put(new SavePlayer(args[i]), 0);
+			} else {
+				map.put(new SavePlayer(args[i]), Integer.parseInt(args[i+1]));
+			}
 		}
 	}
 	
