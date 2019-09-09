@@ -53,7 +53,7 @@ public class Meteor extends Spell {
 		// TODO Auto-generated method stub
 		Vector dir = loc.getDirection();
 		loc = fb.getLocation();
-		loc = loc.setDirection(dir);
+		loc = loc.setDirection(dir.add(new Vector(0, -0.1, 0)));
 		if (caster.isSneaking()) {
 			Vector v = fb.getVelocity();
 			v.setX(caster.getLocation().getDirection().getX());

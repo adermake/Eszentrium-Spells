@@ -85,6 +85,9 @@ public class SaveUtils {
 	}
 	
 	public static SaveEsze getSaveEsze() {
+		if (svgms == null) {
+			load();
+		}
 		return svgms;
 	}
 	
