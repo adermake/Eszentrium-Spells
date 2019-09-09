@@ -1,6 +1,7 @@
 package esze.analytics.solo;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class SaveSelection {
 	
@@ -23,8 +24,8 @@ public class SaveSelection {
 
 
 	public SaveSelection(String s) {
-		s = s.replaceAll("[", "");
-		s = s.replaceAll("]", "");
+		s = s.replaceAll(Pattern.quote("["), "");
+		s = s.replaceAll(Pattern.quote("]"), "");
 		String[] g = s.split(",");
 		chsp = g[0];
 		sp1 = g[1];
