@@ -17,7 +17,12 @@ public class SaveGame {
 			if (args[i+1].equals("")) {
 				map.put(new SavePlayer(args[i]), 0);
 			} else {
-				map.put(new SavePlayer(args[i]), Integer.parseInt(args[i+1]));
+				SavePlayer p = new SavePlayer(args[i]);
+				map.put(p, Integer.parseInt(args[i+1]));
+				
+				if (Integer.parseInt(args[i+1]) == args.length/2) {
+					p.isWinner();
+				}
 			}
 		}
 	}
@@ -76,7 +81,7 @@ public class SaveGame {
 	public void endGame() {
 		ArrayList<SavePlayer> sp = new ArrayList<SavePlayer>(); 
 		for (SavePlayer p : map.keySet()) {
-			if (!p.isDead()) {
+			if (!p.isDead() && !p.isWinner()) {
 				sp.add(p);
 			}
 		}

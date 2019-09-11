@@ -1,6 +1,7 @@
 package esze.analytics.solo;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class SaveEsze {
 	
@@ -144,7 +145,9 @@ public class SaveEsze {
 		int deaths = 0;
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
-				deaths += p.getDeathCount();
+				if (p.getName().equals(name)) {
+					deaths += p.getDeathCount();
+				}
 			}
 		}
 		return deaths;
@@ -156,7 +159,7 @@ public class SaveEsze {
 			for (SavePlayer p : g.getMap().keySet()) {
 				if (p.getName().equals(name)) {
 					for (String s : p.getDeaths()) {
-						String[] edit = s.split("-");
+						String[] edit = s.split(Pattern.quote("-"));
 						if (edit.length >= 1) {
 							if (edit[0].equals(spell)) {
 								deaths++;

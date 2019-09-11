@@ -357,9 +357,14 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 						return true;
 					case "backup":
 						SaveUtils.backup();
+						p.sendMessage("Backed Up!");
 						return true;
 					case "clear":
 						SaveUtils.reset();
+						p.sendMessage("Cleared!");
+						return true;
+					case "info":
+						p.sendMessage(SaveUtils.getSaveEsze().toString());
 						return true;
 					default:
 						p.sendMessage("ERROR");

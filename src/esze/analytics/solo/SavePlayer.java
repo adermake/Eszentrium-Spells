@@ -14,6 +14,7 @@ public class SavePlayer {
 	private String d3;
 	private String d4;
 	private boolean dead = true;
+	private boolean win = false;
 	
 	public SavePlayer() {
 		
@@ -166,6 +167,14 @@ public class SavePlayer {
 	
 	public boolean isDead() {
 		return dead;
+	}
+	
+	public void setWinner() {
+		win = true;
+	}
+	
+	public boolean isWinner() {
+		return win;
 	}
 	
 	public int getDeathCount() {
