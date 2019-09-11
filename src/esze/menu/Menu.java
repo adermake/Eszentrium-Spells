@@ -15,7 +15,7 @@ public class Menu implements Listener {
 		if(e == null)
 			return;
 		
-		if (e.getClickedInventory() == e.getWhoClicked().getInventory()) {
+		if (e.getClickedInventory() == e.getWhoClicked().getInventory() || e.getView().getTitle().equals("§0Reroll - Lege 3 Spells ab") || e.getView().getTitle().equals("Handel...")) {
 			return;
 		}
 		Player p = (Player) e.getWhoClicked();

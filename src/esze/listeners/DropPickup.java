@@ -22,10 +22,6 @@ public class DropPickup implements Listener {
 		}*/
 	}
 	
-	@EventHandler
-	public void onDrop(EntityPickupItemEvent e){
-		
-		e.setCancelled(true);
-	}
+	
 
 }

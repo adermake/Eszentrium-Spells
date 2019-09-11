@@ -91,7 +91,7 @@ public class Spelldrop implements Listener {
 		Player p = e.getPlayer();
 		if (p.getGameMode() != GameMode.SURVIVAL)
 			return;
-		
+		ArrayList<ArmorStand> delete = new ArrayList<ArmorStand>();
 		for ( ArmorStand a : items.keySet()) {
 			
 			if (a.getLocation().distance(p.getLocation())<1.5) {
@@ -99,10 +99,14 @@ public class Spelldrop implements Listener {
 				items.get(a).remove();
 				items.remove(a);
 				SoundUtils.playSound( Sound.ENTITY_ITEM_PICKUP, a.getLocation());
-				a.remove();
+				delete.add(a);
 				
 			}
 		}
+		for (ArmorStand a : delete) {
+			a.remove();
+		}
+		delete.clear();
 	}
 	
 	@EventHandler

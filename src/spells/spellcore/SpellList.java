@@ -21,6 +21,9 @@ import spells.spells.Feuerball;
 import spells.spells.Flucht;
 import spells.spells.Heilen;
 import spells.spells.HimmlischesUrteil;
+import spells.spells.Hünchenluftschlag;
+import spells.spells.Kaminchen;
+import spells.spells.Kätzchenkannone;
 import spells.spells.Lamaturm;
 import spells.spells.Lichtstrudel;
 import spells.spells.Luftsprung;
@@ -41,6 +44,13 @@ import spells.spells.Schock;
 import spells.spells.Schwerkraftsmanipulation;
 import spells.spells.SchwerterausLicht;
 import spells.spells.SiegelderFurcht;
+import spells.spells.SpeerderZwietracht;
+import spells.spells.Teleport;
+import spells.spells.Thermolanze;
+import spells.spells.Verstummen;
+import spells.spells.Wunsch;
+import spells.spells.Wurmloch;
+import spells.spells.Zaubersprung;
 import esze.enums.GameType;
 import esze.types.TypeSOLO;
 import esze.types.TypeTTT;
@@ -89,6 +99,29 @@ public class SpellList {
 		return new ArrayList<>(spellsForThisType.keySet()).get(MathUtils.randInt(0, spellsForThisType.size()-1));
 	}
 	
+public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
+		
+		ArrayList<Spell> spellsForThisType = new ArrayList<Spell>();
+		
+		for(Spell spell : spells.keySet()){
+			if (spell.name.contains("§c")) {
+				continue;
+			}
+			List<Class> classes = spells.get(spell);
+			
+			if(classes.contains(GameType.getType().getClass())){
+				spellsForThisType.add(spell);
+			}
+		}
+		
+		
+		ArrayList<Spell> randomList = (ArrayList<Spell>) spellsForThisType.clone();
+		while (randomList.size()>count) {
+			randomList.remove(MathUtils.randInt(0, randomList.size()-1));
+		}
+		return randomList;
+		
+	}
 	public static void registerSpells() {
 		registerSpell(new Ansturm());
 		registerSpell(new AntlitzderGöttin());
@@ -105,6 +138,9 @@ public class SpellList {
 		registerSpell(new Feuerball());
 		registerSpell(new Flucht());
 		registerSpell(new Heilen(), TypeTTT.class);
+		registerSpell(new Hünchenluftschlag());
+		registerSpell(new Kätzchenkannone());
+		registerSpell(new Kaminchen());
 		//registerSpell(new HimmlischesUrteil(), TypeTTT.class);
 		registerSpell(new Lamaturm());
 		registerSpell(new Lichtstrudel());
@@ -125,7 +161,14 @@ public class SpellList {
 		registerSpell(new Schwerkraftsmanipulation());
 		registerSpell(new Schicksalschnitt());
 		registerSpell(new SchnittdersiebenWinde());
+		registerSpell(new SpeerderZwietracht());
 		registerSpell(new SiegelderFurcht());
+		registerSpell(new Teleport());
+		registerSpell(new Thermolanze());
+		registerSpell(new Verstummen());
+		registerSpell(new Wunsch());
+		registerSpell(new Wurmloch());
+		registerSpell(new Zaubersprung());
 	}
 	
 	public static void registerSpell(Spell spell, Class...gameTypes){

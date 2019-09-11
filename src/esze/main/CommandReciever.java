@@ -232,10 +232,15 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				}
 				if(cmd.getName().startsWith("showpads")) {
 					if(p.isOp()){
-						int number = 0;
+						int number = 1;
 						while (main.plugin.getConfig().contains("jumppads."+args[0]+"."+number)) {
+							
+							
 							JumpPad jp = (JumpPad) main.plugin.getConfig().get("jumppads."+args[0]+"."+number);
 							Slime s = (Slime) p.getWorld().spawnEntity(jp.loc, EntityType.SLIME);
+							s.setCustomName(""+number);
+							s.setCustomNameVisible(true);
+							s.setCollidable(false);
 							s.setSize(1);
 							s.setAI(false);
 							s.setGlowing(true);
@@ -245,9 +250,10 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 									s.remove();
 								}
 							}.runTaskLater(main.plugin, 20*10);
+							number++;
 						}
 						
-						p.sendMessage("§8| §eAll is revealed");
+						p.sendMessage("§8| "+(number-1)+" revealed");
 					}
 				}
 				if(cmd.getName().startsWith("setmode")) {

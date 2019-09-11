@@ -1,5 +1,6 @@
 package esze.types;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
@@ -19,8 +20,12 @@ import esze.menu.SoloSpellMenu;
 import esze.scoreboards.SoloScoreboard;
 import esze.utils.ItemStackUtils;
 import esze.utils.LobbyUtils;
+import esze.utils.Music;
 import esze.utils.PlayerUtils;
 import esze.utils.Title;
+import esze.voice.Discord;
+import sx.blah.discord.util.EmbedBuilder;
+import sx.blah.discord.util.RequestBuffer;
 
 public class TypeSOLO extends Type {
 	boolean gameOver = false;
@@ -56,7 +61,7 @@ public class TypeSOLO extends Type {
 		for (int i = 0;i<16;i++) {
 			Bukkit.getWorld("world").loadChunk(Bukkit.getWorld("world").getChunkAt(nextLoc()));
 		}
-		
+		Music.startRandomMusic();
 		
 		for (Player p : players) {
 				main.damageCause.put(p, ""); //Reset damage Cause
@@ -112,7 +117,14 @@ public class TypeSOLO extends Type {
 			PlayerUtils.hidePlayer(p,100);
 			p.setNoDamageTicks(100);
 			p.teleport(nextLoc());
-			SoloSpellMenu s = new SoloSpellMenu();
+			SoloSpellMenu s;
+			if (lives.get(p) == 1) {
+				s = new SoloSpellMenu(true);
+			}
+			else {
+			 s = new SoloSpellMenu();
+			}
+			
 			new BukkitRunnable() {
 				public void run() {
 					s.open(p);
@@ -141,25 +153,29 @@ public class TypeSOLO extends Type {
 				Title t = new Title("§a"+winner.getName()+" hat gewonnen!");
 				won = true;
 				t.send(p);
-				
+				postResult(winner);
 			}
 			
 			}
 			
 		if (won) {
-			
+			for (Player winner : players) {
+				
+				postResult(winner);
+			}
 			//SaveUtils.endGame(); //Analytics //TODO Macht ERROR
 			
-			Bukkit.broadcastMessage("END");
+			Music.sp.destroy();
 			GameRunnable.stop();
 			Gamestate.setGameState(Gamestate.LOBBY);
-			Bukkit.broadcastMessage("gamestate set");
 			LobbyBackgroundRunnable.start();
-			Bukkit.broadcastMessage("lobbyrunnabel set");
 			LobbyUtils.recallAll();
-			Bukkit.broadcastMessage("recalled");
 			scoreboard.hide = true;
 			players.clear();
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
+				
+			}
 			
 		}
 		
@@ -167,5 +183,32 @@ public class TypeSOLO extends Type {
 	}
 	}
 	
+	public void postResult(Player winner) {
+	    EmbedBuilder builder = new EmbedBuilder();
+
+	   
+	   
 	
+	    builder.appendField("Gewinner", winner.getName(), false);
+	    String allPlayers = "";
+	    for (Player p : Bukkit.getOnlinePlayers()) {
+	    	allPlayers += p.getName()+" ";
+	    }
+	    builder.appendField("Teilnehmer", allPlayers, false);
+	    builder.withAuthorName("Raiton-Game Info Service");
+	    builder.withAuthorIcon("http://minel0l.lima-city.de/esze.jpg");
+
+	    builder.withColor(java.awt.Color.GREEN);
+	    builder.withTitle("Eszentrium SOLO");
+	    builder.withTimestamp(System.currentTimeMillis());
+	    
+	    
+	  
+
+	    builder.withThumbnail("http://minel0l.lima-city.de/solo.jpg");
+
+	    RequestBuffer.request(() -> Discord.channel.getGuild().getChannelByID(621398787155558400L).sendMessage(builder.build()));
+		
+	    
+	}
 }

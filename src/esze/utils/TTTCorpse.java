@@ -2,10 +2,13 @@ package esze.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftCow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -13,13 +16,16 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
@@ -34,7 +40,7 @@ public class TTTCorpse implements Listener{
 	private ArrayList<Entity> cows;
 	private Player carrier = null;
 	private BukkitTask carryTask;
-	
+	public static HashMap<Player,Block> droppedCorpse = new HashMap<Player,Block>();
 	public TTTCorpse(Player player, boolean withInv) {
 		this.player = player;
 		this.username = player.getName();
@@ -62,7 +68,15 @@ public class TTTCorpse implements Listener{
 		main.plugin.getServer().getPluginManager().registerEvents(this, main.plugin);
 		
 	}
-	
+	@EventHandler
+	public void onRightClickBlock(PlayerInteractEvent e){
+		Player p = e.getPlayer();
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && p.isSneaking()) {
+			if (!droppedCorpse.containsKey(p))
+				droppedCorpse.put(p,e.getClickedBlock());
+		}
+		
+	}
 	@EventHandler
 	public void onClick(PlayerInteractEntityEvent e){
 		Player p = e.getPlayer();
@@ -70,12 +84,10 @@ public class TTTCorpse implements Listener{
 		
 		if(this.cows.contains(ent)){
 			
-			if(p.isSneaking()){
-				carry(p);
-			}else{
-				if(inv != null)
+			
+				if(inv != null  && p.getGameMode() == GameMode.SURVIVAL)
 					p.openInventory(inv);
-			}
+			
 		}
 	}
 	
@@ -101,7 +113,8 @@ public class TTTCorpse implements Listener{
 			@Override
 			public void run() {
 				
-				if(carrier != null){
+				
+				if(carrier != null && !droppedCorpse.containsKey(carrier)){
 					Location loc = carrier.getLocation().clone().add(0, 2, 0);
 					
 					
@@ -124,8 +137,10 @@ public class TTTCorpse implements Listener{
 					CorpseUtils.teleportCorpseForPlayers(corpseID, loc.add(0,1,0), Arrays.asList(carrier));
 					
 					cows.get(0).teleport(loc.clone().add(1, 0, 0));
-					cows.get(0).teleport(loc.clone().add(0, 0, 0));
+					cows.get(1).teleport(loc.clone().add(0, 0, 0));
 				}else{
+					
+					
 					stopCarrying();
 				}
 				
@@ -134,14 +149,48 @@ public class TTTCorpse implements Listener{
 	}
 	
 	public void stopCarrying(){
+		
+		Block b = droppedCorpse.get(carrier);
+		Location l = b.getLocation();
+		
+		l = l.add(0,1,0);
+		while (l.getBlock().getType().isSolid()) {
+			l = l.add(0,1,0);
+		}
+	
+		l.setYaw(0);
+		l.setPitch(0);
+		ArrayList<Player> players = new ArrayList<Player>();
+		for(Player p : Bukkit.getOnlinePlayers()){
+			
+				players.add(p);
+			
+		}
+		//cows.get(0).teleport(l.add(1, 0, 0));
+		//cows.get(1).teleport(l);
+		CorpseUtils.teleportCorpseForPlayers(corpseID, l.add(0,1F,0), players);
+		Location cL = l.clone();
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				CorpseUtils.teleportCorpseForPlayers(corpseID, cL, players);
+			}
+		}.runTaskTimer(main.plugin, 1,1);
+		
+		//cows.get(0).teleport(l.add(1, 0, 0));
+		
 		if(carryTask != null){
 			carryTask.cancel();
 		}
-		
+		carrier = null;
 		
 	}
 	
 	public void carry(Player carrier){
+		if (droppedCorpse.containsKey(carrier))
+			droppedCorpse.remove(carrier);
 		if(this.carrier == null){
 			this.carrier = carrier;
 			carryRunner();

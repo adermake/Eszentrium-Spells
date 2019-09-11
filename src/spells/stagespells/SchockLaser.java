@@ -21,6 +21,7 @@ public class SchockLaser extends Spell {
 		hitBlock = true;
 		steprange =  500;
 		speed = 250;
+		hitSpell = true;
 		castSpell(p, name);
 	}
 	

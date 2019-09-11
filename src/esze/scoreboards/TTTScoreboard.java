@@ -10,6 +10,7 @@ import esze.enums.Gamestate;
 import esze.main.main;
 import esze.types.TypeSOLO;
 import esze.types.TypeTTT;
+import sx.blah.discord.api.internal.json.objects.ChannelObject.Type;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -33,7 +34,7 @@ public class TTTScoreboard extends Scoreboard{
 						
 						// TRAITOR BOARD CREATION
 						ArrayList<String> traitorBoard = new ArrayList<String>();
-						traitorBoard.add("§2Spielstand");
+						traitorBoard.add("§2Spielstand §e" + ((TypeTTT) GameType.getType()).secToMin(game.secondsLeft));
 						traitorBoard.add("§c§lVerräter");
 						for(Player p : game.startTraitor){
 							if(p.getGameMode() == GameMode.ADVENTURE){
@@ -55,7 +56,7 @@ public class TTTScoreboard extends Scoreboard{
 						
 						// INNOCENT BOARD CREATION
 						ArrayList<String> innoBoard = new ArrayList<String>();
-						innoBoard.add("§2Spielstand");
+						innoBoard.add("§2Spielstand §e" +  ((TypeTTT) GameType.getType()).secToMin(game.secondsLeft));
 						innoBoard.add("§3§lSpieler");
 						for(Player p : game.players){
 							innoBoard.add(p.getName());

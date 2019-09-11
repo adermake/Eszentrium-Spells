@@ -288,7 +288,7 @@ public abstract class Spell {
 	public void collideWithEntity() {
 		if (hitEntity) {
 			for (LivingEntity ent : Bukkit.getWorld("world").getLivingEntities()) {
-				if (ent instanceof Player) {
+				if (ent instanceof Player || ent instanceof Cow) {
 					continue;
 				}
 				

@@ -23,6 +23,7 @@ public class RufDerOzeaneFish extends Spell{
 		name = namae;
 		hitSpell = true;
 		steprange = 30;
+		
 		hitboxSize = 2;
 		castSpell(p,name);
 		
