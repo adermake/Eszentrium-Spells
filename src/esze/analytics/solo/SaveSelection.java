@@ -24,7 +24,7 @@ public class SaveSelection {
 
 
 	public SaveSelection(String s) {
-		s = s.replaceAll(Pattern.quote("["), "");
+		s = s.replaceAll(Pattern.quote("["), "");//i
 		s = s.replaceAll(Pattern.quote("]"), "");
 		String[] g = s.split(",");
 		chsp = g[0];
