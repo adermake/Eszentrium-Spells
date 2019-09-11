@@ -13,6 +13,7 @@ public class SavePlayer {
 	private String d2;
 	private String d3;
 	private String d4;
+	private boolean dead = true;
 	
 	public SavePlayer() {
 		
@@ -37,7 +38,7 @@ public class SavePlayer {
 		s4 = (list.length > i) ? new SaveSelection(list[i]) : null;
 		i++;
 		d4 = (list.length > i) ? list[i] : null;
-		
+		dead = true;
 	}
 	
 	@Override
@@ -133,6 +134,7 @@ public class SavePlayer {
 		if (d1 == null) {d1 = sele;return false;}
 		if (d2 == null) {d2 = sele;return false;}
 		if (d3 == null) {d3 = sele;return false;}
+		dead = true;
 		if (d4 == null) {d4 = sele;return true;}
 		return true;
 	}
@@ -160,6 +162,10 @@ public class SavePlayer {
 		if (d3 !=null) {deaths.add(d3);}
 		if (d4 !=null) {deaths.add(d4);}
 		return deaths;
+	}
+	
+	public boolean isDead() {
+		return dead;
 	}
 	
 	public int getDeathCount() {

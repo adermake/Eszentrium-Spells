@@ -1,5 +1,6 @@
 package esze.analytics.solo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SaveGame {
@@ -70,6 +71,19 @@ public class SaveGame {
 				map.put(pl, max+1);
 			}
 		}
+	}
+	
+	public void endGame() {
+		ArrayList<SavePlayer> sp = new ArrayList<SavePlayer>(); 
+		for (SavePlayer p : map.keySet()) {
+			if (!p.isDead()) {
+				sp.add(p);
+			}
+		}
+		for (SavePlayer p : sp) {
+			map.remove(p);
+		}
+		
 	}
 
 	public void addSelect(String name, SaveSelection sele) {

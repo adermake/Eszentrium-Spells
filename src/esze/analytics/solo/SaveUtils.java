@@ -64,8 +64,14 @@ public class SaveUtils {
 		if (svgms == null) {
 			load();
 		}
+		gme.endGame();
 		svgms.add(gme);
 		gme = null;
+		save();
+	}
+	
+	public static void reset() {
+		svgms = new SaveEsze();
 		save();
 	}
 	
