@@ -28,17 +28,22 @@ import esze.main.main;
 import esze.menu.SoloSpellMenu;
 import esze.scoreboards.SoloScoreboard;
 import esze.scoreboards.TTTScoreboard;
+import esze.utils.CorpseUtils;
 import esze.utils.ItemStackUtils;
 import esze.utils.LobbyUtils;
 import esze.utils.MathUtils;
+import esze.utils.Music;
 import esze.utils.ParUtils;
 import esze.utils.PlayerUtils;
 import esze.utils.TTTCorpse;
 import esze.utils.TabList;
 import esze.utils.Title;
+import esze.voice.Discord;
 import spells.spellcore.DamageCauseContainer;
 import spells.spellcore.Spell;
 import spells.spellcore.Spelldrop;
+import sx.blah.discord.util.EmbedBuilder;
+import sx.blah.discord.util.RequestBuffer;
 
 public class TypeTTT extends Type{
 	boolean gameOver = false;
@@ -49,7 +54,7 @@ public class TypeTTT extends Type{
 	public HashMap<Player,Player> foundBody = new HashMap<Player,Player>();
 	
 	int gameLengthSeconds = 60 * 10; 
-	int secondsLeft = 0;
+	public int secondsLeft = 0;
 	public TypeTTT() {
 		name = "TTT";
 	}
@@ -57,6 +62,8 @@ public class TypeTTT extends Type{
 	int sec = 0;
 	@Override
 	public void runEverySecond() {
+		
+		
 		secondsLeft--;
 		if (secondsLeft <= 0) {
 			//
@@ -65,11 +72,11 @@ public class TypeTTT extends Type{
 			//
 		}
 		
-		TabList tlist = new TabList("§cTTT","§e"+secToMin(secondsLeft));
+		
 		
 		for (Player p : players) {
 			
-			tlist.send(p);
+			//TabList.setPlayerlistHeader(p, ""+secondsLeft);
 			if (p.getLocation().getY()<60) {
 				p.damage(p.getHealth());
 			}
@@ -81,16 +88,18 @@ public class TypeTTT extends Type{
 			spawnNewSpell();
 			sec = 0;
 		}
+		
 	}
 	
 	
-	public String secToMin(int sec ) {
+	public String secToMin(int seconds) {
+		int sec  = seconds;
 		int min = sec / 60;
 		sec = sec - min * 60;
 		
-		String ret = min+":"+"sec";
+		String ret = min+":"+sec;
 		if (sec < 10) {
-			ret = min+":0"+"sec";
+			ret = min+":0"+sec;
 		}
 		return ret;
 	}
@@ -106,14 +115,19 @@ public class TypeTTT extends Type{
 	
 	@Override
 	public void gameStart() {
+		
+		System.out.println("1");
+		
 		secondsLeft = gameLengthSeconds;
+		
 		innocent.clear();
 		traitor.clear();
 		
 		startInnocent.clear();
 		startTraitor.clear();
-		
+		System.out.println("2");
 
+		
 		scoreboard = new TTTScoreboard();
 		scoreboard.showScoreboard();
 		
@@ -126,24 +140,23 @@ public class TypeTTT extends Type{
 		
 		scoreboard = new TTTScoreboard();
 		scoreboard.showScoreboard();
-		
+		System.out.println("3");
 		PlayerUtils.showAllPlayers();
 
 		setupJumpPad(currentmap);
 		
+		Music.startRandomMusic();
 		for (Player p : players) {
 			p.teleport(nextLoc());
 			p.setGameMode(GameMode.SURVIVAL);
 			p.getInventory().clear();
 			p.setLevel(0);
 			p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true));
-			if (traitor.contains(p)) {
-				p.setLevel(10);
-			}
+			
 		}
+		System.out.println("4");
 		
-		
-		
+		//<
 		for(int i = 0; i<10; i++){
 			spawnNewSpell();
 		}
@@ -158,18 +171,22 @@ public class TypeTTT extends Type{
 			
 		}
 		
+		System.out.println("5");
 		for (Player p : players) {
 			if (!traitor.contains(p)){
 				setInnocent(p);
 			}
 		}
-		
+		//
 		for(Player p : innocent){
 			p.sendMessage("§8| §7Du bist §6unschuldig!");
 			new Title("§a§lUNSCHULDIGER", "ist deine Rolle").send(p);
 			p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.EMERALD, 1, 0, "§eWeltenkatalysator", null, true));
 		}
 		for(Player p : traitor){
+			
+				p.setLevel(10);
+			
 			if(traitor.size() > 1){
 				String build = "§8| §7Du bist ein Traitor mit §6";
 				for(Player p2 : traitor){
@@ -184,6 +201,7 @@ public class TypeTTT extends Type{
 			}
 			new Title("§c§lVERRÄTER", "ist deine Rolle").send(p);
 			p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.EMERALD, 1, 0, "§cSchwarzmarkt", null, true));
+			System.out.println("6");
 		}
 		
 		/*
@@ -210,7 +228,9 @@ public class TypeTTT extends Type{
 	
 	@Override
 	public void death(PlayerDeathEvent event) {
+		
 		Player p = event.getEntity();
+		Discord.setMuted(p, true);
 		TTTCorpse corpse = new TTTCorpse(p, true);
 		corpse.spawn();
 		
@@ -219,7 +239,10 @@ public class TypeTTT extends Type{
 		p.setGameMode(GameMode.ADVENTURE);
 		if (Spell.damageCause.containsKey(p)) {
 			DamageCauseContainer dcc = Spell.damageCause.get(p);
-			dcc.killer.setLevel(dcc.killer.getLevel()+5);
+			if (traitor.contains(dcc.killer)) {
+				dcc.killer.setLevel(dcc.killer.getLevel()+5);
+			}
+			
 			
 			
 		}
@@ -227,8 +250,14 @@ public class TypeTTT extends Type{
 		
 		
 		p.setHealth(20);
+		if (p.getLocation().getY()<60) {
+			p.teleport(nextLoc());
+		}
+		
 		players.remove(p);
 		p.setGameMode(GameMode.ADVENTURE);
+		p.setAllowFlight(true);
+		
 		PlayerUtils.hidePlayer(p);
 		
 		if (innocent.contains(p))
@@ -237,7 +266,8 @@ public class TypeTTT extends Type{
 			traitor.remove(p);
 		
 		p.setNoDamageTicks(100);
-		p.teleport(p.getLocation());
+		
+		
 		checkWinner();
 		
 		
@@ -346,12 +376,10 @@ public class TypeTTT extends Type{
 	public void checkWinner() {
 		if (!won) {
 			
-			Bukkit.broadcastMessage("4");
 		if (innocent.isEmpty() && !gameOver) {
 			
 			scoreboard.hideScoreboard();
 			
-			Bukkit.broadcastMessage("5");
 			
 			for (Player p : Bukkit.getOnlinePlayers()) {
 			
@@ -359,16 +387,17 @@ public class TypeTTT extends Type{
 				Title t = new Title("§4Verräter");
 				t.setSubtitle("§7haben gewonnen!");
 				won = true;
+				
 				t.send(p);
 				
 			
 			}
 			
-			
+			postResult(false);
 			
 		}
-		Bukkit.broadcastMessage("5");
-		if (traitor.isEmpty() && !gameOver) {
+		
+		else if (traitor.isEmpty() && !gameOver) {
 			
 			scoreboard.hideScoreboard();
 			
@@ -385,18 +414,32 @@ public class TypeTTT extends Type{
 				
 			
 			}
-			
+			postResult(true);
 			
 			
 		}
 			
 		if (won && !gameOver) {
-			Bukkit.broadcastMessage("END");
+			
+			
+			new BukkitRunnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					Discord.unMuteAll();
+				}
+			}.runTaskLater(main.plugin, 20);
+			
+			Music.sp.destroy();
+			CorpseUtils.removeAllCorpses();
 			for(Entity e : Bukkit.getWorld("world").getEntities()){
 				if(e.getType() != EntityType.PLAYER){
 					e.remove();
 				}
 			}
+			
+			Spelldrop.items.clear();
 			GameRunnable.stop();
 			Gamestate.setGameState(Gamestate.LOBBY);
 			LobbyBackgroundRunnable.start();
@@ -404,11 +447,60 @@ public class TypeTTT extends Type{
 			scoreboard.hide = true;
 			gameOver = true;
 			players.clear();
-			
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
+				
+			}
 		}
 		
 		
 	}
+	}
+	
+	public void postResult(boolean innoWin) {
+	    EmbedBuilder builder = new EmbedBuilder();
+
+	    ArrayList<String> winners = new ArrayList<String>();
+	    if (innoWin) {
+	    	builder.appendField("Gewinnerteam", "Die Unschuldigen", true);
+	    	
+	    	for (Player p : startInnocent) {
+	    		winners.add(p.getName());
+	    	}
+	    }
+	    else {
+	    	builder.appendField("Gewinnerteam", "Die Verräter", true);
+	    	for (Player p : startTraitor) {
+	    		winners.add(p.getName());
+	    	}
+	    }
+	    String text = "";
+	    for (String s : winners) {
+	    	text += s+" ";
+	    }
+	    if (text == null)
+	    	return;
+	    builder.appendField("Gewinner", text, false);
+	    String allPlayers = "";
+	    for (Player p : Bukkit.getOnlinePlayers()) {
+	    	allPlayers += p.getName()+" ";
+	    }
+	    builder.appendField("Teilnehmer", allPlayers, false);
+	    builder.withAuthorName("Raiton-Game Info Service");
+	    builder.withAuthorIcon("http://minel0l.lima-city.de/esze.jpg");
+
+	    builder.withColor(java.awt.Color.BLUE);
+	    builder.withTitle("Eszentrium TTT");
+	    builder.withTimestamp(System.currentTimeMillis());
+	    
+	    
+	    builder.withDescription("Spielzeit: "+ secToMin(gameLengthSeconds-secondsLeft));
+
+	    builder.withThumbnail("http://minel0l.lima-city.de/ttt.jpg");
+
+	    RequestBuffer.request(() -> Discord.channel.getGuild().getChannelByID(621398787155558400L).sendMessage(builder.build()));
+		
+	    
 	}
 	
 }

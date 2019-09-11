@@ -24,6 +24,7 @@ public class Teleport extends Spell {
 		name = "§bTeleport";
 		cooldown = 20 * 38;
 		speed = 2;
+		hitSpell = true;
 		steprange = 100;
 	}
 	

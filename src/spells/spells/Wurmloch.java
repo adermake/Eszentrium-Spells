@@ -62,6 +62,7 @@ public class Wurmloch extends Spell {
 		
 		delay++;
 		if (delay > 5) {
+			delay = 0;
 			ParUtils.parKreisDir(Particles.DRAGON_BREATH, loc.clone().add(0,16,0), 6, 0, 2, new Vector(0,1,0), new Vector(0,-1,0));
 		}
 		

@@ -25,6 +25,7 @@ public class Verstummen extends Spell {
 		name = "§eVerstummen";
 		cooldown = 20 * 38;
 		speed = 4;
+		hitSpell = true;
 		steprange = 30;
 	}
 	

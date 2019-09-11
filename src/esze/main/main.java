@@ -19,35 +19,44 @@ import net.minecraft.server.v1_13_R1.ParticleParam;
 import net.minecraft.server.v1_13_R1.ParticleParamItem;*/
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.inventivetalent.packetlistener.PacketListenerAPI;
+import org.inventivetalent.packetlistener.handler.ReceivedPacket;
+import org.inventivetalent.packetlistener.handler.SentPacket;
 
 import com.google.gson.JsonObject;
 
-import esze.analytics.solo.SaveUtils;
 import esze.enums.GameType;
 import esze.enums.GameType.TypeEnum;
 import esze.enums.Gamestate;
 import esze.listeners.Block;
 import esze.listeners.CancelClick;
+import esze.listeners.Chat;
 import esze.listeners.Damage;
 import esze.listeners.Death;
 import esze.listeners.DropPickup;
+import esze.listeners.Emerald;
 import esze.listeners.FBoost;
 import esze.listeners.Hunger;
 import esze.listeners.Interact;
 import esze.listeners.Join;
-import esze.listeners.LeaveVehicle;
 import esze.listeners.Move;
 import esze.listeners.Schwertwurf;
 import esze.listeners.Spawn;
 import esze.map.JumpPad;
 import esze.map.JumpPadHandler;
 import esze.map.MapSelect;
-import esze.map.MapUtils;
 import esze.menu.Menu;
 import esze.utils.ChatUtils;
+import esze.utils.CorpseUtils;
 import esze.utils.ItemStackUtils;
 import esze.utils.LibUtils;
+import esze.utils.Music;
+import esze.utils.TTTCorpse;
+import esze.utils.TTTFusion;
+import esze.utils.TTTTrade;
+import esze.voice.Discord;
 import net.minecraft.server.v1_14_R1.MinecraftServer;
+import net.minecraft.server.v1_14_R1.PacketPlayInSteerVehicle;
 import spells.spellcore.Cooldowns;
 import spells.spellcore.EventCollector;
 import spells.spellcore.SpellList;
@@ -56,7 +65,7 @@ import spells.spellcore.Spelldrop;
 public class main extends JavaPlugin {
 	
 	public static main plugin;
-	public static String discord_TOKEN = "lolxd";
+	public static String discord_TOKEN = "NjIxMzA3NjA3NzU1MzkxMDQ2.XXkWCA.N_TEnvxb_eEXoo7yNb9isIajh2c";
 	public static String mapname;
 	public static final String voiddamage = "void";
 	public static HashMap<Player, String> damageCause = new HashMap<Player, String>();
@@ -65,6 +74,8 @@ public class main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
+		
+		
 		
 		plugin = this;
 		//R
@@ -112,10 +123,19 @@ public class main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Block(), this);
 		getServer().getPluginManager().registerEvents(new DropPickup(), this);
 		getServer().getPluginManager().registerEvents(new JumpPadHandler(), this);
+		getServer().getPluginManager().registerEvents(new Emerald(), this);
 		getServer().getPluginManager().registerEvents(new MapSelect(), this);
 		getServer().getPluginManager().registerEvents(new Menu(), this);
 		getServer().getPluginManager().registerEvents(new Spelldrop(), this);
-		getServer().getPluginManager().registerEvents(new LeaveVehicle(), this);
+		getServer().getPluginManager().registerEvents(new TTTFusion(), this);
+		getServer().getPluginManager().registerEvents(new TTTTrade(), this);
+		getServer().getPluginManager().registerEvents(new Music(), this);
+		getServer().getPluginManager().registerEvents(new Chat(), this);
+		TTTFusion.start();
+		
+		PacketListner.registerPackets();
+		
+		
 		
 		JumpPadHandler.start();
 		Gamestate.setGameState(Gamestate.LOBBY);
@@ -149,17 +169,62 @@ public class main extends JavaPlugin {
 			p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
 			p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Test", null, true));
 		}
-		//Discord.run(); DISCORD STUFF
+		Discord.run(); 
+		
+		
+		
+		
+		
+			
+			
+			
+			
+		
+		// PACKETS
+		
+/*
+		protocolManager.addPacketListener( new PacketAdapter(main.plugin, ListenerPriority.NORMAL, 
+		          PacketType.Play.Client.STEER_VEHICLE) {
+		    @Override
+		    public void onPacketReceiving (com.comphenix.protocol.events.PacketEvent e) {
+		    	Bukkit.broadcastMessage("y");
+		        if(e.getPacketType() == PacketType.Play.Client.STEER_VEHICLE) {
+		            if(e.getPacket().getHandle() instanceof PacketPlayInSteerVehicle) {
+		                Field f = null;
+		                try {
+		                    f = PacketPlayInSteerVehicle.class.getDeclaredField("d");
+		                    f.setAccessible(true);
+		                    Bukkit.broadcastMessage("X");
+		                   
+		                    	 f.set(e.getPacket().getHandle(), false);
+		                    	 
+		                    	 Bukkit.broadcastMessage("Xy");
+		                    
+		                   
+		                } catch (Exception e1) {
+		                    e1.printStackTrace();
+		                }
+		            }
+		        }
+		    }
+		 
+		    @Override
+		    public void onPacketSending (com.comphenix.protocol.events.PacketEvent e) {}
+		});
+		*/
 	}
 	
 	@Override
 	public void onDisable() {
 		//SaveUtils.backup();
+		
+		CorpseUtils.removeAllCorpses();
 		for(Entity e : Bukkit.getWorld("world").getEntities()){
 			if(e.getType() != EntityType.PLAYER){
 				e.remove();
 			}
 		}
+		Discord.unMuteAll();
 	}
 	
 	

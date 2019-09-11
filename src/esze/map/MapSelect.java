@@ -125,12 +125,7 @@ public class MapSelect implements Listener{
 				openSelection(p);
 			}
 		}
-		if(i != null && i.getType() == Material.EMERALD){
-			if(i.hasItemMeta() && i.getItemMeta().hasDisplayName() && i.getItemMeta().getDisplayName().equals("§cSchwarzmarkt")){
-				e.setCancelled(true);
-				new TraitorshopMenu().open(p);
-			}
-		}
+		
 	}
 	
 	public static String maxVotes(){

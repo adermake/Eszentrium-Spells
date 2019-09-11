@@ -22,6 +22,7 @@ public class ThermolanzeLaser extends Spell{
 		name ="§eThermolanze";
 		speed = 60;
 		steprange = 200;
+		hitSpell = true;
 		castSpell(caster, name);	
 		
 		

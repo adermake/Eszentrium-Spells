@@ -13,6 +13,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+
+import esze.main.PacketListner;
 import esze.main.main;
 import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.Particles;
@@ -132,7 +134,9 @@ public class Opfersuche extends Spell {
 		// TODO Auto-generated method stub
 		damage(p, 4, caster);
 		playSound(Sound.ENTITY_PHANTOM_HURT,loc,5,2F);
+		PacketListner.noExit.add(p);
 		ent.addPassenger(p);
+		
 		
 	}
 
@@ -174,6 +178,11 @@ public class Opfersuche extends Spell {
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
+		for (Entity ent : grabbed) {
+			if (ent instanceof Player) {
+				PacketListner.noExit.remove(ent);
+			}
+		}
 		ent.remove();
 	}
 

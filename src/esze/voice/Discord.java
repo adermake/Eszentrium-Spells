@@ -33,7 +33,7 @@ public class Discord {
 			@Override
 			public void run() {
 				for(IGuild g : discordbot.getGuilds()){
-					channel = g.getVoiceChannelByID(262298587625422848L);
+					channel = g.getVoiceChannelByID(621375797953036328L);
 					channel.join();
 				}
 			}
@@ -46,6 +46,9 @@ public class Discord {
 	public static void setMuted(Player player, boolean shouldMute){
 		RequestBuffer.request(() -> {
 			for(IUser p : channel.getGuild().getUsers()){
+				if (!channel.getConnectedUsers().contains(p)) {
+					continue;
+				}
 				if(p.getName().equalsIgnoreCase(player.getName()) || (p.getNicknameForGuild(channel.getGuild()) != null && p.getNicknameForGuild(channel.getGuild()).equalsIgnoreCase(player.getName()))){
 					channel.getGuild().setMuteUser(p, shouldMute);
 					if(shouldMute == false){

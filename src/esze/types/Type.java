@@ -3,6 +3,7 @@ package esze.types;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ import esze.main.main;
 import esze.map.JumpPadHandler;
 import esze.scoreboards.Scoreboard;
 import esze.utils.PlayerUtils;
+import sx.blah.discord.util.EmbedBuilder;
 
 public class Type {
 	
@@ -75,4 +77,7 @@ public class Type {
 		
 		Bukkit.broadcastMessage(p.getName() + "ist raus");
 	}
+	
+	
+	
 }

@@ -1,20 +1,29 @@
-package spells.spells;
+package spells.stagespells;
 
-import org.bukkit.Sound;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import spells.spellcore.Spell;
-import spells.stagespells.ThermolanzeLaser;
+import spells.spells.SchneidendePfeile;
 
-public class Thermolanze extends Spell {
+public class Pfeil extends Spell {
 
-	
-	public Thermolanze() {
-		cooldown = 20 * 60;
-		name = "§eThermolanze";
-		steprange = 60;
+	Location toLoc;
+	Vector dir;
+	public Pfeil(String name,Location toLoc,Player caster) {
+		toLoc = this.toLoc;
+		this.caster = caster;
+		this.name = name;
+		Arrow a = (Arrow) spawnEntity(EntityType.ARROW);
+		
+		steprange = 100;
+		dir = caster.getLocation().getDirection();
+		castSpell(caster, name);
 	}
 	
 	@Override
@@ -38,8 +47,7 @@ public class Thermolanze extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		playSound(Sound.ENTITY_HUSK_DEATH,loc,10F,1F);
-		new ThermolanzeLaser(caster,refined);
+		
 	}
 
 	@Override

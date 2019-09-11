@@ -20,6 +20,7 @@ import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -153,6 +154,7 @@ public class EventCollector implements Listener {
 
 		}
 		}
+		
 
 	}
 	@EventHandler
@@ -160,10 +162,20 @@ public class EventCollector implements Listener {
 		Spell.pressingF.add(e.getPlayer());
 		e.setCancelled(true);
 	}
+	
+	
+	
+	
 	@EventHandler
-	public void plsDontLeave(VehicleExitEvent e) {
-		e.setCancelled(true);
+	public void plsDontLeave(PlayerToggleSneakEvent e) {
+		if (e.getPlayer().getVehicle() != null) {
+			Bukkit.broadcastMessage("STAY");
+			e.setCancelled(true);
+		}
+		
 	}
+	
+	
 	@EventHandler
 	public void onTarget(EntityTargetEvent e) {
 		

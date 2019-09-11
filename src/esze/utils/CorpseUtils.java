@@ -76,7 +76,7 @@ public class CorpseUtils {
 		PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(cID = entityPlayer.getId(), watcher, false);
 		
 		for(Player all : showTo){
-			Bukkit.broadcastMessage("Paket an "+all.getName()+" geschickt!");
+			
 			((CraftPlayer) all).getHandle().playerConnection.sendPacket(packet);
 		}
 		allCorpses.put(cID, entityPlayer);
@@ -125,6 +125,12 @@ public class CorpseUtils {
 		}
 	}
 	
+	
+	public static void removeAllCorpses() {
+		for (int key : allCorpses.keySet()) {
+			removeCorpseForAll(key);
+		}
+	}
 	private static byte getFixRotation(float yawpitch){
         return (byte) ((int) (yawpitch * 256.0F / 360.0F));
 	}

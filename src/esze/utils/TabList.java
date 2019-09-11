@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import net.minecraft.server.v1_14_R1.EntityPlayer;
 import net.minecraft.server.v1_14_R1.IChatBaseComponent;
 import net.minecraft.server.v1_14_R1.IChatBaseComponent.ChatSerializer;
 import net.minecraft.server.v1_14_R1.PacketPlayOutPlayerListHeaderFooter;
@@ -25,8 +26,8 @@ public class TabList {
         CraftPlayer craftplayer = (CraftPlayer)player;
         PlayerConnection connection =
           craftplayer.getHandle().playerConnection;
-          IChatBaseComponent hj = ChatSerializer.a(ChatColor.translateAlternateColorCodes('&', "{\"text\": \"" + header + "\"}"));
-          IChatBaseComponent fj = ChatSerializer.a(ChatColor.translateAlternateColorCodes('&', "{\"text\": \"" + footer + "\"}"));
+          IChatBaseComponent hj = ChatSerializer.a(ChatColor.translateAlternateColorCodes('&', "{text: '" + header + "'}"));
+          IChatBaseComponent fj = ChatSerializer.a(ChatColor.translateAlternateColorCodes('&', "{text: '" + footer + "'}"));
         PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter();
         try
         {
@@ -44,4 +45,25 @@ public class TabList {
         connection.sendPacket(packet);
         //DISABLED = NEW CLOUDSYSTEM
       }
+    
+    
+    public static void setPlayerlistHeader(Player player, String header) {
+        CraftPlayer cplayer = (CraftPlayer) player;
+        PlayerConnection connection = cplayer.getHandle().playerConnection;
+       
+        IChatBaseComponent top = ChatSerializer.a("{text: '" + header + "'}");
+       
+        PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter();
+       
+        try {
+            Field headerField = packet.getClass().getDeclaredField("a");
+            headerField.setAccessible(true);
+            headerField.set(packet, top);
+            headerField.setAccessible(!headerField.isAccessible());
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        connection.sendPacket(packet);
+    }
 }
