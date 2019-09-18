@@ -13,28 +13,26 @@ import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 import spells.stagespells.ExplosionDamage;
 import spells.stagespells.Repulsion;
+import spells.stagespells.VampirpilzStage2;
 
 public class Vampirpilz extends Spell{
 
 	public Vampirpilz() {
-		cooldown = 5;
+		cooldown = 20 * 62;
 		steprange = 60;
 		name = "§eVampirpilz";
-		
+		hitSpell = true;
 	}
 	boolean holding = true;
 	Item i;
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		ItemStack m = new ItemStack(Material.MUSHROOM_STEM);
-		ItemStack m1 = new ItemStack(Material.MUSHROOM_STEM);
-		ItemStack m2 = new ItemStack(Material.RED_MUSHROOM_BLOCK);
+		ItemStack m = new ItemStack(Material.RED_MUSHROOM);
+		
 		i = caster.getWorld().dropItem(loc, m);
-		Item i2 = caster.getWorld().dropItem(loc, m1);
-		Item i3 = caster.getWorld().dropItem(loc, m2);
-		i.addPassenger(i2);
-		i2.addPassenger(i3);
+	
+		
 		 
 		//ar.addPassenger(i);
 		if (caster.isSneaking()) {
@@ -59,13 +57,16 @@ public class Vampirpilz extends Spell{
 		
 	}
 
+	
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
 		
-	
 		loc = i.getLocation();	
-		
+		if (i.isOnGround()) {
+			
+			dead = true;
+		}
 	}
 
 	@Override
@@ -96,11 +97,13 @@ public class Vampirpilz extends Spell{
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
+		
+		new VampirpilzStage2(caster, name, loc,refined);
 		loc = i.getLocation();
-		ParUtils.dropItemEffectRandomVector(loc, Material.RED_MUSHROOM_BLOCK, 22, 50, 1);
-		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 5, 1);
-		new ExplosionDamage(7, 11, caster, loc,name);
-		new Repulsion(7, 3, caster, loc,name);
+		ParUtils.dropItemEffectRandomVector(loc, i.getLocation().add(0,-1,0).getBlock().getType(), 6, 50, 0.4);
+		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 5, 2);
+		
+		
 		i.remove();
 		
 	}

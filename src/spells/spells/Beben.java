@@ -17,7 +17,7 @@ public class Beben extends Spell{
 	public Beben() {
 		
 		name = "§eBeben";
-		steprange = 10;
+		steprange = 16;
 		cooldown = 20*40;
 		hitEntity = true;
 		hitPlayer = true;
@@ -134,7 +134,7 @@ public class Beben extends Spell{
 	public void onPlayerHit(Player p) {
 		damage(p,6,caster);
 		
-		doKnockback(p, caster.getLocation(), 3+steprange/20);
+		doKnockback(p, caster.getLocation(), 3+steprange/10);
 		p.setVelocity(p.getVelocity().setY(1.0D+steprange/30));
 		
 
@@ -144,7 +144,7 @@ public class Beben extends Spell{
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
-		doKnockback(ent, caster.getLocation(), 3+steprange/20);
+		doKnockback(ent, caster.getLocation(), 3+steprange/10);
 		ent.setVelocity(ent.getVelocity().setY(1.0D+steprange/30));
 		
 	}

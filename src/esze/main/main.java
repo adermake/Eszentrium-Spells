@@ -54,6 +54,7 @@ import esze.utils.CorpseUtils;
 import esze.utils.ItemStackUtils;
 import esze.utils.LibUtils;
 import esze.utils.Music;
+import esze.utils.PlayerUtils;
 import esze.utils.TTTCorpse;
 import esze.utils.TTTFusion;
 import esze.utils.TTTTrade;
@@ -153,7 +154,7 @@ public class main extends JavaPlugin {
 		PacketListner.registerPackets();
 		
 		
-		
+		PlayerUtils.stopVelocity();
 		JumpPadHandler.start();
 		Gamestate.setGameState(Gamestate.LOBBY);
 		SpellList.registerSpells();
@@ -177,7 +178,7 @@ public class main extends JavaPlugin {
 			p.setHealth(20);
 			p.setMaxHealth(20);
 			p.setWalkSpeed(0.2F);
-			
+			p.setGlowing(false);
 			//Clears Inventory of Players
 			if (p.getGameMode().equals(GameMode.SURVIVAL)) {
 				p.getInventory().clear();

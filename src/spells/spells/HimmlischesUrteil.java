@@ -26,7 +26,7 @@ public class HimmlischesUrteil extends Spell {
 		cooldown = 20*40;
 		casttime = 25;
 		steprange = 40;
-		hitboxSize = 3.5;
+		hitboxSize = 5.5;
 		hitPlayer = true;
 		hitEntity = true;
 	}

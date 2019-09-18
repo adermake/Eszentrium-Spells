@@ -23,7 +23,7 @@ public class Verstummen extends Spell {
 	
 	public Verstummen() {
 		name = "§eVerstummen";
-		cooldown = 20 * 38;
+		cooldown = 20 * 30;
 		speed = 4;
 		hitSpell = true;
 		steprange = 30;

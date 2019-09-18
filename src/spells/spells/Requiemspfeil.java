@@ -31,7 +31,7 @@ public class Requiemspfeil extends Spell {
 		name = "§eRequiemspfeil";
 		steprange = 100;
 		cooldown = 20 * 40;
-		hitboxSize = 3;
+		hitboxSize = 1.5;
 		speed = 1;
 		
 		
@@ -117,10 +117,10 @@ public class Requiemspfeil extends Spell {
 
 	@Override
 	public void onPlayerHit(Player p) {
-		playSound(Sound.ITEM_CROSSBOW_HIT,ori,5,1);
-		playSound(Sound.ITEM_CROSSBOW_HIT,caster.getLocation(),5,1);
+		playSound(Sound.ENTITY_ARROW_HIT_PLAYER,ori,5,1);
+		playSound(Sound.ENTITY_ARROW_HIT_PLAYER,caster.getLocation(),5,1);
 		// TODO Auto-generated method stub
-		damage(p, 5+speedX/6, caster);
+		damage(p, 5+speedX/8, caster);
 		dead = true;
 	}
 
@@ -128,8 +128,8 @@ public class Requiemspfeil extends Spell {
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		ParUtils.createParticle(Particles.EXPLOSION_EMITTER, toLoc, 0,0, 0, 1, 1);
-		playSound(Sound.ITEM_CROSSBOW_HIT,caster.getLocation(),5,1);
-		playSound(Sound.ITEM_CROSSBOW_HIT,ori,5,1);
+		playSound(Sound.ENTITY_ARROW_HIT_PLAYER,ori,5,1);
+		playSound(Sound.ENTITY_ARROW_HIT_PLAYER,caster.getLocation(),5,1);
 		damage(ent, speedX/5, caster);
 		dead = true;
 	}

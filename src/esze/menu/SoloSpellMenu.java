@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.analytics.solo.SaveEsze;
 import esze.analytics.solo.SaveSelection;
 import esze.analytics.solo.SaveUtils;
+import esze.main.main;
+import esze.types.TypeSOLO;
 import esze.utils.NBTUtils;
 import esze.utils.PlayerUtils;
 import spells.spellcore.Spell;
@@ -46,7 +49,14 @@ public class SoloSpellMenu extends ItemMenu{
 		ItemStack is = NBTUtils.setNBT("Spell", "true", icon);
 		p.getInventory().addItem(is);
 		p.setNoDamageTicks(10);
-		p.setVelocity(p.getVelocity().setY(1));
+		p.teleport(TypeSOLO.loc.get(p));
+		PlayerUtils.snare(p, false);
+		new BukkitRunnable() {
+			public void run() {
+				p.setVelocity(p.getVelocity().setY(1));
+			}
+		}.runTaskLater(main.plugin,1);
+	
 		PlayerUtils.showPlayer(p);
 		
 		SaveUtils.addPlayerSelection(p.getName(), new SaveSelection(icon.getName(), spells.get(0).getName(),

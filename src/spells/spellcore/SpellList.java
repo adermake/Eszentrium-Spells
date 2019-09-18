@@ -35,6 +35,8 @@ import spells.spells.Meteoritenhagel;
 import spells.spells.Notenzauber;
 import spells.spells.Opfersuche;
 import spells.spells.Orbitar;
+import spells.spells.Pyroschlag;
+import spells.spells.Ranke;
 import spells.spells.Raumwechsel;
 import spells.spells.RufderOzeane;
 import spells.spells.Schallbrecher;
@@ -51,6 +53,7 @@ import spells.spells.SiegelderFurcht;
 import spells.spells.SpeerderZwietracht;
 import spells.spells.Teleport;
 import spells.spells.Thermolanze;
+import spells.spells.Vampirpilz;
 import spells.spells.Verstummen;
 import spells.spells.Wunsch;
 import spells.spells.Wurmloch;
@@ -164,8 +167,9 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Schallbrecher());
 		registerSpell(new SchwerterausLicht());
 		registerSpell(new Schock());
-		registerSpell(new Schwerkraftsmanipulation());
+		
 		registerSpell(new Requiemspfeil());
+		registerSpell(new Ranke());
 		registerSpell(new Schicksalsschnitt());
 		registerSpell(new SchnittdersiebenWinde());
 		registerSpell(new SpeerderZwietracht());
@@ -173,6 +177,8 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Teleport());
 		registerSpell(new Thermolanze());
 		registerSpell(new Verstummen());
+		registerSpell(new Vampirpilz());
+		registerSpell(new Pyroschlag());
 		registerSpell(new Wunsch());
 		registerSpell(new Wurmloch());
 		registerSpell(new Zaubersprung());

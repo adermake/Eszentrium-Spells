@@ -379,12 +379,30 @@ public class ParUtils {
 	}
 	public static void dashParticleTo(ParticleType par,Entity p,Location l) {
 		Location loc = l.clone();
+		
 		loc.add(randInt(-16,16),randInt(-16,16),randInt(-16,16));
 		
 		new BukkitRunnable() {
 			public void run() {
 				Vector flyTo = p.getLocation().toVector().subtract(loc.toVector()).normalize();
 				createParticle(par, loc, 0, 0, 0, 1, 0);
+				loc.add(p.getLocation().toVector().subtract(loc.toVector()).normalize().multiply(1));
+				if (loc.distance(p.getLocation())<1) {
+					this.cancel();
+				}
+			}
+		}.runTaskTimerAsynchronously(esze.main.main.plugin, 1, 1);
+	}
+	
+	public static void dashParticleToRedstone(Entity p,Location l,double spread,Color c,float size) {
+		Location loc = l.clone();
+		if (spread != 0)
+		loc.add(randDouble(-spread,spread),randDouble(-spread,spread),randDouble(-spread,spread));
+		
+		new BukkitRunnable() {
+			public void run() {
+				Vector flyTo = p.getLocation().toVector().subtract(loc.toVector()).normalize();
+				createRedstoneParticle(loc, 0, 0, 0, 1, c,size);
 				loc.add(p.getLocation().toVector().subtract(loc.toVector()).normalize().multiply(1));
 				if (loc.distance(p.getLocation())<1) {
 					this.cancel();
@@ -426,6 +444,7 @@ public class ParUtils {
 		for (int i = count;i>0;i--) {
 			Location loc = l.clone();
 			loc.add(MathUtils.randInt(-radius,radius),0,MathUtils.randInt(-radius,radius));
+			
 			locs.add(loc);
 		}
 		return locs;
@@ -685,6 +704,30 @@ public class ParUtils {
 				}
 			}
 		}.runTaskLater(main.plugin, delay);
+		
+	}
+	
+	public static void pullItemEffectVector(Location loc,Material m,int delay,Location toLocation,double speed) {
+	
+		
+			ItemStack im = new ItemStack(m);
+			Item it = loc.getWorld().dropItem(loc, im);
+			
+			it.setPickupDelay(1000+delay);
+		
+		
+		new BukkitRunnable() {
+			int t = 0;
+			public void run() {
+				
+				t++;
+				it.setVelocity(toLocation.toVector().subtract(it.getLocation().toVector()).normalize().multiply(speed));
+				if (t>delay || it.getLocation().distance(toLocation)<0.3) {
+					this.cancel();
+					it.remove();
+				}
+			}
+		}.runTaskTimer(main.plugin, 1,1);
 		
 	}
 	

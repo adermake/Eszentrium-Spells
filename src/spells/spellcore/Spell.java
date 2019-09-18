@@ -125,9 +125,14 @@ public abstract class Spell {
 			public void run()
 			{
 				cast++;
+				if (silenced.contains(caster)) {
+					this.cancel();
+				}
 				cast();
+				
 				if (cast>=casttime) {
 					//loc = caster.getEyeLocation();
+					
 					launch();
 					startSpellLoop();
 					this.cancel();
@@ -549,7 +554,7 @@ public abstract class Spell {
 	}
 	public Player pointEntity(Player p) {
 		int range = 300;
-		int toleranz = 1;
+		int toleranz = 3;
 		Location loc = p.getLocation();
 		for (double t = 1; t <= range; t=t+0.5) {
 
@@ -762,11 +767,24 @@ public abstract class Spell {
 	}
 	
 	public boolean swap() {
-		if (EventCollector.quickSwap.contains(caster)) {
-			EventCollector.quickSwap.remove(caster);
+		
+			
+			
+				
+			if (EventCollector.quickSwap.contains(caster)) {
+				new BukkitRunnable() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if (EventCollector.quickSwap.contains(caster)) {
+						EventCollector.quickSwap.remove(caster);
+					}
+				}
+			}.runTaskLater(main.plugin, 1);
 			return true;
 			
 		}
+			
 		return false;
 	}
 	

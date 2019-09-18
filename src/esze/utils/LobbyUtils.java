@@ -53,7 +53,7 @@ public class LobbyUtils {
 			p.setAllowFlight(false);
 			p.getInventory().clear();
 			p.teleport((Location) main.plugin.getConfig().get("lobby.loc"));
-			
+			p.setGlowing(false);
 			PlayerUtils.hidePlayer(p,35);
 		}
 		SoundUtils.playSound(Sound.BLOCK_PORTAL_TRAVEL, l,2,0.6F);

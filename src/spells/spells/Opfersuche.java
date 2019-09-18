@@ -26,7 +26,7 @@ public class Opfersuche extends Spell {
 		name = "§6Opfersuche";
 		cooldown = 20 * 34;
 		steprange = 200;
-		hitboxSize= 4;
+		hitboxSize= 1.5;
 		hitSpell = true;
 	}
 	
@@ -55,71 +55,34 @@ public class Opfersuche extends Spell {
 		// TODO Auto-generated method stub
 		playSound(Sound.ENTITY_PHANTOM_BITE,loc,5,1.5F);
 		loc = caster.getLocation();
-		loc.setYaw(loc.getYaw()+-45);
+		
 	}
-
+	int i = (int) step;
 	int groundTime = 0;
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
 		ent.setFireTicks(-1000);
 		playSound(Sound.ENTITY_PHANTOM_FLAP,ent.getLocation(),1,1.5F);
-		ent.setRotation(loc.getYaw(), loc.getPitch());
 		
-		
-		
-		if (step>45) {
-			loc.setDirection(caster.getLocation().toVector().subtract(ent.getLocation().toVector()));
-			ParUtils.createParticle(Particles.LARGE_SMOKE, ent.getLocation(), 0, 0, 0, 2, 0.01);
-			if (ent.getPassengers().isEmpty()) {
-				ent.teleport(loc.add(loc.getDirection().multiply(1)));
-			}
-			else {
-				ent.setVelocity(loc.getDirection().multiply(3));
-			}
+		if (refined) {
+			ent.setSize((int)step);
+			i = (int) step;
+			if (i >10)
+				i = 10;
 			
-			speed = 3;
+			hitboxSize = 10;
 		}
-		else {
+		
+		
+		
 			
 			ParUtils.createParticle(Particles.LARGE_SMOKE, ent.getLocation().add(0,2,0), 0, 0, 0, 2, 0.01);
-			loc.setYaw(loc.getYaw()+2);
-			if (ent.getPassengers().isEmpty()) {
-				ent.teleport(loc.add(loc.getDirection().multiply(2)));
-			}
-			else {
-				ent.setVelocity(loc.getDirection().multiply(2));
-			}
-		}
-		if (ent.getLocation().distance(caster.getLocation())<1 && step > 50) {
-			dead = true;
-		}
+			ent.teleport(loc.add(loc.getDirection().multiply(2)));
+			
+				
+			
 		
-		if (caster.isSneaking() && refined) {
-			Location save = ent.getLocation();
-			boolean hadPassanger = false;
-			for (Entity e : ent.getPassengers()) {
-				//e.remove();
-				
-				hadPassanger = true;
-				
-				
-				ent.remove();
-				
-				ent = (Phantom) caster.getWorld().spawnEntity(save, EntityType.PHANTOM);
-				bindEntity(ent);
-				e.setVelocity(randVector().multiply(2));
-			}
-			
-			if (hadPassanger) {
-				playSound(Sound.ENTITY_WITHER_HURT,loc,5,1.5F);
-				ParUtils.parKreisDot(Particles.LARGE_SMOKE, loc.clone(), 2, 0, 1, loc.getDirection());
-			}
-			
-		}
-		Vector dir = loc.getDirection();
-		loc = ent.getLocation();
-		loc.setDirection(dir);
 		
 	}
 
@@ -132,35 +95,80 @@ public class Opfersuche extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		damage(p, 4, caster);
+		damage(p, 4+i, caster);
+		phantomSpin(p,1);
 		playSound(Sound.ENTITY_PHANTOM_HURT,loc,5,2F);
-		PacketListner.noExit.add(p);
-		ent.addPassenger(p);
+		new BukkitRunnable() {
+			int t = 0;
+			public void run() {
+				t++;
+				p.setVelocity(new Vector(0,0.05,0));
+				if (t > 100) {
+					this.cancel();
+					
+				}
+				
+			}
+		}.runTaskTimer(main.plugin, 1,1);
 		
 		
+		if (!refined)
+		dead = true;
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent2) {
-		/*
+		
+		playSound(Sound.ENTITY_PHANTOM_HURT,loc,5,2F);
+		phantomSpin(ent2,1);
+	
 		new BukkitRunnable() {
 			int t = 0;
-			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				t++;
-				doPull(ent2, ent.getLocation(), 2);
-				if (t>30) {
+				ent2.setVelocity(new Vector(0,0.05,0));
+				if (t > 100) {
 					this.cancel();
+					
 				}
 			}
-		}.runTaskTimer(main.plugin, 1, 1);
-		
-		*/
-		damage(ent, 4, caster);
-		ent.addPassenger(ent2);
+		}.runTaskTimer(main.plugin, 1,1);
+		damage(ent, 4+i, caster);
+		if (!refined)
+			dead = true;
 	}
 
+	public void phantomSpin(LivingEntity p,int spin) {
+		Phantom fa = (Phantom) spawnEntity(EntityType.PHANTOM);
+		noTargetEntitys.add(fa);
+		
+		
+		new BukkitRunnable() {
+			int t = 0;
+			Location lastPos = fa.getLocation();
+			public void run() {
+				t++;
+				fa.setFireTicks(-1000);
+				int u = t;
+				if (u > 10) 
+					u = 10;
+				ParUtils.createParticle(Particles.LARGE_SMOKE, fa.getLocation(), 0, 0, 0, 2, 0.01);
+				fa.setSize(u);
+				Location pos = ParUtils.stepCalcCircle(p.getLocation(), 3, new Vector(0,0.1,0), 0, t*spin);
+				pos.setDirection(pos.toVector().subtract(lastPos.toVector()));
+				lastPos = pos.clone();
+				fa.teleport(pos);
+				fa.setTarget(p);
+				fa.setRotation(pos.getYaw(),pos.getPitch());
+				if (t > 100) {
+					this.cancel();
+					fa.remove();
+				}
+				//fa.teleport(l.add(dir));
+			}
+		}.runTaskTimer(main.plugin, 1,1);
+		
+	}
 	@Override
 	public void onSpellHit(Spell spell) {
 		// TODO Auto-generated method stub
@@ -178,11 +186,7 @@ public class Opfersuche extends Spell {
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
-		for (Entity ent : grabbed) {
-			if (ent instanceof Player) {
-				PacketListner.noExit.remove(ent);
-			}
-		}
+		
 		ent.remove();
 	}
 

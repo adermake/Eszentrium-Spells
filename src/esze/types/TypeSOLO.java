@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -30,6 +31,7 @@ import sx.blah.discord.util.RequestBuffer;
 public class TypeSOLO extends Type {
 	boolean gameOver = false;
 	public HashMap<Player, Integer> lives = new HashMap<Player,Integer>();
+	public static HashMap<Player, Location> loc= new HashMap<Player,Location>();
 	public TypeSOLO() {
 		name = "SOLO";
 	}
@@ -76,6 +78,7 @@ public class TypeSOLO extends Type {
 				p.setNoDamageTicks(100);
 				SoloSpellMenu s = new SoloSpellMenu();
 				s.open(p);
+				loc.put(p, p.getLocation());
 				lives.put(p, 4);
 			}
 		setupJumpPad(currentmap);
@@ -125,11 +128,13 @@ public class TypeSOLO extends Type {
 			 s = new SoloSpellMenu();
 			}
 			
+			loc.put(p, p.getLocation());
 			new BukkitRunnable() {
 				public void run() {
 					s.open(p);
 				}
 			}.runTaskLater(main.plugin, 2);
+			PlayerUtils.snare(p, true);
 		}
 		
 		
