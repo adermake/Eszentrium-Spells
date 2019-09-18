@@ -1,4 +1,4 @@
-package spells.spells;
+package spells.stagespells;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import spells.spellcore.Spell;
 
-public class SchreiDesPhoenix extends Spell{
+public class VampirpilzStage2 extends Spell {
 
 	@Override
 	public void setUp() {
@@ -68,4 +68,6 @@ public class SchreiDesPhoenix extends Spell{
 		
 	}
 
+	
+	
 }

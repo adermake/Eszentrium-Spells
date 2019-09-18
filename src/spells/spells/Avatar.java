@@ -22,7 +22,7 @@ public class Avatar extends Spell{
 
 	public Avatar() {
 		name = "§cAvatar";
-		steprange = 350;
+		steprange = 20 * 12;
 		cooldown = 20*60;
 		hitEntity = false;
 		hitPlayer = true;
@@ -41,6 +41,8 @@ public class Avatar extends Spell{
 		caster.setAllowFlight(false);
 		
 	}
+
+	
 
 	@Override
 	public void setUp() {
@@ -72,6 +74,9 @@ public class Avatar extends Spell{
 	int i = 25;
 	@Override
 	public void move() {
+		if(caster.getGameMode() == GameMode.ADVENTURE) 
+			dead = true;
+		
 		loc = g.getLocation();
 		i--;
 		if (caster.isSneaking() || caster.getGameMode().equals(GameMode.ADVENTURE)) {
@@ -175,5 +180,9 @@ public class Avatar extends Spell{
 			}
 		}.runTaskTimer(main.plugin, 0, 1);
 	}
+
+
+
+	
 
 }

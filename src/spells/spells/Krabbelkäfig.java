@@ -116,4 +116,5 @@ public class Krabbelkäfig extends Spell {
 
 	
 	
+	
 }

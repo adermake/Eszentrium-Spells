@@ -16,12 +16,12 @@ import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Cooldowns;
 import spells.spellcore.Spell;
 
-public class Schicksalschnitt extends Spell {
+public class Schicksalsschnitt extends Spell {
 
 	
-	public Schicksalschnitt() {
+	public Schicksalsschnitt() {
 		
-		name = "§cSchicksalschnitt";
+		name = "§cSchicksalsschnitt";
 		steprange = 82;
 		cooldown = 20 * 45;
 	}
@@ -32,7 +32,7 @@ public class Schicksalschnitt extends Spell {
 		// TODO Auto-generated method stub
 		target = pointEntity(caster,33);
 		if (target == null) {
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 			dead = true;
 		}
 		else {
@@ -52,6 +52,8 @@ public class Schicksalschnitt extends Spell {
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
+		if (target == null)
+			return;
 		Location locTp = target.getLocation();
 		locTp.setDirection(caster.getLocation().getDirection());
 		ParUtils.createFlyingParticle(Particles.CLOUD, caster.getLocation(), 0.1, 0.4, 0.1, 30, 2, locTp.toVector().subtract(caster.getLocation().toVector()).normalize());
@@ -62,6 +64,8 @@ public class Schicksalschnitt extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		if (target == null)
+			return;
 		if (step< 30) {
 			spawnCut(target.getLocation(),caster,(int)step);
 		}
@@ -154,4 +158,6 @@ public class Schicksalschnitt extends Spell {
 		
 		
 	}
+
+	
 }

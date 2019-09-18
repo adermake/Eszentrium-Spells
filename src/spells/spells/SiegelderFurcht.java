@@ -159,5 +159,6 @@ public class SiegelderFurcht extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

@@ -99,6 +99,7 @@ public class Magnetball extends Spell{
 				e.setVelocity(loc.toVector().subtract(e.getLocation().toVector()));
 			}
 		}
-	} 
+	}
+	
 
 }

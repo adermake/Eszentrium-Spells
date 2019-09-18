@@ -1,5 +1,7 @@
 package spells.spellcore;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.GameMode;
@@ -89,12 +91,12 @@ public class EventCollector implements Listener {
 							is = NBTUtils.setNBT("MaxCooldown", "" + sp.cooldown, is);
 							is = NBTUtils.setNBT("OriginalName", is.getItemMeta().getDisplayName(), is);
 							}
-							sp.castSpell(p, is.getItemMeta().getDisplayName());
-							if (sp.traitorSpell) {
-								is = new ItemStack(Material.BOOK);
-								ItemMeta m = is.getItemMeta();
-								m.setDisplayName("§7Verbranntes Buch");
-								is.setItemMeta(m);
+							if(sp.castSpell(p, is.getItemMeta().getDisplayName())) {
+								is = NBTUtils.setNBT("Cooldown", "" + "0"+ "", is);
+							}
+							if (sp.traitorSpell && !sp.refund) {
+								
+								is = NBTUtils.setNBT("Burn","true", is);
 							}
 							
 								p.getInventory().setItemInMainHand(is);
@@ -126,14 +128,14 @@ public class EventCollector implements Listener {
 							is = NBTUtils.setNBT("Cooldown", "" + sp.cooldown + "", is);
 							is = NBTUtils.setNBT("MaxCooldown", "" + sp.cooldown, is);
 							is = NBTUtils.setNBT("OriginalName", is.getItemMeta().getDisplayName(), is);
-							sp.castSpell(p, is.getItemMeta().getDisplayName());
+							if(sp.castSpell(p, is.getItemMeta().getDisplayName())) {
+								is = NBTUtils.setNBT("Cooldown", "" + "0"+ "", is);
+							}
+							
 
-							if (sp.traitorSpell) {
-								is = new ItemStack(Material.BOOK);
-								ItemMeta m = is.getItemMeta();
-								m.setDisplayName("§7Verbranntes Buch");
-								is.setItemMeta(m);
-								Bukkit.broadcastMessage("T");
+							if (sp.traitorSpell&& !sp.refund) {
+								
+								is = NBTUtils.setNBT("Burn","true", is);
 							}
 							
 								p.getInventory().setItemInMainHand(is);
@@ -157,8 +159,13 @@ public class EventCollector implements Listener {
 		
 
 	}
+	public static ArrayList<Player> quickSwap = new ArrayList<Player>();
 	@EventHandler
 	public void onPayRespectF(PlayerSwapHandItemsEvent e) {
+		if (!quickSwap.contains(e.getPlayer())) {
+			quickSwap.add(e.getPlayer());
+		}
+		
 		Spell.pressingF.add(e.getPlayer());
 		e.setCancelled(true);
 	}

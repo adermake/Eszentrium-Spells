@@ -155,13 +155,14 @@ public class Schwertwurf implements Listener {
 	}
 	
 	public double getAttackDamage(ItemStack itemStack) {
-        double attackDamage = 1.0;
+        double attackDamage = 5.0;
         UUID uuid = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
         net.minecraft.server.v1_14_R1.ItemStack craftItemStack = CraftItemStack.asNMSCopy(itemStack);
         net.minecraft.server.v1_14_R1.Item item = craftItemStack.getItem();
         if(item instanceof net.minecraft.server.v1_14_R1.ItemSword || item instanceof net.minecraft.server.v1_14_R1.ItemTool || item instanceof net.minecraft.server.v1_14_R1.ItemHoe) {
             Multimap<String, AttributeModifier> map = item.a(EnumItemSlot.MAINHAND);
             Collection<AttributeModifier> attributes = map.get(GenericAttributes.ATTACK_DAMAGE.getName());
+            /*
             if(!attributes.isEmpty()) {
                 Bukkit.getLogger().info("Found one or more attribute modifiers:");
                 for(AttributeModifier am: attributes) {
@@ -181,7 +182,10 @@ public class Schwertwurf implements Listener {
                 }
             }
         }
+        */
+        }
         return attackDamage;
-    }
+   
+	}
 
 }

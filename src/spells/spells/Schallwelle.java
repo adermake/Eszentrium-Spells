@@ -1,5 +1,6 @@
 package spells.spells;
 
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -39,7 +40,7 @@ public class Schallwelle extends Spell{
 	@Override
 	public void move() {
 		loc.add(loc.getDirection().multiply(0.5));
-		
+		playSound(Sound.ENTITY_GENERIC_EXPLODE,loc,0.1f,1f);
 	}
 
 	@Override
@@ -104,5 +105,8 @@ public class Schallwelle extends Spell{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	
 
 }

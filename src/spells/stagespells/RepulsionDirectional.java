@@ -74,7 +74,7 @@ public class RepulsionDirectional extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		
+		tagPlayer(p);
 		doKnockback(p, loc, knockback);
 		
 	}
@@ -102,5 +102,5 @@ public class RepulsionDirectional extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

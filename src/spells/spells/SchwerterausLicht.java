@@ -140,4 +140,5 @@ public class SchwerterausLicht extends Spell{
 		return loc;
 		
 	}
+	
 }

@@ -29,7 +29,7 @@ import com.mojang.authlib.properties.Property;
 
 public class CorpseUtils {
 	
-	private static HashMap<Integer, EntityPlayer> allCorpses = new HashMap<Integer, EntityPlayer>();
+	public static HashMap<Integer, EntityPlayer> allCorpses = new HashMap<Integer, EntityPlayer>();
 	
 	public static ArrayList<Integer> getAllCorpseIDs(){
 		return (ArrayList<Integer>)allCorpses.keySet();

@@ -96,14 +96,15 @@ public class Spelldrop implements Listener {
 			
 			if (a.getLocation().distance(p.getLocation())<1.5) {
 				p.getInventory().addItem(a.getItemInHand());
-				items.get(a).remove();
-				items.remove(a);
+				
 				SoundUtils.playSound( Sound.ENTITY_ITEM_PICKUP, a.getLocation());
 				delete.add(a);
 				
 			}
 		}
 		for (ArmorStand a : delete) {
+			items.get(a).remove();
+			items.remove(a);
 			a.remove();
 		}
 		delete.clear();

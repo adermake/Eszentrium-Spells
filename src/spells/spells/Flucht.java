@@ -156,4 +156,7 @@ public class Flucht extends Spell{
 			}
 		}.runTaskTimer(main.plugin, 1, 1);
 	}
+
+
+
 }

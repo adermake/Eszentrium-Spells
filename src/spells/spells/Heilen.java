@@ -124,5 +124,6 @@ public class Heilen extends Spell{
 			ParUtils.parKreisDirSolid(Particles.TOTEM_OF_UNDYING, loc, 1, 0, 3, loc.getDirection(), loc.getDirection().multiply(-2));
 		}
 	}
+	
 
 }

@@ -128,5 +128,6 @@ public class RufDerOzeaneFish extends Spell{
 		// TODO Auto-generated method stub
 		ent.remove();
 	}
+	
 
 }

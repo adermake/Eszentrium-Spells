@@ -80,5 +80,6 @@ public class Eggsplosive extends Spell {
 		new Explosion(2,9,1,2,caster,loc, name);
 		
 	}
+	
 
 }

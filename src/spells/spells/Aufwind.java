@@ -34,7 +34,7 @@ public class Aufwind extends Spell{
 	
 	@Override
 	public void setUp() {
-		playSound( Sound.ITEM_ELYTRA_FLYING,caster.getLocation(), 1, 1);
+		playSound( Sound.ITEM_ELYTRA_FLYING,caster.getLocation(), 0.3F, 2);
 		if (refined) {
 			hitPlayer = true;
 			hitEntity = true;
@@ -155,5 +155,6 @@ public class Aufwind extends Spell{
 			}
 		}.runTaskTimer(main.plugin, 0, 1);
 	}
+
 
 }

@@ -103,5 +103,6 @@ public class Luftsprung extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

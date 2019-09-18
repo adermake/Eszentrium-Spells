@@ -106,5 +106,6 @@ public class ThermolanzeLaser extends Spell{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

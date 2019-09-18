@@ -30,7 +30,7 @@ public class Schwerkraftsmanipulation extends Spell {
 		// TODO Auto-generated method stub
 		target = pointEntity(caster);
 		if (target == null) {
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 			dead = true;
 		}
 		else {
@@ -59,7 +59,11 @@ public class Schwerkraftsmanipulation extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		
+		if (target == null) {
+			dead =true;
+			return;
+		}
+			
 		target.setVelocity(target.getVelocity().setY(-6));
 	}
 
@@ -107,5 +111,7 @@ public class Schwerkraftsmanipulation extends Spell {
 			gravityMani.remove(target);
 		}
 	}
+
+	
 
 }

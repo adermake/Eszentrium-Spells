@@ -53,7 +53,7 @@ public class TypeTTT extends Type{
 	public ArrayList<Player> startTraitor = new ArrayList<Player>();
 	public HashMap<Player,Player> foundBody = new HashMap<Player,Player>();
 	
-	int gameLengthSeconds = 60 * 10; 
+	int gameLengthSeconds = 60 * 7; 
 	public int secondsLeft = 0;
 	public TypeTTT() {
 		name = "TTT";
@@ -84,7 +84,10 @@ public class TypeTTT extends Type{
 			
 		}
 		sec++;
-		if (sec>10) {
+		int i = 20 - players.size()*2;
+		if (i<5)
+			i = 5;
+		if (sec>i) {
 			spawnNewSpell();
 			sec = 0;
 		}
@@ -125,7 +128,6 @@ public class TypeTTT extends Type{
 		
 		startInnocent.clear();
 		startTraitor.clear();
-		System.out.println("2");
 
 		
 		scoreboard = new TTTScoreboard();
@@ -147,6 +149,7 @@ public class TypeTTT extends Type{
 		
 		Music.startRandomMusic();
 		for (Player p : players) {
+			p.setHealth(20);
 			p.teleport(nextLoc());
 			p.setGameMode(GameMode.SURVIVAL);
 			p.getInventory().clear();
@@ -154,10 +157,9 @@ public class TypeTTT extends Type{
 			p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true));
 			
 		}
-		System.out.println("4");
 		
 		//<
-		for(int i = 0; i<10; i++){
+		for(int i = 0; i<players.size(); i++){
 			spawnNewSpell();
 		}
 		
@@ -171,7 +173,6 @@ public class TypeTTT extends Type{
 			
 		}
 		
-		System.out.println("5");
 		for (Player p : players) {
 			if (!traitor.contains(p)){
 				setInnocent(p);
@@ -201,7 +202,6 @@ public class TypeTTT extends Type{
 			}
 			new Title("§c§lVERRÄTER", "ist deine Rolle").send(p);
 			p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.EMERALD, 1, 0, "§cSchwarzmarkt", null, true));
-			System.out.println("6");
 		}
 		
 		/*
@@ -230,6 +230,9 @@ public class TypeTTT extends Type{
 	public void death(PlayerDeathEvent event) {
 		
 		Player p = event.getEntity();
+		if (p.getGameMode() == GameMode.ADVENTURE)
+			return;
+		p.closeInventory();
 		Discord.setMuted(p, true);
 		TTTCorpse corpse = new TTTCorpse(p, true);
 		corpse.spawn();
@@ -384,7 +387,7 @@ public class TypeTTT extends Type{
 			for (Player p : Bukkit.getOnlinePlayers()) {
 			
 			
-				Title t = new Title("§4Verräter");
+				Title t = new Title("§cVerräter");
 				t.setSubtitle("§7haben gewonnen!");
 				won = true;
 				
@@ -407,7 +410,7 @@ public class TypeTTT extends Type{
 			
 			
 
-				Title t = new Title("§aUnschuldigen");
+				Title t = new Title("§7Die §aUnschuldigen");
 				t.setSubtitle("§7haben gewonnen!");
 				won = true;
 				t.send(p);
@@ -449,7 +452,7 @@ public class TypeTTT extends Type{
 			players.clear();
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
-				
+				p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Georg", null, true));
 			}
 		}
 		

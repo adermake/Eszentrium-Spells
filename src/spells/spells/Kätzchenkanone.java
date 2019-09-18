@@ -17,13 +17,13 @@ import spells.spellcore.Spell;
 import spells.stagespells.Explosion;
 import spells.stagespells.Repulsion;
 
-public class Kätzchenkannone extends Spell {
+public class Kätzchenkanone extends Spell {
 
 	Cat cat;
 
-	public Kätzchenkannone() {
+	public Kätzchenkanone() {
 
-		name = "§6Kätzchenkannone";
+		name = "§6Kätzchenkanone";
 		cooldown = 20 * 20;
 		steprange = 70;
 
@@ -118,5 +118,7 @@ public class Kätzchenkannone extends Spell {
 			ParUtils.dropItemEffectRandomVector(loc, Material.RABBIT_HIDE, 1,40, 0.3);
 		}
 	}
+
+	
 
 }

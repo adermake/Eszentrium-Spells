@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import easyscoreboards.ScoreboardUtil;
 import esze.enums.GameType;
 import esze.enums.Gamestate;
+import esze.listeners.Reconnect;
 import esze.players.PlayerAPI;
 import esze.utils.Actionbar;
 
@@ -18,7 +19,7 @@ public class LobbyBackgroundRunnable {
 	private static int runnableID;
 	
 	public static void start(){
-		
+		Reconnect.disconnected.clear();
 		runnableID = Bukkit.getScheduler().scheduleSyncRepeatingTask(main.plugin, new Runnable() {
 		
 			@Override

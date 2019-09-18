@@ -140,4 +140,6 @@ public class SchockLaser extends Spell {
 	public void onDeath() {
 		// TODO Auto-generated method stub
 	}
+
+	
 }

@@ -21,7 +21,7 @@ public class TraitorshopMenu extends ItemMenu {
 		addClickableItem(2, 1, Material.SHEEP_SPAWN_EGG, "§4Verzaubern","§a6 Punkte");
 		addClickableItem(3, 1, Material.STRING, "§4Griff der sieben Winde","§a6 Punkte");
 		addClickableItem(4, 1, Material.MELON_SLICE, "§4Miiilone","§a4 Punkte");
-		
+		addClickableItem(5, 1, Material.WRITABLE_BOOK, "§4Vorbereiten","§a4 Punkte");
 	}
 
 	
@@ -52,13 +52,16 @@ public class TraitorshopMenu extends ItemMenu {
 		if (icon.getName().equals("§4Miiilone")) {
 			buyItem(p,icon,4);
 		}
+		if (icon.getName().equals("§4Vorbereiten")) {
+			buyItem(p,icon,4);
+		}
 	}
 	
 	public void buyItem(Player p,ItemMenuIcon icon,int price) {
 		if (p.getLevel()>= price) {
 			
 		
-			ItemStack is= new ItemStack(Material.BOOK);
+			ItemStack is= new ItemStack(Material.ENCHANTED_BOOK);
 			ItemMeta im = is.getItemMeta();
 			im.setDisplayName(icon.getName());
 		

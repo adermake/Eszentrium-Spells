@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 
 public class DropPickup implements Listener {
 	
@@ -21,7 +22,10 @@ public class DropPickup implements Listener {
 			p.getInventory().setItemInMainHand(null);
 		}*/
 	}
-	
+	@EventHandler
+	public void onPickUp(PlayerPickupItemEvent e) {
+		e.setCancelled(true);
+	}
 	
 
 }

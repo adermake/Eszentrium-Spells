@@ -196,5 +196,6 @@ public class Erdsurfer extends Spell {
 		// TODO Auto-generated method stub
 
 	}
+	
 
 }

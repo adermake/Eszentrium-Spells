@@ -84,6 +84,8 @@ public class KaminchenEntity extends Spell {
 		if(jumpAble && boundOnGround) {
 			damage = 9;
 			for (Player target : Bukkit.getOnlinePlayers()) {
+				if(target == caster)
+					continue;
 				if (target.getGameMode() == GameMode.SURVIVAL) {
 					if (target.getLocation().distance(ent.getLocation())<6) {
 						
@@ -159,5 +161,7 @@ public class KaminchenEntity extends Spell {
 		}
 			
 	}
+
+	
 
 }

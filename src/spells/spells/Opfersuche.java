@@ -186,4 +186,5 @@ public class Opfersuche extends Spell {
 		ent.remove();
 	}
 
+	
 }

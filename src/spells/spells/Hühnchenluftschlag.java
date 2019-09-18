@@ -27,10 +27,10 @@ import spells.stagespells.Eggsplosive;
 import spells.stagespells.ExplosionDamage;
 import spells.stagespells.Repulsion;
 
-public class Hünchenluftschlag extends Spell{
+public class Hühnchenluftschlag extends Spell{
 
-	public Hünchenluftschlag() {
-		name = "§6Hünchenluftschlag";
+	public Hühnchenluftschlag() {
+		name = "§6Hühnchenluftschlag";
 		cooldown = 20 * 42;
 		steprange = 66;
 	}
@@ -173,5 +173,6 @@ public class Hünchenluftschlag extends Spell{
 		if (c != null)
 		c.remove();
 	}
+
 
 }

@@ -90,5 +90,5 @@ public class RufderOzeane extends Spell{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

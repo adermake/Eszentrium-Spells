@@ -136,4 +136,7 @@ public class Notenzauber extends Spell {
 		}.runTaskTimer(main.plugin, 0, 0);
 	}
 
+
+	
+
 }

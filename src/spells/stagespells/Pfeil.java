@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import spells.spellcore.Spell;
-import spells.spells.SchneidendePfeile;
+import spells.spells.Requiemspfeil;
 
 public class Pfeil extends Spell {
 
@@ -85,5 +85,7 @@ public class Pfeil extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

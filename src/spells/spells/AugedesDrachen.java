@@ -2,6 +2,7 @@ package spells.spells;
 
 import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EntityType;
@@ -52,7 +53,7 @@ public class AugedesDrachen extends Spell{
 	@Override
 	public void launch() {
 		
-		
+		playSound(Sound.ENTITY_ENDER_EYE_DEATH,loc,5f,0.5f);
 	}
 	
 	
@@ -98,6 +99,9 @@ public class AugedesDrachen extends Spell{
 
 	@Override
 	public void display() {
+		if (step == 30) {
+			playGlobalSound(Sound.ENTITY_ENDER_DRAGON_DEATH,0.6f,1f);
+		}
 		if (step<=30) {
 			ParUtils.createParticle(Particles.HAPPY_VILLAGER, loc, 0, 0, 0, 1, 0);
 		}
@@ -145,5 +149,7 @@ public class AugedesDrachen extends Spell{
 		
 		
 	}
+	
+	
 
 }

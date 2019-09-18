@@ -32,7 +32,7 @@ public class SchnittdersiebenWinde extends Spell {
 		// TODO Auto-generated method stub
 		target = pointEntity(caster,300);
 		if (target == null) {
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 			dead = true;
 		}
 		
@@ -45,7 +45,7 @@ public class SchnittdersiebenWinde extends Spell {
 			}
 				
 			playSound(Sound.ENTITY_RAVAGER_ATTACK,target.getLocation(),6,0.3F);
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 			dead = true;
 			Actionbar bar = new Actionbar("§c Spieler muss sich in der Luft befinden!");
 			bar.send(caster);
@@ -99,6 +99,7 @@ public class SchnittdersiebenWinde extends Spell {
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
+		if (target != null)
 		ParUtils.chargeDot(target.getLocation(), Particles.CLOUD, 0.4F, 8);
 	}
 
@@ -131,5 +132,6 @@ public class SchnittdersiebenWinde extends Spell {
 		// TODO Auto-generated method stub
 		silenced.remove(target);
 	}
+
 
 }

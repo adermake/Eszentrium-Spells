@@ -93,5 +93,6 @@ public class Wunsch extends Spell{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

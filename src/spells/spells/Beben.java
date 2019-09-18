@@ -135,7 +135,7 @@ public class Beben extends Spell{
 		damage(p,6,caster);
 		
 		doKnockback(p, caster.getLocation(), 3+steprange/20);
-		p.setVelocity(p.getVelocity().setY(2.0D+steprange/30));
+		p.setVelocity(p.getVelocity().setY(1.0D+steprange/30));
 		
 
 
@@ -145,7 +145,7 @@ public class Beben extends Spell{
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		doKnockback(ent, caster.getLocation(), 3+steprange/20);
-		ent.setVelocity(ent.getVelocity().setY(2.0D+steprange/30));
+		ent.setVelocity(ent.getVelocity().setY(1.0D+steprange/30));
 		
 	}
 
@@ -160,5 +160,7 @@ public class Beben extends Spell{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

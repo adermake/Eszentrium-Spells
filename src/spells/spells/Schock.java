@@ -84,5 +84,6 @@ public class Schock extends Spell {
 		
 	}
 	
+	
 
 }

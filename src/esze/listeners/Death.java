@@ -32,7 +32,8 @@ public class Death implements Listener {
 	
 				e.setCancelled(true);
 				p.setHealth(20);
-				
+				if (p.getLocation().getY()<60)
+				p.teleport(GameType.getType().nextLoc());
 				ParUtils.createRedstoneParticle(e.getEntity().getLocation(), 0.3, 0.5, 0.3, 10, Color.RED, 3);
 				GameType.getType().death(event);
 				}

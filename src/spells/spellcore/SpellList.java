@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 
 import spells.spells.Ansturm;
 import spells.spells.AntlitzderGöttin;
+import spells.spells.Astralsprung;
 import spells.spells.Aufwind;
 import spells.spells.AugedesDrachen;
 import spells.spells.Avatar;
@@ -16,14 +17,15 @@ import spells.spells.Blasensturm;
 import spells.spells.Chaoswelle;
 import spells.spells.Enterhaken;
 import spells.spells.Erdsurfer;
+import spells.spells.Erlösung;
 import spells.spells.Explosion;
 import spells.spells.Feuerball;
 import spells.spells.Flucht;
 import spells.spells.Heilen;
 import spells.spells.HimmlischesUrteil;
-import spells.spells.Hünchenluftschlag;
+import spells.spells.Hühnchenluftschlag;
 import spells.spells.Kaminchen;
-import spells.spells.Kätzchenkannone;
+import spells.spells.Kätzchenkanone;
 import spells.spells.Lamaturm;
 import spells.spells.Lichtstrudel;
 import spells.spells.Luftsprung;
@@ -38,9 +40,11 @@ import spells.spells.RufderOzeane;
 import spells.spells.Schallbrecher;
 import spells.spells.Schallwelle;
 import spells.spells.Scharfschuss;
-import spells.spells.Schicksalschnitt;
+import spells.spells.Schicksalsschnitt;
+import spells.spells.Requiemspfeil;
 import spells.spells.SchnittdersiebenWinde;
 import spells.spells.Schock;
+import spells.spells.SchreidesPhönix;
 import spells.spells.Schwerkraftsmanipulation;
 import spells.spells.SchwerterausLicht;
 import spells.spells.SiegelderFurcht;
@@ -104,7 +108,7 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		ArrayList<Spell> spellsForThisType = new ArrayList<Spell>();
 		
 		for(Spell spell : spells.keySet()){
-			if (spell.name.contains("§c")) {
+			if (spell.name.contains("§c") || spell.name.contains("§8")) {
 				continue;
 			}
 			List<Class> classes = spells.get(spell);
@@ -124,11 +128,13 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 	}
 	public static void registerSpells() {
 		registerSpell(new Ansturm());
+		registerSpell(new Astralsprung());
 		registerSpell(new AntlitzderGöttin());
 		registerSpell(new Aufwind());
 		registerSpell(new AugedesDrachen());
 		registerSpell(new Schallwelle());
 		registerSpell(new Scharfschuss());
+		registerSpell(new SchreidesPhönix(), TypeTTT.class);
 		registerSpell(new Avatar());
 		registerSpell(new Beben());
 		registerSpell(new Chaoswelle());
@@ -137,13 +143,13 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Blasensturm());
 		registerSpell(new Feuerball());
 		registerSpell(new Flucht());
+		registerSpell(new Erlösung(), TypeTTT.class);
 		registerSpell(new Heilen(), TypeTTT.class);
-		registerSpell(new Hünchenluftschlag());
-		registerSpell(new Kätzchenkannone());
+		registerSpell(new Hühnchenluftschlag());
+		registerSpell(new Kätzchenkanone());
 		registerSpell(new Kaminchen());
-		//registerSpell(new HimmlischesUrteil(), TypeTTT.class);
+		registerSpell(new HimmlischesUrteil());
 		registerSpell(new Lamaturm());
-		registerSpell(new Lichtstrudel());
 		registerSpell(new Lichtstrudel());
 		registerSpell(new Luftsprung());
 		registerSpell(new Magmafalle());
@@ -159,7 +165,8 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new SchwerterausLicht());
 		registerSpell(new Schock());
 		registerSpell(new Schwerkraftsmanipulation());
-		registerSpell(new Schicksalschnitt());
+		registerSpell(new Requiemspfeil());
+		registerSpell(new Schicksalsschnitt());
 		registerSpell(new SchnittdersiebenWinde());
 		registerSpell(new SpeerderZwietracht());
 		registerSpell(new SiegelderFurcht());

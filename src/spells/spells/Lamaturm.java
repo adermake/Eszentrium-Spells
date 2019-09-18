@@ -38,7 +38,7 @@ public class Lamaturm extends Spell {
 		loc = block(caster,10);
 		if (loc == null) {
 			
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 			dead = true;
 		}
 		else {
@@ -180,6 +180,8 @@ public class Lamaturm extends Spell {
 			turret.remove();
 	}
 
+
+	
 	/*
 	public void addShot(Entity e) {
 		

@@ -14,28 +14,28 @@ import spells.spellcore.Spell;
 import spells.stagespells.ExplosionDamage;
 import spells.stagespells.Repulsion;
 
-public class Miiilone extends Spell {
+public class Vampirpilz extends Spell{
 
-	public Miiilone() {
+	public Vampirpilz() {
 		cooldown = 5;
 		steprange = 60;
-		name = "§4Miiilone";
-		traitorSpell = true;
+		name = "§eVampirpilz";
+		
 	}
 	boolean holding = true;
 	Item i;
-	ArmorStand ar;
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		ItemStack milone = new ItemStack(Material.MELON);
-		
-		i = caster.getWorld().dropItem(loc, milone);
-		ar = createArmorStand(loc.clone());
-		ar.setCustomName("§eMiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiilone");
-		ar.setSmall(true);
-		ar.setGravity(true);
-		ar.setCustomNameVisible(true);
+		ItemStack m = new ItemStack(Material.MUSHROOM_STEM);
+		ItemStack m1 = new ItemStack(Material.MUSHROOM_STEM);
+		ItemStack m2 = new ItemStack(Material.RED_MUSHROOM_BLOCK);
+		i = caster.getWorld().dropItem(loc, m);
+		Item i2 = caster.getWorld().dropItem(loc, m1);
+		Item i3 = caster.getWorld().dropItem(loc, m2);
+		i.addPassenger(i2);
+		i2.addPassenger(i3);
+		 
 		//ar.addPassenger(i);
 		if (caster.isSneaking()) {
 			i.setVelocity(caster.getLocation().getDirection().multiply(2));
@@ -63,21 +63,7 @@ public class Miiilone extends Spell {
 	public void move() {
 		// TODO Auto-generated method stub
 		
-		ar.teleport(i.getLocation());
-		String name = "§aM";
-		int count = 60 - (int)step;
-		if (count < 40) {
-			name = "§eM";
-		}
-		if (count < 20) {
-			name = "§cM";
-		}
-		for (int i = 0; i<count;i++) {
-			name = name+"i";
-		}
-		
-		name = name + "lone";
-		ar.setCustomName(name);
+	
 		loc = i.getLocation();	
 		
 	}
@@ -88,12 +74,7 @@ public class Miiilone extends Spell {
 		
 	}
 
-	@Override
-	public void onPlayerHit(Player p) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
@@ -116,14 +97,18 @@ public class Miiilone extends Spell {
 	public void onDeath() {
 		// TODO Auto-generated method stub
 		loc = i.getLocation();
-		ParUtils.dropItemEffectRandomVector(loc, Material.MELON_SLICE, 22, 50, 1);
+		ParUtils.dropItemEffectRandomVector(loc, Material.RED_MUSHROOM_BLOCK, 22, 50, 1);
 		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 5, 1);
 		new ExplosionDamage(7, 11, caster, loc,name);
 		new Repulsion(7, 3, caster, loc,name);
 		i.remove();
-		ar.remove();
+		
 	}
 
-	
+	@Override
+	public void onPlayerHit(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

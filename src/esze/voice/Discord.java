@@ -44,7 +44,17 @@ public class Discord {
 	}
 	
 	public static void setMuted(Player player, boolean shouldMute){
+		for (IGuild g : discordbot.getGuilds()) {
+			channel = g.getVoiceChannelByID(621375797953036328L);
+		}
+		
 		RequestBuffer.request(() -> {
+			if (channel == null) {
+				System.out.print("CHANNEL IS NULL");
+			}
+			if (channel.getGuild() == null) {
+				System.out.print("GUILD IS NULL");
+			}
 			for(IUser p : channel.getGuild().getUsers()){
 				if (!channel.getConnectedUsers().contains(p)) {
 					continue;

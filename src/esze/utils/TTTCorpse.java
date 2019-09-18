@@ -33,14 +33,16 @@ import esze.main.main;
 
 public class TTTCorpse implements Listener{
 	
-	private Player player;
+	public Player player;
 	private String username;
-	private Inventory inv = null;
-	private int corpseID = 0;
-	private ArrayList<Entity> cows;
+	public Inventory inv = null;
+	public int corpseID = 0;
+	public ArrayList<Entity> cows;
 	private Player carrier = null;
 	private BukkitTask carryTask;
 	public static HashMap<Player,Block> droppedCorpse = new HashMap<Player,Block>();
+	
+	public static ArrayList<TTTCorpse> allCorpses = new ArrayList<TTTCorpse>();
 	public TTTCorpse(Player player, boolean withInv) {
 		this.player = player;
 		this.username = player.getName();
@@ -52,17 +54,19 @@ public class TTTCorpse implements Listener{
 			int i = 0;
 			for(ItemStack isOld : player.getInventory()){
 				if(isOld != null && (isOld.getType() == Material.ENCHANTED_BOOK || isOld.getType() == Material.BOOK)){
+					/*
 					ItemStack is = NBTUtils.setNBT("Cooldown", "0", isOld);
 					String spellname = NBTUtils.getNBT("OriginalName", isOld);
 					ItemMeta meta = is.getItemMeta();
 					meta.setDisplayName(spellname);
 					is.setItemMeta(meta);
 					is.setType(Material.ENCHANTED_BOOK);
-					
-					inv.setItem(i, is);
+					*/
+					inv.setItem(i, isOld);
 					i++;
 				}
 			}
+			allCorpses.add(this);
 		}
 		
 		main.plugin.getServer().getPluginManager().registerEvents(this, main.plugin);
@@ -82,7 +86,7 @@ public class TTTCorpse implements Listener{
 		Player p = e.getPlayer();
 		Entity ent = e.getRightClicked();
 		
-		if(this.cows.contains(ent)){
+		if(this.cows.contains(ent) && p.isSneaking()){
 			
 			
 				if(inv != null  && p.getGameMode() == GameMode.SURVIVAL)
@@ -94,7 +98,7 @@ public class TTTCorpse implements Listener{
 	@EventHandler
 	public void onInvClick(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
-		if(e.getClickedInventory() == inv){
+		if(e.getClickedInventory() == inv && e.getCurrentItem() != null){
 			p.getInventory().addItem(e.getCurrentItem());
 			e.setCancelled(true);
 			
@@ -199,6 +203,17 @@ public class TTTCorpse implements Listener{
 		}
 	}
 	
+	public void remove() {
+		for (Entity ent : cows) {
+			ent.remove();
+		}
+		
+		CorpseUtils.removeCorpseForAll(corpseID);
+		
+		player = null;
+		username = "";
+		allCorpses.remove(this);
+	}
 	
 	public void spawn(){
 		corpseID = CorpseUtils.spawnCorpseForAll(player, player.getLocation());
@@ -224,6 +239,30 @@ public class TTTCorpse implements Listener{
 		
 	}
 	
+	public static ArrayList<TTTCorpse> getCorpses(Location loc,float radius) {
+		
+		ArrayList<TTTCorpse> ret = new ArrayList<TTTCorpse>();
+		
+		for (TTTCorpse c : allCorpses) {
+			if (c.cows.get(0).getLocation().distance(loc)<radius+1) {
+				ret.add(c);
+			}
+		}
+		return ret;
+		
+	}
 
+	public void teleport(Location loc) {
+		ArrayList<Player> send = new ArrayList<Player>();
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			send.add(p);
+		}
+		CorpseUtils.teleportCorpseForPlayers(corpseID, loc, send);
+		
+	
+		
+		cows.get(0).teleport(loc.clone().add(1, 0, 0));
+		cows.get(1).teleport(loc.clone().add(0, 0, 0));
+	}
 
 }

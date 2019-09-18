@@ -94,5 +94,7 @@ public class Spinnenkäfig extends Spell {
 	}
 
 	
+
+	
 	
 }

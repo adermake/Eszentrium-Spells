@@ -36,7 +36,7 @@ public class Zaubersprung extends Spell {
 		back = caster.getLocation();
 		block = block(caster);
 		if (block == null) {
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 			dead = true;
 		}
 		else {
@@ -72,11 +72,7 @@ public class Zaubersprung extends Spell {
 		
 	}
 
-	@Override
-	public void onPlayerHit(Player p) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
@@ -131,6 +127,13 @@ public class Zaubersprung extends Spell {
 		}.runTaskTimer(main.plugin, 1, 1);
 		
 		
+		
+	}
+
+	
+	@Override
+	public void onPlayerHit(Player p) {
+		// TODO Auto-generated method stub
 		
 	}
 	

@@ -40,7 +40,7 @@ public class HimmlischesUrteil extends Spell {
 		loc = null;
 		loc = block(caster);
 		if (loc == null) {
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 			dead = true;
 		}
 		else {
@@ -166,5 +166,8 @@ public class HimmlischesUrteil extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
 
 }

@@ -31,7 +31,7 @@ public class Magmafalle extends Spell {
 		loc = null;
 		loc = block(caster,10);
 		if (loc == null) {
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 			dead = true;
 		}
 		else {
@@ -121,5 +121,6 @@ public class Magmafalle extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

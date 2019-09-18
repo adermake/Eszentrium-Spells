@@ -28,6 +28,7 @@ import org.bukkit.entity.Sheep;
 
 import esze.main.main;
 import esze.utils.ParUtils;
+import esze.utils.PlayerUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
@@ -38,22 +39,62 @@ public class Verzaubern extends Spell {
 	public Verzaubern() {
 		name = "§4Verzaubern";
 		hitSpell = true;
-		steprange = 300;
-		speed = 100;
+		speed = 1;
+		steprange = 8 * 20;
+		
 		cooldown = 20 * 1;
 		traitorSpell = true;
+	}
+		
+		
+			
+	
+		
+		
+		
+	
 
+	@Override
+	public void onDeath() {
+		// TODO Auto-generated method stub
+		if (sheep != null) {
+			
+			if (!sheep.isDead()) {
+				PlayerUtils.showPlayer(target);
+				
+				target.setGameMode(GameMode.SURVIVAL);
+			}
+			else {
+				
+				tagPlayer(target);
+				target.setGameMode(GameMode.SURVIVAL);
+				target.damage(20);
+			}
+			sheep.remove();
+		}
 		
+			
+	}
+
+	@Override
+	public void setUp() {
+		// TODO Auto-generated method stub
 		target = pointEntity(caster,10);
-		
+
 		if (target == null) {
+			refund = true;
 			dead = true;
 		}
 		else {
+			if (sheep != null)
+				return;
 			
-			
+			PlayerUtils.hidePlayer(target);
 			Sheep s = (Sheep) target.getWorld().spawnEntity(target.getLocation(), EntityType.SHEEP);
 			sheep = s;
+			s.setMaxHealth(20);
+			s.setHealth(20);
+			s.setCustomName(target.getName());
 			Bukkit.getScheduler().runTaskAsynchronously(main.plugin, new Runnable() {
 				
 				@Override
@@ -131,40 +172,19 @@ public class Verzaubern extends Spell {
 			
 			
 			target.setGameMode(GameMode.SPECTATOR);
+			target.setAllowFlight(true);
+			target.setFlying(true);
+			
 			((CraftPlayer) target).getHandle().setSpectatorTarget(((CraftEntity) sheep).getHandle());
 			ParUtils.createParticle(Particles.EXPLOSION, target.getLocation(), 0, 0, 0, 3, 1);
 			
 			ParUtils.chargeDot(target.getLocation(), Particles.WITCH, 0.1, 4,10);
 			
 		}
-			
+	}
+
 	
-		
-		
-		
-	}
-
-	@Override
-	public void onDeath() {
-		// TODO Auto-generated method stub
-		if (sheep != null) {
-			
-			if (!sheep.isDead()) {
-				target.setGameMode(GameMode.ADVENTURE);
-			}
-			sheep.remove();
-		}
-			
-	}
-
-	@Override
-	public void setUp() {
-		// TODO Auto-generated method stub
-
-	}
-
-	int t = 0;
-	int stage = 0;
+	
 
 	@Override
 	public void cast() {
@@ -173,31 +193,26 @@ public class Verzaubern extends Spell {
 
 	@Override
 	public void move() {
-		playSound(Sound.ENTITY_CREEPER_PRIMED, loc, (float) 1, 1);
-		loc.add(loc.getDirection());
+		
 
 	}
 
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		ParUtils.createParticle(Particles.DRIPPING_LAVA, loc, 0, 0, 0, 0, 0);
 
 	}
 
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		damage(p, 19, caster);
-		p.setFireTicks(30);
+		
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 
-		damage(ent, 19, caster);
-		ent.setFireTicks(30);
 	}
 
 	@Override
@@ -208,10 +223,7 @@ public class Verzaubern extends Spell {
 
 	@Override
 	public void onBlockHit(Block block) {
-		// TODO Auto-generated method stub
-		playSound(Sound.ENTITY_FIREWORK_ROCKET_BLAST_FAR, loc, 1, 1);
-		ParUtils.createRedstoneParticle(loc, 0, 0, 0, 1, Color.ORANGE, 1);
-		dead = true;
+		
 	}
 
 	@Override
@@ -255,5 +267,15 @@ public class Verzaubern extends Spell {
             }                 
         return true;
     }
+
+
+
+
+
+
+
+
+
+	
 	
 }

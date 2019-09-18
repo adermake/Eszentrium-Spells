@@ -3,13 +3,13 @@ package esze.utils;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
-import net.minecraft.server.v1_14_R1.ArgumentBlock;
-import net.minecraft.server.v1_14_R1.Block;
-import net.minecraft.server.v1_14_R1.IBlockData;
 import net.minecraft.server.v1_14_R1.PacketDataSerializer;
 import net.minecraft.server.v1_14_R1.Particle;
 import net.minecraft.server.v1_14_R1.ParticleParam;
-import net.minecraft.server.v1_14_R1.ParticleParamBlock;
+
+
+
+
 
 public class ParticleParamNormal implements ParticleParam {
 
@@ -27,11 +27,7 @@ public class ParticleParamNormal implements ParticleParam {
 		
 	}
 
-	@Override
-	public Particle<?> b() {
-		// TODO Auto-generated method stub
-		return b;
-	}
+	
 	
 	
 	@SuppressWarnings("unchecked")
@@ -58,6 +54,14 @@ public class ParticleParamNormal implements ParticleParam {
 	  {
 	    this.b = paramParticle;
 	  }
+
+	@Override
+	public Particle<?> getParticle() {
+		// TODO Auto-generated method stub
+		return b;
+	}
+
+	
 
 	
 	

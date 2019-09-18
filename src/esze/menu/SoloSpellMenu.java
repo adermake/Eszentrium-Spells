@@ -30,7 +30,7 @@ public class SoloSpellMenu extends ItemMenu{
 	
 	public SoloSpellMenu(boolean green) {
 		super(1,"spellmenu");
-		spells = SpellList.getDiffrentRandom(4);
+		spells = SpellList.getDiffrentRandomGreen(4);
 		addClickableItem(2, 1, Material.ENCHANTED_BOOK, "§2"+ spells.get(0).getName().substring(2,spells.get(0).getName().length()));
 		addClickableItem(4, 1, Material.ENCHANTED_BOOK, "§2"+ spells.get(1).getName().substring(2,spells.get(1).getName().length()));
 		addClickableItem(6, 1, Material.ENCHANTED_BOOK,"§2"+ spells.get(2).getName().substring(2,spells.get(2).getName().length()));

@@ -1,6 +1,7 @@
 package spells.stagespells;
 
 import org.bukkit.Color;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -56,6 +57,8 @@ public class OrbitarOrb extends Spell {
 	@Override
 	public void move() {
 		
+		if (caster.getGameMode() == GameMode.ADVENTURE)
+			dead = true;
 		// TODO Auto-generated method stub
 		loc.setPitch(loc.getPitch()+90);;
 		lastloc = loc;
@@ -117,5 +120,7 @@ public class OrbitarOrb extends Spell {
 		steprange+=3;
 		speed = u;
 	}
+
+	
 
 }

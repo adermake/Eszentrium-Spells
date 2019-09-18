@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.print.attribute.standard.MediaSize.NA;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -41,6 +43,7 @@ import esze.utils.SoundUtils;
 import esze.utils.TTTCorpse;
 import esze.voice.Discord;
 import net.minecraft.server.v1_14_R1.EntityPlayer;
+import spells.spellcore.SpellList;
 
 public class CommandReciever implements CommandExecutor, TabCompleter{
 	
@@ -265,6 +268,7 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 									p.sendMessage("§8| §cUngültiger Modus!");
 									return false;
 								}
+								SpellList.registerSpells();
 								p.sendMessage("§8| §cModus geändert!");
 								
 							}else{
@@ -390,7 +394,13 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 		            }
 		            //name = name.replace("&", "§");
 		          
-		            	 name = "§e"+name;
+		            	if (name.contains("+")) {
+		            		 name = "§2"+name;
+		            	}
+		            	else {
+		            		 name = "§e"+name;
+		            	}
+		            	name = name.replace("+", "");
 		           
 		           
 		            im.setDisplayName(name);

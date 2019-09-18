@@ -11,6 +11,7 @@ import org.bukkit.util.Vector;
 import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
+import spells.stagespells.ExplosionDamage;
 import spells.stagespells.RepulsionDirectional;
 
 public class Schallbrecher extends Spell {
@@ -22,9 +23,9 @@ public class Schallbrecher extends Spell {
 		hitPlayer = true;
 		hitSpell = true;
 		hitBlock = false;
-		hitboxSize = 1;
+		hitboxSize = 2;
 		steprange = 15;
-		
+		multihit = true;
 	}
 
 	@Override
@@ -79,9 +80,10 @@ public class Schallbrecher extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		p.damage(7);
-		doKnockback(p, loc, 3);
-		playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, loc, 10, 0.7);
+		
+		tagPlayer(p);
+		p.setVelocity(caster.getVelocity());
+		playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, loc, 1, 0.7);
 		
 		
 	}
@@ -90,9 +92,9 @@ public class Schallbrecher extends Spell {
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		
-		ent.damage(7);
-		doKnockback(ent, loc, 3);
-		playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, loc, 10, 0.7);
+		
+		ent.setVelocity(caster.getVelocity());
+		playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, loc, 1, 0.7);
 		
 	}
 
@@ -122,20 +124,26 @@ public class Schallbrecher extends Spell {
 		ParUtils.parKreisDot(Particles.CLOUD, locate, 0.3, 0.0, 0.2, direction.multiply(-1));
 		
 		
-		
+		ParUtils.parKreisDot(Particles.CLOUD, caster.getLocation(), 3, 0, 3, caster.getVelocity());
 		if (refined) {
 			
+			new ExplosionDamage(5, 5, caster, caster.getLocation(), name);
 			new RepulsionDirectional(5, 7, caster, caster.getLocation(), caster.getVelocity(), name);
 			ParUtils.parKreisDirSolid(Particles.CLOUD, caster.getLocation(), 3, 0, 1, caster.getVelocity(), caster.getVelocity());
-			ParUtils.parKreisDot(Particles.CLOUD, caster.getLocation(), 3, 0, 3, caster.getVelocity());
+			
 			ParUtils.parKreisDot(Particles.CLOUD, caster.getLocation(), 3, 0, 2, caster.getVelocity());
 			ParUtils.parKreisDot(Particles.CLOUD, caster.getLocation(), 3, 0, 1, caster.getVelocity());
 			playSound(Sound.ENTITY_WITCH_DEATH,caster.getLocation(),5,0.5F);
 		}
-		
+		else {
+			new ExplosionDamage(5, 7, caster, caster.getLocation(), name);
+			new RepulsionDirectional(5, 3, caster, caster.getLocation(), caster.getVelocity(), name);
+		}
+		playSound(Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, loc, 1, 1);
 		
 		
 	}
+
 	
 	
 }

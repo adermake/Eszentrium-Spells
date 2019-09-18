@@ -59,10 +59,11 @@ public class Feuerball extends Spell {
 		f.setIsIncendiary(false);
 		f.setYield(0f);
 		f.setShooter(caster);
-	
+		dir= caster.getLocation().getDirection();
 		if (refined)
 			f.setFireTicks(10000);
 	}
+	Vector dir;
 
 	@Override
 	public void move() {
@@ -74,11 +75,17 @@ public class Feuerball extends Spell {
 		
 		
 		if (refined) {
-			f.setVelocity(caster.getLocation().getDirection().multiply(1));
+			f.setVelocity(dir.multiply(1));
 		}
 		
 		if (caster.isSneaking()) {
-			f.setVelocity(f.getVelocity().add(new Vector(0,-0.5,0)));
+			if (refined) {
+				f.setVelocity(f.getVelocity().add(new Vector(0,-2,0)));
+			}
+			else {
+				f.setVelocity(f.getVelocity().add(new Vector(0,-0.5,0)));
+			}
+			
 		}
 		
 		
@@ -130,10 +137,10 @@ public class Feuerball extends Spell {
 		if (refined) {
 			ParUtils.createParticle(Particles.EXPLOSION_EMITTER, loc, 0, 0, 0, 4, 1);
 			new ExplosionDamage(6, 10, caster, loc, name);
-			new Repulsion(6, 2, caster, loc, false, name);
+		
 			
 		}
-		
+		new Repulsion(5, 2, caster, loc, true, name);
 		
 		for (int i = 0;i<15;i++) {
 			loc.getWorld().spawnFallingBlock(loc, Material.FIRE, (byte) 0).setVelocity(new Vector(randInt(-3,3),randInt(-3,3),randInt(-3,3)).normalize().multiply(1.5));
@@ -142,6 +149,7 @@ public class Feuerball extends Spell {
 		if (f != null)
 		f.remove();
 			}
+	
 
 	
 	

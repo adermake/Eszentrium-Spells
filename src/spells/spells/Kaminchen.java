@@ -88,4 +88,7 @@ public class Kaminchen extends Spell {
 		
 	}
 
+
+	
+
 }

@@ -70,7 +70,7 @@ public class Repulsion extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		
+		tagPlayer(p);
 		doKnockback(p, loc, knockback);
 		
 	}
@@ -98,5 +98,6 @@ public class Repulsion extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

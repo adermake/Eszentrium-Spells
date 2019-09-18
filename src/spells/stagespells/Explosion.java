@@ -95,4 +95,6 @@ public class Explosion extends Spell {
 		
 	}
 
+	
+
 }

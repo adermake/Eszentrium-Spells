@@ -28,6 +28,7 @@ public class Erlösung extends Spell {
 		hitSpell = false;
 		hitboxSize = 3;
 		multihit = true;
+		traitorSpell = true;
 	}
 	@Override
 	public void setUp() {
@@ -35,7 +36,7 @@ public class Erlösung extends Spell {
 		target = pointEntity(caster,70);
 		
 		if (target == null) {
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 			dead = true;
 		}
 		
@@ -147,4 +148,5 @@ public class Erlösung extends Spell {
 		return null;
 
 	}
+	
 }

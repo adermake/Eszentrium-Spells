@@ -106,5 +106,5 @@ public class AntlitzderGöttin extends Spell{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

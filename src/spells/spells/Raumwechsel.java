@@ -25,7 +25,7 @@ public class Raumwechsel extends Spell{
 		target = pointEntity(caster);
 		
 		if (target == null) {
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 			dead = true;
 			
 		}
@@ -100,5 +100,7 @@ public class Raumwechsel extends Spell{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

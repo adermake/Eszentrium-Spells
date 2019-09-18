@@ -22,7 +22,7 @@ public class Teleport extends Spell {
 	
 	public Teleport() {
 		name = "§bTeleport";
-		cooldown = 20 * 38;
+		cooldown = 20 * 30;
 		speed = 2;
 		hitSpell = true;
 		steprange = 100;
@@ -95,7 +95,8 @@ public class Teleport extends Spell {
 	public void onBlockHit(Block block) {
 		// TODO Auto-generated method stub
 		getTop(loc);
-		caster.teleport(loc);
+	
+		caster.teleport(loc.getBlock().getLocation().add(0.5,0,0.5));
 		dead = true;
 	}
 
@@ -104,4 +105,6 @@ public class Teleport extends Spell {
 		// TODO Auto-generated method stub
 		ParUtils.parKreisDirSolid(Particles.DRAGON_BREATH, loc, 2, 0, 4, loc.getDirection(), loc.getDirection().multiply(-1));
 	}
+
+	
 }

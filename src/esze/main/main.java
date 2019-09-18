@@ -1,6 +1,8 @@
 package esze.main;
 
+import java.awt.PageAttributes.ColorType;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
@@ -40,6 +42,7 @@ import esze.listeners.Hunger;
 import esze.listeners.Interact;
 import esze.listeners.Join;
 import esze.listeners.Move;
+import esze.listeners.Reconnect;
 import esze.listeners.Schwertwurf;
 import esze.listeners.Spawn;
 import esze.map.JumpPad;
@@ -65,18 +68,31 @@ import spells.spellcore.Spelldrop;
 public class main extends JavaPlugin {
 	
 	public static main plugin;
-	public static String discord_TOKEN = "NjIxMzA3NjA3NzU1MzkxMDQ2.XXkWCA.N_TEnvxb_eEXoo7yNb9isIajh2c";
+	public static String discord_TOKEN = "NjIxMzA3NjA3NzU1MzkxMDQ2.XXlsFw.luFd0kLFt-E5erL3VYGwelxFFwc";
 	public static String mapname;
 	public static final String voiddamage = "void";
 	public static HashMap<Player, String> damageCause = new HashMap<Player, String>();
 	
-	
+	public static ArrayList<String> colorTags = new ArrayList<String>();
 	
 	@Override
 	public void onEnable() {
 		
-		
-		
+		colorTags.add("§1");
+		colorTags.add("§2");
+		colorTags.add("§3");
+		colorTags.add("§4");
+		colorTags.add("§5");
+		colorTags.add("§6");
+		colorTags.add("§7");
+		colorTags.add("§8");
+		colorTags.add("§9");
+		colorTags.add("§a");
+		colorTags.add("§b");
+		colorTags.add("§c");
+		colorTags.add("§d");
+		colorTags.add("§e");
+		colorTags.add("§f");
 		plugin = this;
 		//R
 		
@@ -131,6 +147,7 @@ public class main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new TTTTrade(), this);
 		getServer().getPluginManager().registerEvents(new Music(), this);
 		getServer().getPluginManager().registerEvents(new Chat(), this);
+		getServer().getPluginManager().registerEvents(new Reconnect(), this);
 		TTTFusion.start();
 		
 		PacketListner.registerPackets();
@@ -167,7 +184,7 @@ public class main extends JavaPlugin {
 				p.teleport(new Location(Bukkit.getWorld("world"), 0, 105, 0));// teleport into Lobby
 			}
 			p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
-			p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Test", null, true));
+			p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Georg", null, true));
 		}
 		Discord.run(); 
 		

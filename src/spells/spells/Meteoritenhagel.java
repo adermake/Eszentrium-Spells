@@ -22,6 +22,7 @@ public class Meteoritenhagel extends Spell {
 		steprange = 45;
 		name = "§cMeteoritenhagel";
 		speed = 1;
+		
 	}
 	
 	@Override
@@ -32,7 +33,7 @@ public class Meteoritenhagel extends Spell {
 		
 		if (loc == null) {
 			dead = true;
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 		}
 		
 		
@@ -107,5 +108,6 @@ public class Meteoritenhagel extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

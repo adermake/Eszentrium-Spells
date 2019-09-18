@@ -16,12 +16,21 @@ public class Damage implements Listener{
 	
 	@EventHandler
 	public void onDamage(EntityDamageEvent e){
+		if(e.getCause().equals( DamageCause.FALL)) {
+			e.setCancelled(true);
+		}
 		if(e.getEntity() instanceof Player){
 			Player p = (Player) e.getEntity();
+			if (p.getGameMode().equals(GameMode.ADVENTURE) ){
+				e.setCancelled(true);
+			}
 			if(Gamestate.getGameState() == Gamestate.LOBBY){
 				e.setCancelled(true);
 			}else if(Gamestate.getGameState() == Gamestate.INGAME){
 				if(e.getCause().equals( DamageCause.FALL) && !Schwerkraftsmanipulation.gravityMani.contains(p)){
+					e.setCancelled(true);
+				}
+				if(e.getCause().equals( DamageCause.FLY_INTO_WALL) && !Schwerkraftsmanipulation.gravityMani.contains(p)){
 					e.setCancelled(true);
 				}
 			}

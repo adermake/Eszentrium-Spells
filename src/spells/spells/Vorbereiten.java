@@ -1,22 +1,49 @@
 package spells.spells;
 
-import org.bukkit.Location;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import esze.main.main;
+import esze.utils.NBTUtils;
 import spells.spellcore.Spell;
+import spells.spellcore.SpellList;
 
-public class SchneidendePfeile extends Spell {
+public class Vorbereiten extends Spell {
 
 	
-	Location point;
+	public Vorbereiten() {
+		name = "§4Vorbereiten";
+		cooldown = 0;
+		
+	}
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
 		
+		String s = SpellList.getDiffrentRandomGreen(1).get(0).getName();
 		
+		s = "§2"+ChatColor.stripColor(s);
+		final String s2 = s;
+		new BukkitRunnable() {
+			
+			public void run() {
+				ItemStack is = new ItemStack(Material.ENCHANTED_BOOK);
+				ItemMeta im = is.getItemMeta();
+				im.setDisplayName(s2);
+				is.setItemMeta(im);
+				is = NBTUtils.setNBT("Spell", "true", is);
+				caster.getInventory().setItemInMainHand(is);
+			}
+		}.runTaskLater(main.plugin,1);
 		
+		dead = true;
 	}
 
 	@Override
@@ -72,5 +99,6 @@ public class SchneidendePfeile extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

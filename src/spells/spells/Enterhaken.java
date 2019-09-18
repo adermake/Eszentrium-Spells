@@ -51,7 +51,7 @@ public class Enterhaken extends Spell{
 		
 		if (loc == null) {
 			dead = true;
-			Cooldowns.refundCurrentSpell(caster);
+			refund = true;
 		}
 		else {
 			hook = (Trident) caster.getWorld().spawnEntity(caster.getEyeLocation(), EntityType.TRIDENT);
@@ -196,4 +196,6 @@ public class Enterhaken extends Spell{
 		return null;
 
 	}
+
+	
 }

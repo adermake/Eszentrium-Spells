@@ -1,5 +1,6 @@
 package spells.spells;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -11,6 +12,7 @@ import org.bukkit.util.Vector;
 import esze.enums.GameType;
 import esze.types.Type;
 import esze.utils.ParUtils;
+import esze.utils.TTTCorpse;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
@@ -35,6 +37,11 @@ public class Wurmloch extends Spell {
 		wormHolePlaceLoc.setY(62);
 		playSound(Sound.BLOCK_PORTAL_TRAVEL, caster.getLocation(), 3, 2F);
 		playSound(Sound.BLOCK_PORTAL_TRAVEL, wormHolePlaceLoc, 3, 2F);
+		
+		for (TTTCorpse c : TTTCorpse.getCorpses(loc, 6)) {
+			Bukkit.broadcastMessage("X");
+			c.teleport(GameType.getType().nextLoc());
+		}
 	}
 
 	@Override
@@ -101,5 +108,6 @@ public class Wurmloch extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

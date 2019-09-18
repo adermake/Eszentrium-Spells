@@ -104,4 +104,6 @@ public class Scharfschuss extends Spell{
 		
 	}
 
+	
+
 }

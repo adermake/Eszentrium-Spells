@@ -50,7 +50,7 @@ public class Explosion extends Spell{
 		
 		caster.playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
 		for (LivingEntity le : caster.getWorld().getLivingEntities()) {
-			if (checkHit(le,caster.getLocation(),caster,5)) {
+			if (checkHit(le,loc,caster,5)) {
 				damage(le, 9, caster);
 				doKnockback(le, caster.getLocation(), 1);
 			}
@@ -135,5 +135,7 @@ public class Explosion extends Spell{
 
 		}.runTaskTimer(main.plugin, 0, 1);
 	}
+
+	
 
 }

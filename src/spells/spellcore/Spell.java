@@ -23,6 +23,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import esze.main.main;
+import esze.utils.Actionbar;
 import io.netty.util.internal.ThreadLocalRandom;
 
 public abstract class Spell {
@@ -71,6 +72,7 @@ public abstract class Spell {
 	protected ArrayList<Entity> noTargetEntitys = new ArrayList<Entity>();
 	protected ArrayList<Entity> hitEntitys = new ArrayList<Entity>();
 	public static ArrayList<Entity> pressingF = new ArrayList<Entity>();
+	public static ArrayList<Entity> clearpressingF = new ArrayList<Entity>();
 	protected static ArrayList<Spell> spell = new ArrayList<Spell>();
 	protected static ArrayList<Player> gliding = new ArrayList<Player>();
 	protected static ArrayList<Player> hasDied = new ArrayList<Player>();
@@ -85,18 +87,22 @@ public abstract class Spell {
 		public static HashMap<Player,DamageCauseContainer> damageCause = new HashMap<Player,DamageCauseContainer>();
 	//
 	
-	public void castSpell(Player p,String name) {
+	public boolean castSpell(Player p,String name) {
 		
 		this.name = name;
 		
-		createdSpell(p);
+		
+		return createdSpell(p);
 	}
-	public void createdSpell(Player p) {
+	
+	public boolean refund = false;
+	public boolean createdSpell(Player p) {
 		spell.add(this); //XXXX
 		caster = p;
 		loc = p.getEyeLocation();
 		startPos = p.getEyeLocation();
 		setUp(); // steht wahrscheinlich an der falschen Stelle
+		swap();
 		if (casttime > 0) {
 			startCastLoop();
 		}
@@ -104,6 +110,11 @@ public abstract class Spell {
 			launch();
 			startSpellLoop();
 		}
+		if (refund) {
+			Actionbar a = new Actionbar("§c Kein Ziel gefunden!");
+			a.send(caster);
+		}
+		return refund;
 	}
 	
 	
@@ -237,6 +248,7 @@ public abstract class Spell {
 						onDeath();
 						this.cancel();
 					}
+				
 					pressingF.clear();
 					
 				}
@@ -288,7 +300,7 @@ public abstract class Spell {
 	public void collideWithEntity() {
 		if (hitEntity) {
 			for (LivingEntity ent : Bukkit.getWorld("world").getLivingEntities()) {
-				if (ent instanceof Player || ent instanceof Cow) {
+				if (ent instanceof Player || ent instanceof Cow ||ent instanceof ArmorStand) {
 					continue;
 				}
 				
@@ -305,6 +317,7 @@ public abstract class Spell {
 			}
 		}
 	}
+	
 	
 	public void collideWithSpell() {
 		if (hitSpell) {
@@ -514,16 +527,24 @@ public abstract class Spell {
 		spellEnt = e;
 		bound = true;
 	}
-	public static void doKnockback(Entity e, Location fromLocation,double speed) {
+	public void doKnockback(Entity e, Location fromLocation,double speed) {
 		// multiply default 0.25
-		
+		if (e instanceof Player) {
+			if(e != caster) {
+				tagPlayer((Player) e);
+			}
+		}
 		e.setVelocity(fromLocation.toVector().subtract(e.getLocation().toVector()).normalize().multiply(-speed));
 	}
 	
 	
-	public static void doPull(Entity e, Location toLocation,double speed) {
+	public void doPull(Entity e, Location toLocation,double speed) {
 		// multiply default 0.25
-		
+		if (e instanceof Player) {
+			if(e != caster) {
+				tagPlayer((Player) e);
+			}
+		}
 		e.setVelocity(toLocation.toVector().subtract(e.getLocation().toVector()).normalize().multiply(speed));
 	}
 	public Player pointEntity(Player p) {
@@ -654,6 +675,24 @@ public abstract class Spell {
 		return null;
 
 	}
+	public Location loc(Player p,double range) {
+		Location loc = p.getLocation();
+		Location ret = p.getLocation();
+		for (int t = 1; t <= range; t++) {
+
+			Vector direction = loc.getDirection().normalize().multiply(0.5);
+			double x = direction.getX() * t;
+			double y = direction.getY() * t + 1.5;
+			double z = direction.getZ() * t;
+			loc.add(x, y, z);
+			
+
+			ret = loc.clone();
+			loc.subtract(x, y, z);
+		}
+		return ret;
+
+	}
 	public Location loc(Player p,int range) {
 		Location loc = p.getLocation();
 		Location ret = p.getLocation();
@@ -680,6 +719,7 @@ public abstract class Spell {
 		return loca.getBlock().getLocation().add(0.5,0.5,0.5);
 		
 	}
+	
 	public String getName() {
 		return name;
 	}
@@ -718,6 +758,15 @@ public abstract class Spell {
 		}
 		
 		
+		return false;
+	}
+	
+	public boolean swap() {
+		if (EventCollector.quickSwap.contains(caster)) {
+			EventCollector.quickSwap.remove(caster);
+			return true;
+			
+		}
 		return false;
 	}
 	
@@ -790,6 +839,7 @@ public abstract class Spell {
 	public Spell() {};
 	
 	public abstract void setUp();
+	
 	public abstract void cast();
 	public abstract void launch();
 	public abstract void move();
