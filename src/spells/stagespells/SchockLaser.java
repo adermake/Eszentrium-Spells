@@ -123,7 +123,7 @@ public class SchockLaser extends Spell {
 	
 	public void onHit() {
 		double x = (caster.getLocation().getY()-loc.getY());
-		double dmg = 3 + 15/(1 + Math.pow(Math.E, -(1/400)*x)*15);
+		double dmg = 3 + 15/(1 + Math.pow(Math.E, -(1/14)*x)*15);
 		new Explosion(2, dmg, 1, 2, caster, loc, name);
 		ParUtils.parKreisDot(Particles.CLOUD, loc, 5, 0, 0.05, loc.getDirection().multiply(-1));
 		dead = true;
