@@ -12,6 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import esze.utils.Matrix;
+import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 import spells.stagespells.SchwertausLicht;
 
@@ -107,6 +109,7 @@ public class SchwerterausLicht extends Spell{
 			l.add(v.getX(), v.getY(), v.getZ());
 			l.add(l.getDirection().multiply(-3));
 			new SchwertausLicht(l.clone(),caster,name);
+			ParUtils.createParticle(Particles.FLASH, l, 0, 0, 0, 1, 1);
 			Vector ve = j.subtract(l).toVector();
 			Location lala = l.clone();
 			l.setDirection(lolo.toVector().subtract(lala.toVector()));

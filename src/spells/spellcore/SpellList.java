@@ -7,6 +7,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 
 import spells.spells.Ansturm;
+import spells.spells.Mondkugel;
 import spells.spells.AntlitzderGöttin;
 import spells.spells.Astralsprung;
 import spells.spells.Aufwind;
@@ -20,6 +21,7 @@ import spells.spells.Erdsurfer;
 import spells.spells.Erlösung;
 import spells.spells.Explosion;
 import spells.spells.Feuerball;
+import spells.spells.Feuerwerkshelix;
 import spells.spells.Flucht;
 import spells.spells.Heilen;
 import spells.spells.HimmlischesUrteil;
@@ -131,7 +133,7 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 	}
 	public static void registerSpells() {
 		registerSpell(new Ansturm());
-		registerSpell(new Astralsprung());
+		//registerSpell(new Astralsprung());
 		registerSpell(new AntlitzderGöttin());
 		registerSpell(new Aufwind());
 		registerSpell(new AugedesDrachen());
@@ -151,7 +153,7 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Hühnchenluftschlag());
 		registerSpell(new Kätzchenkanone());
 		registerSpell(new Kaminchen());
-		registerSpell(new HimmlischesUrteil());
+		//registerSpell(new HimmlischesUrteil());
 		registerSpell(new Lamaturm());
 		registerSpell(new Lichtstrudel());
 		registerSpell(new Luftsprung());
@@ -182,6 +184,8 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Wunsch());
 		registerSpell(new Wurmloch());
 		registerSpell(new Zaubersprung());
+		registerSpell(new Mondkugel());
+		registerSpell(new Feuerwerkshelix());
 	}
 	
 	public static void registerSpell(Spell spell, Class...gameTypes){

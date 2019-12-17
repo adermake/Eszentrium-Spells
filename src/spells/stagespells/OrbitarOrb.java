@@ -70,6 +70,8 @@ public class OrbitarOrb extends Spell {
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
+		if (silenced.contains(caster))
+			dead = true;
 		if (lastloc == null)
 			lastloc = loc;
 		dir = loc.toVector().subtract(lastloc.toVector());

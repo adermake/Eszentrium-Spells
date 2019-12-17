@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.management.ManagementFactory;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.MBeanServer;
 import javax.print.attribute.standard.MediaSize.NA;
 
 import org.bukkit.Bukkit;
@@ -28,6 +30,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.sun.management.HotSpotDiagnosticMXBean;
+
 import esze.analytics.solo.SaveUtils;
 import esze.enums.GameType;
 import esze.enums.GameType.TypeEnum;
@@ -46,7 +50,19 @@ import net.minecraft.server.v1_14_R1.EntityPlayer;
 import spells.spellcore.SpellList;
 
 public class CommandReciever implements CommandExecutor, TabCompleter{
-	
+	public static void dumpHeap(String filePath, boolean live) throws IOException {
+		/*
+		MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
+		memoryMXBean.gc();
+		MemoryUsage heapMemoryUsage = memoryMXBean.getHeapMemoryUsage();
+		long used = heapMemoryUsage.getUsed();//bytes used
+*/
+	    MBeanServer platformMBeanServer = ManagementFactory.getPlatformMBeanServer();
+	    HotSpotDiagnosticMXBean mxBean = ManagementFactory.newPlatformMXBeanProxy(
+	    		platformMBeanServer, "com.sun.management:type=HotSpotDiagnostic", HotSpotDiagnosticMXBean.class);
+	    //"/tmp/minecraft-memory-dump-"+System.currentTimeMillis()+".hptof", true
+	    mxBean.dumpHeap(filePath, live);
+	}
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdlabel, String [] args) {
 		final Player p = (Player) sender;			
 				
@@ -204,6 +220,14 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				}
 				}
 				if(cmd.getName().startsWith("ping")) {
+					
+					
+					try {
+						dumpHeap("mcmemory.hprof", true);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 					if(args.length == 1){
 						String name = args[0];

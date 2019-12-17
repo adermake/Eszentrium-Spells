@@ -77,6 +77,8 @@ public class Avatar extends Spell{
 		if(caster.getGameMode() == GameMode.ADVENTURE) 
 			dead = true;
 		
+		if (silenced.contains(caster))
+			dead = true;
 		loc = g.getLocation();
 		i--;
 		if (caster.isSneaking() || caster.getGameMode().equals(GameMode.ADVENTURE)) {

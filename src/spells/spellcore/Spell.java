@@ -77,7 +77,7 @@ public abstract class Spell {
 	protected static ArrayList<Player> gliding = new ArrayList<Player>();
 	protected static ArrayList<Player> hasDied = new ArrayList<Player>();
 	protected static ArrayList<Player> hasDiedEntry = new ArrayList<Player>();
-	
+	protected static ArrayList<Player> unHittable = new ArrayList<Player>();
 	protected Location startPos;
 	//CALLED
 	
@@ -281,6 +281,9 @@ public abstract class Spell {
 			
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				if (p == caster && !canHitSelf) {
+					continue;
+				}
+				if (unHittable.contains(p)) {
 					continue;
 				}
 				if (multihit == false && hitEntitys.contains(p)) {

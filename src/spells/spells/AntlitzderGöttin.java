@@ -1,5 +1,7 @@
 package spells.spells;
 
+import java.util.ArrayList;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -15,7 +17,7 @@ import spells.spellcore.Spell;
 
 public class AntlitzderGöttin extends Spell{
 
-	
+	public static ArrayList<Player> deflect = new ArrayList<Player>();
 	public AntlitzderGöttin() {
 		name = "§3Antlitz der Göttin";
 		hitSpell = true;
@@ -30,14 +32,14 @@ public class AntlitzderGöttin extends Spell{
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
-		
+		deflect.remove(caster);
 	}
 
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
 		SoundUtils.playSound(Sound.ENTITY_WITCH_AMBIENT, loc, 3, 0.3F);
-		
+		deflect.add(caster);
 	}
 
 	@Override

@@ -89,7 +89,7 @@ public class Ranke extends Spell{
 		current.remove();
 		new PullRanke(caster, p, path, blocks, loc, (int) step);
 		damage(p, 5, caster);
-		p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20*3, 1));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, (int)step/3, 1));
 		dead = true;
 	}
 

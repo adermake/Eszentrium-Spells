@@ -20,7 +20,7 @@ public class Zaubersprung extends Spell {
 	public Zaubersprung() {
 		name = "§cZaubersprung";
 		cooldown = 20 * 25;
-		steprange = 30;
+		steprange = 100;
 		speed = 1;
 		hitPlayer = false;
 		hitEntity = false;
@@ -63,7 +63,9 @@ public class Zaubersprung extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		
+		if (swap()) {
+			dead = true;
+		}
 	}
 
 	@Override
@@ -119,7 +121,7 @@ public class Zaubersprung extends Spell {
 					ParUtils.createParticle(Particles.SNEEZE, pos,0, 0, 0, 0, 0);
 				}
 				
-				if (t>distance*2) {
+				if (t>100 || caster.isSneaking()) {
 					this.cancel();
 				}
 				

@@ -25,7 +25,7 @@ public class Lamaturm extends Spell {
 		cooldown = 20 * 55;
 		steprange = 20 * 50;
 		hitboxSize = 10;
-		 
+		multihit = true;
 		
 	}
 	
@@ -75,7 +75,7 @@ public class Lamaturm extends Spell {
 	int shootDelay = 0;
 	int shots = 1;
 	int realDelay = 0;
-	int maxShots = 3;
+	int maxShots = 5;
 	@Override
 	public void move() {
 		if (turret == null)
@@ -86,7 +86,7 @@ public class Lamaturm extends Spell {
 		if (refined) {
 			shootDelay+=10;
 		}
-		if (shootDelay > 40 && shots < maxShots) {
+		if (shootDelay > 20 && shots < maxShots) {
 			shots++;
 			playSound(Sound.ENTITY_LLAMA_ANGRY,loc,4,1);
 			

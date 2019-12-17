@@ -166,6 +166,8 @@ public class TypeTTT extends Type{
 		if ( ((int)playerCount/3)-1 > 0)
 		traitorCount += ((int)playerCount/3)-1;
 		
+		if (playerCount == 6)
+			traitorCount = 1;
 		
 		for (int i = 0;i<traitorCount;i++) {
 			int index = MathUtils.randInt(0, players.size()-1);

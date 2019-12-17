@@ -1,6 +1,7 @@
 package esze.listeners;
 
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,12 +11,20 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import esze.enums.Gamestate;
 import esze.main.main;
+import esze.utils.SoundUtils;
+import spells.spells.AntlitzderGöttin;
 import spells.spells.Schwerkraftsmanipulation;
 
 public class Damage implements Listener{
 	
 	@EventHandler
 	public void onDamage(EntityDamageEvent e){
+		
+		if (AntlitzderGöttin.deflect.contains(e.getEntity())) {
+			
+			e.setDamage(0);
+			SoundUtils.playSound(Sound.BLOCK_ENCHANTMENT_TABLE_USE, e.getEntity().getLocation(), 5, 2);
+		}
 		if(e.getCause().equals( DamageCause.FALL)) {
 			e.setCancelled(true);
 		}

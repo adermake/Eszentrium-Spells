@@ -1,6 +1,7 @@
 package spells.spells;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -39,7 +40,9 @@ public class Ansturm extends Spell{
 	public void setUp() {
 		golem = (IronGolem) spawnEntity(EntityType.IRON_GOLEM);
 		noTargetEntitys.add(golem);
-		moveDir = loc.getDirection();
+		Location l = loc.clone();
+		l.setPitch(0);
+		moveDir = l.getDirection();
 	}
 
 	@Override

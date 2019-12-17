@@ -65,13 +65,16 @@ public class Astralsprung extends Spell{
 		
 	}
 
+	int delay = 0;
 	@Override
 	public void move() {
 		if (dead)
 			return;
 		
+		delay--;
 		// TODO Auto-generated method stub
-		if (swap()) {
+		if (swap() && delay <= 0) {
+			delay = 20;
 			dist = target.getLocation().distance(caster.getLocation());
 			while (true) {
 				
@@ -83,7 +86,7 @@ public class Astralsprung extends Spell{
 			randVec2 = randVec2.multiply(dist);
 			
 			loc = target.getLocation().add(randVec2);
-			loc.setY(255);
+			loc.add(0,5,0);
 			while (!loc.getBlock().getType().isSolid()) {
 				
 				loc.add(0,-1,0);

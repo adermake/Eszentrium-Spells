@@ -75,7 +75,7 @@ public class RepulsionDirectional extends Spell {
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		tagPlayer(p);
-		doKnockback(p, loc, knockback);
+		p.setVelocity(dir.multiply(knockback));
 		
 	}
 

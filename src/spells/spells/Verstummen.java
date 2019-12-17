@@ -24,9 +24,9 @@ public class Verstummen extends Spell {
 	public Verstummen() {
 		name = "§eVerstummen";
 		cooldown = 20 * 30;
-		speed = 4;
+		speed = 50;
 		hitSpell = true;
-		steprange = 30;
+		steprange = 300;
 	}
 	
 	@Override
@@ -94,9 +94,8 @@ public class Verstummen extends Spell {
 				}
 			}
 		}.runTaskTimer(main.plugin, 1, 1);
-		if (refined) {
-			Cooldowns.refundCurrentRandomSpell(caster);
-		}
+		
+		caster.teleport(p.getLocation());
 	}
 
 	@Override

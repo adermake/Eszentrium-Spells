@@ -123,7 +123,7 @@ public class VampirpilzStage2 extends Spell {
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		if (p.getNoDamageTicks()<= 1) {
-			heal(caster, 1, caster);
+			heal(caster, 2, caster);
 			ParUtils.pullItemEffectVector(p.getLocation(), Material.NETHER_WART_BLOCK, 44, loc.clone().add(0,0.6,0),0.3F);
 			damage(p,1,caster);
 		}
@@ -137,7 +137,7 @@ public class VampirpilzStage2 extends Spell {
 		
 		if (ent.getNoDamageTicks()<= 1) {
 			ParUtils.pullItemEffectVector(ent.getLocation(), Material.NETHER_WART_BLOCK, 44, loc.clone().add(0,0.6,0),0.3F);
-			heal(caster, 1, caster);
+		
 			damage(ent,1,caster);
 			
 		}

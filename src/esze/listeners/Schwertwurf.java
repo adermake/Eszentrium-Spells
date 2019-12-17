@@ -11,20 +11,26 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.google.common.collect.Multimap;
 
+import esze.enums.GameType;
 import esze.main.main;
 import esze.players.PlayerAPI;
 import net.minecraft.server.v1_14_R1.AttributeModifier;
@@ -45,7 +51,7 @@ public class Schwertwurf implements Listener {
 		if (hand != null && !hand.equals(EquipmentSlot.HAND))
 			return;
 		if (e.getAction() == Action.RIGHT_CLICK_AIR && p.isSneaking() || e.getAction() == Action.RIGHT_CLICK_BLOCK && p.isSneaking()) {
-			if (p.getInventory().getItemInMainHand().getType().toString().contains("SWORD")) {
+			if (p.getInventory().getItemInMainHand().getType() == Material.WOODEN_SWORD) {
 				sword.add(p);
 				new BukkitRunnable() {
 					int t = 0;
@@ -152,8 +158,60 @@ public class Schwertwurf implements Listener {
 			}
 
 		}
+		if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			if (p.getInventory().getItemInMainHand().getType() == Material.GOLDEN_SWORD) {
+				if (goldLaunch.contains(p)) {
+					goldLaunch.remove(p);
+				}
+				for (LivingEntity ent : p.getWorld().getLivingEntities()) {
+					if (ent.getLocation().distance(p.getLocation())<5 && ent != p) {
+						new BukkitRunnable() {
+							int t = 0;
+							public void run() {
+								t++;
+								if (goldLaunch.contains(p)) {
+									goldLaunch.remove(p);
+									this.cancel();
+								}
+								else {
+									doPull(ent, p.getLocation().add(0,0.5,0).add(p.getLocation().getDirection().multiply(3)), ent.getLocation().distance(p.getLocation())/4);
+								}
+								if (t>10) {
+									
+									this.cancel();
+								}
+								
+							}
+						}.runTaskTimer(main.plugin, 0, 1);
+						
+					}
+				}
+			}
+		}
 	}
-	
+	ArrayList<Player> goldLaunch = new ArrayList<Player>();
+	@EventHandler
+	public void onEntityDamage(EntityDamageByEntityEvent e) {
+		
+		if(e.getDamager() instanceof Player) {
+			Player p = (Player) e.getDamager();
+				
+				if (p.getInventory().getItemInMainHand().getType() == Material.GOLDEN_SWORD) {
+					if (!goldLaunch.contains(p)) {
+						goldLaunch.add(p);
+						
+					}
+					e.getEntity().setVelocity(p.getLocation().getDirection().multiply(8));
+					
+				}
+			
+		}
+	}
+	public void doPull(Entity e, Location toLocation,double speed) {
+		// multiply default 0.25
+		
+		e.setVelocity(toLocation.toVector().subtract(e.getLocation().toVector()).normalize().multiply(speed));
+	}
 	public double getAttackDamage(ItemStack itemStack) {
         double attackDamage = 5.0;
         UUID uuid = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");

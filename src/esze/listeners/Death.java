@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -22,6 +23,9 @@ public class Death implements Listener {
 	@EventHandler
 	public void onDeath(EntityDamageEvent e){
 			// TEST
+		if(e.getCause() != DamageCause.ENTITY_EXPLOSION){
+			
+		}
 		if (e.getEntity() instanceof Player) {
 			if(e.getCause() != DamageCause.FALL){
 				Player p = (Player) e.getEntity();
@@ -43,5 +47,8 @@ public class Death implements Listener {
 		}
 		
 	}
-
+	
+	@EventHandler
+	  public void onEntityDamageByEntity(EntityDamageByEntityEvent event) { if (event.getDamager() instanceof org.bukkit.entity.Firework) event.setCancelled(true);  }
+	
 }

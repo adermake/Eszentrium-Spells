@@ -1,6 +1,12 @@
 package spells.spells;
 
+import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryUsage;
 import java.util.ArrayList;
+
+import javax.management.MBeanServer;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -13,6 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import com.sun.management.HotSpotDiagnosticMXBean;
 
 import esze.main.PacketListner;
 import esze.main.main;
@@ -23,12 +30,15 @@ import spells.spellcore.Spell;
 public class Opfersuche extends Spell {
 
 	public Opfersuche() {
+		
 		name = "§6Opfersuche";
 		cooldown = 20 * 34;
 		steprange = 200;
 		hitboxSize= 1.5;
 		hitSpell = true;
 	}
+	
+	
 	
 	Phantom ent;
 	ArrayList<Entity> grabbed = new ArrayList<Entity>();
@@ -96,14 +106,15 @@ public class Opfersuche extends Spell {
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		damage(p, 4+i, caster);
-		phantomSpin(p,1);
+		phantomSpin(p,1,(int)step*4);
 		playSound(Sound.ENTITY_PHANTOM_HURT,loc,5,2F);
 		new BukkitRunnable() {
 			int t = 0;
+			int time = (int)step*4;
 			public void run() {
 				t++;
 				p.setVelocity(new Vector(0,0.05,0));
-				if (t > 100) {
+				if (t > time) {
 					this.cancel();
 					
 				}
@@ -120,14 +131,15 @@ public class Opfersuche extends Spell {
 	public void onEntityHit(LivingEntity ent2) {
 		
 		playSound(Sound.ENTITY_PHANTOM_HURT,loc,5,2F);
-		phantomSpin(ent2,1);
+		phantomSpin(ent2,1,(int)step*4);
 	
 		new BukkitRunnable() {
 			int t = 0;
+			int time = (int)step*4;
 			public void run() {
 				t++;
 				ent2.setVelocity(new Vector(0,0.05,0));
-				if (t > 100) {
+				if (t > time) {
 					this.cancel();
 					
 				}
@@ -138,7 +150,7 @@ public class Opfersuche extends Spell {
 			dead = true;
 	}
 
-	public void phantomSpin(LivingEntity p,int spin) {
+	public void phantomSpin(LivingEntity p,int spin,int time) {
 		Phantom fa = (Phantom) spawnEntity(EntityType.PHANTOM);
 		noTargetEntitys.add(fa);
 		
@@ -160,7 +172,7 @@ public class Opfersuche extends Spell {
 				fa.teleport(pos);
 				fa.setTarget(p);
 				fa.setRotation(pos.getYaw(),pos.getPitch());
-				if (t > 100) {
+				if (t > time) {
 					this.cancel();
 					fa.remove();
 				}

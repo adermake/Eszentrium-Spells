@@ -18,8 +18,8 @@ public class Meteoritenhagel extends Spell {
 	
 	public Meteoritenhagel() {
 		cooldown = 20 * 40;
-		casttime = 44;
-		steprange = 45;
+		casttime = 22;
+		steprange = 25;
 		name = "§cMeteoritenhagel";
 		speed = 1;
 		
@@ -44,11 +44,11 @@ public class Meteoritenhagel extends Spell {
 	public void cast() {
 		
 		//ParUtils.parKreisSolidRedstone(Color.RED, 1, loc.clone(), cast/4, 0, 1, new Vector(0,1,0));
-		Location dot = ParUtils.stepCalcCircle(loc.clone(), 8, new Vector(0,1,0), 0, cast);
+		Location dot = ParUtils.stepCalcCircle(loc.clone(), 8, new Vector(0,1,0), 0, cast*2);
 		ParUtils.createParticle(Particles.LANDING_LAVA, dot, 0, 1, 0, 0, 0);
 		ParUtils.createParticle(Particles.LAVA, dot, 0, 1, 0, 0, 0);
 		//ParUtils.createParticle(Particles.CAMPFIRE_SIGNAL_SMOKE, dot, 0, 1, 0, 0, 5);
-		dot = ParUtils.stepCalcCircle(loc.clone(), 8, new Vector(0,1,0), 0, cast+22);
+		dot = ParUtils.stepCalcCircle(loc.clone(), 8, new Vector(0,1,0), 0, cast*2+22);
 		ParUtils.createParticle(Particles.LANDING_LAVA, dot, 0, 1, 0, 0, 0);
 		ParUtils.createParticle(Particles.LAVA, dot, 0, 1, 0, 0, 0);
 		//ParUtils.createParticle(Particles.CAMPFIRE_SIGNAL_SMOKE, dot, 0, 1, 0, 0, 5);
