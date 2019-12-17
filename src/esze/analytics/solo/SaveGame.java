@@ -35,7 +35,9 @@ public class SaveGame {
 			s += sp.toString() + ",";
 			s += map.get(sp).intValue() + ",";
 		}
-		s = s.substring(0, s.length() - 1);
+		if (s.length() > 1) {
+			s = s.substring(0, s.length()-1);
+		}
 		return s + "]";
 	}
 

@@ -400,6 +400,11 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 					case "info":
 						p.sendMessage(SaveUtils.getSaveEsze().toString());
 						return true;
+					case "commit":
+						p.sendMessage("Commited Game!");
+						SaveUtils.endGame();
+						p.sendMessage(SaveUtils.getSaveEsze().toString());
+						return true;
 					default:
 						p.sendMessage("ERROR");
 						return false;

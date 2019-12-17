@@ -15,6 +15,7 @@ import spells.spellcore.Spell;
 public class ExplosionDamage extends Spell {
 
 	double damage = 0;
+	
 	Location overrideLoc;
 	public ExplosionDamage(double size,double damage,Player caster,Location loca, String namae) {
 		this.caster = caster;
