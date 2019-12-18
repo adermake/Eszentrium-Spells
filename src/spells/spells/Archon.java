@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sun.prism.impl.Disposer.Target;
 
 import esze.utils.ItemStackUtils;
 import esze.utils.NBTUtils;

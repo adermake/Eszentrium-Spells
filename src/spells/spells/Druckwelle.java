@@ -1,7 +1,6 @@
 package spells.spells;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -14,14 +13,12 @@ import esze.utils.ParUtils;
 import esze.utils.SoundUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
-import spells.stagespells.Repulsion;
 
-public class Schockwelle extends Spell {
-
+public class Druckwelle extends Spell {
 	Player target;
-	public Schockwelle() {
+	public Druckwelle() {
 		
-		name = "§rSchockwelle";
+		name = "§rDruckwellxe";
 		cooldown = 20*30;
 		hitPlayer = false;
 		hitEntity = false;
@@ -35,7 +32,7 @@ public class Schockwelle extends Spell {
 	
 	@Override
 	public void setUp() {
-	
+		Bukkit.broadcastMessage(""+NBTUtils.getNBT("Archon", caster.getInventory().getItemInMainHand()));
 		target = Bukkit.getPlayer(NBTUtils.getNBT("Archon", caster.getInventory().getItemInMainHand()));
 		if (target == null) {
 			dead = true;
