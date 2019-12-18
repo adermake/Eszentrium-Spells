@@ -30,8 +30,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.sun.management.HotSpotDiagnosticMXBean;
-
 import esze.analytics.solo.SaveUtils;
 import esze.enums.GameType;
 import esze.enums.GameType.TypeEnum;
@@ -57,11 +55,12 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 		MemoryUsage heapMemoryUsage = memoryMXBean.getHeapMemoryUsage();
 		long used = heapMemoryUsage.getUsed();//bytes used
 */
+		/*
 	    MBeanServer platformMBeanServer = ManagementFactory.getPlatformMBeanServer();
 	    HotSpotDiagnosticMXBean mxBean = ManagementFactory.newPlatformMXBeanProxy(
-	    		platformMBeanServer, "com.sun.management:type=HotSpotDiagnostic", HotSpotDiagnosticMXBean.class);
+	    		platformMBeanServer, "com.sun.management:type=HotSpotDiagnostic", HotSpotDiagnosticMXBean.class);*/
 	    //"/tmp/minecraft-memory-dump-"+System.currentTimeMillis()+".hptof", true
-	    mxBean.dumpHeap(filePath, live);
+	    //mxBean.dumpHeap(filePath, live);
 	}
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdlabel, String [] args) {
 		final Player p = (Player) sender;			
@@ -371,7 +370,7 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 						return true;
 					case "losses":
 						if (args.length < 2) {
-							p.sendMessage("§7Du hast " + SaveUtils.getSaveEsze().getVictories(p.getName()) + "§7 Runden verloren!");
+							p.sendMessage("§7Du hast " + SaveUtils.getSaveEsze().getLosses(p.getName()) + "§7 Runden verloren!");
 						} else {
 							p.sendMessage("§7" + args[1] + " hat " + SaveUtils.getSaveEsze().getVictories(args[1]) + "§7 Runden verloren!");
 						}
