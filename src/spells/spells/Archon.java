@@ -1,10 +1,17 @@
 package spells.spells;
 
+import org.bukkit.GameMode;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
+import com.sun.prism.impl.Disposer.Target;
+
+import esze.utils.ItemStackUtils;
+import esze.utils.NBTUtils;
 import esze.utils.PlayerUtils;
 import spells.spellcore.Spell;
 
@@ -14,26 +21,34 @@ public class Archon extends Spell {
 		
 			cooldown = 33 * 40;
 			name = "§8Archon";
-			steprange = 15;
+		
 			
-			hitboxSize = 3;
+			hitboxSize = 0;
 			speed = 1;
-			multihit = true;
-			hitSpell = true;
+			traitorSpell = true;
+			
 		
 	}
+	Player target;
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		Player target = pointEntity(caster,15);
+		target = pointEntity(caster,15);
 		
 		if (target == null) {
 			refund = true;
 			dead = true;
 		}
 		else {
+			target.setGlowing(true);
 			PlayerUtils.hidePlayer(caster);
-			noTargetEntitys.add(caster);
+			unHittable.add(caster);
+			caster.setAllowFlight(true);
+			caster.setFlying(true);
+			caster.getInventory().clear();
+			
+			caster.getInventory().setItem(1,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rPhasenwechsel")));
+			caster.getInventory().setItem(2,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rSchockwelle")));
 		}
 	}
 
@@ -51,8 +66,47 @@ public class Archon extends Spell {
 
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
+		if (!dead) {
+		caster.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 10,true));
 		
+		// TODO Auto-generated method stub
+		if (target.getGameMode() == GameMode.ADVENTURE) {
+			caster.setNoDamageTicks(0);
+			caster.damage(20);
+			dead = true;
+		}
+		
+		caster.setNoDamageTicks(20);
+		
+		if (swap()) {
+			caster.setVelocity(caster.getLocation().getDirection().multiply(3));
+		}
+		
+		
+		if (caster.getLocation().distance(target.getLocation())>30) {
+			
+			doPull(caster, target.getLocation(), 1);
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		}
 	}
 
 	@Override

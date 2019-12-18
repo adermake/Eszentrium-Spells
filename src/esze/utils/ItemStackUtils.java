@@ -62,5 +62,22 @@ public class ItemStackUtils {
 		
 		return NBTUtils.setNBT(speed, is);
 	}
-
+	
+	public static ItemStack createSpell(String name) {
+		ItemStack is = new ItemStack(Material.ENCHANTED_BOOK);
+	    ItemMeta im = is.getItemMeta();
+     
+   
+        //name = name.replace("&", "§");
+      
+        
+       
+       
+        im.setDisplayName(name);
+        is.setItemMeta(im);
+        
+        is = NBTUtils.setNBT("Spell", "true", is);
+        is = NBTUtils.setNBT("OriginalName", is.getItemMeta().getDisplayName(), is);
+        return is;
+	}
 }

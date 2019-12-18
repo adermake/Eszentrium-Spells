@@ -77,7 +77,7 @@ public abstract class Spell {
 	protected static ArrayList<Player> gliding = new ArrayList<Player>();
 	protected static ArrayList<Player> hasDied = new ArrayList<Player>();
 	protected static ArrayList<Player> hasDiedEntry = new ArrayList<Player>();
-	protected static ArrayList<Player> unHittable = new ArrayList<Player>();
+	public static ArrayList<Player> unHittable = new ArrayList<Player>();
 	protected Location startPos;
 	//CALLED
 	

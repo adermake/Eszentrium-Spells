@@ -13,6 +13,7 @@ import org.bukkit.util.Vector;
 
 import esze.main.main;
 import net.minecraft.server.v1_14_R1.Particles;
+import spells.spellcore.Spell;
 
 public class LobbyUtils {
 
@@ -54,6 +55,7 @@ public class LobbyUtils {
 			p.getInventory().clear();
 			p.teleport((Location) main.plugin.getConfig().get("lobby.loc"));
 			p.setGlowing(false);
+			Spell.unHittable.clear();
 			PlayerUtils.hidePlayer(p,35);
 		}
 		SoundUtils.playSound(Sound.BLOCK_PORTAL_TRAVEL, l,2,0.6F);
