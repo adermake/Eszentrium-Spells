@@ -48,6 +48,8 @@ public class Archon extends Spell {
 			
 			caster.getInventory().setItem(1,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rPhasenwechsel")));
 			caster.getInventory().setItem(2,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rSchockwelle")));
+			caster.getInventory().setItem(3,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rBlitzaufzug")));
+			caster.getInventory().setItem(4,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rDruckwelle")));
 		}
 	}
 
