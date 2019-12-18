@@ -65,15 +65,19 @@ public class Magnetball extends Spell{
 	@Override
 	public void onPlayerHit(Player p) {
 		double distance = p.getLocation().distance(loc);
-		ParUtils.parLineRedstone(loc, p.getLocation().add(0,0.5,0), Color.fromBGR(0, 200-(int)distance*15,(int) (100+distance*15)), 1, 0.5);
+		ParUtils.parLineRedstone(loc, p.getLocation().add(0,0.5,0), Color.fromBGR(0, clamp(200-(int)distance*15, 0, 255),clamp((int) (100+distance*15), 0, 255)), 1, 0.5);
 		
+	}
+	
+	public int clamp(int i, int min, int max) {
+		return (i < min) ? min : ((i > max) ? max : i);
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		double distance = ent.getLocation().distance(loc);
-		ParUtils.parLineRedstone(loc, ent.getLocation().add(0,0.5,0), Color.fromBGR(0, 200-(int)distance*15,(int) (100+distance*15)), 1, 0.5);
+		ParUtils.parLineRedstone(loc, ent.getLocation().add(0,0.5,0), Color.fromBGR(0, clamp(200-(int)distance*15, 0, 255),clamp( (int) (100+distance*15),0 ,255 )), 1, 0.5);
 		
 	}
 

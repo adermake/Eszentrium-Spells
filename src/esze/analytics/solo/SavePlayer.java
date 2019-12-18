@@ -39,7 +39,9 @@ public class SavePlayer {
 		s4 = (list.length > i) ? new SaveSelection(list[i]) : null;
 		i++;
 		d4 = (list.length > i) ? list[i] : null;
-		dead = true;
+		if (d4 != null) {
+			dead = true;
+		}
 	}
 	
 	@Override
@@ -47,13 +49,13 @@ public class SavePlayer {
 		String s = "[";
 		s += name;
 		
-		s += (s1 != null) ? ("," + s1) : ("");
+		s += (s1 != null) ? ("," + s1.toString()) : ("");
 		s += (d1 != null) ? ("," + d1) : ("");
-		s += (s2 != null) ? ("," + s2) : ("");
+		s += (s2 != null) ? ("," + s2.toString()) : ("");
 		s += (d2 != null) ? ("," + d2) : ("");
-		s += (s3 != null) ? ("," + s3) : ("");
+		s += (s3 != null) ? ("," + s3.toString()) : ("");
 		s += (d3 != null) ? ("," + d3) : ("");
-		s += (s4 != null) ? ("," + s4) : ("");
+		s += (s4 != null) ? ("," + s4.toString()) : ("");
 		s += (d4 != null) ? ("," + d4) : ("");
 		
 		return s + "]";

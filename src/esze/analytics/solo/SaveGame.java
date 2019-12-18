@@ -83,7 +83,7 @@ public class SaveGame {
 	public void endGame() {
 		ArrayList<SavePlayer> sp = new ArrayList<SavePlayer>(); 
 		for (SavePlayer p : map.keySet()) {
-			if (!p.isDead() && !p.isWinner()) {
+			if (p == null && !p.isDead() && !p.isWinner()) {
 				sp.add(p);
 			}
 		}

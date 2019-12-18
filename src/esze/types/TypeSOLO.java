@@ -168,7 +168,7 @@ public class TypeSOLO extends Type {
 				
 				postResult(winner);
 			}
-			//SaveUtils.endGame(); //Analytics //TODO Macht ERROR
+			SaveUtils.endGame(); //Analytics //TODO Macht ERROR
 			
 			Music.sp.destroy();
 			GameRunnable.stop();
