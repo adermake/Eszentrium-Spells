@@ -43,6 +43,7 @@ public class SchockLaser extends Spell {
 		
 	}
 
+	Location hitLoc;
 	
 	boolean spiking = false;
 	boolean reverseSpiking = false;
@@ -54,7 +55,7 @@ public class SchockLaser extends Spell {
 	public void move() {
 		
 		if (!spiking && randInt(1,6) == 2 ) {
-			spikeLength = randInt(0,31-(int)(step/10));
+			spikeLength = randInt(0,clamp(31-(int)(step/10), 1, 31));
 			
 			maxSpikeLength = spikeLength;
 			spike = randVector().normalize();
@@ -88,6 +89,10 @@ public class SchockLaser extends Spell {
 		
 		
 	}
+	
+	public int clamp(int i, int min, int max) {
+		return (i < min) ? min : ((i > max) ? max : i);
+	}
 
 	@Override
 	public void display() {
@@ -99,12 +104,14 @@ public class SchockLaser extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
+		hitLoc = p.getLocation();
 		onHit();
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
+		hitLoc = ent.getLocation();
 		onHit();
 	}
 
@@ -117,14 +124,15 @@ public class SchockLaser extends Spell {
 	@Override
 	public void onBlockHit(Block block) {
 		// TODO Auto-generated method stub
+		hitLoc = block.getLocation();
 		onHit();
 	}
 
 	
 	public void onHit() {
-		double x = (caster.getLocation().getY()-loc.getY());
-		double dmg = 3 + 15/(1 + Math.pow(Math.E, -(1/14)*x)*15);
-		new ExplosionDamage(2, dmg,caster, loc, name);
+		double x = (caster.getLocation().getY() - hitLoc.getY());
+		double dmg = 3 + 15/(1 + Math.exp(-0.07*x) * 15);
+		new Explosion(2, dmg,1, 1,caster, loc, name);
 		ParUtils.parKreisDot(Particles.CLOUD, loc, 5, 0, 0.05, loc.getDirection().multiply(-1));
 		dead = true;
 		playSound(Sound.ENTITY_LIGHTNING_BOLT_IMPACT, loc, 4, 0.3F);

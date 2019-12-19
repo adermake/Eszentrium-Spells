@@ -144,7 +144,8 @@ public class EventCollector implements Listener {
 							
 
 						} catch (Exception ex) {
-							ex.printStackTrace(System.out);
+							//ex.printStackTrace(System.out);
+							p.sendMessage("Spell is not vaild!");
 						}
 						;
 					}

@@ -372,11 +372,11 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 						if (args.length < 2) {
 							p.sendMessage("§7Du hast " + SaveUtils.getSaveEsze().getLosses(p.getName()) + "§7 Runden verloren!");
 						} else {
-							p.sendMessage("§7" + args[1] + " hat " + SaveUtils.getSaveEsze().getVictories(args[1]) + "§7 Runden verloren!");
+							p.sendMessage("§7" + args[1] + " hat " + SaveUtils.getSaveEsze().getLosses(args[1]) + "§7 Runden verloren!");
 						}
 						return true;
 					case "worth":
-						if (args.length > 2) {
+						if (args.length >= 2) {
 							String assembly = "";
 							for (int i = 1; i < args.length; i++) {
 								assembly += args[i] + " ";
@@ -385,8 +385,17 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 							p.sendMessage("§7The Spell " + assembly + "§7 has a worth of " + SaveUtils.getSaveEsze().getWorth(assembly) + "§7%!");
 							return true;
 						}
+						return false;
 					case "stats":
-						new SoloAnalyticsMenu(p).open(p);
+						if (args.length < 2) {
+							new SoloAnalyticsMenu(args[1]).open(p);
+						} else {
+							new SoloAnalyticsMenu(p).open(p);
+						}
+						return true;
+					case "save":
+						SaveUtils.save();
+						p.sendMessage("Save!");
 						return true;
 					case "backup":
 						SaveUtils.backup();
@@ -396,14 +405,23 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 						SaveUtils.reset();
 						p.sendMessage("Cleared!");
 						return true;
+					case "usedspell":
+						if (args.length >= 2) {
+							p.sendMessage("§7The Spell "+ SaveUtils.getSaveEsze().getFavSpell(args[1]) + "§7 is " + args[1] + " §7 most used Spell!");
+							return true;
+						} else {
+							p.sendMessage("§7The Spell "+ SaveUtils.getSaveEsze().getFavSpell(args[1]) + "§7 is the most used Spell!");
+							return true;
+						}
 					case "info":
 						p.sendMessage(SaveUtils.getSaveEsze().toString());
 						return true;
+					/*
 					case "commit":
 						p.sendMessage("Commited Game!");
 						SaveUtils.endGame();
 						p.sendMessage(SaveUtils.getSaveEsze().toString());
-						return true;
+						return true;*/
 					default:
 						p.sendMessage("ERROR");
 						return false;
@@ -412,6 +430,9 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				if (sender instanceof Player) {
 		            Player player = (Player) sender;
 		            if (cmd.getName().equals("spell")) {
+		            if (args.length == 0) {
+		            	return false;
+		            }
 		            ItemStack is = new ItemStack(Material.BOOK);
 		            ItemMeta im = is.getItemMeta();
 		            String name = args[0];

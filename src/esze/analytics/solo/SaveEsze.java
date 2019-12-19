@@ -1,7 +1,10 @@
 package esze.analytics.solo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Pattern;
+
+import esze.main.main;
 
 public class SaveEsze {
 	
@@ -175,22 +178,89 @@ public class SaveEsze {
 	}
 
 	public double getSpellWorth(String name, String s) {
+		
 		int choice = 0;
 		int chosen = 0;
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
 				if (p.getName().equals(name)) {
 					for (SaveSelection sele : p.getSelections()) {
-						if (sele.getChsp().equals(s)) {
-							chosen++;
-						}
-						if (sele.getChoices().contains(s)) {
-							choice++;
+						for (String tag : main.colorTags) {
+							if (sele.getChsp().equals(tag + s)) {
+								chosen++;
+							}
+							if (sele.getChoices().contains(tag + s)) {
+								choice++;
+							}
 						}
 					}
 				}
 			}
 		}
+		if (choice == 0) {
+			return 0;
+		}
 		return (100 * ((double) chosen / (double) choice));
 	}
+	
+	public String getFavSpell(String name) {
+		
+		HashMap<String, Integer> map = new HashMap<>();
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				if (p.getName().equals(name)) {
+					for (SaveSelection sele : p.getSelections()) {
+						if (map.containsKey(sele.getChsp())) {
+							Integer i = map.get(sele.getChsp()) + 1;
+							map.remove(sele.getChsp());
+							map.put(sele.getChsp(), i);
+						} else {
+							map.put(sele.getChsp(), 0);
+						}
+					}
+				}
+			}
+		}
+		if (map.size() == 0) {
+			return "";
+		}
+		String max = (String) map.keySet().toArray()[0];
+		for (String s : map.keySet()) {
+			if (map.get(s) > map.get(max)) {
+				max = s;
+			}
+		}
+		return max;
+	}
+	
+	public String getFavSpell() {
+		
+		HashMap<String, Integer> map = new HashMap<>();
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				
+				for (SaveSelection sele : p.getSelections()) {
+					if (map.containsKey(sele.getChsp())) {
+						Integer i = map.get(sele.getChsp()) + 1;
+						map.remove(sele.getChsp());
+						map.put(sele.getChsp(), i);
+					} else {
+						map.put(sele.getChsp(), 0);
+					}
+				}
+				
+			}
+		}
+		if (map.size() == 0) {
+			return "";
+		}
+		String max = (String) map.keySet().toArray()[0];
+		for (String s : map.keySet()) {
+			if (map.get(s) > map.get(max)) {
+				max = s;
+			}
+		}
+		return max;
+	}
+	
 }

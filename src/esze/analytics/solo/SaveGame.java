@@ -60,22 +60,22 @@ public class SaveGame {
 		boolean fin = false;
 		SavePlayer pl = null;
 		for (SavePlayer p : map.keySet()) {
-			if (p.getName().equals(name)) {
+			if (p.getName().equals(name) && !p.isDead()) {
 				fin = p.addDeath(cause);
 				pl = p;
 			}
 		}
 		
 		if (fin) {
-			int max = 0;
-			for (Integer i : map.values()) {
-				if (max <= i) {
-					max = i;
-				}
+			int max = map.size()-1;
+			
+			while (map.values().contains(max) && max > 0) {
+				max -= 1;
 			}
+			
 			if (pl != null) {
 				map.remove(pl);
-				map.put(pl, max+1);
+				map.put(pl, max);
 			}
 		}
 	}
@@ -95,7 +95,7 @@ public class SaveGame {
 
 	public void addSelect(String name, SaveSelection sele) {
 		for (SavePlayer p : map.keySet()) {
-			if (p.getName().equals(name)) {
+			if (p.getName().equals(name) && !p.isDead()) {
 				p.addSelect(sele);
 			}
 		}

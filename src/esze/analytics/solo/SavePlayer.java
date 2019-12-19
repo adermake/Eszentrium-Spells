@@ -137,8 +137,8 @@ public class SavePlayer {
 		if (d1 == null) {d1 = sele;return false;}
 		if (d2 == null) {d2 = sele;return false;}
 		if (d3 == null) {d3 = sele;return false;}
-		dead = true;
 		if (d4 == null) {d4 = sele;return true;}
+		dead = true;
 		return true;
 	}
 
@@ -160,10 +160,10 @@ public class SavePlayer {
 	
 	public ArrayList<String> getDeaths() {
 		ArrayList<String> deaths = new ArrayList<>();
-		if (d1 !=null) {deaths.add(d1);}
-		if (d2 !=null) {deaths.add(d2);}
-		if (d3 !=null) {deaths.add(d3);}
-		if (d4 !=null) {deaths.add(d4);}
+		if (d1 !=null && !d1.equals("")) {deaths.add(d1);}
+		if (d2 !=null && !d2.equals("")) {deaths.add(d2);}
+		if (d3 !=null && !d3.equals("")) {deaths.add(d3);}
+		if (d4 !=null && !d4.equals("")) {deaths.add(d4);}
 		return deaths;
 	}
 	

@@ -28,6 +28,8 @@ import io.netty.util.internal.ThreadLocalRandom;
 
 public abstract class Spell {
 	
+	//FINAL
+	private final double minDist = 0.0001;
 	
 	//TODO
 	//Not hit custom spawned entitys
@@ -86,6 +88,8 @@ public abstract class Spell {
 		protected static ArrayList<Player> silenced = new ArrayList<Player>();
 		public static HashMap<Player,DamageCauseContainer> damageCause = new HashMap<Player,DamageCauseContainer>();
 	//
+	
+	
 	
 	public boolean castSpell(Player p,String name) {
 		
@@ -542,7 +546,9 @@ public abstract class Spell {
 				tagPlayer((Player) e);
 			}
 		}
-		e.setVelocity(fromLocation.toVector().subtract(e.getLocation().toVector()).normalize().multiply(-speed));
+		if (fromLocation.toVector().distance(e.getLocation().toVector()) > minDist) {
+			e.setVelocity(fromLocation.toVector().subtract(e.getLocation().toVector()).normalize().multiply(-speed));
+		}
 	}
 	
 	
@@ -553,7 +559,9 @@ public abstract class Spell {
 				tagPlayer((Player) e);
 			}
 		}
-		e.setVelocity(toLocation.toVector().subtract(e.getLocation().toVector()).normalize().multiply(speed));
+		if (toLocation.toVector().distance(e.getLocation().toVector()) > minDist) {
+			e.setVelocity(toLocation.toVector().subtract(e.getLocation().toVector()).normalize().multiply(speed));
+		}
 	}
 	public Player pointEntity(Player p) {
 		int range = 300;
