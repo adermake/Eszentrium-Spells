@@ -15,6 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.main.main;
 import esze.utils.ParUtils;
+import esze.utils.SoundUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
@@ -49,6 +50,7 @@ public class Avatar extends Spell{
 		spawnSpiraleAnim(caster, 2,3, 0);
 		//caster.setAllowFlight(true);
 		//caster.setFlying(true);
+		SoundUtils.playSound(Sound.ENTITY_WITHER_DEATH, caster.getLocation(), 0.4F, 10);
 		g = (Giant) loc.getWorld().spawnEntity(loc, EntityType.GIANT);
 		g.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000,100));
 		g.setGlowing(true);

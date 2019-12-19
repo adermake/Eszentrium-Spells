@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import spells.spells.Ansturm;
 import spells.spells.Mondkugel;
 import spells.spells.AntlitzderGöttin;
+import spells.spells.Archon;
 import spells.spells.Astralsprung;
 import spells.spells.Aufwind;
 import spells.spells.AugedesDrachen;
@@ -148,6 +149,7 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Blasensturm());
 		registerSpell(new Feuerball());
 		registerSpell(new Flucht());
+		registerSpell(new Archon(), TypeTTT.class);
 		registerSpell(new Erlösung(), TypeTTT.class);
 		registerSpell(new Heilen(), TypeTTT.class);
 		registerSpell(new Hühnchenluftschlag());

@@ -1,6 +1,7 @@
 package spells.spells;
 
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -11,7 +12,10 @@ import org.bukkit.potion.PotionEffectType;
 
 import esze.utils.ItemStackUtils;
 import esze.utils.NBTUtils;
+import esze.utils.ParUtils;
 import esze.utils.PlayerUtils;
+import esze.utils.SoundUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Archon extends Spell {
@@ -40,16 +44,19 @@ public class Archon extends Spell {
 		}
 		else {
 			target.setGlowing(true);
+			SoundUtils.playSound(Sound.ENTITY_WITHER_HURT, target.getLocation(), 0.6F, 10);
 			PlayerUtils.hidePlayer(caster);
 			unHittable.add(caster);
 			caster.setAllowFlight(true);
 			caster.setFlying(true);
 			caster.getInventory().clear();
-			
+			target.setMaxHealth(40);
+			target.setHealth(40);
 			caster.getInventory().setItem(1,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rPhasenwechsel")));
 			caster.getInventory().setItem(2,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rSchockwelle")));
-			caster.getInventory().setItem(3,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rBlitzaufzug")));
-			caster.getInventory().setItem(4,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rDruckwelle")));
+			caster.getInventory().setItem(3,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rDruckwelle")));
+			caster.getInventory().setItem(4,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rBlitzaufstieg")));
+			caster.getInventory().setItem(5,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rBlitzaufstieg")));
 		}
 	}
 
@@ -84,18 +91,22 @@ public class Archon extends Spell {
 		}
 		
 		
-		if (caster.getLocation().distance(target.getLocation())>30) {
+		if (caster.getLocation().distance(target.getLocation())>50) {
 			
 			doPull(caster, target.getLocation(), 1);
+			
+		}
+		
+		if (caster.getLocation().distance(target.getLocation())>60) {
+			
+			caster.teleport(target.getLocation());
 			
 		}
 		
 		
 		
 		
-		
-		
-		
+		ParUtils.createParticle(Particles.END_ROD, caster.getLocation(), 0, 0, 0, 1, 0.005F);
 		
 		
 		

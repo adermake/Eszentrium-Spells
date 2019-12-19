@@ -23,7 +23,7 @@ public class Blitzaufstieg extends Spell {
 	public Blitzaufstieg() {
 		
 		name = "§rBlitzaufstieg";
-		cooldown = 20*30;
+		cooldown = 20*20;
 		hitPlayer = true;
 		hitEntity = true;
 		hitboxSize = 8;
@@ -35,7 +35,7 @@ public class Blitzaufstieg extends Spell {
 	
 	@Override
 	public void setUp() {
-		//target = Bukkit.getPlayer(NBTUtils.getNBT("Archon", caster.getInventory().getItemInMainHand()));
+		target = Bukkit.getPlayer(NBTUtils.getNBT("Archon", caster.getInventory().getItemInMainHand()));
 		if (target == null) {
 			dead = true;
 			hitPlayer = false;

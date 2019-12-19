@@ -23,19 +23,23 @@ public class Discord {
 	public static IVoiceChannel channel;
 	
 	public static void run(){
+		System.out.println("D1");
 		discordbot = new ClientBuilder()
         .withToken(main.discord_TOKEN)
         .login();
-        
 		
+		System.out.println("D2");
 			Bukkit.getScheduler().runTaskLater(main.plugin, new Runnable() {
-			
+				
 			@Override
 			public void run() {
+				System.out.println("DEBUGGGING");
 				for(IGuild g : discordbot.getGuilds()){
+					System.out.println("GUILDS ::::::::::::::::::::::"+g);
 					channel = g.getVoiceChannelByID(621375797953036328L);
 					channel.join();
 				}
+				System.out.println("DONE");
 			}
 		}, 20*3);	
 		

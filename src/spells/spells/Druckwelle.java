@@ -7,6 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import esze.utils.NBTUtils;
 import esze.utils.ParUtils;
@@ -18,13 +19,13 @@ public class Druckwelle extends Spell {
 	Player target;
 	public Druckwelle() {
 		
-		name = "§rDruckwellxe";
-		cooldown = 20*30;
+		name = "§rDruckwelle";
+		cooldown = 20*25;
 		hitPlayer = false;
 		hitEntity = false;
-		hitboxSize = 55;
-		casttime = 20;
-		steprange =22;
+		hitboxSize = 1;
+		
+		
 		
 	}
 	
@@ -41,14 +42,15 @@ public class Druckwelle extends Spell {
 		//ParUtils.createParticle(Particles.FLASH,target.getLocation(), 0, 0, 0, 1, 1);
 		//ParUtils.createParticle(Particles.END_ROD,target.getLocation(), 0, 0, 0, 222, 10);
 		//ParUtils.createParticle(Particles.ENCHANT,target.getLocation(), 0, 0, 0, 102, 10);
-		SoundUtils.playSound(Sound.ENTITY_WITHER_AMBIENT, loc,0.3F,30F);
+		SoundUtils.playSound(Sound.ENTITY_WITHER_HURT, loc,0.3F,30F);
 		noTargetEntitys.add(target);
+		loc = target.getLocation();
 	}
 
 	@Override
 	public void cast() {
 		// TODO Auto-generated method stub
-		ParUtils.chargeDot(target.getLocation(), Particles.END_ROD, 0.2F, 10, 10);
+		
 	}
 
 	@Override
@@ -56,13 +58,36 @@ public class Druckwelle extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
-
+	boolean charging = true;
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
-		SoundUtils.playSound(Sound.ENTITY_WITHER_SPAWN, loc,2F,0.1F);
-		effect(step*6);
-		loc = target.getLocation();
+		if (charging) {
+			Vector dir = caster.getLocation().toVector().subtract(loc.toVector()).normalize();
+			ParUtils.createParticle(Particles.END_ROD, loc, 0, 0, 0, 3, 0);
+			ParUtils.createFlyingParticle(Particles.CLOUD, loc, 0, 0, 0, 1, 0.2F, dir);
+			ParUtils.createParticle(Particles.ENCHANT, loc, 0.1, 0.1, 0.1, 5, 5);
+			loc.add(dir.multiply(1.3F));
+		}
+		else {
+			
+			loc.add(caster.getLocation().getDirection().multiply(2));
+			ParUtils.createParticle(Particles.FLASH, loc, 4, 4, 3, 10, 1);
+			
+		}
+		
+		if (loc.distance(caster.getLocation())<2 && charging) {
+			hitPlayer = true;
+			hitEntity = true;
+			hitboxSize = 6;
+			charging = false;
+			steprange = 15;
+			loc = caster.getLocation();
+			caster.setVelocity(caster.getLocation().getDirection().multiply(-1));
+			SoundUtils.playSound(Sound.BLOCK_CONDUIT_ACTIVATE, loc,2,5);
+			SoundUtils.playSound(Sound.ENTITY_GENERIC_EXPLODE, loc,0.5F,5);
+			ParUtils.parKreisDir(Particles.CLOUD, loc, 3, 0, 2, caster.getLocation().getDirection(),caster.getLocation().getDirection());
+			ParUtils.parKreisDir(Particles.CLOUD, loc, 5, 0, 1, caster.getLocation().getDirection(),caster.getLocation().getDirection());
+		}
 	}
 
 	@Override
@@ -74,8 +99,10 @@ public class Druckwelle extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
+		if ( p == target)
+			return;
 		double distance = p.getLocation().distance(target.getLocation());
-		doKnockback(p, target.getLocation(), 5*(distance/hitboxSize));
+		p.setVelocity(caster.getLocation().getDirection().multiply(2));
 		damage(p, 3, target);
 	}
 
@@ -83,7 +110,7 @@ public class Druckwelle extends Spell {
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		double distance = ent.getLocation().distance(target.getLocation());
-		doKnockback(ent, target.getLocation(), 5*(distance/hitboxSize));
+		ent.setVelocity(caster.getLocation().getDirection().multiply(2));
 		damage(ent, 3, target);
 	}
 
@@ -104,38 +131,5 @@ public class Druckwelle extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
-	public void effect(double t) {
-		for (double theta = 0; theta <= 2 * Math.PI; theta = theta + Math.PI / 32) {
-			double x = t * Math.cos(theta);
-			double y = 0;
-			double z = t * Math.sin(theta);
-			loc.add(x, y, z);
-			int minus = 0;
-			while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR) {
-				loc.add(0, -1, 0);
-				minus++;
-				if (minus >= 256) {
-					break;
-				}
-			}
-
-			// ParticleEffect.FIREWORKS_SPARK.display(loc,0,0,0,0,1);
-
-			
-			ParUtils.createParticle(Particles.CLOUD, loc.clone().add(0,1,0), 0, 1, 0, 0,1);
-			ParUtils.createParticle(Particles.FLASH, loc.clone().add(0,1,0), 1, 2,1, 1, 0);
-			
-			
-			loc.subtract(x, y, z);
-			loc.add(0, minus, 0);
-			theta = theta + Math.PI / 64;
-
-			x = t * Math.cos(theta);
-			y = 2 * Math.exp(-0.1 * t) * Math.sin(t) + 1.5;
-			z = t * Math.sin(theta);
-			loc.add(x, y, z);
-
-			loc.subtract(x, y, z);
-		}
-	}
+	
 }

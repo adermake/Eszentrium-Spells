@@ -235,7 +235,7 @@ public class TypeTTT extends Type{
 		if (p.getGameMode() == GameMode.ADVENTURE)
 			return;
 		p.closeInventory();
-		Discord.setMuted(p, true);
+	
 		TTTCorpse corpse = new TTTCorpse(p, true);
 		corpse.spawn();
 		
@@ -275,7 +275,7 @@ public class TypeTTT extends Type{
 		
 		checkWinner();
 		
-		
+		Discord.setMuted(p, true);
 	}
 	
 	public void spawnNewSpell() {
