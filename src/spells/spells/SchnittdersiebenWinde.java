@@ -82,6 +82,7 @@ public class SchnittdersiebenWinde extends Spell {
 		}
 		
 		if (step >30) {
+			tagPlayer(target);
 			if (refined) {
 				target.setVelocity(caster.getLocation().getDirection().multiply(5));
 				caster.setVelocity(caster.getVelocity().setY(3.0D));

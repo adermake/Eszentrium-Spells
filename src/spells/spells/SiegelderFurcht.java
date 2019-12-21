@@ -133,6 +133,7 @@ public class SiegelderFurcht extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
+		tagPlayer(p);
 		p.teleport(lookAt(p.getLocation(),caster.getLocation().add(0,2,0)));
 	}
 

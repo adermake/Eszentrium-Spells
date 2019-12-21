@@ -13,11 +13,15 @@ public class SavePlayer {
 	private String d2;
 	private String d3;
 	private String d4;
-	private boolean dead = true;
+	private boolean dead = false;
 	private boolean win = false;
 	
 	public SavePlayer() {
-		
+		d1 = "";
+		d2 = "";
+		d3 = "";
+		d4 = "";
+		dead = false;
 	}
 
 	public SavePlayer(String s) {
@@ -40,7 +44,11 @@ public class SavePlayer {
 		i++;
 		d4 = (list.length > i) ? list[i] : null;
 		if (d4 != null) {
-			dead = true;
+			if (!d4.equals("")) {
+				dead = true;
+			}
+		} else {
+			win = true;
 		}
 	}
 	
@@ -106,7 +114,7 @@ public class SavePlayer {
 	}
 
 	public void setD1(String d1) {
-		this.d1 = d1;
+		this.d1 = SaveUtils.rmColor(d1);
 	}
 
 	public String getD2() {
@@ -114,7 +122,7 @@ public class SavePlayer {
 	}
 
 	public void setD2(String d2) {
-		this.d2 = d2;
+		this.d2 = SaveUtils.rmColor(d2);
 	}
 
 	public String getD3() {
@@ -122,7 +130,7 @@ public class SavePlayer {
 	}
 
 	public void setD3(String d3) {
-		this.d3 = d3;
+		this.d3 = SaveUtils.rmColor(d3);
 	}
 
 	public String getD4() {
@@ -130,14 +138,14 @@ public class SavePlayer {
 	}
 
 	public void setD4(String d4) {
-		this.d4 = d4;
+		this.d4 = SaveUtils.rmColor(d4);
 	}
 
 	public boolean addDeath(String sele) {
-		if (d1 == null) {d1 = sele;return false;}
-		if (d2 == null) {d2 = sele;return false;}
-		if (d3 == null) {d3 = sele;return false;}
-		if (d4 == null) {d4 = sele;return true;}
+		if (d1 == null || d1.equals("")) {d1 = SaveUtils.rmColor(sele);return false;}
+		if (d2 == null || d2.equals("")) {d2 = SaveUtils.rmColor(sele);return false;}
+		if (d3 == null || d3.equals("")) {d3 = SaveUtils.rmColor(sele);return false;}
+		if (d4 == null || d4.equals("")) {d4 = SaveUtils.rmColor(sele);return true;}
 		dead = true;
 		return true;
 	}

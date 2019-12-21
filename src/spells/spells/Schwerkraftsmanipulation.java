@@ -63,7 +63,7 @@ public class Schwerkraftsmanipulation extends Spell {
 			dead =true;
 			return;
 		}
-			
+		tagPlayer(target);
 		target.setVelocity(target.getVelocity().setY(-6));
 	}
 

@@ -214,7 +214,6 @@ public abstract class Spell {
 					
 					ts++;
 					
-					
 					if (ts>=1/speed) {	
 						ts = 0;
 						for (int i = 0;i<speed;i++) {

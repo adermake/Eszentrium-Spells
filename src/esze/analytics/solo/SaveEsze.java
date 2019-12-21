@@ -42,6 +42,7 @@ public class SaveEsze {
 	//Analytics ----------------------------------------------------------------------------------------------
 	
 	public double getWorth(String s) {
+		s = SaveUtils.rmColor(s);
 		int choice = 0;
 		int chosen = 0;
 		for (SaveGame g : sv) {
@@ -56,7 +57,9 @@ public class SaveEsze {
 				}
 			}
 		}
-		
+		if (choice == 0) {
+			return 0;
+		}
 		return (100 * ((double) chosen / (double) choice));
 	}
 	
@@ -65,7 +68,7 @@ public class SaveEsze {
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
 				if (p.getName().equals(s)) {
-					if (g.getMap().get(p) == 1) {
+					if (g.getMap().get(p) == 0) {
 						victories++;
 					}
 				}
@@ -79,7 +82,7 @@ public class SaveEsze {
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
 				if (p.getName().equals(s)) {
-					if (g.getMap().get(p) != 1) {
+					if (g.getMap().get(p) != 0) {
 						losses++;
 					}
 				}
@@ -130,6 +133,7 @@ public class SaveEsze {
 	}
 	
 	public int getSpellKills(String name, String spell) {
+		spell = SaveUtils.rmColor(spell);
 		int kills = 0; 
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
@@ -159,6 +163,7 @@ public class SaveEsze {
 	}
 	
 	public int getSpellDeaths(String name, String spell) {
+		spell = SaveUtils.rmColor(spell);
 		int deaths = 0; 
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
@@ -178,21 +183,20 @@ public class SaveEsze {
 	}
 
 	public double getSpellWorth(String name, String s) {
-		
+		s = SaveUtils.rmColor(s);
 		int choice = 0;
 		int chosen = 0;
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
 				if (p.getName().equals(name)) {
 					for (SaveSelection sele : p.getSelections()) {
-						for (String tag : main.colorTags) {
-							if (sele.getChsp().equals(tag + s)) {
-								chosen++;
-							}
-							if (sele.getChoices().contains(tag + s)) {
-								choice++;
-							}
+						if (sele.getChsp().equals(s)) {
+							chosen++;
 						}
+						if (sele.getChoices().contains(s)) {
+							choice++;
+						}
+						
 					}
 				}
 			}

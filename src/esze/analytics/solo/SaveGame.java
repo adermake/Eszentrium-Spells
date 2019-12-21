@@ -13,14 +13,14 @@ public class SaveGame {
 	
 	public SaveGame(String s) {
 		String[] args = SaveUtils.readString(s);
-		for (int i = 0; (i+2) < args.length; i+=2) {
+		for (int i = 0; (i+1) < args.length; i+=2) {
 			if (args[i+1].equals("")) {
-				map.put(new SavePlayer(args[i]), 0);
+				map.put(new SavePlayer(args[i]), args.length/2);
 			} else {
 				SavePlayer p = new SavePlayer(args[i]);
 				map.put(p, Integer.parseInt(args[i+1]));
 				
-				if (Integer.parseInt(args[i+1]) == args.length/2) {
+				if (Integer.parseInt(args[i+1]) == 0) {
 					p.isWinner();
 				}
 			}

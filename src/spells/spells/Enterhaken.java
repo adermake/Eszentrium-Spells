@@ -54,10 +54,11 @@ public class Enterhaken extends Spell{
 			refund = true;
 		}
 		else {
+			/* Does inexplicable damage
 			hook = (Trident) caster.getWorld().spawnEntity(caster.getEyeLocation(), EntityType.TRIDENT);
 			hook.setGravity(false);
 			hook.setVelocity(caster.getLocation().getDirection().multiply(6));
-			hook.setDamage(0);
+			hook.setDamage(0); */
 		}
 		
 		

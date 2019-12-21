@@ -75,6 +75,7 @@ public class Mondkugel extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
+		tagPlayer(p);
 		p.setVelocity(s.getVelocity());
 		hit.add(p);
 	}

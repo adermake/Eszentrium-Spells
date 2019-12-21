@@ -387,7 +387,7 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 						}
 						return false;
 					case "stats":
-						if (args.length < 2) {
+						if (args.length >= 2) {
 							new SoloAnalyticsMenu(args[1]).open(p);
 						} else {
 							new SoloAnalyticsMenu(p).open(p);
@@ -410,7 +410,7 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 							p.sendMessage("§7The Spell "+ SaveUtils.getSaveEsze().getFavSpell(args[1]) + "§7 is " + args[1] + " §7 most used Spell!");
 							return true;
 						} else {
-							p.sendMessage("§7The Spell "+ SaveUtils.getSaveEsze().getFavSpell(args[1]) + "§7 is the most used Spell!");
+							p.sendMessage("§7The Spell "+ SaveUtils.getSaveEsze().getFavSpell() + "§7 is the most used Spell!");
 							return true;
 						}
 					case "info":

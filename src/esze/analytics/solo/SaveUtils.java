@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 import com.google.common.io.Files;
 
+import esze.main.main;
+
 public class SaveUtils {
 	
 	private static SaveGame gme = null;
@@ -36,7 +38,11 @@ public class SaveUtils {
 				break;
 			case ',':
 				if (depth == 0) {
-					list.add(s.substring(lastloc,(i-1)));
+					if (lastloc < i) {
+						list.add(s.substring(lastloc,i));
+					} else {
+						list.add("");
+					}
 					lastloc = (i+1);
 				}
 				break;
@@ -44,12 +50,21 @@ public class SaveUtils {
 				break;
 			}
 		}
+		
+		if (lastloc < s.length()) {
+			list.add(s.substring(lastloc,s.length()));
+		}
+		
 		String[] l = new String[list.size()];
 		int i = 0;
+		
+		//System.out.println("----------------");
 		for (String bla : list) {
+			//System.out.println(bla);
 			l[i] = bla;
 			i++;
 		}
+		//System.out.println("----------------");
 		return l;
 	}
 	
@@ -58,6 +73,10 @@ public class SaveUtils {
 			return;
 		}
 		gme = new SaveGame();	
+	}
+	
+	public static void reload() {
+		svgms = new SaveEsze(svgms.toString());
 	}
 	
 	public static void endGame() {
@@ -147,5 +166,18 @@ public class SaveUtils {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public static String rmColor(String s) {
+		for (String tag : main.colorTags) {
+			s = s.replace(tag, "");
+		}
+		s = s.replace("ä", "ae");
+		s = s.replace("Ä", "Ae");
+		s = s.replace("ö", "oe");
+		s = s.replace("Ö", "Oe");
+		s = s.replace("ü", "ue");
+		s = s.replace("Ü", "Ue");
+		return s;
 	}
 }

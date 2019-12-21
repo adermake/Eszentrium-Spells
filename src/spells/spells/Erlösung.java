@@ -94,6 +94,7 @@ public class Erlösung extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
+		tagPlayer(p);
 		ParUtils.parKreisDot(Particles.END_ROD, loc, 3, 0, 0.25, vel);
 		ParUtils.createParticle(Particles.FLASH, loc, 0.1, 0.1, 0.1, 1, 0.01);
 		p.setVelocity(vel.multiply(2).add(new Vector(0,1,0)));

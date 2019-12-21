@@ -100,6 +100,9 @@ public class Magnetball extends Spell{
 		playSound(Sound.ENTITY_WITHER_SPAWN,loc,4f,2f);
 		for (Entity e : hitEntitys) {
 			if (e.getLocation().distance(loc)<=hitboxSize) {
+				if (e instanceof Player) {
+					tagPlayer((Player) e);
+				}
 				e.setVelocity(loc.toVector().subtract(e.getLocation().toVector()));
 			}
 		}

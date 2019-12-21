@@ -129,6 +129,7 @@ public class Flucht extends Spell{
 						
 						if (p.getGameMode() == GameMode.SURVIVAL) {
 							if (bat.getLocation().distance(p.getLocation())<2) {
+								tagPlayer(p);
 								p.setVelocity(bat.getVelocity());
 							}
 						}

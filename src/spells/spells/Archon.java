@@ -80,7 +80,7 @@ public class Archon extends Spell {
 		// TODO Auto-generated method stub
 		if (target.getGameMode() == GameMode.ADVENTURE) {
 			caster.setNoDamageTicks(0);
-			caster.damage(20);
+			caster.damage(20); //Who should be the killer
 			dead = true;
 		}
 		
