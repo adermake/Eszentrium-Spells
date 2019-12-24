@@ -605,6 +605,57 @@ public abstract class Spell {
 		return null;
 
 	}
+	
+	public Entity pointRealEntity(Player p) {
+		int range = 300;
+		int toleranz = 3;
+		Location loc = p.getLocation();
+		for (double t = 1; t <= range; t=t+0.5) {
+
+			Vector direction = loc.getDirection().normalize();
+			double x = direction.getX() * t;
+			double y = direction.getY() * t + 1.5;
+			double z = direction.getZ() * t;
+			loc.add(x, y, z);
+			Location lo = loc.clone();
+
+			// Particel
+
+
+			if (loc.getBlock().getType().isSolid()) {
+
+				break;
+			}
+
+			for (Entity ent : p.getWorld().getEntities()) {
+				
+				if (ent instanceof Player) {
+					if (ent == p || ((Player) ent).getGameMode() == GameMode.ADVENTURE) {
+						continue;
+					}
+				}
+				
+				
+					
+					Location ploc1 = ent.getLocation();
+					Location ploc2 = ent.getLocation();
+					ploc2.add(0, 1, 0);
+					if (ploc1.distance(loc) <= toleranz || ploc2.distance(loc) <= toleranz) {
+						
+
+						return ent;
+					}
+				
+			}
+			
+			// SUBTRACTING LOCATION UM den prozess
+			// von vorne zu
+			// starten
+			loc.subtract(x, y, z);
+		}
+		return null;
+
+	}
 	public Player pointEntity(Player p,int range) {
 		
 		int toleranz = 1;
