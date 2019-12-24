@@ -2,6 +2,8 @@ package spells.spells;
 
 import java.util.ArrayList;
 
+import org.bukkit.Color;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -9,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
+import esze.utils.SoundUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Binden extends Spell {
@@ -31,12 +35,22 @@ public class Binden extends Spell {
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		ent1 = pointEntity(caster);
+		ent1 = pointRealEntity(caster);
 		
 		if (ent1 == null) {
 			refund = true;
 			dead = true;
 		}
+		else {
+			SoundUtils.playSound(Sound.ENTITY_SLIME_DEATH, loc);
+			SoundUtils.playSound(Sound.ENTITY_SLIME_DEATH, ent1.getLocation());
+			
+			if (refined && caster.isSneaking()) {
+				ent2 = caster;
+				standBy = false;
+			}
+		}
+		
 	}
 
 	@Override
@@ -50,6 +64,7 @@ public class Binden extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
+	int ticker = 0;
 	boolean standBy = true;
 	@Override
 	public void move() {
@@ -59,25 +74,38 @@ public class Binden extends Spell {
 		
 		
 		
-		if (swap()) {
-			ent2 = pointEntity(caster);
+		if (swap() && standBy) {
+			ent2 = pointRealEntity(caster);
 			if (ent2 != null) {
 				standBy = false;
 				steprange = 100;
 				step = 0;
+				SoundUtils.playSound(Sound.ENTITY_SLIME_DEATH, loc);
+				SoundUtils.playSound(Sound.ENTITY_SLIME_DEATH, ent2.getLocation());
 			}
 			
 		}
 		
 		if (!standBy) {
+			ticker++;
+			if (ent1 == ent2) {
+				ent1.setVelocity(new Vector(0,0,0));
+			}
+			SoundUtils.playSound(Sound.ENTITY_SLIME_HURT, ent1.getLocation());
+			if (ticker > 2) {
+				doPull(ent1,ent2.getLocation(),2.5);
+				doPull(ent2,ent1.getLocation(),2.5);
+				ticker = 0;
+			}
 			
-			doPull(ent1,ent2.getLocation(),2);
-			doPull(ent2,ent1.getLocation(),2);
-			
+			ParUtils.parLineRedstone(ent2.getLocation(), ent1.getLocation(), Color.LIME, 1, 1);
 		}
 		else {
-			ParUtils.stepCalcCircle(loc.clone(), 3, new Vector(0,1,0), 0, step);
-			ParUtils.stepCalcCircle(loc.clone(), 3, new Vector(0,1,0), 0, -step);
+			double speed = 2;
+			loc = caster.getLocation();
+			ParUtils.parLineRedstone(caster.getLocation(), ent1.getLocation(), Color.LIME, 1, 1);
+			ParUtils.createParticle(Particles.ITEM_SLIME,ParUtils.stepCalcCircle(loc.clone(), 3, caster.getLocation().getDirection(), 0, step*speed), 0, 0, 0, 1, 1);
+			ParUtils.createParticle(Particles.ITEM_SLIME,ParUtils.stepCalcCircle(loc.clone(), 3,caster.getLocation().getDirection(), 0, -step*speed), 0, 0, 0, 1, 1);
 		}
 		
 	}
