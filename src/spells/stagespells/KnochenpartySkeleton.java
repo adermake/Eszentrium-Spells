@@ -37,7 +37,7 @@ public class KnochenpartySkeleton extends Spell {
 		hitEntity = false;
 		loc = caster.getEyeLocation();
 		multihit = true;
-		canHitSelf = true;
+		
 		//
 	
 		
