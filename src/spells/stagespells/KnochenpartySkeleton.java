@@ -92,7 +92,7 @@ public class KnochenpartySkeleton extends Spell {
 		ent.setFireTicks(-100);
 		loc = ent.getLocation();
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			if (/*p.getGameMode() == GameMode.SURVIVAL && */!unHittable.contains(p)) {
+			if (p.getGameMode() == GameMode.SURVIVAL && unHittable.contains(p) && p != caster) {
 				Location ploc = p.getLocation();
 				ploc.setY(0);
 				Location cloneLoc = loc.clone();
