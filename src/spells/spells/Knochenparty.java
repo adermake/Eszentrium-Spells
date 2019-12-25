@@ -1,26 +1,31 @@
 package spells.spells;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 import spells.stagespells.ExplosionDamage;
+import spells.stagespells.KnochenpartySkeleton;
+import spells.stagespells.KnochenpartySkeletonSummon;
 import spells.stagespells.Repulsion;
 import spells.stagespells.VampirpilzStage2;
 
-public class Vampirpilz extends Spell{
+public class Knochenparty extends Spell{
 
-	public Vampirpilz() {
-		cooldown = 20 * 62;
+	public Knochenparty() {
+		cooldown = 20 * 32;
 		steprange = 60;
-		name = "§6Vampirpilz";
+		name = "§cKnochenparty";
 		hitSpell = true;
 	}
 	boolean holding = true;
@@ -28,11 +33,11 @@ public class Vampirpilz extends Spell{
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		ItemStack m = new ItemStack(Material.RED_MUSHROOM);
+		ItemStack m = new ItemStack(Material.BONE);
 		
 		i = caster.getWorld().dropItem(loc, m);
 	
-		
+		playSound(Sound.ENTITY_SKELETON_DEATH,loc,2,5);
 		 
 		//ar.addPassenger(i);
 		if (caster.isSneaking()) {
@@ -97,12 +102,17 @@ public class Vampirpilz extends Spell{
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
-		
-		new VampirpilzStage2(caster, name, loc,refined);
 		loc = i.getLocation();
-		ParUtils.dropItemEffectRandomVector(loc, i.getLocation().add(0,-1,0).getBlock().getType(), 6, 50, 0.4);
-		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 5, 2);
-		
+		loc.setDirection(new Vector(1,1,0));
+		for (int i = 0;i<20;i++) {
+			
+			loc.setYaw(loc.getYaw()+18);
+			
+			new KnochenpartySkeletonSummon(caster,  loc,loc.getDirection().multiply(0.6F));
+			
+			
+			
+		}
 		
 		i.remove();
 		
