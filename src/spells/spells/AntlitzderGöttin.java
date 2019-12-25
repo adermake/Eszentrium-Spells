@@ -72,12 +72,12 @@ public class AntlitzderGöttin extends Spell{
 		//ParUtils.createParticle(Particles.FLAME, dot, 0, 1, 0, 0, 14);
 		//ParUtils.createParticle(Particles.FLAME, dot2, 0, 1, 0, 0, 14);
 		if (refined) {
-			ParUtils.dropItemEffectVector(dot, Material.MAP, 1, 6, 5,new Vector(0,1,0));
-			ParUtils.dropItemEffectVector(dot2, Material.MAP, 1, 6, 5,new Vector(0,1,0));
+			ParUtils.dropItemEffectVector(dot, Material.TOTEM_OF_UNDYING, 1, 6, 5,new Vector(0,1,0));
+			ParUtils.dropItemEffectVector(dot2, Material.TOTEM_OF_UNDYING, 1, 6, 5,new Vector(0,1,0));
 		}
 		else {
-			ParUtils.dropItemEffectVector(dot, Material.MAP, 1, 1, 1,new Vector(0,1,0));
-			ParUtils.dropItemEffectVector(dot2, Material.MAP, 1, 1, 1,new Vector(0,1,0));
+			ParUtils.dropItemEffectVector(dot, Material.TOTEM_OF_UNDYING, 1, 1, 1,new Vector(0,1,0));
+			ParUtils.dropItemEffectVector(dot2, Material.TOTEM_OF_UNDYING, 1, 1, 1,new Vector(0,1,0));
 		}
 		
 		//ParUtils.createParticle(Particle.VILLAGER_ANGRY, caster.getEyeLocation().add(0,-1.7,0), 0, 1, 0, 0, 1);
