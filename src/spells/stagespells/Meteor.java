@@ -97,7 +97,7 @@ public class Meteor extends Spell {
 		// TODO Auto-generated method stub
 		//new ExplosionDamage(4, 8, caster, loc);
 		
-		new Explosion(4, 9, 4, 1, caster, loc, name);
+		new Explosion(4, 9, 0.5F, 1, caster, loc, name);
 		dead = true;
 	}
 
