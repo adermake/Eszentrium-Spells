@@ -19,7 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import esze.main.PacketListner;
+
 import esze.main.main;
 import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.Particles;
@@ -104,11 +104,11 @@ public class Opfersuche extends Spell {
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		damage(p, 4+i, caster);
-		phantomSpin(p,1,(int)step*4);
+		phantomSpin(p,1,(int)step*6);
 		playSound(Sound.ENTITY_PHANTOM_HURT,loc,5,2F);
 		new BukkitRunnable() {
 			int t = 0;
-			int time = (int)step*4;
+			int time = (int)step*6;
 			public void run() {
 				t++;
 				p.setVelocity(new Vector(0,0.05,0));
@@ -129,11 +129,11 @@ public class Opfersuche extends Spell {
 	public void onEntityHit(LivingEntity ent2) {
 		
 		playSound(Sound.ENTITY_PHANTOM_HURT,loc,5,2F);
-		phantomSpin(ent2,1,(int)step*4);
+		phantomSpin(ent2,1,(int)step*6);
 	
 		new BukkitRunnable() {
 			int t = 0;
-			int time = (int)step*4;
+			int time = (int)step*6;
 			public void run() {
 				t++;
 				ent2.setVelocity(new Vector(0,0.05,0));
