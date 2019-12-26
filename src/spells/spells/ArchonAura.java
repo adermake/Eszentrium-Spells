@@ -11,17 +11,20 @@ import spells.spellcore.Spell;
 import spells.stagespells.ArchonRing;
 
 public class ArchonAura extends Spell {
-	public ArchonAura() {
+	Player overrideCaster;
+	public ArchonAura(Player caster,String name) {
 		name = "§3Auran";
-		hitSpell = true;
+		hitSpell = false;
 		hitPlayer = true;
 		hitBlock = false;
 		hitEntity = true;
 		
-		cooldown = 20*40;
+		
 		speed = 1;
 		hitboxSize = 1;
 		multihit = true;
+		castSpell(caster, name);
+		overrideCaster = caster;
 	}
 	ArchonRing ar;
 	@Override
@@ -39,6 +42,7 @@ public class ArchonAura extends Spell {
 		new ArchonRing(name, caster, caster.getLocation(), 1.3,1,pt);
 		new ArchonRing(name, caster, caster.getLocation(), 1,2,pt);
 		new ArchonRing(name, caster, caster.getLocation(), 1,0.5,pt);
+		caster = overrideCaster;
 	}
 
 	@Override
@@ -50,17 +54,16 @@ public class ArchonAura extends Spell {
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
-		
+		caster = overrideCaster;
 	}
 	
 	
 	@Override
 	public void move() {
+		caster = overrideCaster;
 		loc = caster.getLocation();
-		if (caster.isSneaking()) {
-			hitboxSize = ar.mult* ar.radius;
-			
-		}
+		
+		hitboxSize = ar.mult* ar.radius;
 		
 		
 	}
@@ -68,7 +71,7 @@ public class ArchonAura extends Spell {
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		
+		ParUtils.createParticle(Particles.CLOUD, loc, 0.03F, 0.03F, 0.03F, 2, 0F);
 	}
 
 	@Override

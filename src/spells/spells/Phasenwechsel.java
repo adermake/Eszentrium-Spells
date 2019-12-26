@@ -31,7 +31,7 @@ public class Phasenwechsel extends Spell {
 	
 	@Override
 	public void setUp() {
-		Bukkit.broadcastMessage(""+NBTUtils.getNBT("Archon", caster.getInventory().getItemInMainHand()));
+		
 		target = Bukkit.getPlayer(NBTUtils.getNBT("Archon", caster.getInventory().getItemInMainHand()));
 		if (target == null) {
 			dead = true;
@@ -65,7 +65,7 @@ public class Phasenwechsel extends Spell {
 			ParUtils.createParticle(Particles.END_ROD, loc, 0, 0, 0, 3, 0);
 			ParUtils.createFlyingParticle(Particles.CLOUD, loc, 0, 0, 0, 1, 0.2F, dir);
 			ParUtils.createParticle(Particles.ENCHANT, loc, 0.1, 0.1, 0.1, 5, 5);
-			loc.add(dir.multiply(1.3F));
+			loc.add(dir.multiply(2F));
 		}
 	
 		

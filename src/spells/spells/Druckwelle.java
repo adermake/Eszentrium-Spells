@@ -33,7 +33,7 @@ public class Druckwelle extends Spell {
 	
 	@Override
 	public void setUp() {
-		Bukkit.broadcastMessage(""+NBTUtils.getNBT("Archon", caster.getInventory().getItemInMainHand()));
+		
 		target = Bukkit.getPlayer(NBTUtils.getNBT("Archon", caster.getInventory().getItemInMainHand()));
 		if (target == null) {
 			dead = true;

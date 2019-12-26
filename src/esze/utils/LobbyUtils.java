@@ -57,11 +57,12 @@ public class LobbyUtils {
 			p.getInventory().clear();
 			p.teleport((Location) main.plugin.getConfig().get("lobby.loc"));
 			p.setGlowing(false);
-			Spell.unHittable.clear();
+			
 			p.setMaxHealth(20);
 			p.setHealth(20);
 			PlayerUtils.hidePlayer(p,35);
 		}
+		Spell.unHittable.clear();
 		SoundUtils.playSound(Sound.BLOCK_PORTAL_TRAVEL, l,2,0.6F);
 		
 		new BukkitRunnable() {

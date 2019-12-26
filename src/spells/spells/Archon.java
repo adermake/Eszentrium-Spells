@@ -1,6 +1,7 @@
 package spells.spells;
 
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -28,7 +29,7 @@ public class Archon extends Spell {
 			
 			hitboxSize = 0;
 			speed = 1;
-			traitorSpell = true;
+			casttime = 1;
 			
 		
 	}
@@ -43,27 +44,31 @@ public class Archon extends Spell {
 			dead = true;
 		}
 		else {
+		
 			target.setGlowing(true);
 			SoundUtils.playSound(Sound.ENTITY_WITHER_HURT, target.getLocation(), 0.6F, 10);
 			PlayerUtils.hidePlayer(caster);
 			unHittable.add(caster);
 			caster.setAllowFlight(true);
 			caster.setFlying(true);
-			caster.getInventory().clear();
+			
 			target.setMaxHealth(40);
 			target.setHealth(40);
-			caster.getInventory().setItem(1,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rPhasenwechsel")));
-			caster.getInventory().setItem(2,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rSchockwelle")));
-			caster.getInventory().setItem(3,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rDruckwelle")));
-			caster.getInventory().setItem(4,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rBlitzaufstieg")));
-			caster.getInventory().setItem(5,NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rBlitzaufstieg")));
+		
+			new ArchonReflect(caster, "§rArchon Aura");
+			new ArchonAura(target, "§rArchon Aura");
 		}
 	}
 
 	@Override
 	public void cast() {
 		// TODO Auto-generated method stub
-		
+		caster.getInventory().clear();
+		caster.getInventory().addItem(NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rPhasenwechsel")));
+		caster.getInventory().addItem(NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rSchockwelle")));
+		caster.getInventory().addItem(NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rDruckwelle")));
+		caster.getInventory().addItem(NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rBlitzaufstieg")));
+		caster.getInventory().addItem(NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rBlitzaufstieg")));
 	}
 
 	@Override
@@ -124,7 +129,7 @@ public class Archon extends Spell {
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		
+		ParUtils.dropItemEffectVector(caster.getLocation().add(0,-0.2,0), Material.NETHER_STAR, 1, 1, 0, caster.getLocation().getDirection());
 	}
 
 	@Override

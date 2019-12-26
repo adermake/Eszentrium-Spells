@@ -15,6 +15,7 @@ import spells.spells.Aufwind;
 import spells.spells.AugedesDrachen;
 import spells.spells.Avatar;
 import spells.spells.Beben;
+import spells.spells.Binden;
 import spells.spells.Blasensturm;
 import spells.spells.Chaoswelle;
 import spells.spells.Enterhaken;
@@ -24,10 +25,12 @@ import spells.spells.Explosion;
 import spells.spells.Feuerball;
 import spells.spells.Feuerwerkshelix;
 import spells.spells.Flucht;
+import spells.spells.Fuchstorpedo;
 import spells.spells.Heilen;
 import spells.spells.HimmlischesUrteil;
 import spells.spells.Hühnchenluftschlag;
 import spells.spells.Kaminchen;
+import spells.spells.Knochenparty;
 import spells.spells.Kätzchenkanone;
 import spells.spells.Lamaturm;
 import spells.spells.Lichtstrudel;
@@ -132,7 +135,9 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		return randomList;
 		
 	}
+	
 	public static void registerSpells() {
+		spells.clear();
 		registerSpell(new Ansturm());
 		//registerSpell(new Astralsprung());
 		registerSpell(new AntlitzderGöttin());
@@ -188,6 +193,9 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Zaubersprung());
 		registerSpell(new Mondkugel());
 		registerSpell(new Feuerwerkshelix());
+		registerSpell(new Fuchstorpedo());
+		registerSpell(new Knochenparty());
+		registerSpell(new Binden());
 	}
 	
 	public static void registerSpell(Spell spell, Class...gameTypes){

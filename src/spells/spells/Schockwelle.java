@@ -23,9 +23,9 @@ public class Schockwelle extends Spell {
 		
 		name = "§rSchockwelle";
 		cooldown = 20*30;
-		hitPlayer = false;
-		hitEntity = false;
-		hitboxSize = 55;
+		hitPlayer = true;
+		hitEntity = true;
+		hitboxSize = 6;
 		casttime = 20;
 		steprange =22;
 		
@@ -64,14 +64,41 @@ public class Schockwelle extends Spell {
 	public void move() {
 		// TODO Auto-generated method stub
 		SoundUtils.playSound(Sound.ENTITY_WITHER_SPAWN, loc,2F,0.1F);
-		effect(step*6);
+		
 		loc = target.getLocation();
 	}
 
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		
+		double t = step*6;
+		for (double theta = 0; theta <= 2 * Math.PI; theta = theta + Math.PI / 32) {
+			double x = t * Math.cos(theta);
+			double y = 0;
+			double z = t * Math.sin(theta);
+			loc.add(x, y, z);
+			int minus = 0;
+			while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR) {
+				loc.add(0, -1, 0);
+				minus++;
+				if (minus >= 256) {
+					break;
+				}
+			}
+
+			// ParticleEffect.FIREWORKS_SPARK.display(loc,0,0,0,0,1);
+
+			
+			ParUtils.createParticle(Particles.CLOUD, loc.clone().add(0,1,0), 0, 1, 0, 0,1);
+			ParUtils.createParticle(Particles.FLASH, loc.clone().add(0,1,0), 1, 2,1, 1, 0);
+			
+			collideWithEntity();
+			collideWithPlayer();
+			loc.subtract(x, y, z);
+			loc.add(0, minus, 0);
+			theta = theta + Math.PI / 64;
+
+		}
 	}
 
 	@Override
@@ -108,37 +135,6 @@ public class Schockwelle extends Spell {
 		
 	}
 	public void effect(double t) {
-		for (double theta = 0; theta <= 2 * Math.PI; theta = theta + Math.PI / 32) {
-			double x = t * Math.cos(theta);
-			double y = 0;
-			double z = t * Math.sin(theta);
-			loc.add(x, y, z);
-			int minus = 0;
-			while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR) {
-				loc.add(0, -1, 0);
-				minus++;
-				if (minus >= 256) {
-					break;
-				}
-			}
-
-			// ParticleEffect.FIREWORKS_SPARK.display(loc,0,0,0,0,1);
-
-			
-			ParUtils.createParticle(Particles.CLOUD, loc.clone().add(0,1,0), 0, 1, 0, 0,1);
-			ParUtils.createParticle(Particles.FLASH, loc.clone().add(0,1,0), 1, 2,1, 1, 0);
-			
-			
-			loc.subtract(x, y, z);
-			loc.add(0, minus, 0);
-			theta = theta + Math.PI / 64;
-
-			x = t * Math.cos(theta);
-			y = 2 * Math.exp(-0.1 * t) * Math.sin(t) + 1.5;
-			z = t * Math.sin(theta);
-			loc.add(x, y, z);
-
-			loc.subtract(x, y, z);
-		}
+	
 	}
 }

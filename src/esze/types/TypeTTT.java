@@ -76,7 +76,7 @@ public class TypeTTT extends Type{
 		for (Player p : players) {
 			
 			//TabList.setPlayerlistHeader(p, ""+secondsLeft);
-			if (p.getLocation().getY()<60) {
+			if (p.getLocation().getY()<60 && p.getGameMode() == GameMode.SURVIVAL) {
 				p.damage(p.getHealth());
 			}
 			

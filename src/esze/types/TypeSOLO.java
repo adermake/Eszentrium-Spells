@@ -38,7 +38,7 @@ public class TypeSOLO extends Type {
 	@Override
 	public void runEverySecond() {
 		for (Player p : players) {
-			if (p.getLocation().getY()<60) {
+			if (p.getLocation().getY()<60 && p.getGameMode() == GameMode.SURVIVAL) {
 				p.damage(p.getHealth());
 			}
 			

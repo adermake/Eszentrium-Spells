@@ -30,7 +30,7 @@ public class KnochenpartySkeleton extends Spell {
 	Skeleton ent;
 	Location origin;
 	public KnochenpartySkeleton(Player caster,Location l,Vector dir, Location origin,String namae) {
-		steprange = 600;
+		steprange = 20 * 10;
 		this.origin = origin;
 		hitboxSize = 1.6;
 		hitPlayer = true;
@@ -55,7 +55,7 @@ public class KnochenpartySkeleton extends Spell {
 		ent.setFireTicks(-100);
 		ent.setVelocity(dir);
 		
-		
+		unHittable.add(ent);
 		//ent.getEquipment().setItemInOffHand(new ItemStack(Material.WHITE_DYE));
 		ent.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 250, true));
 		skelvel = dir;
@@ -92,7 +92,7 @@ public class KnochenpartySkeleton extends Spell {
 		ent.setFireTicks(-100);
 		loc = ent.getLocation();
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			if (p.getGameMode() == GameMode.SURVIVAL && unHittable.contains(p) && p != caster) {
+			if (p.getGameMode() == GameMode.SURVIVAL && !unHittable.contains(p) && p != caster) {
 				Location ploc = p.getLocation();
 				ploc.setY(0);
 				Location cloneLoc = loc.clone();
