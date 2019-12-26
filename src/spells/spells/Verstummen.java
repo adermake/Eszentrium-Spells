@@ -95,6 +95,7 @@ public class Verstummen extends Spell {
 			}
 		}.runTaskTimer(main.plugin, 1, 1);
 		
+		if (refined)
 		caster.teleport(p.getLocation());
 	}
 

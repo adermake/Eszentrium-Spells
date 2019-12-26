@@ -13,12 +13,13 @@ import esze.main.main;
 import esze.map.JumpPadHandler;
 import esze.scoreboards.Scoreboard;
 import esze.utils.PlayerUtils;
-import sx.blah.discord.util.EmbedBuilder;
+
 
 public class Type {
 	
 	public String name;
 	public String currentmap;
+	public ArrayList<Player> startplayers = new ArrayList<Player>();
 	public ArrayList<Player> players = new ArrayList<Player>();
 	public ArrayList<Player> spectator = new ArrayList<Player>();
  	public Scoreboard scoreboard;
@@ -75,7 +76,7 @@ public class Type {
 		players.remove(p);
 		spectator.add(p);
 		
-		Bukkit.broadcastMessage(p.getName() + "ist raus");
+		
 	}
 	
 	

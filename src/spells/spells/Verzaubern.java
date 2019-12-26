@@ -61,7 +61,7 @@ public class Verzaubern extends Spell {
 			
 			if (!sheep.isDead()) {
 				PlayerUtils.showPlayer(target);
-				
+				target.teleport(sheep.getLocation());
 				target.setGameMode(GameMode.SURVIVAL);
 			}
 			else {

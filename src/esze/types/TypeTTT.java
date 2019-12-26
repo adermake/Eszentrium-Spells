@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-import org.jflac.io.RandomFileInputStream;
+
 
 import com.google.common.base.Preconditions;
 
@@ -42,8 +42,7 @@ import esze.voice.Discord;
 import spells.spellcore.DamageCauseContainer;
 import spells.spellcore.Spell;
 import spells.spellcore.Spelldrop;
-import sx.blah.discord.util.EmbedBuilder;
-import sx.blah.discord.util.RequestBuffer;
+
 
 public class TypeTTT extends Type{
 	boolean gameOver = false;
@@ -51,7 +50,7 @@ public class TypeTTT extends Type{
 	public ArrayList<Player> traitor = new ArrayList<Player>();
 	public ArrayList<Player> startInnocent = new ArrayList<Player>();
 	public ArrayList<Player> startTraitor = new ArrayList<Player>();
-	public HashMap<Player,Player> foundBody = new HashMap<Player,Player>();
+	
 	
 	int gameLengthSeconds = 60 * 7; 
 	public int secondsLeft = 0;
@@ -235,11 +234,12 @@ public class TypeTTT extends Type{
 		if (p.getGameMode() == GameMode.ADVENTURE)
 			return;
 		p.closeInventory();
-	
+		
 		TTTCorpse corpse = new TTTCorpse(p, true);
 		corpse.spawn();
 		
 		p.getInventory().clear();
+		spectator.add(p);
 		players.remove(p);
 		p.setGameMode(GameMode.ADVENTURE);
 		if (Spell.damageCause.containsKey(p)) {
@@ -259,7 +259,7 @@ public class TypeTTT extends Type{
 			p.teleport(nextLoc());
 		}
 		
-		players.remove(p);
+		
 		p.setGameMode(GameMode.ADVENTURE);
 		p.setAllowFlight(true);
 		
@@ -463,6 +463,7 @@ public class TypeTTT extends Type{
 	}
 	
 	public void postResult(boolean innoWin) {
+		/*
 	    EmbedBuilder builder = new EmbedBuilder();
 
 	    ArrayList<String> winners = new ArrayList<String>();
@@ -504,7 +505,7 @@ public class TypeTTT extends Type{
 	    builder.withThumbnail("http://minel0l.lima-city.de/ttt.jpg");
 
 	    RequestBuffer.request(() -> Discord.channel.getGuild().getChannelByID(621398787155558400L).sendMessage(builder.build()));
-		
+		*/
 	    
 	}
 	

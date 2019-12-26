@@ -43,6 +43,8 @@ public class TTTRevive {
 				}
 				
 				
+				
+				
 				TypeTTT t = (TypeTTT) GameType.getType();
 				if (t.startInnocent.contains(p)) {
 					t.innocent.add(p);
@@ -51,7 +53,7 @@ public class TTTRevive {
 					t.traitor.add(p);
 				}
 				t.players.add(p);
-				
+				t.spectator.remove(p);
 				p.setGameMode(GameMode.SURVIVAL);
 				p.setFlying(false);
 				p.setAllowFlight(false);
@@ -60,7 +62,7 @@ public class TTTRevive {
 		}
 		if(cd != null){
 			try{
-				CorpseUtils.removeCorpseForAll(cd.corpseID);
+				cd.remove();
 			}catch(Exception e){ }
 			}
 			

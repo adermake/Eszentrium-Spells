@@ -178,8 +178,8 @@ public class SchreidesPhönix extends Spell{
 										play.getInventory().clear();
 									
 									
-									play.teleport(c.cows.get(0).getLocation());
-									play.setGameMode(GameMode.SURVIVAL);
+										play.teleport(c.cows.get(0).getLocation());
+										play.setGameMode(GameMode.SURVIVAL);
 									try {
 										
 										

@@ -25,8 +25,7 @@ import esze.utils.Music;
 import esze.utils.PlayerUtils;
 import esze.utils.Title;
 import esze.voice.Discord;
-import sx.blah.discord.util.EmbedBuilder;
-import sx.blah.discord.util.RequestBuffer;
+
 
 public class TypeSOLO extends Type {
 	boolean gameOver = false;
@@ -189,6 +188,7 @@ public class TypeSOLO extends Type {
 	}
 	
 	public void postResult(Player winner) {
+		/*
 	    EmbedBuilder builder = new EmbedBuilder();
 
 	   
@@ -214,6 +214,6 @@ public class TypeSOLO extends Type {
 
 	    RequestBuffer.request(() -> Discord.channel.getGuild().getChannelByID(621398787155558400L).sendMessage(builder.build()));
 		
-	    
+	    */
 	}
 }

@@ -3,6 +3,7 @@ package esze.utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import net.minecraft.server.v1_14_R1.BlockPosition;
 import net.minecraft.server.v1_14_R1.DataWatcher;
@@ -31,8 +32,8 @@ public class CorpseUtils {
 	
 	public static HashMap<Integer, EntityPlayer> allCorpses = new HashMap<Integer, EntityPlayer>();
 	
-	public static ArrayList<Integer> getAllCorpseIDs(){
-		return (ArrayList<Integer>)allCorpses.keySet();
+	public static Set<Integer> getAllCorpseIDs(){
+		return (Set<Integer>)allCorpses.keySet();
 	}
 	
 	public static String getCorpseName(int cID){

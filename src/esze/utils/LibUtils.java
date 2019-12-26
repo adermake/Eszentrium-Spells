@@ -14,7 +14,7 @@ public class LibUtils {
 	
 	public static void initlibs() {
 		try {
-			final File[] libs = new File[] { new File(main.plugin.getDataFolder(), "Discord4j-2.9.3-shaded.jar")  };
+			final File[] libs = new File[] { new File(main.plugin.getDataFolder(), "JDA-4.1.0_81-withDependencies.jar")  };
 			for (final File lib : libs) {
 				if (!lib.exists()) {
 					JarUtils.extractFromJar(lib.getName(),

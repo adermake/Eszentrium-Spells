@@ -21,6 +21,7 @@ import net.minecraft.server.v1_13_R1.ParticleParam;
 import net.minecraft.server.v1_13_R1.ParticleParamItem;*/
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.inventivetalent.packetlistener.PacketListenerAPI;
 import org.inventivetalent.packetlistener.handler.ReceivedPacket;
 import org.inventivetalent.packetlistener.handler.SentPacket;
@@ -69,7 +70,7 @@ import spells.spellcore.Spelldrop;
 public class main extends JavaPlugin {
 	
 	public static main plugin;
-	public static String discord_TOKEN = "NjIxMzA3NjA3NzU1MzkxMDQ2.XfqYkA.dKi8gYsa4-exT9a-0j_-SRqVdJc";
+	public static String discord_TOKEN = "NjIxMzA3NjA3NzU1MzkxMDQ2.XgEmrQ.J-pRTLAtKQfStL2z36fW14fIzf8";
 	public static String mapname;
 	public static final String voiddamage = "void";
 	public static HashMap<Player, String> damageCause = new HashMap<Player, String>();
@@ -187,7 +188,17 @@ public class main extends JavaPlugin {
 			p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
 			p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Georg", null, true));
 		}
-		Discord.run(); 
+		
+		
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				Discord.run(); 
+				
+			}
+		}.runTaskAsynchronously(main.plugin);
+		
 		
 		
 		
@@ -243,6 +254,7 @@ public class main extends JavaPlugin {
 			}
 		}
 		Discord.unMuteAll();
+		Discord.logout();
 	}
 	
 	

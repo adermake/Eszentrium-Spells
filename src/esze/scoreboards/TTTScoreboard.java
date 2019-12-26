@@ -10,7 +10,8 @@ import esze.enums.Gamestate;
 import esze.main.main;
 import esze.types.TypeSOLO;
 import esze.types.TypeTTT;
-import sx.blah.discord.api.internal.json.objects.ChannelObject.Type;
+import esze.utils.CorpseUtils;
+import esze.utils.TTTCorpse;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -58,9 +59,30 @@ public class TTTScoreboard extends Scoreboard{
 						ArrayList<String> innoBoard = new ArrayList<String>();
 						innoBoard.add("§2Spielstand §e" +  ((TypeTTT) GameType.getType()).secToMin(game.secondsLeft));
 						innoBoard.add("§3§lSpieler");
-						for(Player p : game.players){
-							innoBoard.add(p.getName());
+						for(Player p : game.startplayers){
+							if(game.players.contains(p)) {
+								innoBoard.add(p.getName());
+							}else if(game.spectator.contains(p)) {
+								for(Integer corpseID : CorpseUtils.getAllCorpseIDs()) {
+									if(CorpseUtils.getCorpseName(corpseID).equalsIgnoreCase(p.getName())) {
+										TTTCorpse corpse = null;
+										for(TTTCorpse _corpse : TTTCorpse.allCorpses) {
+											if(_corpse.corpseID == corpseID) {
+												corpse = _corpse;
+											}
+										}
+										
+										if(corpse.isExposed) {
+											innoBoard.add("§m"+p.getName());
+										}else {
+											innoBoard.add(p.getName());
+										}
+										
+									}
+								}
+							}
 						}
+						
 						
 						
 						for (Player p : Bukkit.getOnlinePlayers()) {

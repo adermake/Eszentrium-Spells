@@ -63,9 +63,12 @@ public class LobbyCountdownRunnable {
 		Bukkit.getScheduler().cancelTask(runnableID);
 		
 		running = false;
+		GameType.getType().players.clear();
+		GameType.getType().startplayers.clear();
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			if (p.getGameMode() != GameMode.SPECTATOR) {
 				GameType.getType().players.add(p);
+				GameType.getType().startplayers.add(p);
 			}
 		}
 		GameType.getType().currentmap = MapSelect.maxVotes();

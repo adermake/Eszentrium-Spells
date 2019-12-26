@@ -80,7 +80,7 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 								TTTCorpse corpse = new TTTCorpse(p, true);
 								corpse.spawn();
 							}else if(args[0].equalsIgnoreCase("info")){
-								p.sendMessage("§8| §3Discord4J §7- "+Discord.getVersion() + " - " + (Discord.isLoggedIn() ? "§aCONNECTED" : "§cDISCONNECTED"));
+								//p.sendMessage("§8| §3Discord4J §7- "+Discord.getVersion() + " - " + (Discord.isLoggedIn() ? "§aCONNECTED" : "§cDISCONNECTED"));
 							}else{
 								p.sendMessage("§8| §c/game <start/stop/info>");
 							}
