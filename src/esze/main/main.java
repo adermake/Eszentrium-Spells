@@ -28,6 +28,7 @@ import org.inventivetalent.packetlistener.handler.SentPacket;
 
 import com.google.gson.JsonObject;
 
+import esze.app.AppUserPasswordUtils;
 import esze.enums.GameType;
 import esze.enums.GameType.TypeEnum;
 import esze.enums.Gamestate;
@@ -116,6 +117,7 @@ public class main extends JavaPlugin {
 		this.getCommand("game").setExecutor(new CommandReciever());
 		this.getCommand("maps").setExecutor(new CommandReciever());
 		this.getCommand("setspawn").setExecutor(new CommandReciever());
+		this.getCommand("setpassword").setExecutor(new CommandReciever());
 		this.getCommand("setitem").setExecutor(new CommandReciever());
 		this.getCommand("setlobby").setExecutor(new CommandReciever());
 		this.getCommand("downloadfile").setExecutor(new CommandReciever());
@@ -200,7 +202,7 @@ public class main extends JavaPlugin {
 		}.runTaskAsynchronously(main.plugin);
 		
 		
-		
+		AppUserPasswordUtils.createPasswordConfig();
 		
 		
 		

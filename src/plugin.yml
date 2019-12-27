@@ -30,6 +30,9 @@ commands:
   setmode:
     description: Set the gamemode
     usage: 
+  setpassword:
+    description: Set app password
+    usage: 
   setitem:
     description: Set the gamemode
     usage: 

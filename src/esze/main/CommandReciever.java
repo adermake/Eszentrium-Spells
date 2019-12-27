@@ -31,6 +31,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.analytics.solo.SaveUtils;
+import esze.app.AppUserPasswordUtils;
 import esze.enums.GameType;
 import esze.enums.GameType.TypeEnum;
 import esze.enums.Gamestate;
@@ -96,6 +97,14 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 						MapMenu.sendOverview(p);
 					}
 		        }
+				
+				if(cmd.getName().startsWith("setpassword")) {
+					if(args.length == 1){
+						AppUserPasswordUtils.changeUserPassword(p.getUniqueId().toString(), args[0]);
+					} else {
+						p.sendMessage("§8| §c/setpassword <Neues Passwort>");
+					}
+				}
 				
 				if(cmd.getName().startsWith("setjumppad")) {
 					if(p.isOp()){
