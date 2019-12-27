@@ -70,7 +70,7 @@ import spells.spellcore.Spelldrop;
 public class main extends JavaPlugin {
 	
 	public static main plugin;
-	public static String discord_TOKEN = "NjIxMzA3NjA3NzU1MzkxMDQ2.XgEmrQ.J-pRTLAtKQfStL2z36fW14fIzf8";
+	public static String discord_TOKEN = "NjIxMzA3NjA3NzU1MzkxMDQ2.XgaC8w.eqAUWAP3OOwON03fzCPrQ1whAfI";
 	public static String mapname;
 	public static final String voiddamage = "void";
 	public static HashMap<Player, String> damageCause = new HashMap<Player, String>();

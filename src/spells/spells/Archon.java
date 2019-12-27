@@ -63,6 +63,8 @@ public class Archon extends Spell {
 	@Override
 	public void cast() {
 		// TODO Auto-generated method stub
+		if (dead)
+			return;
 		caster.getInventory().clear();
 		caster.getInventory().addItem(NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rPhasenwechsel")));
 		caster.getInventory().addItem(NBTUtils.setNBT("Archon", target.getName(), ItemStackUtils.createSpell("§rSchockwelle")));
