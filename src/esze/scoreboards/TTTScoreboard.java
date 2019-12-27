@@ -72,10 +72,14 @@ public class TTTScoreboard extends Scoreboard{
 											}
 										}
 										
-										if(corpse.isExposed) {
+										if(corpse != null) {
+											if(corpse.isExposed) {
+												innoBoard.add("§m"+p.getName());
+											}else {
+												innoBoard.add(p.getName());
+											}
+										} else {
 											innoBoard.add("§m"+p.getName());
-										}else {
-											innoBoard.add(p.getName());
 										}
 										
 									}

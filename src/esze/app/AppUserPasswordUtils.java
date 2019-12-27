@@ -22,7 +22,12 @@ public class AppUserPasswordUtils {
 		passwordConfigFile = new File(main.plugin.getDataFolder(), "appPasswords.yml");
         if (!passwordConfigFile.exists()) {
         	passwordConfigFile.getParentFile().mkdirs();
-            main.plugin.saveResource("appPasswords.yml", false);
+            //main.plugin.saveResource("appPasswords.yml", false);
+        	try {
+				passwordConfigFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
          }
 
         passwordConfig = new YamlConfiguration();
