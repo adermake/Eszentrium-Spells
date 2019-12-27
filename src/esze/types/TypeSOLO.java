@@ -107,7 +107,7 @@ public class TypeSOLO extends Type {
 	
 	public void loseLife(Player p) {
 		lives.put(p, lives.get(p)-1);
-		
+		p.setGameMode(GameMode.ADVENTURE);
 		p.setVelocity(new Vector(0,0,0));
 		if (lives.get(p) < 1) {
 			out(p);

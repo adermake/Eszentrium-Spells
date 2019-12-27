@@ -3,6 +3,7 @@ package spells.spells;
 import java.util.ArrayList;
 
 import org.bukkit.Color;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -71,8 +72,10 @@ public class Binden extends Spell {
 		if (dead)
 			return;
 		// TODO Auto-generated method stub
-		
-		
+		if (ent1.isDead() || ent2.isDead()) {
+			dead = true;
+		}
+		if (((Player)ent1).getGameMode() == GameMode.ADVENTURE || ((Player)ent2).getGameMode() == GameMode.ADVENTURE)
 		
 		if (swap() && standBy) {
 			ent2 = pointRealEntity(caster);

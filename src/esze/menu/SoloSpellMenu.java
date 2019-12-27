@@ -2,6 +2,7 @@ package esze.menu;
 
 import java.util.ArrayList;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -48,6 +49,7 @@ public class SoloSpellMenu extends ItemMenu{
 		p.closeInventory();
 		ItemStack is = NBTUtils.setNBT("Spell", "true", icon);
 		p.getInventory().addItem(is);
+		p.setGameMode(GameMode.SURVIVAL);
 		p.setNoDamageTicks(10);
 		p.teleport(TypeSOLO.loc.get(p));
 		PlayerUtils.snare(p, false);
