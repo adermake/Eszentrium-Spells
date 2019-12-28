@@ -71,7 +71,7 @@ import spells.spellcore.Spelldrop;
 public class main extends JavaPlugin {
 	
 	public static main plugin;
-	public static String discord_TOKEN = "NjIxMzA3NjA3NzU1MzkxMDQ2.XgaC8w.eqAUWAP3OOwON03fzCPrQ1whAfI";
+	public static String discord_TOKEN = "";
 	public static String mapname;
 	public static final String voiddamage = "void";
 	public static HashMap<Player, String> damageCause = new HashMap<Player, String>();
@@ -119,6 +119,7 @@ public class main extends JavaPlugin {
 		this.getCommand("setspawn").setExecutor(new CommandReciever());
 		this.getCommand("setpassword").setExecutor(new CommandReciever());
 		this.getCommand("setitem").setExecutor(new CommandReciever());
+		this.getCommand("setdiscordtoken").setExecutor(new CommandReciever());
 		this.getCommand("setlobby").setExecutor(new CommandReciever());
 		this.getCommand("downloadfile").setExecutor(new CommandReciever());
 		this.getCommand("ping").setExecutor(new CommandReciever());
@@ -167,6 +168,8 @@ public class main extends JavaPlugin {
 			GameType.setTypeByEnum(TypeEnum.SOLO);
 		}
 		
+		
+		
 		LobbyBackgroundRunnable.start();
 		
 		MinecraftServer.getServer().setMotd(ChatUtils.centerMotD("§cEsze§3Remastered").substring(2)+"\n§8"+ChatUtils.centerMotD("Der Klassiker neu aufgelegt!").substring(3));
@@ -192,14 +195,24 @@ public class main extends JavaPlugin {
 		}
 		
 		
-		new BukkitRunnable() {
-			
-			@Override
-			public void run() {
-				Discord.run(); 
+		if(getConfig().contains("settings.dcToken")) {
+			discord_TOKEN = getConfig().getString("settings.dcToken");
+			new BukkitRunnable() {
 				
+				@Override
+				public void run() {
+					Discord.run(); 
+					
+				}
+			}.runTaskAsynchronously(main.plugin);
+		}else {
+			for(Player p : Bukkit.getOnlinePlayers()) {
+				if(p.isOp()) {
+					p.sendMessage("Der Discord Token wurde nicht in der Config gefunden! (/setdiscordtoken <TOKEN>)");
+				}
 			}
-		}.runTaskAsynchronously(main.plugin);
+		}
+		
 		
 		
 		AppUserPasswordUtils.createPasswordConfig();

@@ -33,6 +33,9 @@ commands:
   setpassword:
     description: Set app password
     usage: 
+  setdiscordtoken:
+    description: Set discord token
+    usage: 
   setitem:
     description: Set the gamemode
     usage: 

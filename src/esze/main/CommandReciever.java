@@ -101,8 +101,19 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 				if(cmd.getName().startsWith("setpassword")) {
 					if(args.length == 1){
 						AppUserPasswordUtils.changeUserPassword(p.getUniqueId().toString(), args[0]);
+						p.sendMessage("§8| §aApp-Passwort geändert!");
 					} else {
 						p.sendMessage("§8| §c/setpassword <Neues Passwort>");
+					}
+				}
+				
+				if(cmd.getName().startsWith("setdiscordtoken")) {
+					if(args.length == 1){
+						main.plugin.getConfig().set("settings.dcToken", args[0]);
+						main.plugin.saveConfig();
+						p.sendMessage("§8| §aDiscord-Token geändert! Der Server muss reloaded werden, damit die Änderungen in Kraft treten.");
+					} else {
+						p.sendMessage("§8| §c/setdiscordtoken <Token>");
 					}
 				}
 				
