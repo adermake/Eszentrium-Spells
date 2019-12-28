@@ -8,6 +8,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.Particles;
@@ -15,11 +16,12 @@ import spells.spellcore.Spell;
 
 public class ThermolanzeLaser extends Spell{
 
-	
-	public ThermolanzeLaser(Player c,boolean refined) {
+	Vector dir;
+	public ThermolanzeLaser(Player c,Vector dir,boolean refined) {
 		this.refined = refined;
 		caster = c;
 		name ="§eThermolanze";
+		this.dir = dir;
 		speed = 60;
 		steprange = 200;
 		hitSpell = true;
@@ -30,6 +32,7 @@ public class ThermolanzeLaser extends Spell{
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
+		loc.setDirection(dir);
 	}
 
 	@Override
@@ -84,6 +87,7 @@ public class ThermolanzeLaser extends Spell{
 	@Override
 	public void onBlockHit(Block block) {
 		// TODO Auto-generated method stub
+		new Flame(name,caster,loc);
 		ParUtils.createRedstoneParticle(loc.clone().add(loc.getDirection().multiply(-1)), 0, 0, 0, 1, Color.ORANGE, 5);
 		Location dir = loc.clone();
 		dir.setPitch(dir.getPitch()-90);

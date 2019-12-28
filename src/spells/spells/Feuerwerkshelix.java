@@ -24,7 +24,7 @@ import spells.stagespells.RepulsionDirectional;
 public class Feuerwerkshelix extends Spell {
 
 	public Feuerwerkshelix() {
-		cooldown = 33 * 40;
+		cooldown = 20 * 27;
 		name = "§eFeuerwerkshelix";
 		steprange = 15;
 		
@@ -159,14 +159,14 @@ public class Feuerwerkshelix extends Spell {
 
 	@Override
 	public void onDeath() {
-		int power = 4;
+		int power = 1;
 		
 		
 		
 		
 		
 		if (refined) {
-			power *= power;
+			power = 2;
 		}
 		// TODO Auto-generated method stub
 		new ExplosionDamage(3, 7, caster, loc, name);

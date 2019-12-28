@@ -7,6 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import esze.main.main;
 import esze.utils.ParUtils;
@@ -19,6 +20,7 @@ public class Explosion extends Spell{
 		name = "§3Explosion";
 		cooldown = 20*45;
 		hitSpell = true;
+		casttime = 30;
 	}
 	
 	@Override
@@ -30,7 +32,8 @@ public class Explosion extends Spell{
 	@Override
 	public void cast() {
 		// TODO Auto-generated method stub
-		
+		loc = caster.getLocation();
+		ParUtils.createParticle(Particles.SMOKE, ParUtils.stepCalcSpiral(loc, (30/step)/8, new Vector(0,1,0),0, step*2), 0.1F, 0.1F, 0.1F, 1, 0);
 	}
 
 	@Override
@@ -42,16 +45,19 @@ public class Explosion extends Spell{
 			}
 		}
 		
-		spawnShockWaffel(caster, 3,loc.clone());
+		if (caster.isSneaking()) {
+			caster.setVelocity(caster.getVelocity().setY(3));
+		}
+		spawnShockWaffel(caster, 5,loc.clone());
 		ParUtils.createParticle(Particles.EXPLOSION_EMITTER, loc, 0, 0, 0, 1, 10);
 		
 		if (!refined)
-		caster.setVelocity(caster.getVelocity().setY(1.0D));
+		//caster.setVelocity(caster.getVelocity().setY(1.0D));
 		
 		caster.playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
 		for (LivingEntity le : caster.getWorld().getLivingEntities()) {
-			if (checkHit(le,loc,caster,5)) {
-				damage(le, 9, caster);
+			if (checkHit(le,loc,caster,6)) {
+				damage(le, 12, caster);
 				doKnockback(le, caster.getLocation(), 1);
 			}
 		}

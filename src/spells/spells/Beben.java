@@ -134,8 +134,8 @@ public class Beben extends Spell{
 	public void onPlayerHit(Player p) {
 		damage(p,6,caster);
 		
-		doKnockback(p, caster.getLocation(), 3+steprange/10);
-		p.setVelocity(p.getVelocity().setY(1.0D+steprange/30));
+		doKnockback(p, caster.getLocation(), 3+steprange/5);
+		p.setVelocity(p.getVelocity().setY(1.0D));
 		
 
 
@@ -144,8 +144,8 @@ public class Beben extends Spell{
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
-		doKnockback(ent, caster.getLocation(), 3+steprange/10);
-		ent.setVelocity(ent.getVelocity().setY(1.0D+steprange/30));
+		doKnockback(ent, caster.getLocation(), 3+steprange/5);
+		ent.setVelocity(ent.getVelocity().setY(1.0D));
 		
 	}
 

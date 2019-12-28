@@ -25,7 +25,8 @@ public class Teleport extends Spell {
 		cooldown = 20 * 30;
 		speed = 2;
 		hitSpell = true;
-		steprange = 100;
+		steprange = 300;
+		speed = 2;
 	}
 	
 	@Override

@@ -31,7 +31,7 @@ public class Ranke extends Spell{
 		powerlevel = 60;
 		speed = 3;
 		
-		cooldown = 20 * 25;
+		cooldown = 20 * 18;
 	}
 	
 	

@@ -15,6 +15,8 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import com.google.common.collect.ImmutableList;
@@ -75,6 +77,7 @@ public class SiegelderFurcht extends Spell {
 		
 		ParUtils.parKreisDir(Particles.LARGE_SMOKE, caster.getLocation(), 4, 0, 0.7, new Vector(0,1,0),new Vector(0,1,0));
 		playSound(Sound.ENTITY_ENDER_DRAGON_GROWL,caster.getLocation(),10,0.4F);
+		caster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20* 5, 2));
 	}
 
 	@Override

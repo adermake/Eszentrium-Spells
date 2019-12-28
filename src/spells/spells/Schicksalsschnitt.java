@@ -58,9 +58,9 @@ public class Schicksalsschnitt extends Spell {
 		locTp.setDirection(caster.getLocation().getDirection());
 		ParUtils.createFlyingParticle(Particles.CLOUD, caster.getLocation(), 0.1, 0.4, 0.1, 30, 2, locTp.toVector().subtract(caster.getLocation().toVector()).normalize());
 		caster.teleport(locTp);
-		PlayerUtils.hidePlayer(caster,80);
+		//PlayerUtils.hidePlayer(caster,80);
 	}
-
+	boolean dashed = false;
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
@@ -73,6 +73,10 @@ public class Schicksalsschnitt extends Spell {
 		
 		if ((int)step % 20 == 0) {
 			SoundUtils.playSound(Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST, loc,2,0.1F);
+		}
+		if (swap() && !dashed) {
+			dashed = true;
+			caster.setVelocity(caster.getLocation().getDirection().multiply(3));
 		}
 		
 		if(step>80) {

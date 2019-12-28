@@ -20,7 +20,7 @@ public class Wurmloch extends Spell {
 
 	public Wurmloch() {
 		name = "§cWurmloch";
-		cooldown = 20 * 42;
+		cooldown = 20 * 25;
 		canHitSelf = true;
 		hitboxSize = 6;
 		hitPlayer = true;
@@ -39,7 +39,7 @@ public class Wurmloch extends Spell {
 		playSound(Sound.BLOCK_PORTAL_TRAVEL, wormHolePlaceLoc, 3, 2F);
 		
 		for (TTTCorpse c : TTTCorpse.getCorpses(loc, 6)) {
-			Bukkit.broadcastMessage("X");
+		
 			c.teleport(GameType.getType().nextLoc());
 		}
 	}

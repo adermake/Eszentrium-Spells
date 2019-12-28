@@ -36,13 +36,13 @@ public class SchnittdersiebenWinde extends Spell {
 			dead = true;
 		}
 		
-		else if (target.isOnGround() || refined) {
+		else {
 			
-			if (refined) {
+		
 				target.setVelocity(target.getVelocity().setY(8));
 				ParUtils.parKreisDirSolid(Particles.CLOUD, target.getLocation(), 3, 0, 3, new Vector(0,1,0), new Vector(0,1,0));
 			
-			}
+			
 				
 			playSound(Sound.ENTITY_RAVAGER_ATTACK,target.getLocation(),6,0.3F);
 			if (!refined) {
@@ -51,12 +51,10 @@ public class SchnittdersiebenWinde extends Spell {
 				Actionbar bar = new Actionbar("§c Spieler muss sich in der Luft befinden!");
 				bar.send(caster);
 			}
-			
-		}
-		else {
 			silenced.add(target);
 			playSound(Sound.AMBIENT_UNDERWATER_ENTER,target.getLocation(),1,2);
 		}
+		
 	}
 
 	@Override
@@ -84,7 +82,7 @@ public class SchnittdersiebenWinde extends Spell {
 		if (step >30) {
 			tagPlayer(target);
 			if (refined) {
-				target.setVelocity(caster.getLocation().getDirection().multiply(5));
+				target.setVelocity(caster.getLocation().getDirection().multiply(12));
 				caster.setVelocity(caster.getVelocity().setY(3.0D));
 			}
 			else {

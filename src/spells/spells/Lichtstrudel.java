@@ -16,7 +16,7 @@ import spells.spellcore.Spell;
 public class Lichtstrudel extends Spell {
 
 	public Lichtstrudel() {
-		cooldown = 20 * 60;
+		cooldown = 20 * 55;
 		name = "§cLichtstrudel";
 		steprange = 100;
 		

@@ -2,6 +2,7 @@ package spells.spells;
 
 import java.util.ArrayList;
 
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -11,6 +12,7 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
+import esze.utils.SoundUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
@@ -30,7 +32,7 @@ public class Mondkugel extends Spell {
 	@Override
 	public void setUp() {
 	
-		
+		SoundUtils.playSound(Sound.BLOCK_CONDUIT_ACTIVATE, loc, 1, 2);
 		
 	}
 
@@ -78,6 +80,7 @@ public class Mondkugel extends Spell {
 		tagPlayer(p);
 		p.setVelocity(s.getVelocity());
 		hit.add(p);
+		SoundUtils.playSound(Sound.BLOCK_CONDUIT_ACTIVATE, loc, 2, 2);
 	}
 
 	@Override
@@ -85,6 +88,7 @@ public class Mondkugel extends Spell {
 		// TODO Auto-generated method stub
 		ent.setVelocity(s.getVelocity());
 		hit.add(ent);
+		SoundUtils.playSound(Sound.BLOCK_CONDUIT_ACTIVATE, loc, 2, 2);
 	}
 
 	@Override

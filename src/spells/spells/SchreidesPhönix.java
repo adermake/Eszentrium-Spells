@@ -164,12 +164,8 @@ public class SchreidesPhönix extends Spell{
 							public void run() {
 								int ti = time;
 								Player play = c.player;
-								Vex v = (Vex) c.cows.get(0).getLocation().clone().getWorld().spawnEntity(c.cows.get(0).getLocation().add(0,(40-ti),0), EntityType.VEX);
-								new BukkitRunnable() {
-									public void run() {
-										v.remove();
-									}
-								}.runTaskLater(main.plugin, 1);
+								//Vex v = (Vex) c.cows.get(0).getLocation().clone().getWorld().spawnEntity(c.cows.get(0).getLocation().add(0,(40-ti),0), EntityType.VEX);
+								
 								
 								if (time == 40) {
 									

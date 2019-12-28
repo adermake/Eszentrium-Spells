@@ -27,8 +27,8 @@ public class Notenzauber extends Spell {
 		hitEntity = false;
 		hitPlayer = true;
 		hitSpell = true;
-		speed = 2;
-		steprange = 40;
+		speed = 4;
+		steprange = 80;
 		hitboxSize = 3;
 		
 	}

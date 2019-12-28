@@ -87,8 +87,8 @@ public class Magmafalle extends Spell {
 		
 		new BukkitRunnable() {
 			public void run() {
-				new ExplosionDamage(4, 10, caster, loc.clone(),name);
-				new Repulsion(4, 5, caster, loc.clone(),true,name);
+				new ExplosionDamage(6, 10, caster, loc.clone(),name);
+				new Repulsion(6, 5, caster, loc.clone(),true,name);
 				ParUtils.parKreisDir(Particles.FLAME, loc.clone(), 5, 0, 6, new Vector(0,1,0), new Vector(0,1,0));
 				ParUtils.createParticle(Particles.EXPLOSION_EMITTER, loc.clone(), 1,1, 1,4, 1);
 				ParUtils.createParticle(Particles.LAVA, loc.clone(), 2,2, 2,40, 1);

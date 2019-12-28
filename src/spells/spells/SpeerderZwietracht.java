@@ -75,7 +75,7 @@ public class SpeerderZwietracht  extends Spell{
 					for (int i = 0;i<3;i++)
 					bloodLine(le.getLocation(), loc.getDirection().multiply(-1));
 					
-					damage(le,8,caster);
+					damage(le,6,caster);
 					dead = true;
 				}
 			}
@@ -99,10 +99,10 @@ public class SpeerderZwietracht  extends Spell{
 		// TODO Auto-generated method stub
 		doKnockback(p,caster.getLocation(),1);
 		if (refined) {
-			damage(p, 6, caster);
+			damage(p, 4, caster);
 		}
 		else {
-			damage(p, 3, caster);
+			damage(p, 2, caster);
 		}
 		playSound(Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, p.getLocation(), 3, 2F);
 	}
@@ -112,10 +112,10 @@ public class SpeerderZwietracht  extends Spell{
 		// TODO Auto-generated method stub
 		doKnockback(ent,caster.getLocation(),1);
 		if (refined) {
-			damage(ent, 6, caster);
+			damage(ent, 4, caster);
 		}
 		else {
-			damage(ent, 3, caster);
+			damage(ent, 2, caster);
 		}
 		
 		

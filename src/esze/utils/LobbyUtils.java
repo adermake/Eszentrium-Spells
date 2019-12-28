@@ -50,6 +50,8 @@ public class LobbyUtils {
 	}
 	public static void recallAll() {
 		Location l = new Location(Bukkit.getWorld("world"),0 ,108 ,3);
+		
+		Spell.clearSpells();
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			p.setGameMode(GameMode.SURVIVAL);
 			p.setFlying(false);

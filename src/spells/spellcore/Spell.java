@@ -75,7 +75,7 @@ public abstract class Spell {
 	protected ArrayList<Entity> hitEntitys = new ArrayList<Entity>();
 	public static ArrayList<Entity> pressingF = new ArrayList<Entity>();
 	public static ArrayList<Entity> clearpressingF = new ArrayList<Entity>();
-	protected static ArrayList<Spell> spell = new ArrayList<Spell>();
+	public static ArrayList<Spell> spell = new ArrayList<Spell>();
 	protected static ArrayList<Player> gliding = new ArrayList<Player>();
 	protected static ArrayList<Player> hasDied = new ArrayList<Player>();
 	protected static ArrayList<Player> hasDiedEntry = new ArrayList<Player>();
@@ -90,6 +90,12 @@ public abstract class Spell {
 	//
 	
 	
+	
+	public static void clearSpells() {
+		for (Spell spell : spell) {
+			spell.dead = true;
+		}
+	}
 	
 	public boolean castSpell(Player p,String name) {
 		

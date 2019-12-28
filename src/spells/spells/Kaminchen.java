@@ -12,7 +12,7 @@ public class Kaminchen extends Spell {
 
 	
 	public Kaminchen() {
-		cooldown = 20 * 35;
+		cooldown = 20 * 25;
 		name = "§6Kaminchen";
 		
 	}

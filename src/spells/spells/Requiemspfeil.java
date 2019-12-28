@@ -28,9 +28,9 @@ public class Requiemspfeil extends Spell {
 	Arrow a;
 	public Requiemspfeil() {
 		
-		name = "§eRequiemspfeil";
-		steprange = 100;
-		cooldown = 20 * 40;
+		name = "§cRequiemspfeil";
+		steprange = 150;
+		cooldown = 20 * 50;
 		hitboxSize = 1.5;
 		speed = 1;
 		
@@ -53,10 +53,8 @@ public class Requiemspfeil extends Spell {
 		caster.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20000, 1,true));
 		
 		
-		if (refined) {
-			steprange = 200;
+		
 			
-		}
 			
 	}
 
@@ -75,6 +73,10 @@ public class Requiemspfeil extends Spell {
 	int speedX = 0;
 	@Override
 	public void move() {
+		
+		if (silenced.contains(caster)) {
+			dead = true;
+		}
 		if (a.isOnGround()) {
 			dead = true;
 		}

@@ -27,6 +27,7 @@ public class Verstummen extends Spell {
 		speed = 50;
 		hitSpell = true;
 		steprange = 300;
+		hitboxSize = 2;
 	}
 	
 	@Override
@@ -86,7 +87,7 @@ public class Verstummen extends Spell {
 				}
 				Title verstummt = new Title("§cVerstummt!","",0,2,0);
 				verstummt.send(p);
-				if (t>60) {
+				if (t>120) {
 					
 					silenced.remove(p);
 					this.cancel();

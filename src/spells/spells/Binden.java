@@ -76,6 +76,7 @@ public class Binden extends Spell {
 			dead = true;
 		}
 		if (((Player)ent1).getGameMode() == GameMode.ADVENTURE || ((Player)ent2).getGameMode() == GameMode.ADVENTURE)
+			dead = true;
 		
 		if (swap() && standBy) {
 			ent2 = pointRealEntity(caster);

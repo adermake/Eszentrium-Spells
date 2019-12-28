@@ -45,10 +45,10 @@ public class Raumwechsel extends Spell{
 			playSound(Sound.ENTITY_EVOKER_PREPARE_WOLOLO, target.getLocation(), 1, 2);
 			playSound(Sound.ENTITY_EVOKER_PREPARE_WOLOLO, target.getLocation(), 1, 2);
 			if (refined) {
-				doPull(caster, target.getLocation(), 7);
+				doPull(caster, target.getLocation(), 9);
 				doPull(target,caster.getLocation(),7);
 			}else {
-				doPull(caster, target.getLocation(), 4);
+				doPull(caster, target.getLocation(), 6);
 				doPull(target,caster.getLocation(),4);
 			}
 			

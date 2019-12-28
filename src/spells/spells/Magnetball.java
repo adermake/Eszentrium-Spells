@@ -103,7 +103,7 @@ public class Magnetball extends Spell{
 				if (e instanceof Player) {
 					tagPlayer((Player) e);
 				}
-				e.setVelocity(loc.toVector().subtract(e.getLocation().toVector()));
+				e.setVelocity(loc.toVector().subtract(e.getLocation().toVector()).normalize().multiply(3));
 			}
 		}
 	}

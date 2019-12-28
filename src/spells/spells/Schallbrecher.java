@@ -56,7 +56,7 @@ public class Schallbrecher extends Spell {
 		Location midloc = caster.getLocation();
 		midloc.setY(midloc.getY()+0.2);
 		Vector direction = loc.getDirection();
-		direction.setY(0);
+		
 		caster.setVelocity(direction);
 		ParUtils.parKreisDot(Particles.CLOUD, locate, 0.5, 0.5, 0.2, direction.multiply(-1));
 		
@@ -141,6 +141,9 @@ public class Schallbrecher extends Spell {
 		}
 		playSound(Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, loc, 1, 1);
 		
+		if (caster.isSneaking()) {
+			caster.setVelocity(caster.getLocation().getDirection().multiply(-1.7F));
+		}
 		
 	}
 
