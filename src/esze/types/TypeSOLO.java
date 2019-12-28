@@ -91,12 +91,15 @@ public class TypeSOLO extends Type {
 		if (main.damageCause.get(p) == null) {
 			main.damageCause.put(p, "");
 		}
-		//Output death message
-		String out = main.toStringCause(p);
-		for (Player rec : Bukkit.getOnlinePlayers()) {
-			rec.sendMessage(out);
+		
+		if(!spectator.contains(p)) {
+			//Output death message
+			String out = main.toStringCause(p);
+			for (Player rec : Bukkit.getOnlinePlayers()) {
+				rec.sendMessage(out);
+			}
+			SaveUtils.addPlayerDeath(p.getName(), main.damageCause.get(p)); //Analytics 
 		}
-		SaveUtils.addPlayerDeath(p.getName(), main.damageCause.get(p)); //Analytics 
 		main.damageCause.put(p, "");
 		p.setVelocity(new Vector(0, 0, 0));
 		
