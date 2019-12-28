@@ -124,6 +124,7 @@ public class CorpseUtils {
 		for(Player all : Bukkit.getOnlinePlayers()){
 			((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityDestroy(cID));
 		}
+		allCorpses.remove(cID);
 	}
 	
 	

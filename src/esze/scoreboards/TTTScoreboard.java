@@ -79,7 +79,7 @@ public class TTTScoreboard extends Scoreboard{
 												innoBoard.add(p.getName());
 											}
 										} else {
-											innoBoard.add("§m"+p.getName());
+											innoBoard.add(p.getName());
 										}
 										
 									}
