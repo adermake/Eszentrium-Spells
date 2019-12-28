@@ -10,11 +10,14 @@ public class AppClientSocket {
 	
 	java.net.Socket clientSocket;
 	AppServer server;
-	Runnable listeningThread;
+	Thread listeningThread;
+	AppCommunicator communicator;
+	AppClientIdentity identity;
 	
 	public AppClientSocket(java.net.Socket clientSocket, AppServer server) {
 		this.clientSocket = clientSocket;
 		this.server = server;
+		communicator = new AppCommunicator(this);
 		startListeningForMessages();
 	}
 
@@ -35,7 +38,7 @@ public class AppClientSocket {
 	}
 	
 	public void startListeningForMessages() {
-		listeningThread = new Runnable() {
+		listeningThread = new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -44,14 +47,16 @@ public class AppClientSocket {
 					try {
 						nachricht = readMessage(clientSocket);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				 	System.out.println(nachricht);
+					if(nachricht != null) {
+						communicator.receivedMessage(nachricht);
+						System.out.println(nachricht);
+					}
 				}
 			}
-		};
-		listeningThread.run();
+		});
+		listeningThread.start();
 	}
 	
 	private String readMessage(java.net.Socket socket) throws IOException {
@@ -72,6 +77,10 @@ public class AppClientSocket {
 					socket.getOutputStream()));
 		printWriter.print(nachricht);
  		printWriter.flush();
+	}
+	
+	public AppClientIdentity getIdentity() {
+		return identity;
 	}
 
 }

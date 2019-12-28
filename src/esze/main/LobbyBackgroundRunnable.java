@@ -3,16 +3,12 @@ package esze.main;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import easyscoreboards.ScoreboardUtil;
+import esze.app.AppClientSocket;
 import esze.enums.GameType;
-import esze.enums.Gamestate;
 import esze.listeners.Reconnect;
-import esze.players.PlayerAPI;
-import esze.utils.Actionbar;
 
 public class LobbyBackgroundRunnable {
 	
@@ -35,6 +31,18 @@ public class LobbyBackgroundRunnable {
 					board.add("  ");
 					board.add("§a§lSpieler:");
 					board.add(Bukkit.getOnlinePlayers().size()+"/"+Bukkit.getMaxPlayers());
+					board.add("   ");
+					board.add("§a§lApp:");
+					
+					boolean usesApp = false;
+					for(AppClientSocket socket : main.plugin.appServer.clientSockets) {
+						if(socket.getIdentity() != null && socket.getIdentity().getUsername().equalsIgnoreCase(p.getName())) {
+							usesApp = true;
+							break;
+						}
+					}
+					
+					board.add(usesApp ? "VERBUNDEN" : "OFFLINE");
 					
 					
 					String[] array = new String[board.size()];

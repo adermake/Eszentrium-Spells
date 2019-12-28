@@ -28,6 +28,7 @@ import org.inventivetalent.packetlistener.handler.SentPacket;
 
 import com.google.gson.JsonObject;
 
+import esze.app.AppServer;
 import esze.app.AppUserPasswordUtils;
 import esze.enums.GameType;
 import esze.enums.GameType.TypeEnum;
@@ -75,6 +76,7 @@ public class main extends JavaPlugin {
 	public static String mapname;
 	public static final String voiddamage = "void";
 	public static HashMap<Player, String> damageCause = new HashMap<Player, String>();
+	public AppServer appServer;
 	
 	public static ArrayList<String> colorTags = new ArrayList<String>();
 	
@@ -219,8 +221,11 @@ public class main extends JavaPlugin {
 		
 		
 		
-			
-			
+
+		System.out.println("Esze | Fahre App-Server hoch.");
+		appServer = new AppServer();
+		//IMPORTANT NEEDS TO BE REACTIVATED BY PHILIPP appServer.startServer();
+		System.out.println("Esze | App-Server hochgefahren.");
 			
 			
 		
@@ -268,8 +273,15 @@ public class main extends JavaPlugin {
 				e.remove();
 			}
 		}
+		
+
+		System.out.println("Esze | Fahre App-Server herunter.");
+		//IMPORTANT NEEDS TO BE REACTIVATED BY PHILIPP //appServer.shutdownServer();
+		System.out.println("Esze | App-Server heruntergefahren.");
+		
 		Discord.unMuteAll();
 		Discord.logout();
+		
 	}
 	
 	
