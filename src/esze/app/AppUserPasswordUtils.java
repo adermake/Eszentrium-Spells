@@ -3,6 +3,7 @@ package esze.app;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -48,8 +49,9 @@ public class AppUserPasswordUtils {
 	}
 	
 	public static boolean checkPassword(String uuid, String password) {
-		if(getPasswordConfig().contains("password."+uuid)) 
+		if(!getPasswordConfig().contains("password."+uuid)) 
 			return false;
+		
 		
 		String hashed = getPasswordConfig().getString("password."+uuid);
 		

@@ -46,6 +46,7 @@ public class AppCommunicator {
 				    UUID uuid = op.getUniqueId();
 				    
 				    authenticated = AppUserPasswordUtils.checkPassword(uuid.toString(), password);
+				    Bukkit.broadcastMessage(uuid.toString() + " " + authenticated);
 				}
 				
 				if(authenticated) {

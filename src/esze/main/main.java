@@ -224,7 +224,7 @@ public class main extends JavaPlugin {
 
 		System.out.println("Esze | Fahre App-Server hoch.");
 		appServer = new AppServer();
-		//IMPORTANT NEEDS TO BE REACTIVATED BY PHILIPP appServer.startServer();
+		appServer.startServer();
 		System.out.println("Esze | App-Server hochgefahren.");
 			
 			
@@ -276,11 +276,18 @@ public class main extends JavaPlugin {
 		
 
 		System.out.println("Esze | Fahre App-Server herunter.");
-		//IMPORTANT NEEDS TO BE REACTIVATED BY PHILIPP //appServer.shutdownServer();
+		appServer.shutdownServer();
 		System.out.println("Esze | App-Server heruntergefahren.");
 		
 		Discord.unMuteAll();
 		Discord.logout();
+		
+		try {
+			wait(2000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
 	

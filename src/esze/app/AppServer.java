@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import esze.main.main;
 
 public class AppServer {
 	
@@ -32,6 +35,10 @@ public class AppServer {
 				//LET ANY CLIENT CONNECT AT ANY TIME
 				while(true) {
 					try {
+						if(!isServerStarted || serverSocket == null || serverSocket.isClosed()) {
+							isServerStarted = false;
+							break;
+						}
 						java.net.Socket client = serverSocket.accept();
 						Bukkit.broadcastMessage(client.getInetAddress().getHostAddress() + " is now connected to server.");
 					 	AppClientSocket clientSocket = new AppClientSocket(client, AppServer.this);
@@ -48,6 +55,7 @@ public class AppServer {
 	
 	public void shutdownServer() {
 		try {
+			serverSocket.setReuseAddress(true);
 			serverSocket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -59,6 +67,8 @@ public class AppServer {
 				e.printStackTrace();
 			}
 		}
+		
+		
 	}
 
 }

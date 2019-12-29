@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
+import org.bukkit.scheduler.BukkitRunnable;
+
+import esze.main.main;
+
 public class AppClientSocket {
 	
 	java.net.Socket clientSocket;
@@ -45,6 +49,10 @@ public class AppClientSocket {
 				while(true) {
 				 	String nachricht = null;
 					try {
+						if(!server.isServerStarted || clientSocket == null || clientSocket.isClosed() || !clientSocket.isConnected()) {
+							identity = null;
+							break;
+						}
 						nachricht = readMessage(clientSocket);
 					} catch (IOException e) {
 						e.printStackTrace();
