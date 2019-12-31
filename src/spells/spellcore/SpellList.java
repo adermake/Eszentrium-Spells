@@ -138,7 +138,7 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 	
 	public static void registerSpells() {
 		spells.clear();
-		registerSpell(new Ansturm());
+		//registerSpell(new Ansturm());
 		//registerSpell(new Astralsprung());
 		registerSpell(new AntlitzderGöttin());
 		registerSpell(new Aufwind());
@@ -187,7 +187,7 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Thermolanze());
 		registerSpell(new Verstummen());
 		registerSpell(new Vampirpilz());
-		registerSpell(new Pyroschlag());
+		
 		registerSpell(new Wunsch());
 		registerSpell(new Wurmloch());
 		registerSpell(new Zaubersprung());

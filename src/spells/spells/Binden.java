@@ -72,11 +72,23 @@ public class Binden extends Spell {
 		if (dead)
 			return;
 		// TODO Auto-generated method stub
-		if (ent1.isDead() || ent2.isDead()) {
-			dead = true;
+		
+		if (ent1 != null) {
+			if (ent1 instanceof Player) {
+				if (((Player)ent1).getGameMode() == GameMode.ADVENTURE)
+				dead = true;
+			}
+			
 		}
-		if (((Player)ent1).getGameMode() == GameMode.ADVENTURE || ((Player)ent2).getGameMode() == GameMode.ADVENTURE)
-			dead = true;
+		
+		if (ent2 != null ) {
+			if (ent2 instanceof Player) {
+				
+			
+			if (((Player)ent2).getGameMode() == GameMode.ADVENTURE)
+				dead = true;
+			}
+		}
 		
 		if (swap() && standBy) {
 			ent2 = pointRealEntity(caster);
@@ -96,9 +108,9 @@ public class Binden extends Spell {
 				ent1.setVelocity(new Vector(0,0,0));
 			}
 			SoundUtils.playSound(Sound.ENTITY_SLIME_HURT, ent1.getLocation());
-			if (ticker > 2) {
-				doPull(ent1,ent2.getLocation(),2.5);
-				doPull(ent2,ent1.getLocation(),2.5);
+			if (ticker > 0) {
+				doPull(ent1,ent2.getLocation(),1);
+				doPull(ent2,ent1.getLocation(),1);
 				ticker = 0;
 			}
 			

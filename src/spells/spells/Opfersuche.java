@@ -34,7 +34,7 @@ public class Opfersuche extends Spell {
 		steprange = 200;
 		hitboxSize= 1.5;
 		hitSpell = true;
-		speed = 4;
+		speed = 3;
 	}
 	
 	

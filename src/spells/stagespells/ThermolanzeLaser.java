@@ -67,14 +67,14 @@ public class ThermolanzeLaser extends Spell{
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		damage(p,1.5,caster);
+		damage(p,6,caster);
 		p.setFireTicks(8);
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
-		damage(ent,1.5,caster);
+		damage(ent,6,caster);
 		ent.setFireTicks(8);
 	}
 
@@ -87,20 +87,17 @@ public class ThermolanzeLaser extends Spell{
 	@Override
 	public void onBlockHit(Block block) {
 		// TODO Auto-generated method stub
-		new Flame(name,caster,loc);
+		new Explosion(3, 4, 1, 1, caster, loc, name);
 		ParUtils.createRedstoneParticle(loc.clone().add(loc.getDirection().multiply(-1)), 0, 0, 0, 1, Color.ORANGE, 5);
 		Location dir = loc.clone();
 		dir.setPitch(dir.getPitch()-90);
 		ParUtils.createFlyingParticle(Particles.CAMPFIRE_COSY_SMOKE, loc.clone().add(loc.getDirection().multiply(-1)), 0, 0, 0, 1, 1, dir.getDirection());
 		
-		if (refined) {
-			bounce();
-		}
-		else {
+		
 			FallingBlock fb = loc.clone().add(loc.getDirection().multiply(-1)).getWorld().spawnFallingBlock(loc.clone().add(loc.getDirection().multiply(-1)), Material.FIRE, (byte)0);
 			fb.setVelocity(dir.getDirection().multiply(0.7));
 			dead = true;
-		}
+		
 		
 		
 	}

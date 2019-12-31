@@ -39,18 +39,13 @@ public class SchnittdersiebenWinde extends Spell {
 		else {
 			
 		
-				target.setVelocity(target.getVelocity().setY(8));
+				target.setVelocity(target.getVelocity().setY(1));
 				ParUtils.parKreisDirSolid(Particles.CLOUD, target.getLocation(), 3, 0, 3, new Vector(0,1,0), new Vector(0,1,0));
 			
 			
 				
 			playSound(Sound.ENTITY_RAVAGER_ATTACK,target.getLocation(),6,0.3F);
-			if (!refined) {
-				refund = true;
-				dead = true;
-				Actionbar bar = new Actionbar("§c Spieler muss sich in der Luft befinden!");
-				bar.send(caster);
-			}
+			
 			silenced.add(target);
 			playSound(Sound.AMBIENT_UNDERWATER_ENTER,target.getLocation(),1,2);
 		}
