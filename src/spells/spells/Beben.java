@@ -81,10 +81,10 @@ public class Beben extends Spell{
 			}
 		}
 		int plus = 0;
-		while (loc.getBlock().getRelative(BlockFace.UP).getType() != Material.AIR) {
+		while (loc.getBlock().getType() != Material.AIR) {
 			loc.add(0, 1, 0);
 			plus++;
-			if (plus >= 4) {
+			if (plus >= 14) {
 				break;
 			}
 		}

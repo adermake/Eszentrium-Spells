@@ -13,11 +13,12 @@ import spells.spellcore.Spell;
 public class Bubble extends Spell{
 	
 	Player target;
+	Location overrideLoc;
 	public Bubble(Location l,Player c,Player t,String namae) {
 		caster = c;
-		loc = l;
+		overrideLoc = l;
 		target = t;
-		casttime = randInt(8,14);
+		casttime = 30;
 		hitSpell = true;
 		steprange = 100;
 		speed = 0.3;
@@ -29,24 +30,25 @@ public class Bubble extends Spell{
 	@Override
 	public void setUp() {
 		
-		
+		loc = overrideLoc;
 	}
 
 	@Override
 	public void cast() {
 		loc.setDirection(lerp(loc.getDirection(),(target.getLocation().toVector()).subtract(loc.toVector()), 0.1));
 		loc.add(loc.getDirection().normalize());	
+		ParUtils.createParticle(Particles.BUBBLE, loc, 0, 0, 0, 5, 0);
 	}
 
 	@Override
 	public void launch() {
-		speed = 8;
+		speed = 2;
 		
 	}
 
 	@Override
 	public void move() {
-		loc.setDirection(lerp(loc.getDirection(),(target.getLocation().toVector()).subtract(loc.toVector()), 0.1));
+		loc.setDirection(lerp(loc.getDirection(),(target.getLocation().toVector()).subtract(loc.toVector()), 0.05));
 		loc.add(loc.getDirection().normalize());		
 	}
 	

@@ -65,6 +65,7 @@ public class Magnetball extends Spell{
 	@Override
 	public void onPlayerHit(Player p) {
 		double distance = p.getLocation().distance(loc);
+		if (step< steprange-10)
 		ParUtils.parLineRedstone(loc, p.getLocation().add(0,0.5,0), Color.fromBGR(0, clamp(200-(int)distance*15, 0, 255),clamp((int) (100+distance*15), 0, 255)), 1, 0.5);
 		
 	}
@@ -77,6 +78,7 @@ public class Magnetball extends Spell{
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		double distance = ent.getLocation().distance(loc);
+		if (step< steprange-10)
 		ParUtils.parLineRedstone(loc, ent.getLocation().add(0,0.5,0), Color.fromBGR(0, clamp(200-(int)distance*15, 0, 255),clamp( (int) (100+distance*15),0 ,255 )), 1, 0.5);
 		
 	}
@@ -98,8 +100,9 @@ public class Magnetball extends Spell{
 		// TODO Auto-generated method stub
 		ParUtils.chargeDot(loc, Particles.END_ROD, 0.2, 4,60);
 		playSound(Sound.ENTITY_WITHER_SPAWN,loc,4f,2f);
-		for (Entity e : hitEntitys) {
-			if (e.getLocation().distance(loc)<=hitboxSize) {
+		for (Entity ent : hitEntitys) {
+			LivingEntity e = (LivingEntity) ent;
+			if (e.getEyeLocation().distance(loc)<0.6+hitboxSize || e.getLocation().distance(loc)<0.6+hitboxSize ) {
 				if (e instanceof Player) {
 					tagPlayer((Player) e);
 				}

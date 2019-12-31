@@ -11,6 +11,7 @@ import org.bukkit.util.Vector;
 
 import esze.main.main;
 import esze.utils.ParUtils;
+import esze.utils.SoundUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
@@ -20,20 +21,35 @@ public class Explosion extends Spell{
 		name = "§3Explosion";
 		cooldown = 20*45;
 		hitSpell = true;
-		casttime = 30;
+		
+		casttime = 15;
 	}
 	
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		
+		if (refined)
+			casttime = 0;
 	}
-
+	
+	int s = 0;
 	@Override
 	public void cast() {
+		
 		// TODO Auto-generated method stub
 		loc = caster.getLocation();
-		ParUtils.createParticle(Particles.SMOKE, ParUtils.stepCalcSpiral(loc, (30/step)/8, new Vector(0,1,0),0, step*2), 0.1F, 0.1F, 0.1F, 1, 0);
+		SoundUtils.playSound(Sound.BLOCK_BAMBOO_HIT, loc, 1, 0.4F);
+		SoundUtils.playSound(Sound.BLOCK_LAVA_EXTINGUISH, loc, 1, 0.4F);
+		for (int i = 0;i<12;i++) {
+			s++;
+			Location l1 = ParUtils.stepCalcSpiral(loc, 9, new Vector(0,1,0),0, s*2);
+			Location l2 = ParUtils.stepCalcSpiral(loc, 9, new Vector(0,1,0),0,- s*2);
+			ParUtils.createParticle(Particles.LARGE_SMOKE, l1, 0.1F, 0.1F, 0.1F, 1, 0);
+			ParUtils.createParticle(Particles.LARGE_SMOKE, l2, 0.1F, 0.1F, 0.1F, 1, 0);
+			ParUtils.createParticle(Particles.FLAME, l1, 0F, 0F, 0F, 0, 5);
+			ParUtils.createParticle(Particles.FLAME, l2, 0F, 0F, 0F, 0, 5);
+		}
+		
 	}
 
 	@Override

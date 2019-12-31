@@ -18,7 +18,7 @@ public class Blasensturm extends Spell{
 		name = "§eBlasensturm";
 		steprange = 30;
 		speed =2;
-		casttime =  6;
+		
 		hitboxSize = 1;
 		cooldown = 20*25;
 		hitSpell = true;
