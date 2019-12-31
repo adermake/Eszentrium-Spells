@@ -10,6 +10,7 @@ import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 import spells.stagespells.Bubble;
+import spells.stagespells.BubbleOld;
 
 public class Blasensturm extends Spell{
 
@@ -20,7 +21,7 @@ public class Blasensturm extends Spell{
 		speed =2;
 		
 		hitboxSize = 1;
-		cooldown = 20*25;
+		cooldown = 20*5;
 		hitSpell = true;
 		
 		
@@ -48,22 +49,11 @@ public class Blasensturm extends Spell{
 
 	@Override
 	public void launch() {
-		Player t = pointEntity(caster);
-		
-		if (t == null) {
-			dead = true;
-			refund = true;
-			return;
-		}
+	
 		for (int i = 0;i < 30; i++) {
-			new Bubble((loc.clone()).setDirection(randVector()), caster, t, name);
+			new Bubble(caster.getEyeLocation(), caster, name);
 		}
-		if (refined) {
-			for (int i = 0;i < 30; i++) {
-				new Bubble((loc.clone()).setDirection(randVector()), caster, t, name);
-			}
-		}
-		dead = true;
+		
 	}
 
 	@Override

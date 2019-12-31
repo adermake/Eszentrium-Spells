@@ -19,9 +19,9 @@ public class Thermolanze extends Spell {
 
 	
 	public Thermolanze() {
-		cooldown = 20 * 5;
+		cooldown = 20 * 60;
 		name = "§cThermolanze";
-		steprange = 20 * 60;
+		steprange = 20 * 4;
 		speed = 0.5;
 		casttime = 30;
 	}
