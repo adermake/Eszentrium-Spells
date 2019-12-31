@@ -76,9 +76,6 @@ public class Fuchstorpedo extends Spell {
 		loc.setDirection(caster.getLocation().getDirection());
 		ent.teleport(loc);
 		//ent.setVelocity(caster.getLocation().getDirection().multiply(2));
-		if (ent.isOnGround()) {
-			dead = true;
-		}
 	}
 
 	@Override
@@ -120,10 +117,10 @@ public class Fuchstorpedo extends Spell {
 		if (!ent.isDead())
 		ent.remove();
 		if (refined) {
-			new Explosion(6, 13, 1, 0, caster, loc, name);
+			new Explosion(6, 13, 5, 0, caster, loc, name);
 		}
 		else {
-			new Explosion(6, 8, 1, 0, caster, loc, name);
+			new Explosion(6, 8, 4, 0, caster, loc, name);
 		}
 		
 	}
