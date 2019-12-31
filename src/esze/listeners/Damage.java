@@ -52,7 +52,7 @@ public class Damage implements Listener{
 				if (((Player) e.getDamager()).getGameMode().equals(GameMode.ADVENTURE)) {
 					e.setCancelled(true);
 				}
-				main.damageCause.remove((Player) e.getDamager());
+				main.damageCause.remove((Player) e.getEntity());
 				main.damageCause.put((Player) e.getEntity(), "Schwert-" + ((Player) e.getDamager()).getName());
 			}
 		}
