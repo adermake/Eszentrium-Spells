@@ -893,7 +893,7 @@ public abstract class Spell {
 				nearest = p;
 				distance = c.getLocation().distance(p.getLocation());
 			}
-			if (p != c && p.getGameMode() == GameMode.ADVENTURE) {
+			if (p != c && p.getGameMode() != GameMode.ADVENTURE) {
 				double dis = c.getLocation().distance(p.getLocation());
 				if (dis<distance) {
 					nearest = p;
@@ -907,17 +907,14 @@ public abstract class Spell {
 		
 	}
 	
-	public static Player getNearestPlayer(Player c,Location l) {
+	public static Player getNearestPlayer(Player c,Location l,double range) {
 		double distance = 10000;
-		Player nearest = c;
+		Player nearest = null;
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			if (nearest == c) {
-				nearest = p;
-				distance = l.distance(p.getLocation());
-			}
-			if (p != c && p.getGameMode() == GameMode.ADVENTURE) {
+			
+			if (p != c && p.getGameMode() != GameMode.ADVENTURE) {
 				double dis = l.distance(p.getLocation());
-				if (dis<distance) {
+				if (dis<distance&& dis < range) {
 					nearest = p;
 					distance = dis;
 				}

@@ -85,7 +85,8 @@ public class Vampirpilz extends Spell{
 	@Override
 	public void onSpellHit(Spell spell) {
 		// TODO Auto-generated method stub
-		
+		if (spell.getName().contains("Antlitz der Göttin"))
+			i.setVelocity(spell.caster.getLocation().getDirection().multiply(2));
 	}
 
 	@Override

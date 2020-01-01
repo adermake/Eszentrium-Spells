@@ -16,12 +16,12 @@ public class Blasensturm extends Spell{
 
 	int rec = 65;
 	public Blasensturm() {
-		name = "§eBlasensturm";
+		name = "§cBlasensturm";
 		steprange = 30;
 		speed =2;
 		
 		hitboxSize = 1;
-		cooldown = 20*5;
+		cooldown = 20*40;
 		hitSpell = true;
 		
 		
@@ -35,10 +35,7 @@ public class Blasensturm extends Spell{
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		if (refined) {
-			speed = 6;
-			steprange = 90;
-		}
+		
 			
 	}
 

@@ -97,10 +97,14 @@ public class AntlitzderGöttin extends Spell{
 
 	@Override
 	public void onSpellHit(Spell spell) {
+		if (spell.getName() == name) {
+			return;
+		}
 		// TODO Auto-generated method stub
 		spell.caster = caster;
 		playSound(Sound.BLOCK_ENCHANTMENT_TABLE_USE, loc, 5, 2);
 		spell.loc.setDirection(loc.getDirection());
+		
 	}
 
 	@Override

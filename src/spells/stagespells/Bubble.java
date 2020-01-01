@@ -1,12 +1,16 @@
 package spells.stagespells;
 
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+
+
 import esze.utils.ParUtils;
+import esze.utils.SoundUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
@@ -16,7 +20,7 @@ public class Bubble extends Spell {
 	Vector vel;
 	
 	public Bubble(Location l,Player c,String namae) {
-		vel = randVector().normalize().multiply(0.06).add(l.getDirection()).normalize();
+		vel = randVector().normalize().multiply(0.4).add(l.getDirection()).normalize();
 		
 		caster = c;
 		overrideLoc = l;
@@ -29,11 +33,13 @@ public class Bubble extends Spell {
 		name = namae;
 		castSpell(caster,namae);
 	}
-
+	int swapTime = 100;
 	@Override
 	public void setUp() {
-		
+		swapTime += randInt(-10, 30);
 		loc = overrideLoc;
+		SoundUtils.playSound(Sound.BLOCK_BUBBLE_COLUMN_UPWARDS_INSIDE, loc,2F,0.1F);
+		
 	}
 
 	@Override
@@ -43,8 +49,13 @@ public class Bubble extends Spell {
 
 	@Override
 	public void launch() {
-		
-		away = getNearestPlayer(caster,loc).getLocation().toVector().subtract(loc.toVector()).normalize();
+		Player nera = getNearestPlayer(caster,loc,10);
+		if (nera != null) {
+			target = nera;
+			
+			away = target.getLocation().toVector().subtract(loc.toVector()).normalize();
+		}
+	
 	}
 	Player target;
 	float sp = 1;
@@ -52,31 +63,55 @@ public class Bubble extends Spell {
 	@Override
 	public void move() {
 		if (step % 10 == 0) {
-			away = getNearestPlayer(caster,loc).getLocation().toVector().subtract(loc.toVector()).normalize();
+			Player nera = getNearestPlayer(caster,loc,10);
+			if (nera != null) {
+				
+				target = nera;
+				
+				away = target.getLocation().toVector().subtract(loc.toVector()).normalize();
+			}
+			
 		}
-		if (step<100) {
+		if (step == swapTime) {
+			SoundUtils.playSound(Sound.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_INSIDE, loc,2F,0.1F);
+			ParUtils.createParticle(Particles.SWEEP_ATTACK, loc, 1, 1, 1, 1, 1);
+		}
+		if (step<swapTime) {
 			loc.add(vel.clone().multiply(sp));
-			sp-= 0.01;
+			loc.setDirection(vel);
+			sp-= 0.04;
 			if (sp<0.1) {
 				sp = 0.1F;
 			}
-			
+			if (target != null && away != null)
 			loc.add(away.multiply(sp));
 		}
 		else {
 			if (target == null) {
+				Player nera = getNearestPlayer(caster,loc,10);
+				if (nera != null) {
+					if (target == null)
+						
+					target = nera;
+					
+				}
+				else {
+					dead = true;
+				}
 				
-				target = getNearestPlayer(caster,loc);
+			}
+			else {
+				Vector toTarget = target.getLocation().toVector().subtract(loc.toVector()).normalize();;
+				
+				loc.add(toTarget.multiply(sp));
+				loc.setDirection(toTarget);
+				sp+= 0.01;
+				if (sp>1) {
+					sp = 1F;
+				}
 			}
 			
-			Vector toTarget = target.getLocation().toVector().subtract(loc.toVector()).normalize();;
 			
-			loc.add(toTarget.multiply(sp));
-			
-			sp+= 0.01;
-			if (sp>1) {
-				sp = 1F;
-			}
 		}
 		
 		
@@ -120,8 +155,8 @@ public class Bubble extends Spell {
 
 	@Override
 	public void onDeath() {
-		ParUtils.createParticle(Particles.BUBBLE_POP, loc, 0, 0, 0, 1, 1);
-		
+		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 1, 1);
+		SoundUtils.playSound(Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, loc,2F,0.1F);
 	}
 	
 	public Vector lerp(Vector start, Vector end,double val) {

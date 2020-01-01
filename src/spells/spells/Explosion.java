@@ -22,14 +22,13 @@ public class Explosion extends Spell{
 		cooldown = 20*45;
 		hitSpell = true;
 		
-		casttime = 15;
+		casttime = 20;
 	}
 	
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		if (refined)
-			casttime = 0;
+		
 	}
 	
 	int s = 0;
@@ -38,18 +37,10 @@ public class Explosion extends Spell{
 		
 		// TODO Auto-generated method stub
 		loc = caster.getLocation();
-		SoundUtils.playSound(Sound.BLOCK_BAMBOO_HIT, loc, 1, 0.4F);
-		SoundUtils.playSound(Sound.BLOCK_LAVA_EXTINGUISH, loc, 1, 0.4F);
-		for (int i = 0;i<12;i++) {
-			s++;
-			Location l1 = ParUtils.stepCalcSpiral(loc, 9, new Vector(0,1,0),0, s*2);
-			Location l2 = ParUtils.stepCalcSpiral(loc, 9, new Vector(0,1,0),0,- s*2);
-			ParUtils.createParticle(Particles.LARGE_SMOKE, l1, 0.1F, 0.1F, 0.1F, 1, 0);
-			ParUtils.createParticle(Particles.LARGE_SMOKE, l2, 0.1F, 0.1F, 0.1F, 1, 0);
-			ParUtils.createParticle(Particles.FLAME, l1, 0F, 0F, 0F, 0, 5);
-			ParUtils.createParticle(Particles.FLAME, l2, 0F, 0F, 0F, 0, 5);
-		}
-		
+		SoundUtils.playSound(Sound.BLOCK_BAMBOO_HIT, loc, 1, 1F);
+		SoundUtils.playSound(Sound.BLOCK_LAVA_EXTINGUISH, loc, 1, 1F);
+		ParUtils.createFlyingParticle(Particles.LARGE_SMOKE, loc, 0, 0, 0, 1, 1, new Vector(0,1,0));
+		ParUtils.createFlyingParticle(Particles.FLAME, loc, 0, 0, 0, 1, 1, new Vector(0,1,0));
 	}
 
 	@Override
@@ -73,7 +64,7 @@ public class Explosion extends Spell{
 		caster.playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
 		for (LivingEntity le : caster.getWorld().getLivingEntities()) {
 			if (checkHit(le,loc,caster,6)) {
-				damage(le, 12, caster);
+				damage(le, 10, caster);
 				doKnockback(le, caster.getLocation(), 1);
 			}
 		}

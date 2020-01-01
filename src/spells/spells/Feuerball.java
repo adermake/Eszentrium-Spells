@@ -119,8 +119,8 @@ public class Feuerball extends Spell {
 	@Override
 	public void onSpellHit(Spell spell) {
 		// TODO Auto-generated method stub
-		
-		
+		if (spell.getName().contains("Antlitz der Göttin"))
+		dir = spell.caster.getLocation().getDirection();
 	}
 
 	@Override

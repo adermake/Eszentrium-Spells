@@ -26,7 +26,7 @@ public class Kätzchenkanone extends Spell {
 		name = "§6Kätzchenkanone";
 		cooldown = 20 * 20;
 		steprange = 70;
-
+		hitSpell = true;
 	}
 
 	@Override
@@ -83,7 +83,8 @@ public class Kätzchenkanone extends Spell {
 	@Override
 	public void onSpellHit(Spell spell) {
 		// TODO Auto-generated method stub
-
+		if (spell.getName().contains("Antlitz der Göttin"))
+			cat.setVelocity(spell.caster.getLocation().getDirection().multiply(2));
 	}
 
 	@Override

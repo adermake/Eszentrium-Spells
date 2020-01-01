@@ -21,7 +21,7 @@ public class Erdsurfer extends Spell {
 		speed = 1;
 		steprange = 0;
 		hitPlayer = false;
-		hitSpell = true;
+		
 		
 	}
 	@Override

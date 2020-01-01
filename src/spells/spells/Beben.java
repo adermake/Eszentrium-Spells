@@ -21,7 +21,7 @@ public class Beben extends Spell{
 		cooldown = 20*40;
 		hitEntity = true;
 		hitPlayer = true;
-		hitSpell = false;
+		hitSpell = true;
 		hitBlock = false;
 		hitboxSize = 3;
 		casttime = 20;
