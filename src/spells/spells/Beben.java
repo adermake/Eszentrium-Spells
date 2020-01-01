@@ -153,6 +153,7 @@ public class Beben extends Spell{
 	public void onSpellHit(Spell spell) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 	@Override
