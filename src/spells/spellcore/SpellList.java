@@ -25,7 +25,7 @@ import spells.spells.Explosion;
 import spells.spells.Feuerball;
 import spells.spells.Feuerwerkshelix;
 import spells.spells.Flucht;
-import spells.spells.Fuchstorpedo;
+import spells.spells.Delfintorpedo;
 import spells.spells.Heilen;
 import spells.spells.HimmlischesUrteil;
 import spells.spells.Hühnchenluftschlag;
@@ -57,6 +57,7 @@ import spells.spells.Schwerkraftsmanipulation;
 import spells.spells.SchwerterausLicht;
 import spells.spells.SiegelderFurcht;
 import spells.spells.SpeerderZwietracht;
+import spells.spells.Stich;
 import spells.spells.Teleport;
 import spells.spells.Thermolanze;
 import spells.spells.Vampirpilz;
@@ -193,9 +194,10 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Zaubersprung());
 		registerSpell(new Mondkugel());
 		registerSpell(new Feuerwerkshelix());
-		registerSpell(new Fuchstorpedo());
+		registerSpell(new Delfintorpedo());
 		registerSpell(new Knochenparty());
 		registerSpell(new Binden());
+		registerSpell(new Stich());
 	}
 	
 	public static void registerSpell(Spell spell, Class...gameTypes){

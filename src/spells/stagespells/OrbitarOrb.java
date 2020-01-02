@@ -87,7 +87,8 @@ public class OrbitarOrb extends Spell {
 		// TODO Auto-generated method stub
 		ParUtils.createParticle(Particles.EXPLOSION, loc, 0, 0, 0, 1, 0);
 		playSound(Sound.ENTITY_DRAGON_FIREBALL_EXPLODE,loc,1,1);
-		p.setVelocity(dir.multiply(speed/2));
+		//p.setVelocity(dir.multiply(speed/2));
+		doKnockback(p, caster.getLocation(), 1 );
 		damage(p, 2, caster);
 	}
 

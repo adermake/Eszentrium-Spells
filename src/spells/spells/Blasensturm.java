@@ -21,7 +21,7 @@ public class Blasensturm extends Spell{
 		speed =2;
 		
 		hitboxSize = 1;
-		cooldown = 20*40;
+		cooldown = 20*45;
 		hitSpell = true;
 		
 		

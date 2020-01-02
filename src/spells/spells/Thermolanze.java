@@ -1,6 +1,7 @@
 package spells.spells;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -53,7 +54,8 @@ public class Thermolanze extends Spell {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		
+		if (caster.getGameMode() == GameMode.ADVENTURE)
+			dead = true;
 		
 		Vector sub = caster.getLocation().getDirection().subtract(dirLoc.getDirection()).normalize().multiply(0.03);
 		
