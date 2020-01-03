@@ -436,6 +436,28 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 					case "info":
 						p.sendMessage(SaveUtils.getSaveEsze().toString());
 						return true;
+					case "sk":
+						if (args.length >= 2) {
+							String assembly = "";
+							for (int i = 1; i < args.length; i++) {
+								assembly += args[i] + " ";
+							}
+							assembly = assembly.substring(0,assembly.length()-1);
+							p.sendMessage("§7The Spell " + assembly + "§7 has a worth of " + SaveUtils.getSaveEsze().getSpellKills(p.getName(), assembly) + "§7%!");
+							return true;
+						}
+						return false;
+					case "sd":
+						if (args.length >= 2) {
+							String assembly = "";
+							for (int i = 1; i < args.length; i++) {
+								assembly += args[i] + " ";
+							}
+							assembly = assembly.substring(0,assembly.length()-1);
+							p.sendMessage("§7The Spell " + assembly + "§7 has a worth of " + SaveUtils.getSaveEsze().getSpellDeaths(p.getName(), assembly) + "§7%!");
+							return true;
+						}
+						return false;
 					/*
 					case "commit":
 						p.sendMessage("Commited Game!");

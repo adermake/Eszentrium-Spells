@@ -65,6 +65,7 @@ public class TypeSOLO extends Type {
 		Music.startRandomMusic();
 		
 		for (Player p : players) {
+				main.damageCause.remove(p);
 				main.damageCause.put(p, ""); //Reset damage Cause
 				SaveUtils.addPlayer(p.getName()); //Analytics
 				p.teleport(nextLoc());
@@ -89,6 +90,7 @@ public class TypeSOLO extends Type {
 	public void death(PlayerDeathEvent event) {
 		Player p = event.getEntity();
 		if (main.damageCause.get(p) == null) {
+			main.damageCause.remove(p);
 			main.damageCause.put(p, "");
 		}
 		
@@ -165,6 +167,9 @@ public class TypeSOLO extends Type {
 			
 			}
 			
+			for (Player winner : players) {
+				SaveUtils.setWinner(winner.getName());
+			}
 		if (won) {
 			for (Player winner : players) {
 				

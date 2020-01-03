@@ -89,6 +89,10 @@ public class SaveUtils {
 		save();
 	}
 	
+	public static void setWinner(String g) {
+		gme.setWinner(g);
+	}
+	
 	public static void reset() {
 		svgms = new SaveEsze();
 		save();

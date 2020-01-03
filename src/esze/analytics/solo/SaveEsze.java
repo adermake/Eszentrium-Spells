@@ -190,10 +190,10 @@ public class SaveEsze {
 			for (SavePlayer p : g.getMap().keySet()) {
 				if (p.getName().equals(name)) {
 					for (SaveSelection sele : p.getSelections()) {
-						if (sele.getChsp().equals(s)) {
+						if (sele != null && sele.getChsp() != null &&sele.getChsp().equals(s)) {
 							chosen++;
 						}
-						if (sele.getChoices().contains(s)) {
+						if (sele != null && sele.getChoices() != null && sele.getChoices().contains(s)) {
 							choice++;
 						}
 						

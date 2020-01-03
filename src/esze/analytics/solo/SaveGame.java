@@ -80,6 +80,28 @@ public class SaveGame {
 		}
 	}
 	
+	public void setWinner(String name) {
+		HashMap<SavePlayer, Integer> over = new HashMap<>();
+		for (SavePlayer p : map.keySet()) {
+			if (p.getName().equals(name)) {
+				over.put(p, 0);
+			} else if (map.get(p) == 0) {
+				int max = map.size()-1;
+				
+				while ((map.values().contains(max) || over.values().contains(max)) && max > 0) {
+					max -= 1;
+				}
+				if (max == 0) {
+					max = 1;
+				}
+				over.put(p, max);
+			} else {
+				over.put(p, map.get(p));
+			}
+		}
+		map = over;
+	}
+	
 	public void endGame() {
 		ArrayList<SavePlayer> sp = new ArrayList<SavePlayer>(); 
 		for (SavePlayer p : map.keySet()) {
