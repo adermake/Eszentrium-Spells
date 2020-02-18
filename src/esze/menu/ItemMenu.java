@@ -54,6 +54,19 @@ public abstract class ItemMenu {
 		
 	}
 	
+	public void addClickableItem(int gridX, int gridY, Material m, String iconname,ArrayList<String> l) {
+		
+		ItemMenuIcon is = new ItemMenuIcon(gridX,gridY,m,iconname,this);
+		ItemMeta im = is.getItemMeta();
+		
+		im.setLore(l);
+		is.setItemMeta(im);
+		inventory.setItem((gridY-1)*9+gridX-1, is);
+		
+		
+		
+	}
+	
 	public void addClickableItem(int gridX, int gridY, Material m, String iconname,String l,boolean enchanted) {
 		
 		ItemMenuIcon is = new ItemMenuIcon(gridX,gridY,m,iconname,this);
