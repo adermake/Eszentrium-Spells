@@ -22,10 +22,10 @@ public class SpellAnalyticsMenu extends ItemMenu {
 				continue;
 			}
 			ArrayList<String> lore = new ArrayList<String>();
-			lore.add( "Tötungen: "  + SaveUtils.getSaveEsze().getSpellKills(p.getName(), SaveUtils.rmColor(s.getName())) );
-			lore.add( "Tode: "  + SaveUtils.getSaveEsze().getSpellDeaths(p.getName(), SaveUtils.rmColor(s.getName())) );
-			lore.add( "Deine Pickrate: "  + SaveUtils.getSaveEsze().getSpellWorth(p.getName(), SaveUtils.rmColor(s.getName())) + "%" );
-			lore.add( "Metaichkeit: "  + SaveUtils.getSaveEsze().getWorth(SaveUtils.rmColor(s.getName())) + "%" );
+			//lore.add( "Tötungen: "  + SaveUtils.getSaveEsze().getSpellKills(p.getName(), SaveUtils.rmColor(s.getName())) );
+			//lore.add( "Tode: "  + SaveUtils.getSaveEsze().getSpellDeaths(p.getName(), SaveUtils.rmColor(s.getName())) );
+			//lore.add( "Deine Pickrate: "  + SaveUtils.getSaveEsze().getSpellWorth(p.getName(), SaveUtils.rmColor(s.getName())) + "%" );
+			//lore.add( "Metaichkeit: "  + SaveUtils.getSaveEsze().getWorth(SaveUtils.rmColor(s.getName())) + "%" );
 			addClickableItem(x, y, Material.BOOK, s.getName(), lore);
 			x++;
 			if (x>9) {
