@@ -1,6 +1,7 @@
 package esze.menu;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -39,7 +40,7 @@ public class ItemMenuIcon extends ItemStack {
 				}
 			}
 		}
-		catch(Exception e) {
+		catch(ConcurrentModificationException e) {
 			
 		}
 		

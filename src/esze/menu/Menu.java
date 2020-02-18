@@ -11,7 +11,7 @@ public class Menu implements Listener {
 
 	
 	@EventHandler
-	public void omMenu(InventoryClickEvent e) {
+	public void onMenu(InventoryClickEvent e) {
 		if(e == null)
 			return;
 		
