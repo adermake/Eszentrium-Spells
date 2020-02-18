@@ -22,7 +22,7 @@ public class AppClientSocket {
 		this.clientSocket = clientSocket;
 		this.server = server;
 		communicator = new AppCommunicator(this);
-		startListeningForMessages();
+		//startListeningForMessages(); Bug when Connection gets reset
 	}
 
 	public java.net.Socket getClientSocket() {
@@ -42,6 +42,7 @@ public class AppClientSocket {
 	}
 	
 	public void startListeningForMessages() {
+		/*
 		listeningThread = new Thread(new Runnable() {
 			
 			@Override
@@ -64,7 +65,7 @@ public class AppClientSocket {
 				}
 			}
 		});
-		listeningThread.start();
+		listeningThread.start();*/
 	}
 	
 	private String readMessage(java.net.Socket socket) throws IOException {
