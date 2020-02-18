@@ -48,11 +48,13 @@ public class SaveEsze {
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
 				for (SaveSelection sele : p.getSelections()) {
-					if (sele.getChsp().equals(s)) {
-						chosen++;
-					}
-					if (sele.getChoices().contains(s)) {
-						choice++;
+					if (sele != null) {
+						if (sele.getChsp().equals(s)) {
+							chosen++;
+						}
+						if (sele.getChoices().contains(s)) {
+							choice++;
+						}
 					}
 				}
 			}
