@@ -19,7 +19,7 @@ public class Schallbrecher extends Spell {
 	public Schallbrecher() {
 		name = "§bSchallbrecher";
 		cooldown = 20*18;
-		hitEntity = true;
+		hitEntity = false;
 		hitPlayer = true;
 		hitSpell = true;
 		hitBlock = false;

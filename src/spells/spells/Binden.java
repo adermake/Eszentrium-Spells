@@ -9,6 +9,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
@@ -103,6 +105,17 @@ public class Binden extends Spell {
 		}
 		
 		if (!standBy) {
+			if (ent1 != ent2) {
+				if (ent1 instanceof Player) {
+					Player e = (Player) ent1;
+					e.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 1, 10));
+				}
+				if (ent2 instanceof Player) {
+					Player e = (Player) ent2;
+					e.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 1, 10));
+				}
+			}
+			
 			ticker++;
 			if (ent1 == ent2) {
 				ent1.setVelocity(new Vector(0,0,0));

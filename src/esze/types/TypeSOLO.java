@@ -25,6 +25,7 @@ import esze.utils.Music;
 import esze.utils.PlayerUtils;
 import esze.utils.Title;
 import esze.voice.Discord;
+import weapons.WeaponMenu;
 
 
 public class TypeSOLO extends Type {
@@ -72,7 +73,8 @@ public class TypeSOLO extends Type {
 				p.setGameMode(GameMode.SURVIVAL);
 				p.getInventory().clear();
 			
-					p.getInventory().addItem(ItemStackUtils.attackSpeedify(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true)));
+				if (!WeaponMenu.items.containsKey(p))
+				p.getInventory().addItem(ItemStackUtils.attackSpeedify(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§cSchwert", null, true)));
 				
 				PlayerUtils.hidePlayer(p,100);
 				p.setNoDamageTicks(100);
@@ -81,6 +83,7 @@ public class TypeSOLO extends Type {
 				loc.put(p, p.getLocation());
 				lives.put(p, 4);
 			}
+		WeaponMenu.deliverItems();
 		setupJumpPad(currentmap);
 		new SoloScoreboard();
 		
@@ -111,6 +114,17 @@ public class TypeSOLO extends Type {
 
 	
 	public void loseLife(Player p) {
+		if (p == null)
+			return;
+		
+		if (!lives.containsKey(p)) {
+			Bukkit.broadcastMessage("§c[Error] Live List Bug detected!"); 
+			Bukkit.broadcastMessage("§c[Error] Canceling Lifeloss!"); 
+			
+			p.teleport(nextLoc());
+			return;
+		}
+			
 		lives.put(p, lives.get(p)-1);
 		p.setGameMode(GameMode.ADVENTURE);
 		p.setVelocity(new Vector(0,0,0));
@@ -121,7 +135,7 @@ public class TypeSOLO extends Type {
 		else {
 			
 			
-			PlayerUtils.hidePlayer(p,100);
+			PlayerUtils.hidePlayer(p,200);
 			p.setNoDamageTicks(100);
 			p.teleport(nextLoc());
 			SoloSpellMenu s;
@@ -184,10 +198,7 @@ public class TypeSOLO extends Type {
 			LobbyUtils.recallAll();
 			scoreboard.hide = true;
 			players.clear();
-			for (Player p : Bukkit.getOnlinePlayers()) {
-				p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
-				
-			}
+		
 			
 		}
 		

@@ -143,7 +143,9 @@ public class Feuerball extends Spell {
 		new Repulsion(5, 2, caster, loc, true, name);
 		
 		for (int i = 0;i<15;i++) {
-			loc.getWorld().spawnFallingBlock(loc, Material.FIRE, (byte) 0).setVelocity(new Vector(randInt(-3,3),randInt(-3,3),randInt(-3,3)).normalize().multiply(1.5));
+			
+			Vector vel = new Vector(randInt(-3,3),randInt(-3,3),randInt(-3,3)).add(new Vector(0,0.1,0));
+			loc.getWorld().spawnFallingBlock(loc, Material.FIRE, (byte) 0).setVelocity(vel.normalize().multiply(1.5));
 		}
 		callCollision(4);
 		if (f != null)

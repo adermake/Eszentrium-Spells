@@ -35,7 +35,7 @@ public class JumpPad implements ConfigurationSerializable{
 	
 	public void launch(Entity p) {
 		
-		
+		float mult = 1F;
 		if (type == JumpPadType.DIRECTIONAL && p instanceof Player) {
 			new BukkitRunnable() {
 				int t = 0;
@@ -44,7 +44,7 @@ public class JumpPad implements ConfigurationSerializable{
 					p.setVelocity(p.getVelocity().setY(0.5));
 					
 					if (((Player)p).isSneaking()) {
-						p.setVelocity(p.getLocation().getDirection().multiply(power));
+						p.setVelocity(p.getLocation().getDirection().multiply(power*mult));
 						jumpAnimation(p);
 						this.cancel();
 					}
@@ -56,10 +56,46 @@ public class JumpPad implements ConfigurationSerializable{
 		}
 		if (type == JumpPadType.UP) {
 			
-			p.setVelocity(p.getVelocity().setY(power));
+			p.setVelocity(p.getVelocity().setY(power*mult));
+			new BukkitRunnable() {
+				int i = 0;
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					i++;
+					if (i>5) {
+						this.cancel();
+					}
+					p.setVelocity(p.getVelocity().setY(power*mult));
+				}
+			}.runTaskTimer(main.plugin, 1, 1);
 			jumpAnimation(p);
 		}
 		
+		if (p instanceof Player) {
+			Player player = (Player) p;
+			JumpPadHandler.onCooldown.add(player);
+			
+			new BukkitRunnable() {
+				int time = (type == JumpPadType.UP) ? (int)(power * 35) : (int)(power * 35);
+				 
+				int t = 0;
+				@Override
+				public void run() {
+					
+					float a = time;
+					float b = t;
+					t++;
+					player.setExp(1-(b/a));
+					
+					if (t> time) {
+						
+						JumpPadHandler.onCooldown.remove(player);
+						this.cancel();
+					}
+				}
+			}.runTaskTimer(main.plugin, 1, 1);
+		}
 		
 	}
 	public void jumpAnimation(Entity p) {

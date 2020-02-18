@@ -18,8 +18,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import esze.main.main;
+import esze.menu.ColorTagSpellSelectionMenu;
+import esze.menu.SpellAnalyticsMenu;
 import esze.utils.MathUtils;
 import net.minecraft.server.v1_14_R1.ItemStack;
+import weapons.WeaponMenu;
 
 public class Interact implements Listener{
 	
@@ -77,37 +80,58 @@ public class Interact implements Listener{
 		Player p = e.getPlayer();
 		
 		if (e.getAction() == Action.RIGHT_CLICK_AIR ||e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			if (p.getInventory().getItemInMainHand() != null && p.getInventory().getItemInMainHand().hasItemMeta() && p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("§3Georg")) {
-				int randColor = MathUtils.randInt(0, main.colorTags.size());
-				int randSpech = MathUtils.randInt(0,4);
-				
-				String s = "Georg sagt: '" +main.colorTags.get(randColor);
-				
-				if (randSpech == 0) {
-					s+="Sei wie der letzte Keks in der Schüssel.";
+			if (p.getInventory().getItemInMainHand().getType() == Material.ARROW) {
+				e.setCancelled(true);
+			}
+			if (p.getInventory().getItemInMainHand() != null && p.getInventory().getItemInMainHand().hasItemMeta()) {
+				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("§cErbrochene Fragmente")) {
+					if (p.isSneaking()) {
+						p.openInventory(new ColorTagSpellSelectionMenu().getInventory());
+					}
 				}
-				if (randSpech == 1) {
-					s+="Führe das Leben wie eine Mutter im 19. Jahrhundert.";
-				}
-				if (randSpech == 2) {
-					s+="Der Sinn des Lebens ist wichtiger als die Frage selbst.";
-				}
-				if (randSpech == 3) {
-					s+="Führe ein Gespräch mit einer Giraffe. Sie könnte dein Leben bereichern.";
-				}
-				if (randSpech == 4) {
-					s+="Ein Spaziergang auf den Knien gibt dir eine neue Perspektive.";
-				}
+				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("§3Georg")) {
+					if (p.isSneaking()) {
+						p.openInventory(new ColorTagSpellSelectionMenu().getInventory());
+					}
+					else {
+						int randColor = MathUtils.randInt(0, main.colorTags.size()-1);
+						int randSpech = MathUtils.randInt(0,4);
+						
+						String s = "Georg sagt: '" +main.colorTags.get(randColor);
+						
+						if (randSpech == 0) {
+							s+="Sei wie der letzte Keks in der Schüssel.";
+						}
+						if (randSpech == 1) {
+							s+="Führe das Leben wie eine Mutter im 19. Jahrhundert.";
+						}
+						if (randSpech == 2) {
+							s+="Der Sinn des Lebens ist wichtiger als die Frage selbst.";
+						}
+						if (randSpech == 3) {
+							s+="Führe ein Gespräch mit einer Giraffe. Sie könnte dein Leben bereichern.";
+						}
+						if (randSpech == 4) {
+							s+="Ein Spaziergang auf den Knien gibt dir eine neue Perspektive.";
+						}
 
-				s+= "§r'";
+						s+= "§r'";
+						
+						p.sendMessage(s);
+						org.bukkit.inventory.ItemStack is = p.getInventory().getItemInMainHand();
+						is.setType(Material.PRISMARINE_CRYSTALS);
+						ItemMeta im = is.getItemMeta();
+						im.setDisplayName("§cErbrochene Fragmente");
+						is.setItemMeta(im);
+						p.getInventory().setItemInMainHand(is);
+					}
 				
-				p.sendMessage(s);
-				org.bukkit.inventory.ItemStack is = p.getInventory().getItemInMainHand();
-				is.setType(Material.PRISMARINE_CRYSTALS);
-				ItemMeta im = is.getItemMeta();
-				im.setDisplayName("§cErbrochene Fragmente");
-				is.setItemMeta(im);
-				p.getInventory().setItemInMainHand(is);
+				}
+				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("§3Arsenal")) {
+					WeaponMenu w = new WeaponMenu(p);
+					w.open(p);
+				}
+				
 				
 			}
 			if (p.isSneaking() && !p.getPassengers().isEmpty()) {

@@ -54,6 +54,8 @@ public class Zaubersprung extends Spell {
 
 	@Override
 	public void launch() {
+		if (dead)
+			return;
 		// TODO Auto-generated method stub
 		caster.teleport(block);
 		playSound(Sound.BLOCK_PORTAL_TRIGGER, caster.getLocation(), 1, 2);

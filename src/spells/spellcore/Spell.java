@@ -938,6 +938,11 @@ public abstract class Spell {
 	}
 	
 	
+	public int getCooldown() {
+		return cooldown;
+	}
+	
+	
 	// OVERRIDEABLES
 	
 	public Spell() {};

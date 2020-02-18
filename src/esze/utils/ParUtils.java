@@ -731,6 +731,30 @@ public class ParUtils {
 		
 	}
 	
+	public static void pullItemEffectVector(Location loc,Material m,int delay,Entity ent,double speed) {
+		
+		
+		ItemStack im = new ItemStack(m);
+		Item it = loc.getWorld().dropItem(loc, im);
+		
+		it.setPickupDelay(1000+delay);
+	
+	
+	new BukkitRunnable() {
+		int t = 0;
+		public void run() {
+			
+			t++;
+			it.setVelocity(ent.getLocation().toVector().subtract(it.getLocation().toVector()).normalize().multiply(speed));
+			if (t>delay || it.getLocation().distance(ent.getLocation())<0.3) {
+				this.cancel();
+				it.remove();
+			}
+		}
+	}.runTaskTimer(main.plugin, 1,1);
+	
+}
+	
 	public static void debugRay(Location locC) {
 		Location loc = locC.clone();
 		for (double t = 1; t <= 10; t=t+0.5) {

@@ -1,8 +1,10 @@
-package esze.listeners;
+package weapons;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.UUID;
+
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -30,36 +32,143 @@ import org.bukkit.util.Vector;
 
 import com.google.common.collect.Multimap;
 
+
 import esze.enums.GameType;
 import esze.main.main;
 import esze.players.PlayerAPI;
+import esze.utils.Actionbar;
+import esze.utils.ItemStackUtils;
+import esze.utils.NBTUtils;
+import esze.utils.ParUtils;
+import esze.utils.SoundUtils;
 import net.minecraft.server.v1_14_R1.AttributeModifier;
 import net.minecraft.server.v1_14_R1.EnumItemSlot;
 import net.minecraft.server.v1_14_R1.GenericAttributes;
+import net.minecraft.server.v1_14_R1.NBTTagCompound;
+import net.minecraft.server.v1_14_R1.NBTTagInt;
+import net.minecraft.server.v1_14_R1.NBTTagList;
+import net.minecraft.server.v1_14_R1.NBTTagString;
+import net.minecraft.server.v1_14_R1.Particles;
+import spells.spellcore.Spell;
+import spells.stagespells.BowArrow;
 
-public class Schwertwurf implements Listener {
+public class WeaponAbilitys implements Listener {
 
-	public static ArrayList<Player> sword = new ArrayList<Player>();
-
+	public static ArrayList<Player> cd = new ArrayList<Player>();
+	public static HashMap<Player,Integer> charge1 = new HashMap<Player,Integer>();
+	public static HashMap<Player,Integer> charge2 = new HashMap<Player,Integer>();
+	public static HashMap<Player,String> lastLaunched = new HashMap<Player,String>();
+	
 	@EventHandler
-	public void onSwordLaunch(PlayerInteractEvent e) {
+	public void onWeaponUse(PlayerInteractEvent e) {
 		final Player p = e.getPlayer();
-		if (sword.contains(p)) {
-			return;
-		}
+		
 		EquipmentSlot hand = e.getHand();
 		if (hand != null && !hand.equals(EquipmentSlot.HAND))
 			return;
+		
+		
+		
+		
+		//SPHERE
+		if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			if (p.getInventory().getItemInMainHand().getType() == Material.HEART_OF_THE_SEA) {
+				if (lastLaunched.containsKey(p)) {
+					if (cd.contains(p))
+						return;
+					try {
+						String name = lastLaunched.get(p);
+						Class clazz = Class.forName(name);
+						Spell sp = (Spell) clazz.newInstance();
+						sp.castSpell(p, sp.getName());
+						cd.add(p);
+						
+						new BukkitRunnable() {
+							int sec = 0;
+							int cooldown = sp.getCooldown();
+							@Override
+							public void run() {
+								sec++;
+								new Actionbar("§bFokussphäre: §e"+(cooldown/20-sec)+" Sekunden").send(p);
+								if (sec*20 >= cooldown || !WeaponMenu.running) {
+									cd.remove(p);
+									new Actionbar("").send(p);
+									this.cancel();
+								}
+								
+								// TODO Auto-generated method stub
+								
+							}
+						}.runTaskTimer(main.plugin, 0,20);
+						
+						
+
+					} catch (Exception ex) {
+						//ex.printStackTrace(System.out);
+						p.sendMessage("Spell is not vaild!");
+					}
+					;
+				}
+				
+			}
+			
+		}
+		
+		//BOW 
+		if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			if (p.getInventory().getItemInMainHand().getType() == Material.BOW) {
+				if (charge2.containsKey(p) && charge2.get(p)>0) {
+					charge2.put(p, charge2.get(p)-1);
+					
+					new BowArrow(p, p.getEyeLocation(), "§cBogen");
+				}
+			}
+			
+		}
+		
+		
+		/*
+		if (e.getAction() == Action.LEFT_CLICK_AIR && p.isSneaking() || e.getAction() == Action.LEFT_CLICK_BLOCK && p.isSneaking()) {
+			if (p.getInventory().getItemInMainHand().getType() == Material.BOW && p.isSneaking()) {
+				p.setVelocity(p.getLocation().getDirection().multiply(-2));
+				SoundUtils.playSound(Sound.ENTITY_WITHER_SHOOT, p.getLocation(),2,5);
+				ParUtils.createParticle(Particles.CLOUD, p.getLocation(), 0, 0, 0, 11, 2);
+				cd.add(p);
+				new BukkitRunnable() {
+					int t = 0;
+
+					public void run() {
+						t = t + 1;
+						if (t > 10) {
+							cd.remove(p);
+							p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_DIAMOND, 1, (float) 0.9);
+							this.cancel();
+						}
+
+					}
+				}.runTaskTimerAsynchronously(main.plugin, 20, 20);
+			}
+		}
+		*/
+		
+		
+		
+		//SWORD
 		if (e.getAction() == Action.RIGHT_CLICK_AIR && p.isSneaking() || e.getAction() == Action.RIGHT_CLICK_BLOCK && p.isSneaking()) {
 			if (p.getInventory().getItemInMainHand().getType() == Material.WOODEN_SWORD) {
-				sword.add(p);
+				
+				if (cd.contains(p)) {
+					return;
+				}
+				
+				cd.add(p);
 				new BukkitRunnable() {
 					int t = 0;
 
 					public void run() {
 						t = t + 1;
 						if (t > 100) {
-							sword.remove(p);
+							cd.remove(p);
 							p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_DIAMOND, 1, (float) 0.9);
 							this.cancel();
 						}
@@ -244,6 +353,13 @@ public class Schwertwurf implements Listener {
         }
         return attackDamage;
    
+	}
+	
+	public static void clearLists() {
+		lastLaunched.clear();
+		cd.clear();
+		charge1.clear();
+		charge2.clear();
 	}
 
 }

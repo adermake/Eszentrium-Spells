@@ -42,6 +42,7 @@ import esze.voice.Discord;
 import spells.spellcore.DamageCauseContainer;
 import spells.spellcore.Spell;
 import spells.spellcore.Spelldrop;
+import weapons.WeaponMenu;
 
 
 public class TypeTTT extends Type{
@@ -153,10 +154,11 @@ public class TypeTTT extends Type{
 			p.setGameMode(GameMode.SURVIVAL);
 			p.getInventory().clear();
 			p.setLevel(0);
-			p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§eHolz-Schwert", null, true));
+			if (!WeaponMenu.items.containsKey(p))
+			p.getInventory().addItem(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§cSchwert", null, true));
 			
 		}
-		
+		WeaponMenu.deliverItems();
 		//<
 		for(int i = 0; i<players.size(); i++){
 			spawnNewSpell();
@@ -452,10 +454,7 @@ public class TypeTTT extends Type{
 			scoreboard.hide = true;
 			gameOver = true;
 			players.clear();
-			for (Player p : Bukkit.getOnlinePlayers()) {
-				p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
-				p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Georg", null, true));
-			}
+			
 		}
 		
 		

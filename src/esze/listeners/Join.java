@@ -36,7 +36,8 @@ public class Join implements Listener{
 			p.getInventory().clear();
 		}
 		p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
-		p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Georg", null, true));
+		p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.CHEST, 1, 0, "§3Arsenal", null, true));
+		p.getInventory().setItem(6, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Georg", null, true));
 		if(Gamestate.getGameState() == Gamestate.LOBBY){
 			//p.teleport((Location) main.plugin.getConfig().get("lobby.loc"));
 			e.setJoinMessage("§8> §3" + p.getName() + " §7ist beigetreten.");

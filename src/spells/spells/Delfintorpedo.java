@@ -118,10 +118,10 @@ public class Delfintorpedo extends Spell {
 		if (!ent.isDead())
 		ent.remove();
 		if (refined) {
-			new Explosion(6, 13, 5, 0, caster, loc, name);
+			new Explosion(6, 10, 5, 0, caster, loc, name);
 		}
 		else {
-			new Explosion(6, 8, 4, 0, caster, loc, name);
+			new Explosion(6, 6, 4, 0, caster, loc, name);
 		}
 		
 	}

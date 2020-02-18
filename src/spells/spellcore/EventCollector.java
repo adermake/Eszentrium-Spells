@@ -32,6 +32,7 @@ import esze.utils.Actionbar;
 import esze.utils.NBTUtils;
 import esze.utils.SoundUtils;
 import net.minecraft.server.v1_14_R1.PacketPlayOutSetCooldown;
+import weapons.WeaponAbilitys;
 
 public class EventCollector implements Listener {
 
@@ -94,6 +95,10 @@ public class EventCollector implements Listener {
 							if(sp.castSpell(p, is.getItemMeta().getDisplayName())) {
 								is = NBTUtils.setNBT("Cooldown", "" + "0"+ "", is);
 							}
+							
+							if (!sp.traitorSpell)
+							WeaponAbilitys.lastLaunched.put(p, name);
+							
 							if (sp.traitorSpell && !sp.refund) {
 								
 								is = NBTUtils.setNBT("Burn","true", is);
@@ -132,6 +137,8 @@ public class EventCollector implements Listener {
 								is = NBTUtils.setNBT("Cooldown", "" + "0"+ "", is);
 							}
 							
+							if (!sp.traitorSpell)
+							WeaponAbilitys.lastLaunched.put(p, name);
 
 							if (sp.traitorSpell&& !sp.refund) {
 								

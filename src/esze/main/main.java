@@ -36,7 +36,6 @@ import esze.enums.Gamestate;
 import esze.listeners.Block;
 import esze.listeners.CancelClick;
 import esze.listeners.Chat;
-import esze.listeners.Damage;
 import esze.listeners.Death;
 import esze.listeners.DropPickup;
 import esze.listeners.Emerald;
@@ -44,9 +43,9 @@ import esze.listeners.FBoost;
 import esze.listeners.Hunger;
 import esze.listeners.Interact;
 import esze.listeners.Join;
+import esze.listeners.Launch;
 import esze.listeners.Move;
 import esze.listeners.Reconnect;
-import esze.listeners.Schwertwurf;
 import esze.listeners.Spawn;
 import esze.map.JumpPad;
 import esze.map.JumpPadHandler;
@@ -68,6 +67,8 @@ import spells.spellcore.Cooldowns;
 import spells.spellcore.EventCollector;
 import spells.spellcore.SpellList;
 import spells.spellcore.Spelldrop;
+import weapons.Damage;
+import weapons.WeaponAbilitys;
 
 public class main extends JavaPlugin {
 	
@@ -140,7 +141,7 @@ public class main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Spawn(), this);
 		getServer().getPluginManager().registerEvents(new Hunger(), this);
 		getServer().getPluginManager().registerEvents(new Interact(), this);
-		getServer().getPluginManager().registerEvents(new Schwertwurf(), this);
+		getServer().getPluginManager().registerEvents(new WeaponAbilitys(), this);
 		getServer().getPluginManager().registerEvents(new FBoost(), this);
 		getServer().getPluginManager().registerEvents(new CancelClick(), this);
 		getServer().getPluginManager().registerEvents(new Block(), this);
@@ -155,6 +156,7 @@ public class main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Music(), this);
 		getServer().getPluginManager().registerEvents(new Chat(), this);
 		getServer().getPluginManager().registerEvents(new Reconnect(), this);
+		getServer().getPluginManager().registerEvents(new Launch(), this);
 		TTTFusion.start();
 		
 		PacketListner.registerPackets();
@@ -192,8 +194,13 @@ public class main extends JavaPlugin {
 				p.getInventory().clear();
 				p.teleport(new Location(Bukkit.getWorld("world"), 0, 105, 0));// teleport into Lobby
 			}
-			p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
-			p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Georg", null, true));
+			
+				p.getInventory().setItem(8, ItemStackUtils.createItemStack(Material.MAP, 1, 0, "§3Map wählen", null, true));
+				p.getInventory().setItem(7, ItemStackUtils.createItemStack(Material.CHEST, 1, 0, "§3Arsenal", null, true));
+				p.getInventory().setItem(6, ItemStackUtils.createItemStack(Material.DIAMOND, 1, 0, "§3Georg", null, true));
+				
+				
+			
 		}
 		
 		

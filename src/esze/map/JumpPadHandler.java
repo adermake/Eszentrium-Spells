@@ -19,7 +19,7 @@ public class JumpPadHandler implements Listener{
 
 	
 	public static ArrayList<JumpPad> jumpPads = new ArrayList<JumpPad>();
-	
+	public static ArrayList<Player> onCooldown =  new ArrayList<Player>();
 	
 	public static void start(){
 		Bukkit.getScheduler().runTaskTimer(main.plugin, new Runnable() {
@@ -38,7 +38,12 @@ public class JumpPadHandler implements Listener{
 	
 	@EventHandler
 	public void onMove(PlayerMoveEvent e){
+		
 		Player p = e.getPlayer();
+		if (onCooldown.contains(p))
+			return;
+		
+		
 		checkJumpPads(p);
 	}
 	

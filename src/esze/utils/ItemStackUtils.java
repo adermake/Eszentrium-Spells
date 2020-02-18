@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -13,6 +15,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
 import net.minecraft.server.v1_14_R1.NBTTagDouble;
 import net.minecraft.server.v1_14_R1.NBTTagInt;
+import net.minecraft.server.v1_14_R1.NBTTagList;
 import net.minecraft.server.v1_14_R1.NBTTagString;
 
 public class ItemStackUtils {
@@ -50,7 +53,9 @@ public class ItemStackUtils {
 	}
 	
 	public static ItemStack attackSpeedify(ItemStack is) {
-		NBTTagCompound speed = new NBTTagCompound();
+		net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(is);
+        NBTTagCompound speed = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
+		
 		speed.set("AttributeName", new NBTTagString("generic.attackSpeed"));
 		speed.set("Name", new NBTTagString("generic.attackSpeed"));
 		speed.set("Amount", new NBTTagDouble(0));
@@ -62,6 +67,39 @@ public class ItemStackUtils {
 		
 		return NBTUtils.setNBT(speed, is);
 	}
+	
+	public static ItemStack attackDamage(ItemStack is,int dmg) {
+	
+		  
+	      
+        net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(is);
+        NBTTagCompound compound = nmsStack.getTag();
+        if (compound == null) {
+           compound = new NBTTagCompound();
+            nmsStack.setTag(compound);
+            compound = nmsStack.getTag();
+        }
+        NBTTagList modifiers = new NBTTagList();
+        NBTTagCompound damage = new NBTTagCompound();
+        damage.set("AttributeName", new NBTTagString("generic.attackDamage"));
+        damage.set("Name", new NBTTagString("generic.attackDamage"));
+        damage.set("Amount", new NBTTagInt(dmg));
+        damage.set("Slot", new NBTTagString("mainhand"));
+        damage.set("Operation", new NBTTagInt(0));
+        damage.set("UUIDLeast", new NBTTagInt(894654));
+        damage.set("UUIDMost", new NBTTagInt(2872));
+        modifiers.add(damage);
+        compound.set("AttributeModifiers", modifiers);
+        nmsStack.setTag(compound);
+        is = CraftItemStack.asBukkitCopy(nmsStack);
+      
+         
+		
+		
+		
+		return is;
+	}
+	
 	
 	public static ItemStack createSpell(String name) {
 		ItemStack is = new ItemStack(Material.ENCHANTED_BOOK);
