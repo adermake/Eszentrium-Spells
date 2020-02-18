@@ -27,7 +27,7 @@ public class ColorTagSpellSelectionMenu extends ItemMenu{
 		else {
 			String tag = icon.getName().substring(0,2);
 			p.closeInventory();
-			p.openInventory(new SpellAnalyticsMenu(tag).getInventory());
+			p.openInventory(new SpellAnalyticsMenu(tag,p).getInventory());
 		}
 		
 	}
