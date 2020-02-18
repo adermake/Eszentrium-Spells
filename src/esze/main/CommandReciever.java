@@ -39,6 +39,7 @@ import esze.map.JumpPad;
 import esze.map.JumpPad.JumpPadType;
 import esze.map.JumpPadHandler;
 import esze.map.MapMenu;
+import esze.menu.ColorTagSpellSelectionMenu;
 import esze.menu.SoloAnalyticsMenu;
 import esze.utils.MathUtils;
 import esze.utils.NBTUtils;
@@ -431,6 +432,14 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 							return true;
 						} else {
 							p.sendMessage("§7The Spell "+ SaveUtils.getSaveEsze().getFavSpell() + "§7 is the most used Spell!");
+							return true;
+						}
+					case "spellmenu":
+						if (args.length >= 2) {
+							new ColorTagSpellSelectionMenu(args[1]).open(p);
+							return true;
+						} else {
+							new ColorTagSpellSelectionMenu(p.getName()).open(p);;
 							return true;
 						}
 					case "info":

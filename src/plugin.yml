@@ -68,7 +68,7 @@ commands:
     usage: 
   analytics:
     description: Shows Stats
-    usage: /analytics [wins/losses/worth] spell
+    usage: /analytics [stats/spellmenu] name
   playrandomsound:
     description: plays random sound
     usage: /playrandomsound

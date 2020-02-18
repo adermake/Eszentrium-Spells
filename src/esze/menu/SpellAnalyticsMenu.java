@@ -12,7 +12,7 @@ import spells.spellcore.SpellList;
 
 public class SpellAnalyticsMenu extends ItemMenu {
 
-	public SpellAnalyticsMenu(String colorTag,Player p) {
+	public SpellAnalyticsMenu(String colorTag,String p) {
 		super(6,colorTag+"Spells    ");
 		// TODO Auto-generated constructor stub
 		int x = 1;
@@ -24,9 +24,9 @@ public class SpellAnalyticsMenu extends ItemMenu {
 			ArrayList<String> lore = new ArrayList<String>();
 			String number = "§e";
 			String text = "§r";
-			lore.add( text + "Tötungen: "  					+ number + cut(SaveUtils.getSaveEsze().getSpellKills(p.getName(), SaveUtils.rmColor(s.getName())) ) );
-			lore.add( text + "Tode: "  						+ number + cut(SaveUtils.getSaveEsze().getSpellDeaths(p.getName(), SaveUtils.rmColor(s.getName())) ) );
-			lore.add( text + "Deine Auswahlrate: "  		+ number + cut(SaveUtils.getSaveEsze().getSpellWorth(p.getName(), SaveUtils.rmColor(s.getName())) ) + "%" );
+			lore.add( text + "Tötungen: "  					+ number + ( (int) SaveUtils.getSaveEsze().getSpellKills(p, SaveUtils.rmColor(s.getName())) ) );
+			lore.add( text + "Tode: "  						+ number + ( (int) SaveUtils.getSaveEsze().getSpellDeaths(p, SaveUtils.rmColor(s.getName())) ) );
+			lore.add( text + "Deine Auswahlrate: "  		+ number + cut(SaveUtils.getSaveEsze().getSpellWorth(p, SaveUtils.rmColor(s.getName())) ) + "%" );
 			lore.add( text + "Allgemeine Auswahlrate: "  	+ number + cut(SaveUtils.getSaveEsze().getWorth(SaveUtils.rmColor(s.getName())) ) + "%" );
 			addClickableItem(x, y, Material.BOOK, s.getName(), lore);
 			x++;
@@ -54,7 +54,7 @@ public class SpellAnalyticsMenu extends ItemMenu {
 		String s = "" + d;
 		int max = 4;
 		if (s.length() > max) {
-			s.subSequence(0, max);
+			s = s.subSequence(0, max).toString();
 		}
 		return s;
 	}

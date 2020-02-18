@@ -5,8 +5,11 @@ import org.bukkit.entity.Player;
 
 public class ColorTagSpellSelectionMenu extends ItemMenu{
 
-	public ColorTagSpellSelectionMenu() {
+	private String player;
+	
+	public ColorTagSpellSelectionMenu(String p) {
 		super(1,"Spells :-)");
+		player = p;
 		// TODO Auto-generated constructor stub
 		addClickableItem(1, 1, Material.ARROW, "§eProjektilzauber");
 		addClickableItem(2, 1, Material.ELYTRA, "§bMobilitätszauber");
@@ -27,7 +30,7 @@ public class ColorTagSpellSelectionMenu extends ItemMenu{
 		else {
 			String tag = icon.getName().substring(0,2);
 			p.closeInventory();
-			p.openInventory(new SpellAnalyticsMenu(tag,p).getInventory());
+			p.openInventory(new SpellAnalyticsMenu(tag,player).getInventory());
 		}
 		
 	}

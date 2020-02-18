@@ -86,12 +86,12 @@ public class Interact implements Listener{
 			if (p.getInventory().getItemInMainHand() != null && p.getInventory().getItemInMainHand().hasItemMeta()) {
 				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("§cErbrochene Fragmente")) {
 					if (p.isSneaking()) {
-						p.openInventory(new ColorTagSpellSelectionMenu().getInventory());
+						p.openInventory(new ColorTagSpellSelectionMenu(p.getName()).getInventory());
 					}
 				}
 				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("§3Georg")) {
 					if (p.isSneaking()) {
-						p.openInventory(new ColorTagSpellSelectionMenu().getInventory());
+						p.openInventory(new ColorTagSpellSelectionMenu(p.getName()).getInventory());
 					}
 					else {
 						int randColor = MathUtils.randInt(0, main.colorTags.size()-1);
