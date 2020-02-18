@@ -23,7 +23,7 @@ public class SpellAnalyticsMenu extends ItemMenu {
 			}
 			ArrayList<String> lore = new ArrayList<String>();
 			String number = "§e";
-			String text = "§r";
+			String text = "§7";
 			lore.add( text + "Tötungen: "  					+ number + ( (int) SaveUtils.getSaveEsze().getSpellKills(p, SaveUtils.rmColor(s.getName())) ) );
 			lore.add( text + "Tode: "  						+ number + ( (int) SaveUtils.getSaveEsze().getSpellDeaths(p, SaveUtils.rmColor(s.getName())) ) );
 			lore.add( text + "Deine Auswahlrate: "  		+ number + cut(SaveUtils.getSaveEsze().getSpellWorth(p, SaveUtils.rmColor(s.getName())) ) + "%" );
