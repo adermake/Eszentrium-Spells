@@ -176,6 +176,9 @@ public class SaveUtils {
 		for (String tag : main.colorTags) {
 			s = s.replace(tag, "");
 		}
+		
+		s = s.replace(" ", "");
+		
 		s = s.replace("ä", "ae");
 		s = s.replace("Ä", "Ae");
 		s = s.replace("ö", "oe");
