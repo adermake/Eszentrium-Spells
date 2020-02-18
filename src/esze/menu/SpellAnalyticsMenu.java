@@ -17,6 +17,7 @@ public class SpellAnalyticsMenu extends ItemMenu {
 		for (Spell s : SpellList.spells.keySet()) {
 			if (!s.getName().contains(colorTag))
 				continue;
+			
 			addClickableItem(x, y, Material.BOOK, s.getName());
 			x++;
 			if (x>9) {
