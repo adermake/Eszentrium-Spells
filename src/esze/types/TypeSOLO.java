@@ -40,6 +40,14 @@ public class TypeSOLO extends Type {
 	public void runEverySecond() {
 		for (Player p : players) {
 			if (p.getLocation().getY()<60 && p.getGameMode() == GameMode.SURVIVAL) {
+				if (main.damageCause.get(p) == null) {
+					main.damageCause.put(p, "");
+				}
+				if (main.damageCause.get(p).equals("")) {
+					main.damageCause.put(p, main.voiddamage);
+				} else if (!main.damageCause.get(p).endsWith(main.voiddamage)){
+					main.damageCause.put(p, main.damageCause.get(p) + "-" + main.voiddamage);
+				}
 				p.damage(p.getHealth());
 			}
 			
