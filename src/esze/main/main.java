@@ -181,7 +181,7 @@ public class main extends JavaPlugin {
 		LibUtils.initlibs();
 		
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			main.damageCause.put(p, ""); //Damage Cause
+			main.damageCause.put(p, "unknown"); //Damage Cause
 			p.setExp(0F);
 			p.setLevel(0);
 			p.setFoodLevel(20);
@@ -323,19 +323,30 @@ public class main extends JavaPlugin {
 		String[] in = main.damageCause.get(p).split("-");
 		String color = "§7";
 		//Analysis 
+		if (in.length == 0) {
+			color = "ERROR:::";
+		} else 
 		if (in.length == 1) {
 			if (in[0].equals("")) {
+				color += p.getName() + " ERRORED TO DEATH!"; //no Cause old
+			} else 
+			if (in[0].equals("unknown")) {
 				color += p.getName() + " starb!"; //no Cause
-			}
+			} else 
 			if (in[0].equals(voiddamage)) {
 				color += p.getName() + " fiel ins Void!"; //Void
+			} else {
+			
+			color += p.getName() + " ERRORED TO DEATH! ("+ in[0] + ")"; 
 			}
-		}
+		} else 
 		if (in.length == 2) {
 			color += p.getName() + " wurde durch " + in[1] + " mit " + in[0] + " getötet!"; //Cause+Player
-		}
+		} else 
 		if (in.length == 3) {
 			color += p.getName() + " wurde durch " + in[1] + " mit " + in[0] + " ins Void geworfen!"; //Cause+Player+void
+		} else {
+			color = main.damageCause.get(p);
 		}
 		return color;
 	}

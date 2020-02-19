@@ -67,7 +67,7 @@ public class TypeSOLO extends Type {
 		
 		for (Player p : players) {
 				main.damageCause.remove(p);
-				main.damageCause.put(p, ""); //Reset damage Cause
+				main.damageCause.put(p, "unknown"); //Reset damage Cause
 				SaveUtils.addPlayer(p.getName()); //Analytics
 				p.teleport(nextLoc());
 				p.setGameMode(GameMode.SURVIVAL);
@@ -92,9 +92,10 @@ public class TypeSOLO extends Type {
 	@Override
 	public void death(PlayerDeathEvent event) {
 		Player p = event.getEntity();
+		
 		if (main.damageCause.get(p) == null) {
 			main.damageCause.remove(p);
-			main.damageCause.put(p, "");
+			main.damageCause.put(p, "unknown");
 		}
 		
 		if(!spectator.contains(p)) {
@@ -104,8 +105,11 @@ public class TypeSOLO extends Type {
 				rec.sendMessage(out);
 			}
 			SaveUtils.addPlayerDeath(p.getName(), main.damageCause.get(p)); //Analytics 
+		} else {
+			p.sendMessage("STOP DIEING!");
 		}
-		main.damageCause.put(p, "");
+		
+		main.damageCause.put(p, "unknown");
 		p.setVelocity(new Vector(0, 0, 0));
 		
 		loseLife(p);
