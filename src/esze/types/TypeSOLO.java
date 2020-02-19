@@ -84,6 +84,7 @@ public class TypeSOLO extends Type {
 				lives.put(p, 4);
 			}
 		WeaponMenu.deliverItems();
+		spectator.clear();
 		setupJumpPad(currentmap);
 		new SoloScoreboard();
 		
