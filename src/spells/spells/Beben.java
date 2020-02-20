@@ -37,15 +37,21 @@ public class Beben extends Spell{
 		
 	}
 
+	double height = 0;
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		
+		height = caster.getLocation().getY();
+		caster.setVelocity(caster.getVelocity().add(new Vector(0,-6,0)));
 	}
 
 	@Override
 	public void cast() {
 		if (caster.isOnGround() == true) {
+			height = height-caster.getLocation().getY();
+			if (height < 2)
+				height = 2;
+			
 			cast = casttime;
 			if (refined)
 			steprange= steprange*2;
@@ -134,7 +140,7 @@ public class Beben extends Spell{
 	public void onPlayerHit(Player p) {
 		damage(p,6,caster);
 		
-		doKnockback(p, caster.getLocation(), 3+steprange/5);
+		doKnockback(p, caster.getLocation(), 1+height/10);
 		p.setVelocity(p.getVelocity().setY(1.0D));
 		
 
@@ -144,7 +150,8 @@ public class Beben extends Spell{
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
-		doKnockback(ent, caster.getLocation(), 3+steprange/5);
+		damage(ent,6,caster);
+		doKnockback(ent, caster.getLocation(), 1+height/10);
 		ent.setVelocity(ent.getVelocity().setY(1.0D));
 		
 	}

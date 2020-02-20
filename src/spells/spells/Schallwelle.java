@@ -14,8 +14,8 @@ public class Schallwelle extends Spell{
 	public Schallwelle() {
 		cooldown = 20*10;
 		name = "§eSchallwelle";
-		speed = 1;
-		steprange =30;
+		speed = 3;
+		steprange =42;
 		hitPlayer = true;
 		hitSpell = true;
 		
@@ -26,8 +26,8 @@ public class Schallwelle extends Spell{
 	public void setUp() {
 		// TODO Auto-generated method stub
 		if (refined) {
-			steprange *=2;
-			speed = 4;
+			steprange *=8;
+			speed = 6;
 		}
 	}
 

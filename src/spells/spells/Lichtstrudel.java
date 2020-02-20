@@ -16,7 +16,7 @@ import spells.spellcore.Spell;
 public class Lichtstrudel extends Spell {
 
 	public Lichtstrudel() {
-		cooldown = 20 * 55;
+		cooldown = 20 * 45;
 		name = "§cLichtstrudel";
 		steprange = 100;
 		
@@ -116,7 +116,7 @@ public void dot(Location la,Location to,Player p,int time ) {
 				t--;
 				ParUtils.createParticle(Particles.END_ROD, l, 0, 0,0,0, 0);
 				for (LivingEntity le : p.getWorld().getLivingEntities()) {
-					if (checkHit(le,l,p,2)) {
+					if (checkHit(le,l,p,3)) {
 						doPull(le, too,1);
 					}
 				}

@@ -18,6 +18,7 @@ public class Orbitar extends Spell {
 		cooldown = 20 * 60;
 		steprange = 20 * 4;
 		
+		
 	}
 	
 	@Override

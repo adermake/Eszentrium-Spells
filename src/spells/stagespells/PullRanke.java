@@ -9,6 +9,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import spells.spellcore.Spell;
@@ -57,6 +59,10 @@ public class PullRanke extends Spell {
 	
 	@Override
 	public void move() {
+		if (victim instanceof LivingEntity) {
+			LivingEntity ent = (LivingEntity) victim;
+			ent.addPotionEffect(new PotionEffect(PotionEffectType.POISON,20,3));
+		}
 		if (backstep>10) {
 			playSound(Sound.ENTITY_LEASH_KNOT_BREAK, loc, 5, 1);
 			blocks.get(backstep-10).setVelocity(path.get(backstep-10).clone().multiply(-1));

@@ -20,7 +20,7 @@ public class Mondkugel extends Spell {
 	
 	ArrayList<Entity> hit = new ArrayList<Entity>();
 	public Mondkugel() {
-		cooldown = 43 * 20;
+		cooldown = 28 * 20;
 		name = "§cMondkugel";
 		steprange = 50;
 		

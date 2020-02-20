@@ -104,7 +104,7 @@ public class Feuerball extends Spell {
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		damage(p, 5, caster);
-		doKnockback(p,loc,2);
+		doKnockback(p,loc,1);
 		
 	}
 
@@ -112,7 +112,7 @@ public class Feuerball extends Spell {
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		damage(ent, 5, caster);
-		doKnockback(ent,loc,2);
+		doKnockback(ent,loc,1);
 		
 	}
 

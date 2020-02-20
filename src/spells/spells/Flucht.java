@@ -108,7 +108,7 @@ public class Flucht extends Spell{
 	public LivingEntity bat(final Player p,boolean refined) {
 		
 		final Bat bat = (Bat) p.getWorld().spawnEntity(p.getLocation(), EntityType.BAT);
-		
+		unHittable.add(bat);
 		
 		
 	

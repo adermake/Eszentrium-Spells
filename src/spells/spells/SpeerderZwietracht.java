@@ -140,9 +140,9 @@ public class SpeerderZwietracht  extends Spell{
 		step = 0;
 		speed = 1;
 		if (refined) {
-			steprange = 240;
+			steprange = 170;
 		}else {
-			steprange = 140;
+			steprange = 60;
 		}
 		
 		hasHitBlock = true;

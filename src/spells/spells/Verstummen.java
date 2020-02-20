@@ -72,7 +72,7 @@ public class Verstummen extends Spell {
 
 	@Override
 	public void onPlayerHit(Player p) {
-		damage(p,5,caster);
+		damage(p,3,caster);
 		playSound(Sound.ENTITY_ARROW_HIT_PLAYER,caster.getLocation(),5,1);
 		// TODO Auto-generated method stub
 		ParUtils.parKreisDir(Particles.END_ROD, loc, 2, 0,1, loc.getDirection().multiply(-1), loc.getDirection().multiply(-1));

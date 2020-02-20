@@ -27,6 +27,7 @@ public class AugedesDrachen extends Spell{
 		cooldown = 20*60;
 		steprange = 130;
 		hitboxSize = 1;
+		multihit = true;
 		
 	}
 	@Override

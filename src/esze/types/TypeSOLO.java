@@ -25,6 +25,7 @@ import esze.utils.Music;
 import esze.utils.PlayerUtils;
 import esze.utils.Title;
 import esze.voice.Discord;
+import spells.spellcore.Spell;
 import weapons.WeaponMenu;
 
 
@@ -84,8 +85,8 @@ public class TypeSOLO extends Type {
 				if (!WeaponMenu.items.containsKey(p))
 				p.getInventory().addItem(ItemStackUtils.attackSpeedify(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§cSchwert", null, true)));
 				
-				PlayerUtils.hidePlayer(p,100);
-				p.setNoDamageTicks(100);
+				PlayerUtils.hidePlayer(p,200);
+				p.setNoDamageTicks(200);
 				SoloSpellMenu s = new SoloSpellMenu();
 				s.open(p);
 				loc.put(p, p.getLocation());
@@ -146,10 +147,16 @@ public class TypeSOLO extends Type {
 			checkWinner();
 		}
 		else {
-			
+			Spell.silenced.add(p);
+			new BukkitRunnable() {
+				public void run() {
+					Spell.silenced.remove(p);
+				}
+				
+			}.runTaskLater(main.plugin, 10);
 			
 			PlayerUtils.hidePlayer(p,200);
-			p.setNoDamageTicks(100);
+			p.setNoDamageTicks(200);
 			p.teleport(nextLoc());
 			SoloSpellMenu s;
 			if (lives.get(p) == 1) {

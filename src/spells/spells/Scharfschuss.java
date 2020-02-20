@@ -18,7 +18,7 @@ public class Scharfschuss extends Spell{
 		hitSpell = true;
 		steprange = 300;
 		speed = 100;
-		casttime = 30;
+		casttime = 40;
 		cooldown = 20*60;
 	}
 

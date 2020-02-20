@@ -49,6 +49,9 @@ public class Death implements Listener {
 	}
 	
 	@EventHandler
-	  public void onEntityDamageByEntity(EntityDamageByEntityEvent event) { if (event.getDamager() instanceof org.bukkit.entity.Firework) event.setCancelled(true);  }
+	  public void onEntityDamageByEntity(EntityDamageByEntityEvent event) { 
+		if (event.getDamager() instanceof org.bukkit.entity.Firework) event.setCancelled(true); 
+		if (event.getDamager() instanceof org.bukkit.entity.Slime) event.setCancelled(true); 
+	}
 	
 }

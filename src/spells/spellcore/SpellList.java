@@ -49,6 +49,7 @@ import spells.spells.Schallbrecher;
 import spells.spells.Schallwelle;
 import spells.spells.Scharfschuss;
 import spells.spells.Schicksalsschnitt;
+import spells.spells.Schleimschleuder;
 import spells.spells.Requiemspfeil;
 import spells.spells.SchnittdersiebenWinde;
 import spells.spells.Schock;
@@ -196,8 +197,9 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Feuerwerkshelix());
 		registerSpell(new Delfintorpedo());
 		registerSpell(new Knochenparty());
-		registerSpell(new Binden());
+		//registerSpell(new Binden());
 		registerSpell(new Stich());
+		registerSpell(new Schleimschleuder());
 	}
 	
 	public static void registerSpell(Spell spell, Class...gameTypes){

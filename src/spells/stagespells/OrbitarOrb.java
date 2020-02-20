@@ -29,6 +29,8 @@ public class OrbitarOrb extends Spell {
 		castSpell(p,name);
 		speed = 2;
 		a = createArmorStand(p.getLocation());
+		unHittable.add(a);
+		
 		a.setHelmet(new ItemStack(Material.CACTUS));
 		noTargetEntitys.add(a);
 		hitboxSize = 2;

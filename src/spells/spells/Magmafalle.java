@@ -19,7 +19,7 @@ public class Magmafalle extends Spell {
 	
 	public Magmafalle() {
 		name = "§cMagmafalle";
-		cooldown = 20 * 60;
+		cooldown = 20 * 30;
 		steprange = 800;
 		hitboxSize = 4;
 		hitPlayer = false;

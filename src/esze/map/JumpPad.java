@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
@@ -73,6 +74,10 @@ public class JumpPad implements ConfigurationSerializable{
 		}
 		
 		if (p instanceof Player) {
+			if (((Player) p).getGameMode() == GameMode.CREATIVE)
+				return;
+			
+			
 			Player player = (Player) p;
 			JumpPadHandler.onCooldown.add(player);
 			

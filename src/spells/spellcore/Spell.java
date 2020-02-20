@@ -85,7 +85,7 @@ public abstract class Spell {
 	
 	
 	//CC 
-		protected static ArrayList<Player> silenced = new ArrayList<Player>();
+		public static ArrayList<Player> silenced = new ArrayList<Player>();
 		public static HashMap<Player,DamageCauseContainer> damageCause = new HashMap<Player,DamageCauseContainer>();
 	//
 	

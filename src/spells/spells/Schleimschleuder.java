@@ -17,14 +17,14 @@ import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
-public class Geistermeister extends Spell {
+public class Schleimschleuder extends Spell {
 
-	public Geistermeister() {
+	public Schleimschleuder() {
 		
 		
 		
-		cooldown = 5;
-		
+		cooldown = 20 * 25;
+		name = "§cSchleimschleuder";
 		speed = 1;
 		hitEntity = false;
 		hitPlayer = false;
@@ -55,6 +55,7 @@ public class Geistermeister extends Spell {
 		g.setSize(1);
 		noTargetEntitys.add(g);
 		g.setVelocity(loc.getDirection().multiply(s));
+		
 		//caster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,40,9));
 	}
 
@@ -68,6 +69,7 @@ public class Geistermeister extends Spell {
 	Vector dir;
 	@Override
 	public void move() {
+		g.setTarget(null);
 		if (swap() && dashCharge) {
 			dashCharge = false;
 			playSound(Sound.ENTITY_SLIME_JUMP,caster.getLocation(),2,1);
@@ -102,7 +104,7 @@ public class Geistermeister extends Spell {
 					stagedone = true;
 					hitPlayer = true;
 					hitEntity = true;
-					hitboxSize = size;
+					hitboxSize = size*1.5F;
 					playSound(Sound.BLOCK_SLIME_BLOCK_HIT,loc,10,1);
 				}
 				if (dash > 30) {
