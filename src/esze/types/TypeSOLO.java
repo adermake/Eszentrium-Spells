@@ -42,9 +42,9 @@ public class TypeSOLO extends Type {
 		for (Player p : players) {
 			if (p.getLocation().getY()<60 && p.getGameMode() == GameMode.SURVIVAL) {
 				if (main.damageCause.get(p) == null) {
-					main.damageCause.put(p, "");
+					main.damageCause.put(p, main.unknownDamage);
 				}
-				if (main.damageCause.get(p).equals("")) {
+				if (main.damageCause.get(p).equals("") || main.damageCause.get(p).equals(main.unknownDamage)) {
 					main.damageCause.put(p, main.voiddamage);
 				} else if (!main.damageCause.get(p).endsWith(main.voiddamage)){
 					main.damageCause.put(p, main.damageCause.get(p) + "-" + main.voiddamage);
@@ -76,7 +76,7 @@ public class TypeSOLO extends Type {
 		
 		for (Player p : players) {
 				main.damageCause.remove(p);
-				main.damageCause.put(p, "unknown"); //Reset damage Cause
+				main.damageCause.put(p, main.unknownDamage); //Reset damage Cause
 				SaveUtils.addPlayer(p.getName()); //Analytics
 				p.teleport(nextLoc());
 				p.setGameMode(GameMode.SURVIVAL);
@@ -105,7 +105,7 @@ public class TypeSOLO extends Type {
 		
 		if (main.damageCause.get(p) == null) {
 			main.damageCause.remove(p);
-			main.damageCause.put(p, "unknown");
+			main.damageCause.put(p, main.unknownDamage);
 		}
 		
 		if(!spectator.contains(p)) {
@@ -116,10 +116,10 @@ public class TypeSOLO extends Type {
 			}
 			SaveUtils.addPlayerDeath(p.getName(), main.damageCause.get(p)); //Analytics 
 		} else {
-			p.sendMessage("STOP DIEING!");
+			//p.sendMessage("STOP DIEING!");
 		}
 		
-		main.damageCause.put(p, "unknown");
+		main.damageCause.put(p, main.unknownDamage);
 		p.setVelocity(new Vector(0, 0, 0));
 		
 		loseLife(p);

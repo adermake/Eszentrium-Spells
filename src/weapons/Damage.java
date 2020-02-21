@@ -55,11 +55,17 @@ public class Damage implements Listener{
 					e.setCancelled(true);
 				}
 				Player p = (Player) e.getDamager();
-				main.damageCause.remove((Player) e.getEntity());
-				main.damageCause.put((Player) e.getEntity(), "Schwert-" + ((Player) e.getDamager()).getName());
+				
+				if (p.getInventory().getItemInMainHand().getType() == Material.BOOK || p.getInventory().getItemInMainHand().getType() == Material.ENCHANTED_BOOK) {
+					main.damageCause.remove((Player) e.getEntity());
+					main.damageCause.put((Player) e.getEntity(), "Buch-" + ((Player) e.getDamager()).getName());
+				} else {
+					main.damageCause.remove((Player) e.getEntity());
+					main.damageCause.put((Player) e.getEntity(), p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() +  "-" + ((Player) e.getDamager()).getName());
+				}
 				
 				if (p.getInventory().getItemInMainHand().getType() == Material.BOW) {
-					main.damageCause.put((Player) e.getEntity(), "Bogen-" + ((Player) e.getDamager()).getName());
+					//main.damageCause.put((Player) e.getEntity(), "Bogen-" + ((Player) e.getDamager()).getName());
 					if (WeaponAbilitys.charge1.containsKey(p)) {
 						WeaponAbilitys.charge1.put(p, WeaponAbilitys.charge1.get(p)+1);
 						

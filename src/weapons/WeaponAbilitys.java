@@ -80,7 +80,7 @@ public class WeaponAbilitys implements Listener {
 						String name = lastLaunched.get(p);
 						Class clazz = Class.forName(name);
 						Spell sp = (Spell) clazz.newInstance();
-						sp.castSpell(p, sp.getName());
+						if (!sp.castSpell(p, "§cFokussphäre")) {
 						cd.add(p);
 						
 						new BukkitRunnable() {
@@ -101,6 +101,7 @@ public class WeaponAbilitys implements Listener {
 							}
 						}.runTaskTimer(main.plugin, 0,20);
 						
+						} 
 						
 
 					} catch (Exception ex) {

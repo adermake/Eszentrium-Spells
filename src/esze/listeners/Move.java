@@ -22,9 +22,9 @@ public class Move implements Listener{
 				if(e.getTo().getBlockY() <= 60){
 					//Register void as damageCause
 					if (main.damageCause.get(p) == null) {
-						main.damageCause.put(p, "");
+						main.damageCause.put(p, main.unknownDamage);
 					}
-					if (main.damageCause.get(p).equals("")) {
+					if (main.damageCause.get(p).equals("") || main.damageCause.get(p).equals(main.unknownDamage)) {
 						main.damageCause.put(p, main.voiddamage);
 					} else if (!main.damageCause.get(p).endsWith(main.voiddamage)){
 						main.damageCause.put(p, main.damageCause.get(p) + "-" + main.voiddamage);

@@ -34,6 +34,7 @@ public class GameRunnable {
 	public static void stop(){
 		Bukkit.getScheduler().cancelTask(runnableTickID);
 		Bukkit.getScheduler().cancelTask(runnableSecID);
+		GameType.refreshGameType();
 	}
 
 }

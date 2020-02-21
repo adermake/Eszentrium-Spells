@@ -142,6 +142,8 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		spells.clear();
 		//registerSpell(new Ansturm());
 		//registerSpell(new Astralsprung());
+		//registerSpell(new HimmlischesUrteil());
+		//registerSpell(new Binden());
 		registerSpell(new AntlitzderGöttin());
 		registerSpell(new Aufwind());
 		registerSpell(new AugedesDrachen());
@@ -162,7 +164,7 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Hühnchenluftschlag());
 		registerSpell(new Kätzchenkanone());
 		registerSpell(new Kaminchen());
-		//registerSpell(new HimmlischesUrteil());
+		
 		registerSpell(new Lamaturm());
 		registerSpell(new Lichtstrudel());
 		registerSpell(new Luftsprung());
@@ -197,7 +199,7 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Feuerwerkshelix());
 		registerSpell(new Delfintorpedo());
 		registerSpell(new Knochenparty());
-		//registerSpell(new Binden());
+		
 		registerSpell(new Stich());
 		registerSpell(new Schleimschleuder());
 	}

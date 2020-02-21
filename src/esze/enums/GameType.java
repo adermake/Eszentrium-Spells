@@ -1,5 +1,6 @@
 package esze.enums;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import esze.main.main;
@@ -47,6 +48,14 @@ public class GameType {
 		SOLO,TTT,TEAMS;
 	}
 
-	
+	public static void refreshGameType() {
+		if (type != null) {
+			try {
+				type = (Type) type.getClass().newInstance();
+			} catch (InstantiationException | IllegalAccessException e) {
+				Bukkit.broadcastMessage("Apperently Logic doesn't work anymore (GameType:54)");
+			}
+		}
+	}
 
 }
