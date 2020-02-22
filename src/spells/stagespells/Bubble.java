@@ -137,8 +137,8 @@ public class Bubble extends Spell {
 	}
 	
 	public void hitEnt(LivingEntity ent) {
-		ent.setVelocity(loc.getDirection().normalize().multiply(3));
-		damage(ent, 2, caster);
+		ent.setVelocity(loc.getDirection().normalize().multiply(2));
+		damage(ent, 1, caster);
 		dead = true;
 	}
 

@@ -41,6 +41,8 @@ import esze.map.JumpPadHandler;
 import esze.map.MapMenu;
 import esze.menu.ColorTagSpellSelectionMenu;
 import esze.menu.SoloAnalyticsMenu;
+import esze.menu.SoloSelectionTopMenu;
+import esze.menu.WeaponsAnalyticsMenu;
 import esze.utils.MathUtils;
 import esze.utils.NBTUtils;
 import esze.utils.SoundUtils;
@@ -442,6 +444,22 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 							new ColorTagSpellSelectionMenu(p.getName()).open(p);;
 							return true;
 						}
+					case "weaponmenu":
+						if (args.length >= 2) {
+							new WeaponsAnalyticsMenu(args[1]).open(p);
+							return true;
+						} else {
+							new WeaponsAnalyticsMenu(p.getName()).open(p);;
+							return true;
+						}
+					case "topmenu":
+						if (args.length >= 2) {
+							new SoloSelectionTopMenu(args[1]).open(p);
+							return true;
+						} else {
+							new SoloSelectionTopMenu(p.getName()).open(p);;
+							return true;
+						}
 					case "info":
 						p.sendMessage(SaveUtils.getSaveEsze().toString());
 						return true;
@@ -452,7 +470,7 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 								assembly += args[i] + " ";
 							}
 							assembly = assembly.substring(0,assembly.length()-1);
-							p.sendMessage("§7The Spell " + assembly + "§7 has a worth of " + SaveUtils.getSaveEsze().getSpellKills(p.getName(), assembly) + "§7%!");
+							p.sendMessage("§7The Spell " + assembly + "§7 has a kills of " + SaveUtils.getSaveEsze().getSpellKills(p.getName(), assembly) + "§7!");
 							return true;
 						}
 						return false;
@@ -463,7 +481,7 @@ public class CommandReciever implements CommandExecutor, TabCompleter{
 								assembly += args[i] + " ";
 							}
 							assembly = assembly.substring(0,assembly.length()-1);
-							p.sendMessage("§7The Spell " + assembly + "§7 has a worth of " + SaveUtils.getSaveEsze().getSpellDeaths(p.getName(), assembly) + "§7%!");
+							p.sendMessage("§7The Spell " + assembly + "§7 has a deaths of " + SaveUtils.getSaveEsze().getSpellDeaths(p.getName(), assembly) + "§7%");
 							return true;
 						}
 						return false;

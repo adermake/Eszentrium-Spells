@@ -69,6 +69,7 @@ import spells.spellcore.SpellList;
 import spells.spellcore.Spelldrop;
 import weapons.Damage;
 import weapons.WeaponAbilitys;
+import weapons.WeaponList;
 
 public class main extends JavaPlugin {
 	
@@ -167,6 +168,8 @@ public class main extends JavaPlugin {
 		JumpPadHandler.start();
 		Gamestate.setGameState(Gamestate.LOBBY);
 		SpellList.registerSpells();
+		SpellList.sortSpells();
+		WeaponList.setUpWeapons();
 		if(getConfig().contains("settings.mode")){
 			GameType.setTypeByName(getConfig().getString("settings.mode"));
 		}else{

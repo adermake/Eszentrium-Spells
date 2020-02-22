@@ -22,6 +22,7 @@ import net.minecraft.server.v1_14_R1.NBTTagCompound;
 import net.minecraft.server.v1_14_R1.NBTTagInt;
 import net.minecraft.server.v1_14_R1.NBTTagList;
 import net.minecraft.server.v1_14_R1.NBTTagString;
+import spells.stagespells.BowArrow;
 
 public class WeaponMenu extends ItemMenu{
 	
@@ -31,17 +32,37 @@ public class WeaponMenu extends ItemMenu{
 		super(1, "§cArsenal");
 		
 		if (items.containsKey(p)) {
-			addClickableItem(1, 1, Material.WOODEN_SWORD, "§cSchwert","§e---",items.get(p).contains("Schwert"));
+			int count = 1;
+			for (String name : WeaponList.weapons.keySet()) {
+				addClickableItem(count, 1, WeaponList.weapons.get(name), name ,"§e---",items.get(p).contains(removeColorTag(name)));
+				count++;
+			}
+			
+			/*
 			addClickableItem(2, 1, Material.BOW, "§cBogen","§e---",items.get(p).contains("Bogen"));
-			addClickableItem(3, 1, Material.HEART_OF_THE_SEA, "§cFokussphäre","§e---",items.get(p).contains("Fokussphäre"));
+			addClickableItem(3, 1, Material.HEART_OF_THE_SEA, "§cFokussphäre","§e---",items.get(p).contains("Fokussphäre"));*/
 		}
 		else {
+			
+			int count = 1;
+			for (String name : WeaponList.weapons.keySet()) {
+				addClickableItem(count, 1, WeaponList.weapons.get(name), name ,"§e---");
+				count++;
+			}
+			/*
 			addClickableItem(1, 1, Material.WOODEN_SWORD, "§cSchwert","§e---");
 			addClickableItem(2, 1, Material.BOW, "§cBogen","§e---");
-			addClickableItem(3, 1, Material.HEART_OF_THE_SEA, "§cFokussphäre","§e---");
+			addClickableItem(3, 1, Material.HEART_OF_THE_SEA, "§cFokussphäre","§e---");*/
 		}
 		
 		
+	}
+	
+	public static String removeColorTag(String s) {
+		for (String tag : main.colorTags) {
+			s = s.replace(tag, "");
+		}
+		return s;
 	}
 
 	
@@ -76,7 +97,7 @@ public class WeaponMenu extends ItemMenu{
 		for (Player p : items.keySet()) {
 			WeaponAbilitys.charge1.put(p, 0);
 			WeaponAbilitys.charge2.put(p, 0);
-			if (items.get(p).contains("Bogen")) {
+			if (items.get(p).contains(removeColorTag(WeaponList.BOWNAME))) {
 				ItemStack is = new ItemStack(Material.BOW);
 				ItemMeta im = is.getItemMeta();
 				im.setUnbreakable(true);
@@ -124,12 +145,12 @@ public class WeaponMenu extends ItemMenu{
 				}.runTaskTimer(main.plugin, 5,5);
 			}
 			
-			if (items.get(p).contains("Schwert")) {
-				ItemStack is = ItemStackUtils.attackSpeedify(ItemStackUtils.createItemStack(Material.WOODEN_SWORD, 1, 0, "§cSchwert", null, true));
+			if (items.get(p).contains(removeColorTag(WeaponList.SWORDNAME))) {
+				ItemStack is = ItemStackUtils.attackSpeedify(ItemStackUtils.createItemStack(WeaponList.weapons.get(WeaponList.SWORDNAME), 1, 0, WeaponList.SWORDNAME, null, true));
 				p.getInventory().setItem(0, is);
 			}
-			if (items.get(p).contains("Fokussphäre")) {
-				ItemStack is = ItemStackUtils.attackSpeedify(ItemStackUtils.createItemStack(Material.HEART_OF_THE_SEA, 1, 0, "§cFokussphäre", null, true));
+			if (items.get(p).contains(removeColorTag(WeaponList.FOCUSSPHERENAME))) {
+				ItemStack is = ItemStackUtils.attackSpeedify(ItemStackUtils.createItemStack(WeaponList.weapons.get(WeaponList.FOCUSSPHERENAME), 1, 0, WeaponList.FOCUSSPHERENAME, null, true));
 				is = ItemStackUtils.attackDamage(is, 2);
 				new BukkitRunnable() {
 					int i = 0;
@@ -139,7 +160,7 @@ public class WeaponMenu extends ItemMenu{
 						if (WeaponAbilitys.lastLaunched.containsKey(p)) {
 							String spellname = WeaponAbilitys.lastLaunched.get(p).replace("spells.spells.", "");
 							if (!WeaponAbilitys.cd.contains(p))
-							new Actionbar("§bFokussphäre: "+"§c"+spellname).send(p);
+							new Actionbar("§b" + removeColorTag(WeaponList.FOCUSSPHERENAME) + ": "+"§c"+spellname).send(p);
 						}
 						if (!running) {
 							this.cancel();

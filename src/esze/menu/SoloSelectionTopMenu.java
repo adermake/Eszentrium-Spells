@@ -2,7 +2,6 @@ package esze.menu;
 
 import java.util.ArrayList;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -10,15 +9,17 @@ import esze.analytics.solo.SaveUtils;
 import spells.spellcore.Spell;
 import spells.spellcore.SpellList;
 
-public class SpellAnalyticsMenu extends ItemMenu {
+public class SoloSelectionTopMenu extends ItemMenu{
 
-	public SpellAnalyticsMenu(String colorTag,String p) {
-		super(6,colorTag+"Spells    ");
+	public SoloSelectionTopMenu(String p) {
+		super(6,"" +"Top-Spells    ");
 		// TODO Auto-generated constructor stub
+		int amount = 0;
+		
 		int x = 1;
 		int y = 1;
 		for (Spell s : SpellList.getSortedSpells()) {
-			if (!s.getName().contains(colorTag)) {
+			if (amount >= 6*9) {
 				continue;
 			}
 			ArrayList<String> lore = new ArrayList<String>();
@@ -27,6 +28,8 @@ public class SpellAnalyticsMenu extends ItemMenu {
 			lore.add( text + "Tötungen: "  					+ number + ( (int) SaveUtils.getSaveEsze().getSpellKills(p, SaveUtils.rmColor(s.getName())) ) );
 			lore.add( text + "Tode: "  						+ number + ( (int) SaveUtils.getSaveEsze().getSpellDeaths(p, SaveUtils.rmColor(s.getName())) ) );
 			lore.add( text + "Deine Auswahlrate: "  		+ number + cut(SaveUtils.getSaveEsze().getSpellWorth(p, SaveUtils.rmColor(s.getName())) ) + "%" );
+			lore.add( text + "Allgemeine Tötungen: "  					+ number + ( (int) SaveUtils.getSaveEsze().getSpellKills(SaveUtils.rmColor(s.getName())) ) );
+			//lore.add( text + "Allgemeine Tode: "  						+ number + ( (int) SaveUtils.getSaveEsze().getSpellDeaths(SaveUtils.rmColor(s.getName())) ) );
 			lore.add( text + "Allgemeine Auswahlrate: "  	+ number + cut(SaveUtils.getSaveEsze().getWorth(SaveUtils.rmColor(s.getName())) ) + "%" );
 			addClickableItem(x, y, Material.BOOK, s.getName(), lore);
 			x++;
@@ -35,19 +38,11 @@ public class SpellAnalyticsMenu extends ItemMenu {
 				x=1;
 			}
 			
-		}
-		
-		for (Spell s : SpellList.traitorSpells) {
-			if (!s.getName().contains(colorTag))
-				continue;
-			addClickableItem(x, y, Material.BOOK, s.getName());
-			x++;
-			if (x>9) {
-				y++;
-				x=1;
-			}
+			amount++;
 			
 		}
+		
+		
 	}
 	
 	public String cut(double d) {
@@ -64,5 +59,4 @@ public class SpellAnalyticsMenu extends ItemMenu {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

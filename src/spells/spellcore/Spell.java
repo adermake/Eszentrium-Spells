@@ -60,6 +60,7 @@ public abstract class Spell {
 	protected boolean hitSpell = false;
 	protected boolean hitBlock = true;
 	protected boolean canHitSelf = false;
+	protected boolean canBeSilenced = true;
 	protected boolean multihit = false;
 	protected boolean dieOnLowPower = true;
 	protected boolean powerBattle = false;
@@ -135,7 +136,7 @@ public abstract class Spell {
 			public void run()
 			{
 				cast++;
-				if (silenced.contains(caster)) {
+				if (canBeSilenced && silenced.contains(caster)) {
 					this.cancel();
 				}
 				cast();
@@ -935,6 +936,10 @@ public abstract class Spell {
 		
 		
 		return a;
+	}
+	
+	public void setCanBeSilenced(boolean b) {
+		canBeSilenced = b;
 	}
 	
 	

@@ -22,7 +22,7 @@ public class Heilen extends Spell{
 	public Heilen() {
 		steprange = 40;
 		cooldown = 20*24;
-		name = "§eHeilen";
+		name = "§aHeilen";
 		speed = 30;
 		
 		hitEntity = true;

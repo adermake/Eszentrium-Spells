@@ -17,7 +17,7 @@ import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
-public class SchwertausLicht extends Spell{
+public class SchwertausLicht extends Spell {
 
 	Location saveLoc;
 	boolean hp = false;
@@ -55,14 +55,19 @@ public class SchwertausLicht extends Spell{
 		a.setRightArmPose(ea);
 		playSound(Sound.BLOCK_ENCHANTMENT_TABLE_USE,loc,10,2);
 				
-		
-		
+		setCanBeSilenced(false);
+		toggleExplode = true;
 	}
+	
+	private boolean toggleExplode = true;
 
 	@Override
 	public void cast() {
 		a.setRightArmPose(a.getRightArmPose().add(randDouble(-0.05, 0.05), 0, 0));
-		
+		if ( silenced.contains(caster)) {
+			toggleExplode = false;
+			dead = true;
+		}
 	}
 
 	@Override
@@ -123,8 +128,9 @@ public class SchwertausLicht extends Spell{
 	@Override
 	public void onDeath() {
 		a.remove();
-		new SwordExplosion(loc,caster, name);
-		
+		if (toggleExplode) {
+			new SwordExplosion(loc,caster, name);
+		}
 	}
 
 	
