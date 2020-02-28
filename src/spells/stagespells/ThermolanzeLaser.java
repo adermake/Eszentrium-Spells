@@ -5,9 +5,11 @@ import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
@@ -86,8 +88,53 @@ public class ThermolanzeLaser extends Spell{
 
 	@Override
 	public void onBlockHit(Block block) {
+		
+		loc.add(0,1,0);
+		@SuppressWarnings("deprecation")
+		
+		MaterialData md = new MaterialData(loc.getBlock().getRelative(BlockFace.DOWN).getType(), loc.getBlock().getRelative(BlockFace.DOWN).getData());
+		if (loc.getBlock().getType() == Material.AIR) {
+			FallingBlock f = (FallingBlock) loc.getWorld().spawnFallingBlock(loc, md);
+			f.setVelocity(f.getVelocity().setY(0.2));
+		
+		
+		}
+		if (loc.add(0,0,1).getBlock().getType() == Material.AIR) {
+			FallingBlock f = (FallingBlock) loc.getWorld().spawnFallingBlock(loc, md);
+			f.setVelocity(f.getVelocity().setY(0.2));
+			f.setDropItem(false);
+		
+		}
+		if (loc.add(0,0,-1).getBlock().getType() == Material.AIR) {
+			FallingBlock f = (FallingBlock) loc.getWorld().spawnFallingBlock(loc, md);
+			f.setVelocity(f.getVelocity().setY(0.2));
+			f.setDropItem(false);
+		
+		}
+		if (loc.add(-1,0,0).getBlock().getType() == Material.AIR) {
+			FallingBlock f = (FallingBlock) loc.getWorld().spawnFallingBlock(loc, md);
+			f.setVelocity(f.getVelocity().setY(0.2));
+			f.setDropItem(false);
+		
+		}
+		if (loc.add(1,0,0).getBlock().getType() == Material.AIR) {
+			FallingBlock f = (FallingBlock) loc.getWorld().spawnFallingBlock(loc, md);
+			f.setVelocity(f.getVelocity().setY(0.2));
+			f.setDropItem(false);
+		
+		}
+		loc.add(0,-1,0);
 		// TODO Auto-generated method stub
-		new Explosion(3, 4, 1, 1, caster, loc, name);
+		if (refined) {
+			new Explosion(4, 4, 1, 1, caster, loc, name);
+			new Repulsion(6, 8, caster, loc, name);
+		}
+		else {
+			new Explosion(2, 4, 1, 1, caster, loc, name);
+			new Repulsion(4, 4, caster, loc, name);
+		}
+		
+		
 		ParUtils.createRedstoneParticle(loc.clone().add(loc.getDirection().multiply(-1)), 0, 0, 0, 1, Color.ORANGE, 5);
 		Location dir = loc.clone();
 		dir.setPitch(dir.getPitch()-90);

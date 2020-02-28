@@ -1,5 +1,6 @@
 package spells.spells;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -10,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 
+import esze.utils.ParUtils;
+import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Beben extends Spell{
@@ -17,7 +20,7 @@ public class Beben extends Spell{
 	public Beben() {
 		
 		name = "§eBeben";
-		steprange = 16;
+		steprange = 42;
 		cooldown = 20*40;
 		hitEntity = true;
 		hitPlayer = true;
@@ -25,7 +28,7 @@ public class Beben extends Spell{
 		hitBlock = false;
 		hitboxSize = 3;
 		casttime = 20;
-		speed = 1;
+		speed = 4;
 		
 		
 		
@@ -43,6 +46,9 @@ public class Beben extends Spell{
 		// TODO Auto-generated method stub
 		height = caster.getLocation().getY();
 		caster.setVelocity(caster.getVelocity().add(new Vector(0,-6,0)));
+		ParUtils.createFlyingParticle(Particles.CLOUD, caster.getLocation(), 0, 2, 0, 10, 1, new Vector(0,-1,0));
+		ParUtils.parKreisDot(Particles.CLOUD, caster.getLocation(), 2, 0, 2, new Vector(0,1,0));
+		playSound(Sound.ENTITY_MOOSHROOM_CONVERT,caster.getLocation(),15,2);
 	}
 
 	@Override
@@ -69,11 +75,12 @@ public class Beben extends Spell{
 	public void launch() {
 		// TODO Auto-generated method stub
 		loc = caster.getLocation();
+		direction = caster.getLocation().getDirection();
 	}
-
+	Vector direction; 
 	@Override
 	public void move() {
-		Vector direction = loc.getDirection().normalize();
+		
 		double x = direction.getX() ;
 		double y = 0;
 		double z = direction.getZ() ;
@@ -139,21 +146,41 @@ public class Beben extends Spell{
 	@Override
 	public void onPlayerHit(Player p) {
 		damage(p,6,caster);
+		double h = 1;
+		if (refined) {
+			h += height/2;
+		}
+		else {
+			h += height/4;
+		}
+		if (h > 10)
+			h = 10;
 		
-		doKnockback(p, caster.getLocation(), 1+height/10);
-		p.setVelocity(p.getVelocity().setY(1.0D));
-		
-
-
+		Vector dir = direction.clone().normalize();
+		dir = dir.setY(0);
+		dir = dir.normalize();
+		p.setVelocity(dir.multiply(h).add(new Vector(0,1,0)));
+		//p.setVelocity(p.getVelocity().setY(1.0D));
 	
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		damage(ent,6,caster);
-		doKnockback(ent, caster.getLocation(), 1+height/10);
-		ent.setVelocity(ent.getVelocity().setY(1.0D));
+		double h = 1;
+		if (refined) {
+			h += height/2;
+		}
+		else {
+			h += height/4;
+		}
+		if (h > 10)
+			h = 10;
 		
+		Vector dir = direction.clone();
+		dir = dir.setY(0);
+		dir = dir.normalize();
+		ent.setVelocity(dir.multiply(h).add(new Vector(0,1,0)));
 	}
 
 	@Override

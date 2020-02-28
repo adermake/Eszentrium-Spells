@@ -80,7 +80,7 @@ public class Schleimschleuder extends Spell {
 			time++;
 			if (time == 20*2)
 				dir = g.getLocation().toVector().subtract(caster.getLocation().toVector()).normalize();
-			if (time > 20 * 2) {
+			if (time > 30) {
 				dash++;
 				
 				if (dash == 1) {

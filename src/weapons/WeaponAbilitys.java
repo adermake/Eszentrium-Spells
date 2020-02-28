@@ -85,7 +85,7 @@ public class WeaponAbilitys implements Listener {
 						
 						new BukkitRunnable() {
 							int sec = 0;
-							int cooldown = sp.getCooldown();
+							int cooldown = sp.getCooldown()*2;
 							@Override
 							public void run() {
 								sec++;

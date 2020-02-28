@@ -15,6 +15,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -42,6 +43,7 @@ import esze.voice.Discord;
 import spells.spellcore.DamageCauseContainer;
 import spells.spellcore.Spell;
 import spells.spellcore.Spelldrop;
+import spells.spells.AntlitzderGöttin;
 import weapons.WeaponMenu;
 
 
@@ -241,6 +243,9 @@ public class TypeTTT extends Type{
 	public void death(PlayerDeathEvent event) {
 		
 		Player p = event.getEntity();
+		if (deathCheck(p)) {
+			return;
+		}
 		if (p.getGameMode() == GameMode.ADVENTURE)
 			return;
 		p.closeInventory();

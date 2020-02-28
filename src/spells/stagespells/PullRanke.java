@@ -61,7 +61,7 @@ public class PullRanke extends Spell {
 	public void move() {
 		if (victim instanceof LivingEntity) {
 			LivingEntity ent = (LivingEntity) victim;
-			ent.addPotionEffect(new PotionEffect(PotionEffectType.POISON,20,3));
+			ent.addPotionEffect(new PotionEffect(PotionEffectType.POISON,20,6));
 		}
 		if (backstep>10) {
 			playSound(Sound.ENTITY_LEASH_KNOT_BREAK, loc, 5, 1);

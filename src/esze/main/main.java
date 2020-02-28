@@ -168,7 +168,7 @@ public class main extends JavaPlugin {
 		JumpPadHandler.start();
 		Gamestate.setGameState(Gamestate.LOBBY);
 		SpellList.registerSpells();
-		SpellList.sortSpells();
+		//SpellList.sortSpells();
 		WeaponList.setUpWeapons();
 		if(getConfig().contains("settings.mode")){
 			GameType.setTypeByName(getConfig().getString("settings.mode"));

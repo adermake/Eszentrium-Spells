@@ -47,6 +47,7 @@ public class JumpPad implements ConfigurationSerializable{
 					if (((Player)p).isSneaking()) {
 						p.setVelocity(p.getLocation().getDirection().multiply(power*mult));
 						jumpAnimation(p);
+						padCooldown(p);
 						this.cancel();
 					}
 					if (t>30) {
@@ -71,8 +72,14 @@ public class JumpPad implements ConfigurationSerializable{
 				}
 			}.runTaskTimer(main.plugin, 1, 1);
 			jumpAnimation(p);
+			padCooldown(p);
 		}
 		
+		
+		
+	}
+	
+	public void padCooldown(Entity p ) {
 		if (p instanceof Player) {
 			if (((Player) p).getGameMode() == GameMode.CREATIVE)
 				return;
@@ -101,7 +108,6 @@ public class JumpPad implements ConfigurationSerializable{
 				}
 			}.runTaskTimer(main.plugin, 1, 1);
 		}
-		
 	}
 	public void jumpAnimation(Entity p) {
 		

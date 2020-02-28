@@ -28,7 +28,7 @@ public class PlayerUtils {
 	
 	public static void hidePlayer(Player p) {
 		
-		Bukkit.broadcastMessage("Hiding "+p.getName());
+		
 		for (Player pl : Bukkit.getOnlinePlayers()) {
 			pl.hidePlayer(main.plugin, p);
 		}
@@ -36,7 +36,7 @@ public class PlayerUtils {
 	}
 	
 	public static void showPlayer(Player p) {
-		Bukkit.broadcastMessage("Showing"+p.getName());
+		
 		for (Player pl : Bukkit.getOnlinePlayers()) {
 			pl.showPlayer(main.plugin, p);
 		}

@@ -40,13 +40,13 @@ public class Scharfschuss extends Spell{
 	public void cast() {
 		t++;
 		stage++;
-		if (t<10) {
+		if (t<20) {
 			ParUtils.dashParticleTo(Particles.FLAME, caster, loc);
 			ParUtils.dashParticleTo(Particles.FLAME, caster, loc);
 			ParUtils.dashParticleTo(Particles.FLAME, caster, loc);
 		}
 		
-		if (t < 20) {
+		if (t < 40) {
 			if (stage > 2) {
 				playGlobalSound(Sound.ENTITY_ELDER_GUARDIAN_DEATH_LAND, 1, 1);
 				stage = 0;

@@ -8,11 +8,13 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import esze.main.main;
 import esze.map.JumpPadHandler;
 import esze.scoreboards.Scoreboard;
 import esze.utils.PlayerUtils;
+import spells.spells.AntlitzderGöttin;
 
 
 public class Type {
@@ -79,6 +81,20 @@ public class Type {
 		
 	}
 	
-	
+	public boolean deathCheck(Player p) {
+		if (p.getLastDamageCause().getCause() == DamageCause.FLY_INTO_WALL) {
+			return true;
+		}
+		
+		if (p.getLastDamageCause().getCause() == DamageCause.ENTITY_ATTACK) {
+			
+			return true;
+		}
+		if (AntlitzderGöttin.deflect.contains(p)) {
+			return true;
+		}
+		
+		return false;
+	}
 	
 }

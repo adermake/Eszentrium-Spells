@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.xxmicloxx.NoteBlockAPI.event.SongEndEvent;
 import com.xxmicloxx.NoteBlockAPI.model.Song;
@@ -27,7 +28,15 @@ public class Music implements Listener {
 	@EventHandler
 	public void musicStopped(SongEndEvent event) {
 		SongPlayer player = event.getSongPlayer();
-		startRandomMusic();
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				startRandomMusic();
+			}
+		}.runTaskLater(main.plugin, 20);
+		
 	}
 
 	public static void startRandomMusic() {

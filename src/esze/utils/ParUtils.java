@@ -410,6 +410,25 @@ public class ParUtils {
 			}
 		}.runTaskTimerAsynchronously(esze.main.main.plugin, 1, 1);
 	}
+	
+	public static void auraParticle(ParticleType par,Entity p,double speed,int time) {
+		Location loc = p.getLocation();
+		
+		loc.add(0,randInt(1,16)/16,0);
+		
+		new BukkitRunnable() {
+			int t = 0;
+			public void run() {
+				t++;
+				createParticle(par, loc, 0, 0, 0, 1, 0);
+				loc.add(randDouble(-speed, speed),randDouble(-speed, speed),randDouble(-speed, speed));
+				if (t>time)
+					this.cancel();
+			}
+		}.runTaskTimerAsynchronously(esze.main.main.plugin, 1, 1);
+	}
+	
+	
 	/*
 	public static ArrayList<Location> grabBlocks(Location l,int count) {
 		ArrayList<Location> locList = new ArrayList<Location>();

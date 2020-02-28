@@ -1,13 +1,16 @@
 package spells.spells;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
+
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Cooldowns;
 import spells.spellcore.Spell;
@@ -34,6 +37,20 @@ public class Meteoritenhagel extends Spell {
 		if (loc == null) {
 			dead = true;
 			refund = true;
+		}
+		else {
+			
+			Location hBlock = loc.clone();
+			hBlock.setY(255);
+			while (hBlock.getBlock().getType() == Material.AIR) {
+				hBlock.add(0,-1,0);
+				if (hBlock.getY()<10) {
+					Bukkit.broadcastMessage("§c[Error] Logic doesnt seem to apply in this universe");
+					break;
+					
+				}
+			}
+			loc = hBlock;
 		}
 		
 		

@@ -115,7 +115,7 @@ public class Chaoswelle extends Spell{
 					t = t + 0.3 * Math.PI;
 				}
 				
-				for (double theta = 0; theta <= 2 * Math.PI; theta = theta + Math.PI / 32+step) {
+				for (double theta = 0; theta <= 2 * Math.PI; theta = theta + Math.PI / (32+step)) {
 					double x = t * Math.cos(theta);
 					double y = 0;
 					double z = t * Math.sin(theta);

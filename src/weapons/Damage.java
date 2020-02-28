@@ -74,6 +74,14 @@ public class Damage implements Listener{
 						WeaponAbilitys.charge1.put(p, 1);
 						
 					}
+					Player p2 = (Player) e.getEntity();
+					
+					if (WeaponAbilitys.charge1.containsKey(p2)) {
+						if (WeaponAbilitys.charge1.get(p2) > 0)
+						WeaponAbilitys.charge1.put(p2, WeaponAbilitys.charge1.get(p2)-1);
+						
+					}
+					
 					
 				}
 				

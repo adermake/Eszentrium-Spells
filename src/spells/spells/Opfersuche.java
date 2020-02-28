@@ -104,7 +104,14 @@ public class Opfersuche extends Spell {
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		damage(p, 4+i, caster);
+		if (refined) {
+			damage(p, 10, caster);
+		}
+		else {
+			damage(p, 4, caster);
+		}
+		
+		
 		phantomSpin(p,1,(int)step*6);
 		playSound(Sound.ENTITY_PHANTOM_HURT,loc,5,2F);
 		new BukkitRunnable() {
@@ -144,7 +151,13 @@ public class Opfersuche extends Spell {
 				}
 			}
 		}.runTaskTimer(main.plugin, 1,1);
-		damage(ent, 4+i, caster);
+		if (refined) {
+			damage(ent, 10, caster);
+		}
+		else {
+			damage(ent, 4, caster);
+		}
+		
 		if (!refined)
 			dead = true;
 	}
@@ -190,8 +203,7 @@ public class Opfersuche extends Spell {
 	@Override
 	public void onBlockHit(Block block) {
 		// TODO Auto-generated method stub
-		if (step<50 && !ent.getPassengers().isEmpty())
-			step = 50;
+		
 	}
 
 	@Override

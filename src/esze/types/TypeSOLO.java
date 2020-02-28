@@ -8,6 +8,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -26,6 +27,7 @@ import esze.utils.PlayerUtils;
 import esze.utils.Title;
 import esze.voice.Discord;
 import spells.spellcore.Spell;
+import spells.spells.AntlitzderGöttin;
 import weapons.WeaponMenu;
 
 
@@ -102,7 +104,12 @@ public class TypeSOLO extends Type {
 	@Override
 	public void death(PlayerDeathEvent event) {
 		Player p = event.getEntity();
-		
+		if (deathCheck(p)) {
+			return;
+		}
+		if (AntlitzderGöttin.deflect.contains(p)) {
+			return;
+		}
 		if (main.damageCause.get(p) == null) {
 			main.damageCause.remove(p);
 			main.damageCause.put(p, main.unknownDamage);
