@@ -53,6 +53,7 @@ public class Schleimschleuder extends Spell {
 		playSound(Sound.ENTITY_SLIME_ATTACK,loc,5,1);
 		// TODO Auto-generated method stub
 		g = (Slime) spawnEntity(EntityType.SLIME);
+		g.setInvulnerable(true);
 		g.setSize(1);
 		noTargetEntitys.add(g);
 		g.setVelocity(loc.getDirection().multiply(s));

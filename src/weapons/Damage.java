@@ -49,6 +49,10 @@ public class Damage implements Listener{
 	}
 	@EventHandler
 	public void onEntityDamage(EntityDamageByEntityEvent e) {
+		if (!(e.getDamager() instanceof Player)) {
+			e.setCancelled(true);
+			return;
+		}
 		if(e.getDamager() instanceof Player) {
 			if (e.getEntity() instanceof Player) {
 				if (((Player) e.getDamager()).getGameMode().equals(GameMode.ADVENTURE)) {

@@ -65,6 +65,7 @@ public class Type {
 		
 	
 	public void out(Player p) {
+	
 		p.getInventory().clear();
 		p.setGameMode(GameMode.ADVENTURE);
 		p.setAllowFlight(true);
@@ -82,14 +83,17 @@ public class Type {
 	}
 	
 	public boolean deathCheck(Player p) {
+		
+		if (p.getKiller() != null) {
+			if(!(p.getKiller() instanceof Player)) {
+				return true;
+			}
+		}
 		if (p.getLastDamageCause().getCause() == DamageCause.FLY_INTO_WALL) {
 			return true;
 		}
 		
-		if (p.getLastDamageCause().getCause() == DamageCause.ENTITY_ATTACK) {
-			
-			return true;
-		}
+		
 		if (AntlitzderGöttin.deflect.contains(p)) {
 			return true;
 		}
