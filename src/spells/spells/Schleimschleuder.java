@@ -1,5 +1,6 @@
 package spells.spells;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -69,7 +70,12 @@ public class Schleimschleuder extends Spell {
 	Vector dir;
 	@Override
 	public void move() {
-		g.setTarget(null);
+		
+		if (dead)
+			return;
+		
+		
+		
 		if (swap() && dashCharge) {
 			dashCharge = false;
 			playSound(Sound.ENTITY_SLIME_JUMP,caster.getLocation(),2,1);
@@ -77,9 +83,15 @@ public class Schleimschleuder extends Spell {
 		}
 			
 		if (!stagedone) {
+			dir = g.getLocation().toVector().subtract(caster.getLocation().toVector()).normalize();
 			time++;
-			if (time == 20*2)
-				dir = g.getLocation().toVector().subtract(caster.getLocation().toVector()).normalize();
+			//if (time == 20*2)
+				
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				if (checkHit(p, g.getLocation(), caster, g.getSize()*4+3)) {
+					p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,20,3));
+				}
+			}
 			if (time > 30) {
 				dash++;
 				
@@ -104,7 +116,7 @@ public class Schleimschleuder extends Spell {
 					stagedone = true;
 					hitPlayer = true;
 					hitEntity = true;
-					hitboxSize = size*1.5F;
+					hitboxSize = size*2F;
 					playSound(Sound.BLOCK_SLIME_BLOCK_HIT,loc,10,1);
 				}
 				if (dash > 30) {
@@ -125,10 +137,10 @@ public class Schleimschleuder extends Spell {
 		else {
 			if (dash<5)
 				dead = true;
-			g.setVelocity(dir.normalize().multiply(dash/2));
+			g.setVelocity(dir.normalize().multiply(dash/3));
 			time2++;
 			loc = g.getLocation();
-			loc = g.getLocation();
+			
 			if (time2>20) {
 				dead = true;
 				
@@ -182,9 +194,12 @@ public class Schleimschleuder extends Spell {
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
+		
 		ParUtils.createParticle(Particles.ITEM_SLIME, loc, 1, 1, 1, 10, 1);
 		if (!g.isDead())
 			g.remove();
+		
+		
 	}
 
 }
