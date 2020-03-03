@@ -170,7 +170,52 @@ public class WeaponMenu extends ItemMenu{
 				}.runTaskTimer(main.plugin, 5, 5);
 				p.getInventory().setItem(0, is);
 			}
+			
+			
+			
+			//Sythe
+			if (items.get(p).contains(removeColorTag(WeaponList.BAMBOONAME))) {
+				ItemStack is = new ItemStack(Material.BAMBOO);
+				ItemMeta im = is.getItemMeta();
+				im.setDisplayName("§cBambus");
+				im.setUnbreakable(true);
+				is.setItemMeta(im);
+				
+				is = ItemStackUtils.attackDamage(is, 3);
+				p.getInventory().addItem(is);
+			
+				
+				new BukkitRunnable() {
+					int i = 0;
+					int time = 0;
+					@Override
+					public void run() {
+						if (!running) {
+							this.cancel();
+						}
+						String text = "§aSprünge:";
+						if (WeaponAbilitys.charge1.get(p) == 0) {
+							text += " §7[>§7>>§7]";
+						}
+						if (WeaponAbilitys.charge1.get(p) == 1) {
+							text += " §7[§a>§7>>§7]";
+						}
+						if (WeaponAbilitys.charge1.get(p) == 2) {
+							text += " §7[§a>>§7>§7]";
+						}
+						if (WeaponAbilitys.charge1.get(p) == 3) {
+							text += " §7[§a>>>§7]";
+						}
+						new Actionbar(text).send(p);
+						
+					}
+				}.runTaskTimer(main.plugin, 5,5);
+			}
 		}
+		
+		//SYTHE
+		
+		
 	}
 	
 	public static void stopLoop() {

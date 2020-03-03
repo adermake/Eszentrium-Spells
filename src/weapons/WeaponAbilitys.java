@@ -1,5 +1,6 @@
 package weapons;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -23,6 +25,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -42,14 +45,20 @@ import esze.utils.NBTUtils;
 import esze.utils.ParUtils;
 import esze.utils.SoundUtils;
 import net.minecraft.server.v1_14_R1.AttributeModifier;
+import net.minecraft.server.v1_14_R1.Block.Info;
+import net.minecraft.server.v1_14_R1.EnumColor;
 import net.minecraft.server.v1_14_R1.EnumItemSlot;
 import net.minecraft.server.v1_14_R1.GenericAttributes;
+import net.minecraft.server.v1_14_R1.Item;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
 import net.minecraft.server.v1_14_R1.NBTTagInt;
 import net.minecraft.server.v1_14_R1.NBTTagList;
 import net.minecraft.server.v1_14_R1.NBTTagString;
+import net.minecraft.server.v1_14_R1.PacketPlayOutSetCooldown;
 import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_14_R1.PlayerConnection;
 import spells.spellcore.Spell;
+import spells.spells.BambusDash;
 import spells.stagespells.BowArrow;
 
 public class WeaponAbilitys implements Listener {
@@ -58,7 +67,7 @@ public class WeaponAbilitys implements Listener {
 	public static HashMap<Player,Integer> charge1 = new HashMap<Player,Integer>();
 	public static HashMap<Player,Integer> charge2 = new HashMap<Player,Integer>();
 	public static HashMap<Player,String> lastLaunched = new HashMap<Player,String>();
-	
+	public static HashMap<Player,Vector> lastMovedDir = new HashMap<Player,Vector>();
 	@EventHandler
 	public void onWeaponUse(PlayerInteractEvent e) {
 		final Player p = e.getPlayer();
@@ -111,6 +120,19 @@ public class WeaponAbilitys implements Listener {
 					;
 				}
 				
+			}
+			
+			if (p.getInventory().getItemInMainHand().getType() == Material.BAMBOO) {
+				
+				if (charge1.containsKey(p)) {
+					
+					if (charge1.get(p)>0) {
+						
+						BambusDash bd = new BambusDash();
+						bd.castSpell(p, "§cBambusDash");
+						charge1.put(p, charge1.get(p)-1);
+					}
+				}
 			}
 			
 		}
@@ -297,6 +319,8 @@ public class WeaponAbilitys implements Listener {
 					}
 				}
 			}
+			
+			
 		}
 	}
 	ArrayList<Player> goldLaunch = new ArrayList<Player>();
@@ -314,8 +338,55 @@ public class WeaponAbilitys implements Listener {
 					e.getEntity().setVelocity(p.getLocation().getDirection().multiply(8));
 					
 				}
+				
+				if (p.getInventory().getItemInMainHand().getType() == Material.BAMBOO) {
+					
+					if (!charge1.containsKey(p)) {
+						charge1.put(p, 1);
+					}
+					else {
+						if (charge1.get(p)<3)
+						charge1.put(p, charge1.get(p)+1);
+					}
+					if (cd.contains(p)) {
+						
+						return;
+						
+					}
+						
+					if (!p.isSneaking()) {
+						return;
+					}
+						Vector dir = p.getLocation().getDirection().normalize().multiply(-1.5);
+						//dir.add(new Vector(0,1,0));
+						
+						//dir = dir.normalize().multiply(1);
+						
+						p.setVelocity(dir.add(new Vector(0,0.2,0)));
+						
+						sendCooldownPacket(p, p.getInventory().getItemInMainHand(), 20);
+						cd.add(p);
+						new BukkitRunnable() {
+							public void run() {
+								cd.remove(p);
+							}
+						}.runTaskLater(main.plugin, 20);
+					
+					
+				}
 			
 		}
+	}
+	
+	
+	public void sendCooldownPacket(Player p,ItemStack is,int time) {
+		
+		
+		 PlayerConnection connection = ((CraftPlayer) p).getHandle().playerConnection;
+		
+		 Item item = CraftItemStack.asNMSCopy(is).getItem();
+		 PacketPlayOutSetCooldown packet = new PacketPlayOutSetCooldown(item, time);
+		 connection.sendPacket(packet);
 	}
 	public void doPull(Entity e, Location toLocation,double speed) {
 		// multiply default 0.25
@@ -354,6 +425,12 @@ public class WeaponAbilitys implements Listener {
         }
         return attackDamage;
    
+	}
+	
+	@EventHandler
+	public void onMove(PlayerMoveEvent e) {
+		//lastMovedDir.put(e.getPlayer(), e.getTo().toVector().subtract(e.getFrom().toVector()));
+		
 	}
 	
 	public static void clearLists() {
