@@ -89,7 +89,7 @@ public class Type {
 				return true;
 			}
 		}
-		if (p.getLastDamageCause().getCause() == DamageCause.FLY_INTO_WALL) {
+		if (p.getLastDamageCause() != null && p.getLastDamageCause().getCause() != null && p.getLastDamageCause().getCause() == DamageCause.FLY_INTO_WALL) {
 			return true;
 		}
 		
