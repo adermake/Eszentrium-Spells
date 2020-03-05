@@ -27,7 +27,9 @@ public class SpellAnalyticsMenu extends ItemMenu {
 			lore.add( text + "Tötungen: "  					+ number + ( (int) SaveUtils.getSaveEsze().getSpellKills(p, SaveUtils.rmColor(s.getName())) ) );
 			lore.add( text + "Tode: "  						+ number + ( (int) SaveUtils.getSaveEsze().getSpellDeaths(p, SaveUtils.rmColor(s.getName())) ) );
 			lore.add( text + "Deine Auswahlrate: "  		+ number + cut(SaveUtils.getSaveEsze().getSpellWorth(p, SaveUtils.rmColor(s.getName())) ) + "%" );
+			lore.add( text + "Deine verbesserte Auswahlrate: "  		+ number + cut(SaveUtils.getSaveEsze().getEnhancedSpellWorth(p, SaveUtils.rmColor(s.getName())) ) + "%" );
 			lore.add( text + "Allgemeine Auswahlrate: "  	+ number + cut(SaveUtils.getSaveEsze().getWorth(SaveUtils.rmColor(s.getName())) ) + "%" );
+			lore.add( text + "Allgemeine verbesserte Auswahlrate: "  	+ number + cut(SaveUtils.getSaveEsze().getEnhancedWorth(SaveUtils.rmColor(s.getName())) ) + "%" );
 			addClickableItem(x, y, Material.BOOK, s.getName(), lore);
 			x++;
 			if (x>9) {

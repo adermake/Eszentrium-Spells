@@ -116,7 +116,7 @@ public class Ranke extends Spell{
 		// TODO Auto-generated method stub
 	
 		current.remove();
-		new PullRanke(caster, null, path, blocks, loc, (int) step);
+		new PullRanke(caster, null, path, blocks, loc, (int) step,name);
 		dead = true;
 	}
 

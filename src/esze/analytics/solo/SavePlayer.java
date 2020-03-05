@@ -166,6 +166,14 @@ public class SavePlayer {
 		return selections;
 	}
 	
+	public ArrayList<SaveSelection> getNormalSelections() {
+		ArrayList<SaveSelection> selections = new ArrayList<>();
+		if (s1 != null) {selections.add(s1);}
+		if (s2 != null) {selections.add(s2);}
+		if (s3 != null) {selections.add(s3);}
+		return selections;
+	}
+	
 	public ArrayList<String> getDeaths() {
 		ArrayList<String> deaths = new ArrayList<>();
 		if (d1 !=null && !d1.equals("")) {deaths.add(d1);}

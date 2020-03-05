@@ -47,7 +47,7 @@ public class SaveEsze {
 		int chosen = 0;
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
-				for (SaveSelection sele : p.getSelections()) {
+				for (SaveSelection sele : p.getNormalSelections()) {
 					if (sele != null && sele.getChsp() != null && sele.getChoices() != null) {
 						if (sele.getChsp().equals(s)) {
 							chosen++;
@@ -57,6 +57,32 @@ public class SaveEsze {
 						}
 					}
 				}
+			}
+		}
+		if (choice == 0) {
+			return 0;
+		}
+		return (100 * ((double) chosen / (double) choice));
+	}
+	
+	public double getEnhancedWorth(String s) {
+		s = SaveUtils.rmColor(s);
+		int choice = 0;
+		int chosen = 0;
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				SaveSelection sele = p.getS4();
+				if (sele != null) {
+					if (sele != null && sele.getChsp() != null && sele.getChoices() != null) {
+						if (sele.getChsp().equals(s)) {
+							chosen++;
+						}
+						if (sele.getChoices().contains(s)) {
+							choice++;
+						}
+					}
+				}
+			
 			}
 		}
 		if (choice == 0) {
@@ -96,7 +122,7 @@ public class SaveEsze {
 	public void changeSpellName(String old_s, String new_s) {
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
-				for (SaveSelection sele : p.getSelections()) {
+				for (SaveSelection sele : p.getNormalSelections()) {
 					if (sele.getChsp().equals(old_s)) {
 						sele.setChsp(new_s);
 					}
@@ -228,7 +254,7 @@ public class SaveEsze {
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
 				if (p.getName().equals(name)) {
-					for (SaveSelection sele : p.getSelections()) {
+					for (SaveSelection sele : p.getNormalSelections()) {
 						if (sele != null && sele.getChsp() != null &&sele.getChsp().equals(s)) {
 							chosen++;
 						}
@@ -246,13 +272,39 @@ public class SaveEsze {
 		return (100 * ((double) chosen / (double) choice));
 	}
 	
+	public double getEnhancedSpellWorth(String name, String s) {
+		s = SaveUtils.rmColor(s);
+		int choice = 0;
+		int chosen = 0;
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				if (p.getName().equals(name)) {
+					SaveSelection sele = p.getS4();
+					if (sele != null) {
+						if (sele != null && sele.getChsp() != null &&sele.getChsp().equals(s)) {
+							chosen++;
+						}
+						if (sele != null && sele.getChoices() != null && sele.getChoices().contains(s)) {
+							choice++;
+						}
+					}
+					
+				}
+			}
+		}
+		if (choice == 0) {
+			return 0;
+		}
+		return (100 * ((double) chosen / (double) choice));
+	}
+	
 	public String getFavSpell(String name) {
 		
 		HashMap<String, Integer> map = new HashMap<>();
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
 				if (p.getName().equals(name)) {
-					for (SaveSelection sele : p.getSelections()) {
+					for (SaveSelection sele : p.getNormalSelections()) {
 						if (map.containsKey(sele.getChsp())) {
 							Integer i = map.get(sele.getChsp()) + 1;
 							map.remove(sele.getChsp());
@@ -282,7 +334,7 @@ public class SaveEsze {
 		for (SaveGame g : sv) {
 			for (SavePlayer p : g.getMap().keySet()) {
 				
-				for (SaveSelection sele : p.getSelections()) {
+				for (SaveSelection sele : p.getNormalSelections()) {
 					if (map.containsKey(sele.getChsp())) {
 						Integer i = map.get(sele.getChsp()) + 1;
 						map.remove(sele.getChsp());
