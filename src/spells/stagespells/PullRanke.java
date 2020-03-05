@@ -22,13 +22,13 @@ public class PullRanke extends Spell {
 	Entity victim;
 	int backstep;
 	
-	public PullRanke(Player caster,Entity p,HashMap<Integer,Vector> path,HashMap<Integer,FallingBlock> blocks,Location loc,int setstep) {
+	public PullRanke(Player caster,Entity p,HashMap<Integer,Vector> path,HashMap<Integer,FallingBlock> blocks,Location loc,int setstep,String namae) {
 		backstep = setstep;
 		this.loc = loc;
 		this.path = path;
 		this.blocks = blocks;
 		victim = p;
-		
+		name = namae;
 		
 		steprange = 150;
 		hitboxSize = 2;
@@ -39,7 +39,7 @@ public class PullRanke extends Spell {
 		this.caster = caster;
 		cooldown = 0;
 		
-		castSpell(caster, "§eRanke");
+		castSpell(caster, namae);
 	}
 	
 	

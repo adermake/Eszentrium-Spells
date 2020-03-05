@@ -61,7 +61,7 @@ public class Ranke extends Spell{
 		blocks.put((int)step, fb);
 		if (step == steprange-1) {
 			fb.remove();
-			new PullRanke(caster, null, path, blocks, loc, (int) step);
+			new PullRanke(caster, null, path, blocks, loc, (int) step,name);
 		}
 	}
 	
@@ -87,7 +87,7 @@ public class Ranke extends Spell{
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
 		current.remove();
-		new PullRanke(caster, p, path, blocks, loc, (int) step);
+		new PullRanke(caster, p, path, blocks, loc, (int) step,name);
 		damage(p, 5, caster);
 		p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, (int)step/3, 1));
 		dead = true;
@@ -98,7 +98,7 @@ public class Ranke extends Spell{
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
 		current.remove();
-		new PullRanke(caster, ent, path, blocks, loc, (int) step);
+		new PullRanke(caster, ent, path, blocks, loc, (int) step,name);
 		damage(ent, 5, caster);
 		dead = true;
 	}
