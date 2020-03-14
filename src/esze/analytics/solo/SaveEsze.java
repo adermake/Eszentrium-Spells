@@ -178,6 +178,43 @@ public class SaveEsze {
 		return kills;
 	}
 	
+	
+	public int getSpellKillsNormal(String name, String spell) {
+		spell = SaveUtils.rmColor(spell);
+		int kills = 0; 
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				for (String s : p.getDeaths()) {
+					String[] edit = s.split("-");
+					if (edit.length == 2) {
+						if (edit[1].equals(name) && edit[0].equals(spell)) {
+							kills++;
+						}
+					}
+				}
+			}
+		}
+		return kills;
+	}
+	
+	public int getSpellKillsVoid(String name, String spell) {
+		spell = SaveUtils.rmColor(spell);
+		int kills = 0; 
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				for (String s : p.getDeaths()) {
+					String[] edit = s.split("-");
+					if (edit.length == 3) {
+						if (edit[1].equals(name) && edit[0].equals(spell)) {
+							kills++;
+						}
+					}
+				}
+			}
+		}
+		return kills;
+	}
+	
 	public int getSpellKills(String spell) {
 		spell = SaveUtils.rmColor(spell);
 		int kills = 0; 
@@ -228,6 +265,47 @@ public class SaveEsze {
 		return deaths;
 	}
 	
+	public int getSpellDeathsNormal(String name, String spell) {
+		spell = SaveUtils.rmColor(spell);
+		int deaths = 0; 
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				if (p.getName().equals(name)) {
+					for (String s : p.getDeaths()) {
+						String[] edit = s.split(Pattern.quote("-"));
+						if (edit.length == 2) {
+							if (edit[0].equals(spell)) {
+								deaths++;
+							}
+						}
+					}
+				}
+			}
+		}
+		return deaths;
+	}
+	
+	
+	public int getSpellDeathsVoid(String name, String spell) {
+		spell = SaveUtils.rmColor(spell);
+		int deaths = 0; 
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				if (p.getName().equals(name)) {
+					for (String s : p.getDeaths()) {
+						String[] edit = s.split(Pattern.quote("-"));
+						if (edit.length == 3) {
+							if (edit[0].equals(spell)) {
+								deaths++;
+							}
+						}
+					}
+				}
+			}
+		}
+		return deaths;
+	}
+	
 	public int getSpellDeaths(String spell) {
 		spell = SaveUtils.rmColor(spell);
 		int deaths = 0; 
@@ -247,6 +325,44 @@ public class SaveEsze {
 		return deaths;
 	}
 
+	public int getSpellDeathsNormal(String spell) {
+		spell = SaveUtils.rmColor(spell);
+		int deaths = 0; 
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				for (String s : p.getDeaths()) {
+					String[] edit = s.split(Pattern.quote("-"));
+					if (edit.length == 2) {
+						if (edit[0].equals(spell)) {
+							deaths++;
+						}
+					}
+				}
+				
+			}
+		}
+		return deaths;
+	}
+	
+	public int getSpellDeathsVoid(String spell) {
+		spell = SaveUtils.rmColor(spell);
+		int deaths = 0; 
+		for (SaveGame g : sv) {
+			for (SavePlayer p : g.getMap().keySet()) {
+				for (String s : p.getDeaths()) {
+					String[] edit = s.split(Pattern.quote("-"));
+					if (edit.length == 3) {
+						if (edit[0].equals(spell)) {
+							deaths++;
+						}
+					}
+				}
+				
+			}
+		}
+		return deaths;
+	}
+	
 	public double getSpellWorth(String name, String s) {
 		s = SaveUtils.rmColor(s);
 		int choice = 0;
