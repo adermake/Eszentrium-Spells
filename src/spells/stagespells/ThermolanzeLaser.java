@@ -69,14 +69,14 @@ public class ThermolanzeLaser extends Spell{
 	@Override
 	public void onPlayerHit(Player p) {
 		// TODO Auto-generated method stub
-		damage(p,6,caster);
+		damage(p,2,caster);
 		p.setFireTicks(8);
 	}
 
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
-		damage(ent,6,caster);
+		damage(ent,2,caster);
 		ent.setFireTicks(8);
 	}
 
@@ -126,11 +126,11 @@ public class ThermolanzeLaser extends Spell{
 		loc.add(0,-1,0);
 		// TODO Auto-generated method stub
 		if (refined) {
-			new Explosion(4, 4, 1, 1, caster, loc, name);
+			new Explosion(6, 4, 1, 1, caster, loc, name);
 			new Repulsion(6, 8, caster, loc, name);
 		}
 		else {
-			new Explosion(2, 4, 1, 1, caster, loc, name);
+			new Explosion(4, 4, 1, 1, caster, loc, name);
 			new Repulsion(4, 4, caster, loc, name);
 		}
 		

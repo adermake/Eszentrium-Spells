@@ -83,7 +83,9 @@ public class Type {
 	}
 	
 	public boolean deathCheck(Player p) {
-		
+		if (p.getLocation().getY()<=60) {
+			return false;
+		}
 		if (p.getKiller() != null) {
 			if(!(p.getKiller() instanceof Player)) {
 				return true;

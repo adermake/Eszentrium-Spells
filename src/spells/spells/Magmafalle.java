@@ -2,6 +2,8 @@ package spells.spells;
 
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -19,8 +21,8 @@ public class Magmafalle extends Spell {
 	
 	public Magmafalle() {
 		name = "§cMagmafalle";
-		cooldown = 20 * 30;
-		steprange = 800;
+		cooldown = 20 * 20;
+		steprange = 1400;
 		hitboxSize = 4;
 		hitPlayer = false;
 		hitEntity = false;
@@ -69,6 +71,25 @@ public class Magmafalle extends Spell {
 			ParUtils.createParticle(Particles.DRIPPING_LAVA, loc.clone().add(0,0.3,0), 1, 0, 1, 1, 0.3);
 		}
 			
+		for (Entity ent : caster.getWorld().getEntities()) {
+			if (ent instanceof ArmorStand  && ent.getLocation().distance(loc)<hitboxSize) {
+				
+				ParUtils.createParticle(Particles.FLAME, loc, 1,1, 1, 20, 0.3);
+				playSound(Sound.BLOCK_LAVA_EXTINGUISH,loc,6,1);
+				dead = true;
+				new BukkitRunnable() {
+					public void run() {
+						new ExplosionDamage(6, 10, caster, loc.clone(),name);
+						new Repulsion(6, 5, caster, loc.clone(),true,name);
+						ParUtils.parKreisDir(Particles.FLAME, loc.clone(), 5, 0, 6, new Vector(0,1,0), new Vector(0,1,0));
+						ParUtils.createParticle(Particles.EXPLOSION_EMITTER, loc.clone(), 1,1, 1,4, 1);
+						ParUtils.createParticle(Particles.LAVA, loc.clone(), 2,2, 2,40, 1);
+						playSound(Sound.ENTITY_DRAGON_FIREBALL_EXPLODE,loc.clone(),6,0.1F);
+						
+					}
+				}.runTaskLater(main.plugin,10);
+			}
+		}
 	}
 
 	@Override
@@ -101,6 +122,7 @@ public class Magmafalle extends Spell {
 	@Override
 	public void onEntityHit(LivingEntity ent) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 

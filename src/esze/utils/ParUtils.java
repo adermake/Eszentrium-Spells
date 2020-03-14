@@ -39,6 +39,18 @@ public class ParUtils {
 	}
 
 	public static void createRedstoneParticle(Location loc, double spreadX, double spreadY, double spreadZ, int count,
+			Color color, float size,Player p) {
+		WorldServer nmsWorld = ((CraftWorld) loc.getWorld()).getHandle();
+		
+			EntityPlayer ep = ((CraftPlayer) p).getHandle();
+			nmsWorld.a(ep,
+					new ParticleParamRedstone(color.getRed() / 255.0F, color.getGreen() / 255.0F,
+							color.getBlue() / 255.0F, size),
+					true, loc.getX(), loc.getY(), loc.getZ(), count, spreadX, spreadY, spreadZ, 0);
+		
+	}
+	
+	public static void createRedstoneParticle(Location loc, double spreadX, double spreadY, double spreadZ, int count,
 			Color color, float size) {
 		WorldServer nmsWorld = ((CraftWorld) loc.getWorld()).getHandle();
 		for (Player p : Bukkit.getOnlinePlayers()) {

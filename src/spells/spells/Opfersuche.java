@@ -34,7 +34,7 @@ public class Opfersuche extends Spell {
 		steprange = 200;
 		hitboxSize= 2.5;
 		hitSpell = true;
-		speed = 3;
+		speed = 2;
 	}
 	
 	
@@ -112,7 +112,7 @@ public class Opfersuche extends Spell {
 		}
 		
 		
-		phantomSpin(p,1,(int)step*6);
+		phantomSpin(p,1,20+(int)step*6);
 		playSound(Sound.ENTITY_PHANTOM_HURT,loc,5,2F);
 		new BukkitRunnable() {
 			int t = 0;

@@ -17,6 +17,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import esze.enums.GameType;
 import esze.enums.Gamestate;
 import esze.utils.ParUtils;
+import spells.spells.AntlitzderGöttin;
 
 public class Death implements Listener {
 	
@@ -35,7 +36,14 @@ public class Death implements Listener {
 				PlayerDeathEvent event = new PlayerDeathEvent(p, null, 0, "he dead");
 	
 				e.setCancelled(true);
-				p.setHealth(20);
+				if (AntlitzderGöttin.deflect.contains(p)) {
+					p.setHealth(e.getDamage());
+				}
+				else {
+					p.setHealth(20);
+				}
+				
+				
 				if (p.getLocation().getY()<60)
 				p.teleport(GameType.getType().nextLoc());
 				ParUtils.createRedstoneParticle(e.getEntity().getLocation(), 0.3, 0.5, 0.3, 10, Color.RED, 3);

@@ -2,6 +2,8 @@ package weapons;
 
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
@@ -18,6 +20,7 @@ import esze.menu.ItemMenuIcon;
 import esze.utils.Actionbar;
 import esze.utils.ItemStackUtils;
 import esze.utils.NBTUtils;
+import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
 import net.minecraft.server.v1_14_R1.NBTTagInt;
 import net.minecraft.server.v1_14_R1.NBTTagList;
@@ -94,9 +97,14 @@ public class WeaponMenu extends ItemMenu{
 	public static boolean running = true;
 	public static void deliverItems() {
 		running = true;
-		for (Player p : items.keySet()) {
+		WeaponAbilitys.cd.clear();
+		WeaponAbilitys.cd2.clear();
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			
+			
 			WeaponAbilitys.charge1.put(p, 0);
 			WeaponAbilitys.charge2.put(p, 0);
+			/*
 			if (items.get(p).contains(removeColorTag(WeaponList.BOWNAME))) {
 				ItemStack is = new ItemStack(Material.BOW);
 				ItemMeta im = is.getItemMeta();
@@ -144,11 +152,30 @@ public class WeaponMenu extends ItemMenu{
 					}
 				}.runTaskTimer(main.plugin, 5,5);
 			}
+			*/
 			
-			if (items.get(p).contains(removeColorTag(WeaponList.SWORDNAME))) {
 				ItemStack is = ItemStackUtils.attackSpeedify(ItemStackUtils.createItemStack(WeaponList.weapons.get(WeaponList.SWORDNAME), 1, 0, WeaponList.SWORDNAME, null, true));
+				
+				
+				
+				new BukkitRunnable() {
+					int i = 0;
+					int time = 0;
+					@Override
+					public void run() {
+						if (WeaponAbilitys.lastLaunched.containsKey(p)) {
+							String spellname = WeaponAbilitys.lastLaunched.get(p).replace("spells.spells.", "");
+							if (!WeaponAbilitys.cd.contains(p))
+							new Actionbar("§b" + "Zauberecho" + ": "+"§c"+spellname).send(p);
+						}
+						if (!running) {
+							this.cancel();
+						}
+						
+					}
+				}.runTaskTimer(main.plugin, 5, 5);
 				p.getInventory().setItem(0, is);
-			}
+			/*
 			if (items.get(p).contains(removeColorTag(WeaponList.FOCUSSPHERENAME))) {
 				ItemStack is = ItemStackUtils.attackSpeedify(ItemStackUtils.createItemStack(WeaponList.weapons.get(WeaponList.FOCUSSPHERENAME), 1, 0, WeaponList.FOCUSSPHERENAME, null, true));
 				is = ItemStackUtils.attackDamage(is, 2);
@@ -171,8 +198,8 @@ public class WeaponMenu extends ItemMenu{
 				p.getInventory().setItem(0, is);
 			}
 			
-			
-			
+			*/
+				/*
 			//Sythe
 			if (items.get(p).contains(removeColorTag(WeaponList.BAMBOONAME))) {
 				ItemStack is = new ItemStack(Material.BAMBOO);
@@ -180,8 +207,8 @@ public class WeaponMenu extends ItemMenu{
 				im.setDisplayName("§cBambus");
 				im.setUnbreakable(true);
 				is.setItemMeta(im);
-				
-				is = ItemStackUtils.attackDamage(is, 3);
+				// Not real Attack Damage
+				is = ItemStackUtils.attackDamage(is, 2);
 				p.getInventory().addItem(is);
 			
 				
@@ -194,23 +221,30 @@ public class WeaponMenu extends ItemMenu{
 							this.cancel();
 						}
 						String text = "§aSprünge:";
-						if (WeaponAbilitys.charge1.get(p) == 0) {
+						if (WeaponAbilitys.charge2.get(p) == 0) {
 							text += " §7[>§7>>§7]";
 						}
-						if (WeaponAbilitys.charge1.get(p) == 1) {
+						if (WeaponAbilitys.charge2.get(p) == 1) {
 							text += " §7[§a>§7>>§7]";
 						}
-						if (WeaponAbilitys.charge1.get(p) == 2) {
+						if (WeaponAbilitys.charge2.get(p) == 2) {
 							text += " §7[§a>>§7>§7]";
 						}
-						if (WeaponAbilitys.charge1.get(p) == 3) {
+						if (WeaponAbilitys.charge2.get(p) == 3) {
 							text += " §7[§a>>>§7]";
 						}
+						if (WeaponAbilitys.pList.containsKey(p)) {
+							for (Player pl : WeaponAbilitys.pList.get(p)) {
+								ParUtils.createRedstoneParticle(pl.getEyeLocation(),0.1F, 0.1F, 0.1F, 3, Color.LIME, 1, p);
+							}
+						}
+						
 						new Actionbar(text).send(p);
 						
 					}
 				}.runTaskTimer(main.plugin, 5,5);
 			}
+			*/
 		}
 		
 		//SYTHE

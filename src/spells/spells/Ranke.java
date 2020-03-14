@@ -25,20 +25,42 @@ public class Ranke extends Spell{
 	FallingBlock current;
 	public Ranke() {
 		
-		name = "§cRanke";
-		steprange = 150;
+		name = "§eRanke";
+		steprange = 200;
 		hitboxSize = 1.5;
 		powerlevel = 60;
 		speed = 3;
 		
 		cooldown = 20 * 18;
+		
 	}
-	
+	public Ranke(Player p,int rec) {
+		
+		
+		name = "§cRanke";
+		steprange = 150;
+		hitboxSize = 1.5;
+		powerlevel = 60;
+		speed = 3;
+		caster = p;
+		cooldown = 20 * 18;
+		castSpell(caster, name);
+		if (rec > 0) {
+			new BukkitRunnable() {
+				public void run() {
+					new Ranke(caster,rec-1);
+				}
+			}.runTaskLater(main.plugin, 10);
+			
+			
+		}
+	}
 	
 	
 	
 	@Override
 	public void cast() {
+		
 		
 	}
 	
@@ -72,7 +94,9 @@ public class Ranke extends Spell{
 	@Override
 	public void launch() {
 		// TODO Auto-generated method stub
-		
+		if (refined) {
+			new Ranke(caster, 2);
+		}
 	}
 
 
@@ -88,7 +112,7 @@ public class Ranke extends Spell{
 		// TODO Auto-generated method stub
 		current.remove();
 		new PullRanke(caster, p, path, blocks, loc, (int) step,name);
-		damage(p, 5, caster);
+		damage(p, 3, caster);
 		p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, (int)step/3, 1));
 		dead = true;
 	}
@@ -99,7 +123,7 @@ public class Ranke extends Spell{
 		// TODO Auto-generated method stub
 		current.remove();
 		new PullRanke(caster, ent, path, blocks, loc, (int) step,name);
-		damage(ent, 5, caster);
+		damage(ent, 3, caster);
 		dead = true;
 	}
 

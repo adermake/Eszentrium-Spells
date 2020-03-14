@@ -33,7 +33,7 @@ public class KaminchenEntity extends Spell {
 		ent.setTarget(ent);
 		ent.setInvulnerable(true);
 		name = namae;
-		
+		ent.setMaxHealth(1);
 		castSpell(caster, name);
 	}
 

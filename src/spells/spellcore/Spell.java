@@ -512,11 +512,7 @@ public abstract class Spell {
 		}
 		//Damage will be an Damage cause even when tagPlayers has been disabled
 	}
-	
-	/**
-	 * Shows caster and Spell as DamageCause
-	 * @param ent
-	 */
+
 	public void tagPlayer(Player ent) {
 		
 		// FABIANS DAMAGE CAUSE

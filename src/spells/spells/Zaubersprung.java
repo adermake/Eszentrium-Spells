@@ -64,6 +64,9 @@ public class Zaubersprung extends Spell {
 
 	@Override
 	public void move() {
+		if (silenced.contains(caster)) {
+			dead = true;
+		}
 		// TODO Auto-generated method stub
 		if (swap()) {
 			dead = true;

@@ -17,9 +17,9 @@ public class WeaponList {
 	public static void setUpWeapons() {
 		weapons = new LinkedHashMap<>();
 		weapons.put( SWORDNAME, Material.WOODEN_SWORD);
-		weapons.put( BOWNAME , Material.BOW);
-		weapons.put( FOCUSSPHERENAME , Material.HEART_OF_THE_SEA);
-		weapons.put( BAMBOONAME,Material.BAMBOO);
+		//weapons.put( BOWNAME , Material.BOW);
+		//weapons.put( FOCUSSPHERENAME , Material.HEART_OF_THE_SEA);
+		//weapons.put( BAMBOONAME,Material.BAMBOO);
 	}
 	
 

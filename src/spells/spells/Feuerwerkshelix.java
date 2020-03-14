@@ -28,6 +28,9 @@ public class Feuerwerkshelix extends Spell {
 		name = "§eFeuerwerkshelix";
 		steprange = 15;
 		
+		if (refined)
+			steprange = 35;
+		
 		hitboxSize = 3;
 		speed = 1;
 		multihit = true;

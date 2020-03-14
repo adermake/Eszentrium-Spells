@@ -13,7 +13,7 @@ public class RufderOzeane extends Spell{
 	
 	public RufderOzeane() {
 		name = "§6Ruf der Ozeane";
-		cooldown = 20 * 50;
+		cooldown = 20 * 53;
 		steprange = 30;
 		speed = 0.5;
 		

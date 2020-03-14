@@ -1,5 +1,6 @@
 package spells.spells;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -62,6 +63,9 @@ public class Teleport extends Spell {
 
 	@Override
 	public void display() {
+		if (caster.getGameMode() == GameMode.ADVENTURE) {
+			dead = true;
+		}
 		// TODO Auto-generated method stub
 		
 	}

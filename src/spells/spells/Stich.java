@@ -15,6 +15,7 @@ import spells.spellcore.Spell;
 
 public class Stich extends Spell {
 	
+	
 	public Stich() {
 		name = "§cStich";
 		
@@ -27,6 +28,7 @@ public class Stich extends Spell {
 		steprange = 80;
 		hitPlayer = true;
 		hitEntity = true;
+		
 	}
 	int dashes = 2;
 	public Stich(Player caster,int dashes) {
@@ -137,7 +139,13 @@ public class Stich extends Spell {
 			p.setVelocity(caster.getVelocity().normalize());
 			SoundUtils.playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, loc, 1F, 5);
 		}
-		damage(p, 4, caster);
+		if (dashes > 0) {
+			damage(p, 2, caster);
+		}
+		else {
+			damage(p, 8, caster);
+		}
+		
 		step = length+1;
 		caster.setVelocity(caster.getVelocity().normalize().multiply(2.5).setY(1F));
 		// TODO Auto-generated method stub
@@ -159,7 +167,12 @@ public class Stich extends Spell {
 			ent.setVelocity(caster.getVelocity().normalize());
 			SoundUtils.playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, loc,1F, 5);
 		}
-		damage(ent, 4, caster);
+		if (dashes > 0) {
+			damage(ent, 2, caster);
+		}
+		else {
+			damage(ent, 8, caster);
+		}
 		step = length+1;
 		caster.setVelocity(caster.getVelocity().normalize().multiply(2.5).setY(1F));
 		// TODO Auto-generated method stub

@@ -67,6 +67,7 @@ import spells.spellcore.Cooldowns;
 import spells.spellcore.EventCollector;
 import spells.spellcore.SpellList;
 import spells.spellcore.Spelldrop;
+import weapons.BuffHandler;
 import weapons.Damage;
 import weapons.WeaponAbilitys;
 import weapons.WeaponList;
@@ -170,6 +171,7 @@ public class main extends JavaPlugin {
 		SpellList.registerSpells();
 		//SpellList.sortSpells();
 		WeaponList.setUpWeapons();
+		BuffHandler.tickMethod();
 		if(getConfig().contains("settings.mode")){
 			GameType.setTypeByName(getConfig().getString("settings.mode"));
 		}else{

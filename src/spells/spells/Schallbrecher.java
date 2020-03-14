@@ -136,7 +136,7 @@ public class Schallbrecher extends Spell {
 			playSound(Sound.ENTITY_WITCH_DEATH,caster.getLocation(),5,0.5F);
 		}
 		else {
-			new ExplosionDamage(5, 7, caster, caster.getLocation(), name);
+			new ExplosionDamage(5, 3, caster, caster.getLocation(), name);
 			new RepulsionDirectional(5, 3, caster, caster.getLocation(), caster.getVelocity(), name);
 		}
 		playSound(Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, loc, 1, 1);

@@ -20,7 +20,7 @@ public class SchockLaser extends Spell {
 		this.refined = refined;
 		hitBlock = true;
 		steprange =  500;
-		speed = 250;
+		speed = 5;
 		hitSpell = true;
 		castSpell(p, name);
 	}

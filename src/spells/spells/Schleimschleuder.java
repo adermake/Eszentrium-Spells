@@ -89,7 +89,7 @@ public class Schleimschleuder extends Spell {
 			//if (time == 20*2)
 				
 			for (Player p : Bukkit.getOnlinePlayers()) {
-				if (checkHit(p, g.getLocation(), caster, g.getSize()*4+3)) {
+				if (checkHit(p, g.getLocation(), caster, g.getSize()*3+3)) {
 					p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,20,3));
 				}
 			}
@@ -117,7 +117,7 @@ public class Schleimschleuder extends Spell {
 					stagedone = true;
 					hitPlayer = true;
 					hitEntity = true;
-					hitboxSize = size*2F;
+					hitboxSize = size*3F;
 					playSound(Sound.BLOCK_SLIME_BLOCK_HIT,loc,10,1);
 				}
 				if (dash > 30) {

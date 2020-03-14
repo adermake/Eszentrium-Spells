@@ -64,6 +64,7 @@ import spells.spells.Schwerkraftsmanipulation;
 import spells.spells.SchwerterausLicht;
 import spells.spells.SiegelderFurcht;
 import spells.spells.SpeerderZwietracht;
+import spells.spells.Sternentor;
 import spells.spells.Stich;
 import spells.spells.Teleport;
 import spells.spells.Thermolanze;
@@ -209,6 +210,7 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		
 		registerSpell(new Stich());
 		registerSpell(new Schleimschleuder());
+		registerSpell(new Sternentor());
 	}
 	
 	public static void registerSpell(Spell spell, Class...gameTypes){

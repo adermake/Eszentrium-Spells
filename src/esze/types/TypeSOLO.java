@@ -107,9 +107,7 @@ public class TypeSOLO extends Type {
 		if (deathCheck(p)) {
 			return;
 		}
-		if (AntlitzderGöttin.deflect.contains(p)) {
-			return;
-		}
+		
 		if (main.damageCause.get(p) == null) {
 			main.damageCause.remove(p);
 			main.damageCause.put(p, main.unknownDamage);
