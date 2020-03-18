@@ -117,7 +117,7 @@ public class Schleimschleuder extends Spell {
 					stagedone = true;
 					hitPlayer = true;
 					hitEntity = true;
-					hitboxSize = size*3F;
+					hitboxSize = 2+size*3F;
 					playSound(Sound.BLOCK_SLIME_BLOCK_HIT,loc,10,1);
 				}
 				if (dash > 30) {

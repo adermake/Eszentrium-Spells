@@ -59,6 +59,10 @@ public class AntlitzderGöttin extends Spell{
 		loc = caster.getLocation();
 		if (refined)
 			caster.setNoDamageTicks(5);
+		
+		if (caster.getLocation().getY()<62) {
+			dead = true;
+		}
 	}
 
 	@Override

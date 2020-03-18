@@ -20,7 +20,7 @@ public class Meteoritenhagel extends Spell {
 
 	
 	public Meteoritenhagel() {
-		cooldown = 20 * 30;
+		cooldown = 20 * 35;
 		casttime = 11;
 		steprange = 25;
 		name = "§cMeteoritenhagel";
@@ -83,7 +83,7 @@ public class Meteoritenhagel extends Spell {
 		delay++;
 		if (delay > 3) {
 			Location calc = loc.clone().add(0,100,0);
-			calc.add(randInt(-6,6),0,randInt(-6,6));
+			calc.add(randInt(-4,4),0,randInt(-4,4));
 			new Meteor(calc,caster,name);
 			delay = 0;
 		}

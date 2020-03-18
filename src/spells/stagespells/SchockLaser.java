@@ -7,8 +7,10 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import esze.main.main;
 import esze.utils.ParUtils;
 import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
@@ -20,9 +22,22 @@ public class SchockLaser extends Spell {
 		this.refined = refined;
 		hitBlock = true;
 		steprange =  500;
-		speed = 5;
+		speed = 1;
 		hitSpell = true;
 		castSpell(p, name);
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				speed*=1.00001F*speed;
+				
+				if (speed > 20) {
+					speed = 20;
+					this.cancel();
+				}
+			}
+		}.runTaskTimer(main.plugin, 1, 1);
 	}
 	
 	@Override
@@ -49,10 +64,12 @@ public class SchockLaser extends Spell {
 	boolean reverseSpiking = false;
 	Vector spike;
 	int spikeLength = 1;
-	int maxSpikeLength = 1;
+	int maxSpikeLength = 35;
 	Location phaseLoc;
+	double antiFocus = 0;
 	@Override
 	public void move() {
+		
 		
 		if (!spiking && randInt(1,6) == 2 ) {
 			spikeLength = randInt(0,clamp(31-(int)(step/10), 1, 31));
@@ -64,6 +81,11 @@ public class SchockLaser extends Spell {
 			phaseLoc = loc.clone();
 		}
 		
+		if (caster.isSneaking()) {
+			maxSpikeLength-= 1;
+			antiFocus+=1;
+			
+		}
 		if (phaseLoc != null)
 		phaseLoc.add(phaseLoc.getDirection().multiply(0.5));
 		if (spiking) {
@@ -97,6 +119,7 @@ public class SchockLaser extends Spell {
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
+		
 		ParUtils.createParticle(Particles.END_ROD, loc, 0, 0, 0, 1, 0);
 		//ParUtils.createParticle(Particles.FIREWORK, loc, 0,1, 0, 0, 0.05);
 	}
@@ -131,8 +154,10 @@ public class SchockLaser extends Spell {
 	
 	public void onHit() {
 		double x = (caster.getLocation().getY() - hitLoc.getY());
+		x = - antiFocus/10;
+		
 		double dmg = 3 + 15/(1 + Math.exp(-0.07*x) * 15);
-		new Explosion(2, dmg,1, 1,caster, loc, name);
+		new Explosion(4, dmg,1, 1,caster, loc, name);
 		ParUtils.parKreisDot(Particles.CLOUD, loc, 5, 0, 0.05, loc.getDirection().multiply(-1));
 		dead = true;
 		playSound(Sound.ENTITY_LIGHTNING_BOLT_IMPACT, loc, 4, 0.3F);

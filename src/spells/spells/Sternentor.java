@@ -19,7 +19,7 @@ public class Sternentor extends Spell {
 	public Sternentor() {
 		name = "§cSternentor";
 		
-		cooldown = 20 * 15;
+		cooldown = 20 * 25;
 		steprange = 20 * 10;
 		speed = 1;
 		canHitSelf = true;

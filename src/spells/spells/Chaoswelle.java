@@ -139,7 +139,7 @@ public class Chaoswelle extends Spell{
 						if (checkHit(le,loc,p,2)) {
 							
 							doKnockback(le,p.getLocation(),4);
-							damage(le,12-theta,caster);
+							damage(le,8-theta,caster);
 						}
 					}
 					loc.subtract(x, y, z);
