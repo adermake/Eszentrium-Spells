@@ -154,7 +154,7 @@ public class SchockLaser extends Spell {
 	
 	public void onHit() {
 		double x = (caster.getLocation().getY() - hitLoc.getY());
-		x = - antiFocus/10;
+		x  -= antiFocus/10;
 		
 		double dmg = 3 + 15/(1 + Math.exp(-0.07*x) * 15);
 		new Explosion(4, dmg,1, 1,caster, loc, name);

@@ -129,9 +129,11 @@ public class CorpseUtils {
 	
 	
 	public static void removeAllCorpses() {
-		for (int key : allCorpses.keySet()) {
+		HashMap<Integer,EntityPlayer> keyInts = (HashMap<Integer, EntityPlayer>) allCorpses.clone();
+		for (int key : keyInts.keySet()) {
 			removeCorpseForAll(key);
 		}
+		keyInts.clear();
 	}
 	private static byte getFixRotation(float yawpitch){
         return (byte) ((int) (yawpitch * 256.0F / 360.0F));
