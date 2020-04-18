@@ -12,17 +12,17 @@ import esze.main.main;
 
 public class AppClientSocket {
 	
-	java.net.Socket clientSocket;
-	AppServer server;
-	Thread listeningThread;
-	AppCommunicator communicator;
-	AppClientIdentity identity;
+	volatile java.net.Socket clientSocket;
+	volatile AppServer server;
+	volatile Thread listeningThread;
+	volatile AppCommunicator communicator;
+	volatile AppClientIdentity identity;
 	
 	public AppClientSocket(java.net.Socket clientSocket, AppServer server) {
 		this.clientSocket = clientSocket;
 		this.server = server;
 		communicator = new AppCommunicator(this);
-		//startListeningForMessages(); Bug when Connection gets reset
+		startListeningForMessages(); //Bug when Connection gets reset
 	}
 
 	public java.net.Socket getClientSocket() {
@@ -42,7 +42,6 @@ public class AppClientSocket {
 	}
 	
 	public void startListeningForMessages() {
-		/*
 		listeningThread = new Thread(new Runnable() {
 			
 			@Override
@@ -55,17 +54,21 @@ public class AppClientSocket {
 							break;
 						}
 						nachricht = readMessage(clientSocket);
-					} catch (IOException e) {
-						e.printStackTrace();
+					} catch (Exception e) {
+						//e.printStackTrace();
+						if(identity!=null && identity.username!=null)
+							System.out.println("Esze | User "+identity.username+" hat die App-Verbindung abgebrochen.");
+						identity = null;
+						break;
 					}
 					if(nachricht != null) {
 						communicator.receivedMessage(nachricht);
-						System.out.println(nachricht);
+						System.out.println(nachricht); //DEBUG MSG
 					}
 				}
 			}
 		});
-		listeningThread.start();*/
+		listeningThread.start();
 	}
 	
 	private String readMessage(java.net.Socket socket) throws IOException {

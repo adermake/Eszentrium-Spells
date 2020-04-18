@@ -280,7 +280,9 @@ public class main extends JavaPlugin {
 	public void onDisable() {
 		//SaveUtils.backup();
 		
+		try {
 		CorpseUtils.removeAllCorpses();
+		}catch(Error e) {System.out.println("Esze | Fehler beim Löschen der Leichen");}
 		for(Entity e : Bukkit.getWorld("world").getEntities()){
 			if(e.getType() != EntityType.PLAYER){
 				e.remove();
@@ -289,18 +291,27 @@ public class main extends JavaPlugin {
 		
 
 		System.out.println("Esze | Fahre App-Server herunter.");
-		appServer.shutdownServer();
-		System.out.println("Esze | App-Server heruntergefahren.");
-		
-		Discord.unMuteAll();
-		Discord.logout();
+		try {
+			appServer.shutdownServer();
+			System.out.println("Esze | App-Server heruntergefahren.");
+		}catch(Exception e) {
+			System.out.println("Esze | App-Server herunterfahren fehlgeschlagen.");
+		}
 		
 		try {
+			Discord.unMuteAll();
+			Discord.logout();
+			System.out.println("Esze | Discord heruntergefahren.");
+		}catch(Error e) {
+			System.out.println("Esze | Discord herunterfahren fehlgeschlagen.");
+		}
+		
+		/*try {
 			wait(2000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		
 	}
 	
