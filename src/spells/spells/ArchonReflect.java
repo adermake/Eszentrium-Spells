@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
 import esze.utils.SoundUtils;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 
 public class ArchonReflect extends Spell{
@@ -66,7 +66,7 @@ public class ArchonReflect extends Spell{
 	@Override
 	public void display() {
 		//playSound(Sound.BLOCK_NOTE_BLOCK_COW_BELL, loc, 10F, 0.1F);
-		
+		caster.setAllowFlight((true));
 		loc = caster.getLocation();
 		
 		//ParUtils.createParticle(Particles.FLAME, dot, 0, 1, 0, 0, 14);

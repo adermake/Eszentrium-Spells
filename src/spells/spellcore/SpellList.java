@@ -37,6 +37,7 @@ import spells.spells.HimmlischesUrteil;
 import spells.spells.Hühnchenluftschlag;
 import spells.spells.Kaminchen;
 import spells.spells.Knochenparty;
+import spells.spells.KosmischeBindung;
 import spells.spells.Kätzchenkanone;
 import spells.spells.Lamaturm;
 import spells.spells.Lichtstrudel;
@@ -48,12 +49,14 @@ import spells.spells.Notenzauber;
 import spells.spells.Opfersuche;
 import spells.spells.Orbitar;
 import spells.spells.Pyroschlag;
+import spells.spells.Quantentunnel;
 import spells.spells.Ranke;
 import spells.spells.Raumwechsel;
 import spells.spells.RufderOzeane;
 import spells.spells.Schallbrecher;
 import spells.spells.Schallwelle;
 import spells.spells.Scharfschuss;
+import spells.spells.Ghul;
 import spells.spells.Schicksalsschnitt;
 import spells.spells.Schleimschleuder;
 import spells.spells.Requiemspfeil;
@@ -211,6 +214,9 @@ public static ArrayList<Spell> getDiffrentRandomGreen(int count) {
 		registerSpell(new Stich());
 		registerSpell(new Schleimschleuder());
 		registerSpell(new Sternentor());
+		registerSpell(new Quantentunnel());
+		registerSpell(new Ghul());
+		registerSpell(new KosmischeBindung());
 	}
 	
 	public static void registerSpell(Spell spell, Class...gameTypes){

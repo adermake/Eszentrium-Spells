@@ -925,7 +925,24 @@ public abstract class Spell {
 		return nearest;
 		
 	}
-	
+	public static LivingEntity getNearestEntity(Player c,Location l,double range) {
+		double distance = 10000;
+		LivingEntity nearest = null;
+		for (LivingEntity p : c.getWorld().getLivingEntities()) {
+			
+			if (p != c) {
+				double dis = l.distance(p.getLocation());
+				if (dis<distance&& dis < range) {
+					nearest = p;
+					distance = dis;
+				}
+			}
+		}
+		
+
+		return nearest;
+		
+	}
 	public ArmorStand createArmorStand(Location loca) {
 		ArmorStand a = (ArmorStand) loca.getWorld().spawnEntity(loca, EntityType.ARMOR_STAND);
 		

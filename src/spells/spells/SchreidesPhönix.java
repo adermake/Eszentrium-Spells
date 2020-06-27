@@ -22,7 +22,7 @@ import esze.utils.CorpseUtils;
 import esze.utils.ParUtils;
 import esze.utils.TTTCorpse;
 import esze.utils.TTTRevive;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 
 public class SchreidesPhönix extends Spell{

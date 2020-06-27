@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Public/spigot.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Public/NoteBlockAPI-1.4.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Public/PacketListenerAPI_v3.7.3-SNAPSHOT.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/Public/JDA-4.1.0_81-withDependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ralf/Desktop/Server/server.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

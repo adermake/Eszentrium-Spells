@@ -4,19 +4,18 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import net.minecraft.server.v1_14_R1.NBTTagCompound;
-import net.minecraft.server.v1_14_R1.NBTTagDouble;
-import net.minecraft.server.v1_14_R1.NBTTagInt;
-import net.minecraft.server.v1_14_R1.NBTTagList;
-import net.minecraft.server.v1_14_R1.NBTTagString;
+import net.minecraft.server.v1_16_R1.NBTTagCompound;
+import net.minecraft.server.v1_16_R1.NBTTagDouble;
+import net.minecraft.server.v1_16_R1.NBTTagInt;
+import net.minecraft.server.v1_16_R1.NBTTagList;
+import net.minecraft.server.v1_16_R1.NBTTagString;
 
 public class ItemStackUtils {
 	
@@ -53,16 +52,17 @@ public class ItemStackUtils {
 	}
 	
 	public static ItemStack attackSpeedify(ItemStack is) {
-		net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(is);
+		net.minecraft.server.v1_16_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(is);
         NBTTagCompound speed = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
 		
-		speed.set("AttributeName", new NBTTagString("generic.attackSpeed"));
-		speed.set("Name", new NBTTagString("generic.attackSpeed"));
-		speed.set("Amount", new NBTTagDouble(0));
-		speed.set("Operation", new NBTTagInt(0));
-		speed.set("UUIDLeast", new NBTTagInt(894654));
-		speed.set("UUIDMost", new NBTTagInt(2872));
-		speed.set("Slot", new NBTTagString("mainhand"));
+    
+		speed.set("AttributeName",  NBTTagString.a("generic.attackSpeed"));
+		speed.set("Name", NBTTagString.a("generic.attackSpeed"));
+		speed.set("Amount", NBTTagDouble.a(0));
+		speed.set("Operation", NBTTagInt.a(0));
+		speed.set("UUIDLeast", NBTTagInt.a(894654));
+		speed.set("UUIDMost", NBTTagInt.a(2872));
+		speed.set("Slot", NBTTagString.a("mainhand"));
 		
 		
 		return NBTUtils.setNBT(speed, is);
@@ -72,7 +72,7 @@ public class ItemStackUtils {
 	
 		  
 	      
-        net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(is);
+        net.minecraft.server.v1_16_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(is);
         NBTTagCompound compound = nmsStack.getTag();
         if (compound == null) {
            compound = new NBTTagCompound();
@@ -81,13 +81,13 @@ public class ItemStackUtils {
         }
         NBTTagList modifiers = new NBTTagList();
         NBTTagCompound damage = new NBTTagCompound();
-        damage.set("AttributeName", new NBTTagString("generic.attackDamage"));
-        damage.set("Name", new NBTTagString("generic.attackDamage"));
-        damage.set("Amount", new NBTTagInt(dmg));
-        damage.set("Slot", new NBTTagString("mainhand"));
-        damage.set("Operation", new NBTTagInt(0));
-        damage.set("UUIDLeast", new NBTTagInt(894654));
-        damage.set("UUIDMost", new NBTTagInt(2872));
+        damage.set("AttributeName", NBTTagString.a("generic.attackDamage"));
+        damage.set("Name", NBTTagString.a("generic.attackDamage"));
+        damage.set("Amount", NBTTagInt.a(dmg));
+        damage.set("Slot", NBTTagString.a("mainhand"));
+        damage.set("Operation", NBTTagInt.a(0));
+        damage.set("UUIDLeast", NBTTagInt.a(894654));
+        damage.set("UUIDMost", NBTTagInt.a(2872));
         modifiers.add(damage);
         compound.set("AttributeModifiers", modifiers);
         nmsStack.setTag(compound);

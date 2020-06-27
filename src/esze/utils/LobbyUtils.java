@@ -13,7 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import esze.main.main;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 import weapons.WeaponAbilitys;
 import weapons.WeaponMenu;

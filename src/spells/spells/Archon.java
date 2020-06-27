@@ -16,7 +16,7 @@ import esze.utils.NBTUtils;
 import esze.utils.ParUtils;
 import esze.utils.PlayerUtils;
 import esze.utils.SoundUtils;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Archon extends Spell {

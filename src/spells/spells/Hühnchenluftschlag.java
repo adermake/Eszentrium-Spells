@@ -1,27 +1,21 @@
 package spells.spells;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_14_R1.CraftWorld;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;  
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import esze.main.main;
 import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.BlockPosition;
-import net.minecraft.server.v1_14_R1.EntityChicken;
-import net.minecraft.server.v1_14_R1.EntityTypes;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.EntityChicken;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 import spells.stagespells.Eggsplosive;
 import spells.stagespells.ExplosionDamage;

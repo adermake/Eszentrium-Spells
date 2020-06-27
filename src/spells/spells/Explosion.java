@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 import esze.main.main;
 import esze.utils.ParUtils;
 import esze.utils.SoundUtils;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Explosion extends Spell{
@@ -117,12 +117,13 @@ public class Explosion extends Spell{
 		
 		caster.playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 20);
 		for (LivingEntity le : caster.getWorld().getLivingEntities()) {
-			if (checkHit(le,loc,caster,(power/ct)*10)) {
+			if (checkHit(le,loc,caster,(power/ct)*15)) {
 				damage(le, 6+(power/ct)*10, caster);
 				doKnockback(le, caster.getLocation().clone().add(0,-2,0), 1);
 			}
 		}
 		
+		ParUtils.parKreisDir(Particles.FLAME, caster.getLocation(), (power/ct)*15, 0, 2, new Vector(0,1,0), new Vector(0,1,0));
 		dead = true;
 	}
 

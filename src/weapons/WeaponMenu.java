@@ -3,10 +3,6 @@ package weapons;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -19,13 +15,6 @@ import esze.menu.ItemMenu;
 import esze.menu.ItemMenuIcon;
 import esze.utils.Actionbar;
 import esze.utils.ItemStackUtils;
-import esze.utils.NBTUtils;
-import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.NBTTagCompound;
-import net.minecraft.server.v1_14_R1.NBTTagInt;
-import net.minecraft.server.v1_14_R1.NBTTagList;
-import net.minecraft.server.v1_14_R1.NBTTagString;
-import spells.stagespells.BowArrow;
 
 public class WeaponMenu extends ItemMenu{
 	

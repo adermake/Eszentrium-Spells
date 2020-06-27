@@ -8,7 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.main.main;
 import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 
 public class BuffHandler {
 

@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 
 import esze.utils.Matrix;
 import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 
 public class AugedesDrachen extends Spell{

@@ -1,13 +1,9 @@
 package spells.spells;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_14_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -18,7 +14,6 @@ import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
 import esze.utils.PlayerUtils;
-import net.minecraft.server.v1_14_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Requiemspfeil extends Spell {

@@ -9,7 +9,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_14_R1.entity.CraftCow;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftCow;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -30,7 +30,6 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import esze.enums.GameType;
-import esze.enums.Gamestate;
 import esze.main.main;
 import esze.types.TypeTTT;
 

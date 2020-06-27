@@ -1,19 +1,17 @@
 package weapons;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
-
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -23,43 +21,27 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.google.common.collect.Multimap;
 
-
-import esze.enums.GameType;
 import esze.main.main;
 import esze.players.PlayerAPI;
 import esze.utils.Actionbar;
-import esze.utils.ItemStackUtils;
-import esze.utils.NBTUtils;
 import esze.utils.ParUtils;
-import esze.utils.SoundUtils;
-import net.minecraft.server.v1_14_R1.AttributeModifier;
-import net.minecraft.server.v1_14_R1.Block.Info;
-import net.minecraft.server.v1_14_R1.EnumColor;
-import net.minecraft.server.v1_14_R1.EnumItemSlot;
-import net.minecraft.server.v1_14_R1.GenericAttributes;
-import net.minecraft.server.v1_14_R1.Item;
-import net.minecraft.server.v1_14_R1.NBTTagCompound;
-import net.minecraft.server.v1_14_R1.NBTTagInt;
-import net.minecraft.server.v1_14_R1.NBTTagList;
-import net.minecraft.server.v1_14_R1.NBTTagString;
-import net.minecraft.server.v1_14_R1.PacketPlayOutSetCooldown;
-import net.minecraft.server.v1_14_R1.Particles;
-import net.minecraft.server.v1_14_R1.PlayerConnection;
+import net.minecraft.server.v1_16_R1.AttributeBase;
+import net.minecraft.server.v1_16_R1.AttributeModifier;
+import net.minecraft.server.v1_16_R1.EnumItemSlot;
+import net.minecraft.server.v1_16_R1.GenericAttributes;
+import net.minecraft.server.v1_16_R1.Item;
+import net.minecraft.server.v1_16_R1.PacketPlayOutSetCooldown;
+import net.minecraft.server.v1_16_R1.PlayerConnection;
 import spells.spellcore.Spell;
-import spells.spells.BambusDash;
-import spells.stagespells.BowArrow;
 
 public class WeaponAbilitys implements Listener {
 
@@ -559,11 +541,11 @@ public class WeaponAbilitys implements Listener {
 	public double getAttackDamage(ItemStack itemStack) {
         double attackDamage = 5.0;
         UUID uuid = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
-        net.minecraft.server.v1_14_R1.ItemStack craftItemStack = CraftItemStack.asNMSCopy(itemStack);
-        net.minecraft.server.v1_14_R1.Item item = craftItemStack.getItem();
-        if(item instanceof net.minecraft.server.v1_14_R1.ItemSword || item instanceof net.minecraft.server.v1_14_R1.ItemTool || item instanceof net.minecraft.server.v1_14_R1.ItemHoe) {
-            Multimap<String, AttributeModifier> map = item.a(EnumItemSlot.MAINHAND);
-            Collection<AttributeModifier> attributes = map.get(GenericAttributes.ATTACK_DAMAGE.getName());
+        net.minecraft.server.v1_16_R1.ItemStack craftItemStack = CraftItemStack.asNMSCopy(itemStack);
+        net.minecraft.server.v1_16_R1.Item item = craftItemStack.getItem();
+        if(item instanceof net.minecraft.server.v1_16_R1.ItemSword || item instanceof net.minecraft.server.v1_16_R1.ItemTool || item instanceof net.minecraft.server.v1_16_R1.ItemHoe) {
+            Multimap<AttributeBase, AttributeModifier> map = item.a(EnumItemSlot.MAINHAND);
+            Collection<AttributeModifier> attributes = map.get(GenericAttributes.ATTACK_DAMAGE);
             /*
             if(!attributes.isEmpty()) {
                 Bukkit.getLogger().info("Found one or more attribute modifiers:");

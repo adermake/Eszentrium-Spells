@@ -21,7 +21,7 @@ import esze.main.main;
 import esze.menu.ColorTagSpellSelectionMenu;
 import esze.menu.SpellAnalyticsMenu;
 import esze.utils.MathUtils;
-import net.minecraft.server.v1_14_R1.ItemStack;
+
 import weapons.WeaponMenu;
 
 public class Interact implements Listener{

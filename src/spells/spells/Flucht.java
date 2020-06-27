@@ -13,7 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import esze.main.main;
 import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 public class Flucht extends Spell{
 
@@ -100,9 +100,12 @@ public class Flucht extends Spell{
 	@Override
 	public void onDeath() {
 		// TODO Auto-generated method stub
-		for (Player pl : Bukkit.getOnlinePlayers()) {
-			pl.showPlayer(main.plugin, caster);
+		if (caster.getGameMode() != GameMode.ADVENTURE) {
+			for (Player pl : Bukkit.getOnlinePlayers()) {
+				pl.showPlayer(main.plugin, caster);
+			}
 		}
+		
 	}
 	
 	public LivingEntity bat(final Player p,boolean refined) {

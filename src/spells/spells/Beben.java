@@ -12,7 +12,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Beben extends Spell{
@@ -21,7 +21,7 @@ public class Beben extends Spell{
 		
 		name = "§eBeben";
 		steprange = 42;
-		cooldown = 20*40;
+		cooldown = 20*30;
 		hitEntity = true;
 		hitPlayer = true;
 		hitSpell = true;

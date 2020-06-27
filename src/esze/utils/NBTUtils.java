@@ -1,11 +1,10 @@
 package esze.utils;
 
-import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
 
-import net.minecraft.server.v1_14_R1.ItemStack;
-import net.minecraft.server.v1_14_R1.NBTTagCompound;
-import net.minecraft.server.v1_14_R1.NBTTagString;
+import net.minecraft.server.v1_16_R1.ItemStack;
+import net.minecraft.server.v1_16_R1.NBTTagCompound;
+import net.minecraft.server.v1_16_R1.NBTTagString;
 
 public class NBTUtils {
 
@@ -15,7 +14,7 @@ public class NBTUtils {
 	public static org.bukkit.inventory.ItemStack setNBT(String key,String value,org.bukkit.inventory.ItemStack is) {
 		ItemStack nms = CraftItemStack.asNMSCopy(is);
 		NBTTagCompound n = (nms.hasTag()) ? nms.getTag() : new NBTTagCompound();
-		n.set(key, new NBTTagString(value));
+		n.set(key, NBTTagString.a(value));
 		nms.setTag(n);
 		is = CraftItemStack.asBukkitCopy(nms);
 		return is;

@@ -5,27 +5,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.server.v1_14_R1.BlockPosition;
-import net.minecraft.server.v1_14_R1.DataWatcher;
-import net.minecraft.server.v1_14_R1.DataWatcherRegistry;
-import net.minecraft.server.v1_14_R1.EntityPlayer;
-import net.minecraft.server.v1_14_R1.PacketPlayOutEntity.PacketPlayOutEntityLook;
-import net.minecraft.server.v1_14_R1.PacketPlayOutEntityDestroy;
-import net.minecraft.server.v1_14_R1.PacketPlayOutEntityMetadata;
-import net.minecraft.server.v1_14_R1.PacketPlayOutEntityTeleport;
-import net.minecraft.server.v1_14_R1.PacketPlayOutNamedEntitySpawn;
-import net.minecraft.server.v1_14_R1.PacketPlayOutPlayerInfo;
-import net.minecraft.server.v1_14_R1.PlayerInteractManager;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_14_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_14_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_16_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+
+import net.minecraft.server.v1_16_R1.BlockPosition;
+import net.minecraft.server.v1_16_R1.DataWatcher;
+import net.minecraft.server.v1_16_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_16_R1.EntityPlayer;
+import net.minecraft.server.v1_16_R1.PacketPlayOutEntity.PacketPlayOutEntityLook;
+import net.minecraft.server.v1_16_R1.PacketPlayOutEntityDestroy;
+import net.minecraft.server.v1_16_R1.PacketPlayOutEntityMetadata;
+import net.minecraft.server.v1_16_R1.PacketPlayOutEntityTeleport;
+import net.minecraft.server.v1_16_R1.PacketPlayOutNamedEntitySpawn;
+import net.minecraft.server.v1_16_R1.PacketPlayOutPlayerInfo;
+import net.minecraft.server.v1_16_R1.PlayerInteractManager;
 
 
 public class CorpseUtils {
@@ -87,11 +87,11 @@ public class CorpseUtils {
 	public static void teleportCorpseForPlayers(int cID, Location loc, List<Player> teleportFor){
 		//Bukkit.broadcastMessage("loc: "+loc);
 		//Bukkit.broadcastMessage("ent: "+allCorpses.get(cID));
-		allCorpses.get(cID).locX = loc.getX();
-		allCorpses.get(cID).locY = loc.getY();
-		allCorpses.get(cID).locZ = loc.getZ();
-		allCorpses.get(cID).pitch = loc.getPitch();
-		allCorpses.get(cID).yaw = loc.getYaw();
+		allCorpses.get(cID).setLocation(loc.getX(), loc.getY(), loc.getZ(), loc.getPitch(), loc.getYaw());
+		//allCorpses.get(cID).locY = loc.getY();
+		//allCorpses.get(cID).locZ = loc.getZ();
+		//allCorpses.get(cID).pitch = loc.getPitch();
+		//allCorpses.get(cID).yaw = loc.getYaw();
 		
 		//Bukkit.broadcastMessage("p: "+allCorpses.get(cID).pitch);
 		//Bukkit.broadcastMessage("y: "+allCorpses.get(cID).yaw);

@@ -15,7 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 
 public class Schleimschleuder extends Spell {
@@ -53,6 +53,7 @@ public class Schleimschleuder extends Spell {
 		playSound(Sound.ENTITY_SLIME_ATTACK,loc,5,1);
 		// TODO Auto-generated method stub
 		g = (Slime) spawnEntity(EntityType.SLIME);
+		g.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,10000000,100));
 		g.setInvulnerable(true);
 		g.setSize(1);
 		noTargetEntitys.add(g);

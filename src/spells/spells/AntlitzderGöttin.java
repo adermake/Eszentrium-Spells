@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 
 import esze.utils.ParUtils;
 import esze.utils.SoundUtils;
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 import spells.spellcore.Spell;
 
 public class AntlitzderGöttin extends Spell{
@@ -101,7 +101,7 @@ public class AntlitzderGöttin extends Spell{
 
 	@Override
 	public void onSpellHit(Spell spell) {
-		if (spell.getName() == name) {
+		if (spell.getName().contains("Antlitz der Göttin")) {
 			return;
 		}
 		// TODO Auto-generated method stub

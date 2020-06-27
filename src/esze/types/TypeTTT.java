@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.minecraft.server.v1_14_R1.Particles;
+import net.minecraft.server.v1_16_R1.Particles;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -88,7 +88,7 @@ public class TypeTTT extends Type{
 				} else if (!main.damageCause.get(p).endsWith(main.voiddamage)){
 					main.damageCause.put(p, main.damageCause.get(p) + "-" + main.voiddamage);
 				}
-				p.damage(p.getHealth());
+				p.damage(40);
 			}
 			
 			
